@@ -182,7 +182,7 @@ components:
 Derived from `docs/brand-board.md` (Compass Marketing Advisors, Brand Board v1.0, September 2026).
 The six palette colours, the typographic direction, the imagery rules and every "never" are
 sourced from that document. Everything else here (derived tints, the type scale, spacing, the
-named typefaces) is a Stage 1 proposal and is labelled as such. Product truth (audience,
+named typefaces) was proposed in Stage 1 and approved by Tom on 2026-09-07. Product truth (audience,
 positioning, copy rules) lives in `PRODUCT.md` and is not repeated here.
 
 ## Overview
@@ -277,8 +277,8 @@ with a brick underline; eyebrows on dark are sandstone dim.
 
 ## Typography
 
-**Display Font:** Rokkitt (variable 100–900; with Rockwell, Roboto Slab, Georgia fallbacks). Proposed, Stage 1.
-**Body Font:** Merriweather Sans (variable 300–800; with Fira Sans, Segoe UI, system-ui fallbacks). Proposed, Stage 1.
+**Display Font:** Rokkitt (variable 100–900; with Rockwell, Roboto Slab, Georgia fallbacks). Approved 2026-09-07.
+**Body Font:** Merriweather Sans (variable 300–800; with Fira Sans, Segoe UI, system-ui fallbacks). Approved 2026-09-07.
 **Label/Numeral Font:** Merriweather Sans with `font-variant-numeric: tabular-nums` (the face ships `tnum`).
 
 **Character:** A condensed geometric slab with a small x-height (0.40 em) set in uppercase

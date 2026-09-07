@@ -1,8 +1,7 @@
-# Art direction (Stage 1 proposal)
+# Art direction (Stage 1, approved)
 
-Status: **Hold.** Proposed 2026-09-07 for Tom's approval. Reads from `docs/brand-board.md`,
-`DESIGN.md` and the actual logo raster (`public/images/brand/logo-badge-414.jpg`). Once approved,
-the "proposed" labels come off `DESIGN.md` and Stage 2 builds against it.
+Status: **Approved** by Tom on 2026-09-07, all four decisions. Stage 2 builds against this and `DESIGN.md`. Reads from `docs/brand-board.md`,
+`DESIGN.md` and the actual logo raster (`public/images/brand/logo-badge-414.jpg`). The "proposed" labels have been removed from `DESIGN.md`.
 
 ## 1. Typefaces
 
