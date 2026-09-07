@@ -1,0 +1,164 @@
+{
+  "generated": "2026-09-07",
+  "source": "Facebook page facebook.com/shewmakerbrothersmasonry, via Google Drive > Compass Clients > Shewmaker Brothers Masonry > Media",
+  "status": "INTERIM. Every file is a 414 x 414 px Facebook thumbnail. Usable for gallery thumbnails and small cards at 1x only. Full-resolution originals are required from Sam for every image before launch (see docs/placeholders.md).",
+  "rules": [
+    "No location, town, cove or customer is known for any photo. Never caption a photo with a place name.",
+    "No stock or AI-generated image may be added to this folder.",
+    "Alt text describes the work (material and method), never the mood."
+  ],
+  "brand": [
+    {
+      "file": "../brand/logo-badge-414.jpg",
+      "width": 414,
+      "height": 414,
+      "description": "The logo badge: bearded mason with folded arms, American flag, stone fireplace with mounted buck, trowel, John 3:16 tattoo; wordmark SHEWMAKER BROTHERS in a heavy condensed slab. Square Facebook crop; the MASONRY line is cut off at the bottom.",
+      "needs": "Vector source, a simplified small-size mark and a one-colour version."
+    }
+  ],
+  "images": [
+    {
+      "file": "seawall-before-eroded-bank-01.jpg",
+      "width": 414, "height": 414, "project": "shoreline-rebuild-01", "state": "before",
+      "alt": "Eroded lakefront bank of exposed rock and clay beneath a white deck and stairs, before a stone retaining wall",
+      "description": "Before: the failed bank under a lake house deck, exposed rock and red clay, no wall.",
+      "services": ["lakefront-retaining-walls", "seawall-repair", "seawall-construction", "retaining-walls"],
+      "pairsWith": "lakefront-retaining-wall-crew-01.jpg",
+      "usable": "thumbnail-only"
+    },
+    {
+      "file": "lakefront-retaining-wall-crew-01.jpg",
+      "width": 414, "height": 414, "project": "shoreline-rebuild-01", "state": "after",
+      "alt": "Mortared fieldstone lakefront retaining wall below a white deck, two crew members working on top",
+      "description": "After: mortared multicolour fieldstone retaining wall built below the same deck, crew on top, boulder in front.",
+      "services": ["lakefront-retaining-walls", "retaining-walls", "seawall-construction", "about"],
+      "pairsWith": "seawall-before-eroded-bank-01.jpg",
+      "usable": "thumbnail-only"
+    },
+    {
+      "file": "lakefront-retaining-wall-detail-01.jpg",
+      "width": 414, "height": 414, "project": "shoreline-rebuild-01", "state": "detail",
+      "alt": "Corner of a mortared fieldstone retaining wall showing joint work and the poured concrete footing at its base",
+      "description": "Detail: wall corner, grey mortar joints, tan and rust fieldstone, fresh concrete footing visible at the base.",
+      "services": ["lakefront-retaining-walls", "retaining-walls", "masonry-repair", "projects"],
+      "usable": "thumbnail-only"
+    },
+    {
+      "file": "seawall-before-eroded-bank-02.jpg",
+      "width": 414, "height": 414, "project": "shoreline-rebuild-01", "state": "before",
+      "alt": "Wide view of an eroded lakefront slope with exposed roots below a deck, a crew member working among boulders",
+      "description": "Before, wide: exposed roots and rubble under the deck, cables strung for the rebuild, crew member on the boulders.",
+      "services": ["lakefront-retaining-walls", "seawall-repair", "excavation"],
+      "usable": "thumbnail-only"
+    },
+    {
+      "file": "seawall-before-shoreline-from-water-01.jpg",
+      "width": 414, "height": 414, "project": "shoreline-rebuild-01", "state": "before",
+      "alt": "Undercut, eroding shoreline seen from the water with a white lake house above and a dock float in the foreground",
+      "description": "Before, from the water: the undercut bank at the waterline with the lake house above; water in frame.",
+      "services": ["seawall-repair", "seawall-construction", "lakefront-retaining-walls", "cities"],
+      "usable": "thumbnail-only"
+    },
+    {
+      "file": "stone-seawall-lakefront-01.jpg",
+      "width": 414, "height": 414, "project": "seawall-02", "state": "after",
+      "alt": "Long run of finished mortared stone seawall along a beach with a lake house above and the water at right",
+      "description": "Finished mortared stone seawall along the shore, lake house above, crew member at left, water at right. Strongest seawall wide in the set.",
+      "services": ["seawall-construction", "seawall-repair", "home", "cities"],
+      "hero": true,
+      "usable": "thumbnail-only"
+    },
+    {
+      "file": "stone-seawall-cap-crew-01.jpg",
+      "width": 414, "height": 414, "project": "seawall-cap-04", "state": "during",
+      "alt": "Mason smoothing the poured concrete cap on the end of a mortared stone seawall, covered docks and the lake behind",
+      "description": "Crew finishing the concrete cap on a seawall return; docks and open water behind. Shows the cap detail and the crew at work.",
+      "services": ["seawall-construction", "concrete", "about"],
+      "usable": "thumbnail-only"
+    },
+    {
+      "file": "stone-seawall-lakefront-02.jpg",
+      "width": 414, "height": 414, "project": "seawall-03", "state": "after",
+      "alt": "Finished mortared stone seawall in front of a lake house with a screened porch, stone stairs to the right, on a sunny day",
+      "description": "Finished seawall at a lake house with a screened porch; stone stairs at the right end; sun on the stone.",
+      "services": ["seawall-construction", "lakefront-stairs", "cities", "home"],
+      "hero": true,
+      "usable": "thumbnail-only"
+    },
+    {
+      "file": "retaining-wall-stairs-01.jpg",
+      "width": 414, "height": 414, "project": "wall-stairs-06", "state": "after",
+      "alt": "Mortared stone retaining wall with an integrated flight of stone stairs with concrete-capped treads, houses behind",
+      "description": "Retaining wall with built-in stone stairs and poured treads (drone frame, DJI_0325). Bare graded ground in front.",
+      "services": ["lakefront-stairs", "retaining-walls", "lakefront-retaining-walls", "concrete"],
+      "original": "DJI_0325.JPG",
+      "usable": "thumbnail-only"
+    },
+    {
+      "file": "retaining-wall-drainage-swale-01.jpg",
+      "width": 414, "height": 414, "project": "wall-swale-07", "state": "after",
+      "alt": "Mortared fieldstone retaining wall with a concrete drainage swale running down the slope between two houses",
+      "description": "Retaining wall with a concrete-lined drainage channel through it (drone frame, DJI_0328). Shows water management, not just the wall.",
+      "services": ["retaining-walls", "concrete", "excavation", "lakefront-retaining-walls"],
+      "original": "DJI_0328.JPG",
+      "usable": "thumbnail-only"
+    },
+    {
+      "file": "seawall-footing-trench-crew-01.jpg",
+      "width": 414, "height": 414, "project": "seawall-footing-05", "state": "during",
+      "alt": "Crew of four hand-digging the footing trench along a shoreline for a stone seawall, docks and the lake behind",
+      "description": "Crew digging the seawall footing trench by hand along the shore; docks and open water behind. The 'built on a footing' proof shot.",
+      "services": ["seawall-construction", "excavation", "about", "home"],
+      "usable": "thumbnail-only"
+    },
+    {
+      "file": "stone-wall-dark-mortar-cap-01.jpg",
+      "width": 414, "height": 414, "project": "patio-wall-08", "state": "during",
+      "alt": "Low stone wall with large grey stone faces and dark mortar joints, cap freshly poured, rebar dowels standing",
+      "description": "In progress: low wall with big grey stone faces, dark joints, fresh cap, rebar in place. Same site as the flagstone patio photo.",
+      "services": ["retaining-walls", "stone-veneer", "concrete"],
+      "usable": "thumbnail-only"
+    },
+    {
+      "file": "flagstone-patio-in-progress-01.jpg",
+      "width": 414, "height": 414, "project": "patio-wall-08", "state": "during",
+      "alt": "Flagstone slabs laid out on the grass for a patio in front of a low mortared stone wall with a fresh cap, lake house behind",
+      "description": "In progress: flagstone being laid out for a patio at the foot of a new low stone wall; lake house with covered porch behind.",
+      "services": ["patios", "retaining-walls", "lakefront-stairs"],
+      "usable": "thumbnail-only"
+    },
+    {
+      "file": "stone-stairs-concrete-treads-01.jpg",
+      "width": 414, "height": 414, "project": "stairs-09", "state": "detail",
+      "alt": "Close view of stone stairs with mortared fieldstone risers and smooth poured concrete treads beside a stone wall",
+      "description": "Detail: fieldstone risers with poured concrete treads climbing beside a stone wall. Shows the stone-and-concrete combination.",
+      "services": ["lakefront-stairs", "concrete", "retaining-walls", "patios"],
+      "usable": "thumbnail-only"
+    },
+    {
+      "file": "fireplace-pizza-oven-grill-01.jpg",
+      "width": 414, "height": 414, "project": "outdoor-kitchen-10", "state": "after",
+      "alt": "Outdoor stone fireplace with a pizza oven above and a built-in grill beside it, on a flagstone patio under trees",
+      "description": "The fireplace, pizza oven and built-in crank grill in multicolour stone veneer on a flagstone patio. The brand board's best single asset.",
+      "services": ["outdoor-fireplaces", "pizza-ovens", "outdoor-kitchens", "patios", "home"],
+      "hero": true,
+      "usable": "thumbnail-only"
+    },
+    {
+      "file": "indoor-fireplace-stacked-stone-01.jpg",
+      "width": 414, "height": 414, "project": "indoor-fireplace-11", "state": "after",
+      "alt": "Floor-to-ceiling stacked stone veneer fireplace with a rustic timber mantel and a raised concrete hearth",
+      "description": "Indoor fireplace: full-height ledgestone veneer in white, grey and tan, timber mantel, raised hearth.",
+      "services": ["indoor-fireplaces", "stone-veneer", "chimney-construction"],
+      "usable": "thumbnail-only"
+    },
+    {
+      "file": "brick-arch-doorway-01.jpg",
+      "width": 414, "height": 414, "project": "brick-arch-12", "state": "after",
+      "alt": "Interior doorway framed in brick with a segmental brick arch, opening into an office",
+      "description": "Brick doorway with a segmental arch inside an office. The only brick and the only commercial-looking interior in the set.",
+      "services": ["brick-masonry", "commercial-masonry", "masonry-repair"],
+      "usable": "thumbnail-only"
+    }
+  ]
+}
