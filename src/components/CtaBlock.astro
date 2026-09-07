@@ -1,0 +1,31 @@
+---
+import Section from './Section.astro';
+import Button from './Button.astro';
+import PhoneLink from './PhoneLink.astro';
+import { site, telHref } from '@/config/site';
+import { copy } from '@/data/copy/global';
+
+interface Props {
+  heading?: string;
+  line?: string;
+}
+const { heading = copy.cta.heading, line = copy.cta.line } = Astro.props;
+---
+
+<Section tone="shadow" courseLines labelledby="cta-heading" class="cta-block">
+  <div class="cta-block__inner">
+    <h2 id="cta-heading" class="t-title">{heading}</h2>
+    <p class="t-lead">{line}</p>
+    <div class="cta-block__actions">
+      <Button href={telHref}>{site.cta.primary}</Button>
+      <Button href={site.cta.secondaryHref} variant="secondary">{site.cta.secondary}</Button>
+      <PhoneLink class="cta-block__phone" />
+    </div>
+  </div>
+</Section>
+
+<style>
+  .cta-block__inner { display: grid; gap: 16px; max-width: 60ch; }
+  .cta-block__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 12px; }
+  .cta-block__phone { font-size: 1.125rem; }
+</style>

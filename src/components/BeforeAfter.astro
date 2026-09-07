@@ -1,0 +1,37 @@
+---
+/** Before/after pair from the same project, side by side, no slider. */
+import Photo from './Photo.astro';
+import Eyebrow from './Eyebrow.astro';
+import { imageByFile } from '@/data/images';
+
+interface Props {
+  before: string;
+  after: string;
+  beforeCaption?: string;
+  afterCaption?: string;
+}
+const { before, after, beforeCaption, afterCaption } = Astro.props;
+const b = imageByFile(before);
+const a = imageByFile(after);
+if (!b || !a) throw new Error(`Before/after pair missing from manifest: ${before}, ${after}`);
+if (b.project !== a.project) throw new Error(`Before/after pair must come from one project: ${before} / ${after}`);
+---
+
+<div class="pair">
+  <div class="pair__item">
+    <Eyebrow rule>Before</Eyebrow>
+    <Photo file={before} caption={beforeCaption} />
+  </div>
+  <div class="pair__item">
+    <Eyebrow rule>After</Eyebrow>
+    <Photo file={after} caption={afterCaption} />
+  </div>
+</div>
+
+<style>
+  .pair { display: grid; gap: 24px; }
+  .pair__item { display: grid; gap: 12px; align-content: start; max-width: 414px; }
+  @media (min-width: 40rem) {
+    .pair { grid-template-columns: 1fr 1fr; }
+  }
+</style>

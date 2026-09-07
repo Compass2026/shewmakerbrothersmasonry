@@ -1,0 +1,41 @@
+---
+/**
+ * The one wrapper every page section uses. It owns the background tone, the vertical
+ * padding, the container width and the optional grain or course-line texture.
+ * Nothing sets a section background any other way (DESIGN.md, Section Wrapper).
+ */
+import type { Tone } from '@/data/types';
+
+interface Props {
+  tone?: Tone;
+  width?: 'copy' | 'wide' | 'full';
+  grain?: boolean;
+  courseLines?: boolean;
+  padding?: 'section' | 'tight' | 'none';
+  id?: string;
+  class?: string;
+  as?: 'section' | 'div' | 'article' | 'aside';
+  labelledby?: string;
+}
+
+const {
+  tone = 'ground',
+  width = 'copy',
+  grain = false,
+  courseLines = false,
+  padding = 'section',
+  id,
+  class: className,
+  as: Tag = 'section',
+  labelledby,
+} = Astro.props;
+---
+
+<Tag
+  id={id}
+  data-tone={tone}
+  aria-labelledby={labelledby}
+  class:list={['section', `pad-${padding}`, { grain, 'course-lines': courseLines }, className]}
+>
+  {width === 'full' ? <slot /> : <div class:list={['wrap', { 'wrap--wide': width === 'wide' }]}><slot /></div>}
+</Tag>

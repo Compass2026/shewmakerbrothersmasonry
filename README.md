@@ -22,9 +22,23 @@ should be configuration.
 
 - Stage 0, source material: done.
 - Stage 1, art direction: approved (Rokkitt display, Merriweather Sans body, one light section per page, the homepage order in `docs/art-direction.md`, interim raster badge in the header).
-- Stage 2, scaffold and globals: next. Astro + TypeScript + Tailwind, `src/config/site.ts` as the single source of truth, global and schema components, empty shell to Vercel staging.
-- Stage 3, all 34 pages to 70 percent.
+- Stage 2, scaffold and globals: done 2026-09-07. Astro 7 + TypeScript + Tailwind 4, `src/config/site.ts` as the single source of truth, global and schema components, the home page, staging on Vercel.
+- Stage 3, all 34 pages to 70 percent: next.
 - Stage 4, verify with Impeccable detect, Playwright screenshots, schema validation, Core Web Vitals.
+
+## Build and run
+
+```
+npm install
+npm run dev          # http://localhost:4321
+npm run build        # static output in dist/
+npm run check        # astro check (TypeScript)
+node qa/screenshots.mjs --all   # desktop + mobile full-page screenshots of every page into qa/screenshots/
+```
+
+Every page is `noindex` and robots.txt is closed until `SITE_ENV=production` is set in the Vercel
+project for the live domain. `SITE_URL` overrides the canonical origin; otherwise it comes from
+`VERCEL_PROJECT_PRODUCTION_URL` or the staging constant in `src/config/site.ts`.
 
 ## Hard rules (build failures)
 

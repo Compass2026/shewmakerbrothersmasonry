@@ -1,0 +1,10 @@
+---
+interface Props {
+  rule?: boolean;
+  class?: string;
+  as?: 'p' | 'span' | 'div';
+}
+const { rule = false, class: className, as: Tag = 'p' } = Astro.props;
+---
+
+<Tag class:list={['eyebrow', { 'has-rule': rule }, className]}><slot /></Tag>

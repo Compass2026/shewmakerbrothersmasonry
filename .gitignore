@@ -26,3 +26,7 @@ playwright-report/
 
 # scratch media downloads (raw Drive pulls, not source)
 .tmp-media/
+
+# QA output
+qa/screenshots/
+.impeccable/review/

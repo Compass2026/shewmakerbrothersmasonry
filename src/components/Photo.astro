@@ -1,0 +1,31 @@
+---
+/**
+ * A real Shewmaker photograph from the manifest, rendered at an honest size with a caption
+ * that names material and method. Never a place name (manifest rule).
+ */
+import { imageByFile, imageSrc } from '@/data/images';
+
+interface Props {
+  file: string;
+  caption?: string | false;
+  class?: string;
+  eager?: boolean;
+}
+
+const { file, caption, class: className, eager = false } = Astro.props;
+const img = imageByFile(file);
+if (!img) throw new Error(`Unknown project image: ${file}`);
+const cap = caption === false ? undefined : (caption ?? img.alt);
+---
+
+<figure class:list={['photo', className]}>
+  <img
+    src={imageSrc(img.file)}
+    width={img.width}
+    height={img.height}
+    alt={img.alt}
+    loading={eager ? 'eager' : 'lazy'}
+    decoding="async"
+  />
+  {cap && <figcaption class="photo__caption">{cap}</figcaption>}
+</figure>

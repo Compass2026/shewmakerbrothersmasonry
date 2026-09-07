@@ -1,0 +1,47 @@
+---
+/**
+ * A coursed (running-bond) grid of thumbnails: rows of full squares alternate with rows that
+ * start and end on a half stone. The one place the 414 px images are honest at 1x.
+ */
+import { imageByFile, imageSrc } from '@/data/images';
+
+interface Props {
+  files: string[];
+  /** Wrap each image in a link (e.g. to the gallery). */
+  href?: string;
+  class?: string;
+}
+const { files, href, class: className } = Astro.props;
+const list = files.map((f) => {
+  const img = imageByFile(f);
+  if (!img) throw new Error(`Unknown project image: ${f}`);
+  return img;
+});
+---
+
+<ul class:list={['coursed', className]}>
+  {list.map((img) => (
+    <li class="coursed__item">
+      {href ? (
+        <a href={href} class="coursed__link"><img src={imageSrc(img.file)} width={img.width} height={img.height} alt={img.alt} loading="lazy" decoding="async" /></a>
+      ) : (
+        <img src={imageSrc(img.file)} width={img.width} height={img.height} alt={img.alt} loading="lazy" decoding="async" />
+      )}
+    </li>
+  ))}
+</ul>
+
+<style>
+  .coursed { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; list-style: none; margin: 0; padding: 0; }
+  .coursed__item { grid-column: span 2; aspect-ratio: 1; overflow: hidden; border-radius: var(--radius-md); background: var(--card); }
+  .coursed__item img, .coursed__link { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .coursed__link { display: block; }
+  /* mobile course: [2,2] then [1,2,1] */
+  .coursed__item:nth-child(5n + 3), .coursed__item:nth-child(5n + 5) { grid-column: span 1; aspect-ratio: 1 / 2; }
+  @media (min-width: 48rem) {
+    .coursed { grid-template-columns: repeat(8, 1fr); gap: 12px; }
+    .coursed__item, .coursed__item:nth-child(5n + 3), .coursed__item:nth-child(5n + 5) { grid-column: span 2; aspect-ratio: 1; }
+    /* desktop course: [2,2,2,2] then [1,2,2,2,1] */
+    .coursed__item:nth-child(9n + 5), .coursed__item:nth-child(9n + 9) { grid-column: span 1; aspect-ratio: 1 / 2; }
+  }
+</style>

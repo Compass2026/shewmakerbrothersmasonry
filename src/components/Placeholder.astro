@@ -1,0 +1,45 @@
+---
+/**
+ * Placeholder block (DESIGN.md, signature component). Locked to the slot's aspect ratio,
+ * dashed brick border, diagonal hatch, "PHOTO NEEDED" plus one line saying exactly which
+ * shot is required. Every instance is collected into docs/placeholders.md from data-* attributes.
+ */
+import { imageByFile, imageSrc } from '@/data/images';
+
+interface Props {
+  /** CSS aspect-ratio, e.g. "16 / 9". Omit to control it from a parent class. */
+  ratio?: string;
+  /** Exactly which shot is required, in one line. */
+  need: string;
+  /** Slot name for the placeholder log, e.g. "hero", "inline", "portrait". */
+  slotName: string;
+  /** Optional manifest file shown small beside the label, never stretched. */
+  thumb?: string;
+  label?: string;
+  class?: string;
+}
+
+const { ratio, need, slotName, thumb, label = 'Photo needed', class: className } = Astro.props;
+const t = thumb ? imageByFile(thumb) : undefined;
+if (thumb && !t) throw new Error(`Placeholder thumb is not in the manifest: ${thumb}`);
+---
+
+<div
+  class:list={['placeholder', { 'placeholder--thumb': !!t }, className]}
+  style={ratio ? `--ratio: ${ratio}` : undefined}
+  data-placeholder
+  data-page={Astro.url.pathname}
+  data-slot={slotName}
+  data-need={need}
+>
+  <div class="placeholder__text">
+    <p class="placeholder__label">{label}</p>
+    <p class="placeholder__need">{need}</p>
+  </div>
+  {t && (
+    <figure class="placeholder__thumb">
+      <img src={imageSrc(t.file)} width={t.width} height={t.height} alt={t.alt} loading="lazy" decoding="async" />
+      <figcaption>Interim 414 px thumbnail, shown at size</figcaption>
+    </figure>
+  )}
+</div>

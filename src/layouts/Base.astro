@@ -1,0 +1,81 @@
+---
+import '@fontsource-variable/rokkitt';
+import '@fontsource-variable/merriweather-sans';
+import '@/styles/global.css';
+import rokkittWoff2 from '@fontsource-variable/rokkitt/files/rokkitt-latin-wght-normal.woff2?url';
+import merriweatherWoff2 from '@fontsource-variable/merriweather-sans/files/merriweather-sans-latin-wght-normal.woff2?url';
+import { site, absoluteUrl } from '@/config/site';
+import { businessNode, websiteNode } from '@/lib/schema';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import Schema from '@/components/Schema.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Extra JSON-LD nodes for this page. Business and WebSite are always included. */
+  schema?: unknown[];
+  ogImage?: string;
+}
+
+const { title, description, schema = [], ogImage = site.logo.badge } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const fullTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
+const graph = [businessNode(), websiteNode(), ...schema];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {site.env !== 'production' && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="preload" as="font" type="font/woff2" href={rokkittWoff2} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={merriweatherWoff2} crossorigin />
+    <meta name="theme-color" content="#221e1a" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={absoluteUrl(ogImage)} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="generator" content={Astro.generator} />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    <Schema graph={graph} />
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      const targets = document.querySelectorAll<HTMLElement>('.reveal');
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || !('IntersectionObserver' in window)) {
+        targets.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            }
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.05 },
+        );
+        targets.forEach((el) => io.observe(el));
+      }
+    </script>
+  </body>
+</html>

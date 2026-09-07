@@ -1,0 +1,91 @@
+---
+/**
+ * Footer on shadow with faint course lines and the NAP block: name, city and state, phone.
+ * No street address anywhere (service-area business).
+ */
+import { site, telHref } from '@/config/site';
+import { segments, servicesBySegment, servicePath } from '@/data/taxonomy';
+import { cities, cityPath, foldIns } from '@/data/cities';
+
+const year = new Date().getFullYear();
+const countyLine = `${site.counties.slice(0, -1).join(', ')} and ${site.counties[site.counties.length - 1]} counties`;
+---
+
+<footer class="site-footer course-lines" data-tone="shadow">
+  <div class="wrap wrap--wide">
+    <div class="site-footer__grid">
+      <div class="site-footer__nap">
+        <img src={site.logo.badge} width="72" height="72" alt={site.logo.alt} loading="lazy" decoding="async" class="site-footer__badge" />
+        <p class="site-footer__name">Shewmaker Brothers<br />Masonry</p>
+        <p class="site-footer__place">{site.base.locality}, {site.base.regionName}</p>
+        <p><a class="phone site-footer__phone" href={telHref}>{site.phone.display}</a></p>
+        <p class="t-small muted">Third generation, family owned. Serving the {site.market}: {countyLine}.</p>
+        <p class="t-small"><a class="link" href={site.social.facebook} rel="noopener" target="_blank">Facebook</a></p>
+      </div>
+
+      <nav class="site-footer__col site-footer__services" aria-label="Services">
+        {segments.map((seg) => (
+          <div class="site-footer__group">
+            <p class="site-footer__heading">{seg.name}</p>
+            <ul>
+              {servicesBySegment(seg.id).map((s) => (
+                <li><a href={servicePath(s.slug)}>{s.navLabel ?? s.name}</a></li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </nav>
+
+      <nav class="site-footer__col" aria-label="Service area">
+        <p class="site-footer__heading">Service area</p>
+        <ul>
+          {cities.map((c) => (
+            <li><a href={cityPath(c.slug)}>{c.name}</a></li>
+          ))}
+          {foldIns.map((f) => (
+            <li><a href={f.anchor}>{f.name}</a></li>
+          ))}
+          <li><a href="/service-area/">All of the service area</a></li>
+        </ul>
+      </nav>
+
+      <nav class="site-footer__col" aria-label="Company">
+        <p class="site-footer__heading">Shewmaker Brothers Masonry</p>
+        <ul>
+          <li><a href="/projects/">Projects</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="site-footer__bottom">
+      <p class="t-small muted">© {year} {site.name}. Service-area business based in {site.base.locality}, {site.base.regionName}.</p>
+      <p class="t-small muted">Call Sam at <a class="phone" href={telHref}>{site.phone.display}</a>.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer { background: var(--surface); color: var(--ink); padding: 64px 0 32px; border-top: 1px solid var(--rule); }
+  .site-footer__grid { display: grid; gap: 40px; }
+  .site-footer__nap { display: grid; gap: 10px; justify-items: start; align-content: start; }
+  .site-footer__badge { border-radius: var(--radius-sm); }
+  .site-footer__name { font-family: var(--font-display); font-weight: 900; font-size: 1.5rem; line-height: 0.95; text-transform: uppercase; letter-spacing: 0.02em; color: var(--heading); margin-top: 6px; }
+  .site-footer__place { font-weight: 600; }
+  .site-footer__phone { font-size: 1.25rem; }
+  .site-footer__heading { font-weight: 700; font-size: 0.8125rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+  .site-footer__col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+  .site-footer__col a { color: var(--ink); text-decoration: none; font-size: 0.9375rem; }
+  .site-footer__col a:hover { text-decoration: underline; }
+  .site-footer__services { display: grid; gap: 24px; }
+  .site-footer__bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--rule); }
+  @media (min-width: 40rem) {
+    .site-footer__services { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 64rem) {
+    .site-footer__grid { grid-template-columns: 1.1fr 2fr 0.8fr 0.8fr; gap: 48px; }
+    .site-footer__services { grid-template-columns: 1fr 1fr; }
+  }
+</style>

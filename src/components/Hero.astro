@@ -1,0 +1,60 @@
+---
+/**
+ * Page hero. Every page opens on ground with a photograph and a sandstone headline.
+ * Until full-resolution originals arrive, the photograph slot is a labelled placeholder
+ * with the 414 px thumbnail shown small beside it (docs/art-direction.md, §3).
+ */
+import Section from './Section.astro';
+import Eyebrow from './Eyebrow.astro';
+import Button from './Button.astro';
+import Placeholder from './Placeholder.astro';
+import { site, telHref } from '@/config/site';
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  /** Display size: home and gallery only. */
+  display?: boolean;
+  thumb?: string;
+  need: string;
+  ctas?: boolean;
+}
+
+const { eyebrow, title, lead, display = false, thumb, need, ctas = true } = Astro.props;
+---
+
+<Section tone="ground" width="wide" padding="tight" class="hero" labelledby="page-title">
+  <div class="hero__grid">
+    <div class="hero__text">
+      <slot name="above" />
+      {eyebrow && <Eyebrow rule class="reveal">{eyebrow}</Eyebrow>}
+      <h1 id="page-title" class:list={[display ? 't-display' : 't-headline', 'reveal']} style="--i:1">{title}</h1>
+      {lead && <p class="t-lead reveal" style="--i:2">{lead}</p>}
+      {ctas && (
+        <div class="hero__ctas reveal" style="--i:3">
+          <Button href={telHref}>{site.cta.primary}</Button>
+          <Button href={site.cta.secondaryHref} variant="secondary">{site.cta.secondary}</Button>
+        </div>
+      )}
+      <slot />
+    </div>
+    <div class="hero__media reveal" style="--i:2">
+      <Placeholder need={need} thumb={thumb} slotName="hero" class="placeholder--hero" />
+    </div>
+  </div>
+</Section>
+
+<style>
+  .hero { padding-top: clamp(2rem, 4vw, 3.5rem); }
+  .hero__grid { display: grid; gap: 32px; align-items: end; }
+  .hero__text { display: grid; gap: 20px; max-width: 64ch; }
+  .hero__ctas { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  :global(.placeholder--hero) { aspect-ratio: 4 / 5; }
+  @media (min-width: 48rem) {
+    :global(.placeholder--hero) { aspect-ratio: 16 / 9; }
+  }
+  @media (min-width: 64rem) {
+    .hero__grid { grid-template-columns: 7fr 5fr; gap: 48px; }
+  }
+</style>

@@ -1,0 +1,9 @@
+---
+import { site, telHref } from '@/config/site';
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<a href={telHref} class:list={['phone', className]}>{site.phone.display}</a>
