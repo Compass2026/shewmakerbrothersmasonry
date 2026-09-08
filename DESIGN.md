@@ -177,7 +177,11 @@ components:
   header:
     backgroundColor: "rgba(11, 9, 7, 0.86)"
     textColor: "{colors.mortar-dim}"
-    height: "80px"
+    height: "120px"
+  header-compact:
+    backgroundColor: "rgba(11, 9, 7, 0.94)"
+    textColor: "{colors.mortar-dim}"
+    height: "72px"
   footer:
     backgroundColor: "{colors.pit}"
     textColor: "{colors.mortar-dim}"
@@ -285,9 +289,14 @@ at the top or bottom edge, and every section boundary is a 1px joint.
 
 ## Elevation & Depth
 
-Depth is material: the block face steps up from the section, a 1px ember joint marks its edge,
-inset highlights (top-left) and shadows (bottom-right) chisel it, a 6% grain and a diagonal
-sheen give it stone, and a soft 40px drop at 80% black settles it on the ground. Photographs are
+Depth is material, and the stone is real: two seamless tiles are cut from the crew's own
+photographs (`public/images/textures/fieldstone.webp` from the lakefront wall detail,
+`greystone.webp` from the dark-mortar wall; `node qa/make-textures.mjs` regenerates them by
+mirror-tiling a cropped patch and darkening it). Grey stone sits behind every block face at 16%;
+fieldstone sits behind lifted sections at 13% and the pit sections at 10%, and, masked into a
+running bond under an ember line, forms the course stripe. Never stock, never generated. The
+block face steps up from the section, a 1px ember joint marks its edge, inset highlights
+(top-left) and shadows (bottom-right) chisel it, a diagonal sheen sits over the stone, and a soft 40px drop at 80% black settles it on the ground. Photographs are
 darkened and softened behind text (brightness 0.45 to 0.62, blur 1.5 to 3px) with a scrim from
 the left and from the bottom. Hovered link-blocks lift 3px and brighten their joint.
 
@@ -322,11 +331,14 @@ outlined icon box.
 - **Before/after:** two blocks with a coal "Before" tag and an ember "After" tag over the photo.
 - **FAQ:** blocks with an ember plus that rotates open.
 - **Chips:** filter buttons, ember when pressed.
-- **Course stripe:** the running-bond stripe above the footer and wherever a band needs a hard edge.
+- **Course stripe:** real fieldstone masked into a running bond under a 3px ember line, above the footer.
 - **Pending note:** a dashed block in fieldstone naming the photograph or fact still to come; every
   instance is listed in `docs/placeholders.md`.
-- **Header:** fixed, blurred coal, badge plus Anton wordmark, tracked nav, phone, chamfered estimate
-  button; full-screen coal panel on mobile with Anton links and a Services disclosure.
+- **Header:** fixed, blurred coal, 96px badge (72px on phones) beside the Anton wordmark at rest, shrinking
+  to 48px with the bar at 72px once the page scrolls; tracked nav, phone, chamfered estimate button;
+  the wordmark hides between 64rem and 80rem so the nav stays on one line; full-screen coal panel on
+  mobile with Anton links and a Services disclosure. The document offset is constant, so the shrink
+  never reflows the page.
 - **Footer:** pit ground, badge lockup, services in two columns, service area, get in touch, motto
   "Built on a footing."
 

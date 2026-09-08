@@ -12,7 +12,7 @@ const servicesActive = segments.some((seg) => servicesBySegment(seg.id).some((s)
 <header class="site-header" data-header>
   <div class="wrap wrap--wide site-header__row">
     <a class="brand" href="/" aria-label={`${site.name}, home`}>
-      <img class="brand__badge" src={site.logo.badge} width="48" height="48" alt="" decoding="async" fetchpriority="high" />
+      <img class="brand__badge" src={site.logo.badge} width="96" height="96" alt="" decoding="async" fetchpriority="high" />
       <span class="brand__name" aria-hidden="true"><span class="brand__line1">Shewmaker Brothers</span><span class="brand__line2">Masonry · Lake of the Ozarks</span></span>
     </a>
     <nav class="nav" aria-label="Primary">
@@ -106,19 +106,24 @@ const servicesActive = segments.some((seg) => servicesBySegment(seg.id).some((s)
 <style>
   .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: rgba(11, 9, 7, 0.86); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--joint); }
   .site-header.is-compact { background: rgba(11, 9, 7, 0.94); }
-  .site-header__row { position: relative; z-index: 2; display: flex; align-items: center; gap: 24px; min-height: 80px; }
+  /* impeccable-disable-next-line layout-transition: fixed header, the document offset is constant so nothing reflows */
+  .site-header__row { position: relative; z-index: 2; display: flex; align-items: center; gap: 24px; min-height: 96px; transition: min-height 260ms var(--ease-expo); }
+  .site-header.is-compact .site-header__row { min-height: 72px; }
   .brand { display: flex; align-items: center; gap: 12px; margin-right: auto; text-decoration: none; color: var(--color-chalk); }
-  .brand__badge { width: 48px; height: 48px; }
+  /* impeccable-disable-next-line layout-transition: the badge shrinks with the fixed header; no document reflow */
+  .brand__badge { width: 72px; height: 72px; transition: width 260ms var(--ease-expo), height 260ms var(--ease-expo); }
+  .site-header.is-compact .brand__badge { width: 48px; height: 48px; }
   .brand__name { display: none; flex-direction: column; line-height: 1; }
-  .brand__line1 { font-family: var(--font-display); font-size: 1.375rem; letter-spacing: 0.02em; text-transform: uppercase; color: var(--color-chalk); }
+  .brand__line1 { font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 0.02em; text-transform: uppercase; color: var(--color-chalk); white-space: nowrap; transition: font-size 260ms var(--ease-expo); }
+  .site-header.is-compact .brand__line1 { font-size: 1.375rem; }
   .brand__line2 { margin-top: 4px; font-family: var(--font-condensed); font-weight: 600; font-size: 0.6875rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--color-ember); }
   .nav { display: none; }
   .nav__list { display: flex; gap: 2px; list-style: none; margin: 0; padding: 0; }
   .nav__item { position: relative; }
-  .nav__link { position: relative; display: inline-flex; align-items: center; gap: 6px; padding: 10px 12px; font-family: var(--font-condensed); font-weight: 600; font-size: 0.9375rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-mortar-dim); text-decoration: none; background: none; border: 0; cursor: pointer; }
+  .nav__link { position: relative; display: inline-flex; align-items: center; gap: 6px; padding: 10px 10px; white-space: nowrap; font-family: var(--font-condensed); font-weight: 600; font-size: 0.9375rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-mortar-dim); text-decoration: none; background: none; border: 0; cursor: pointer; }
   .nav__link:hover { color: var(--color-chalk); }
   .nav__link.is-active { color: var(--color-chalk); }
-  .nav__link.is-active::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: 4px; height: 2px; background: var(--color-ember); }
+  .nav__link.is-active::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: 4px; height: 2px; background: var(--color-ember); }
   :global(.nav__chevron) { transition: transform 160ms ease; }
   .nav__link[aria-expanded="true"] :global(.nav__chevron) { transform: rotate(180deg); }
   .menu { position: absolute; top: calc(100% + 10px); left: 0; width: min(54rem, calc(100vw - 2 * var(--spacing-gutter))); padding: 28px; background: var(--color-block); border: 1px solid var(--joint-strong); box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.8); }
@@ -127,15 +132,15 @@ const servicesActive = segments.some((seg) => servicesBySegment(seg.id).some((s)
   .menu__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
   .menu__link { color: var(--color-mortar); text-decoration: none; font-size: 1rem; }
   .menu__link:hover, .menu__link.is-active { color: var(--color-ember); }
-  .site-header__actions { display: flex; align-items: center; gap: 18px; }
+  .site-header__actions { display: flex; align-items: center; gap: 16px; flex: none; }
   .site-header__phone { font-size: 1.125rem; }
-  :global(.site-header__cta) { display: none; min-height: 46px; padding-block: 12px; }
+  :global(.site-header__cta) { display: none; min-height: 46px; padding-block: 12px; white-space: nowrap; }
   .nav-toggle { display: inline-grid; place-items: center; width: 46px; height: 46px; background: none; border: 1px solid var(--joint-strong); color: var(--color-chalk); cursor: pointer; }
   .nav-toggle__icon--close { display: none; }
   .nav-toggle[aria-expanded="true"] .nav-toggle__icon--open { display: none; }
   .nav-toggle[aria-expanded="true"] .nav-toggle__icon--close { display: block; }
-  .nav-panel { position: fixed; inset: 0; z-index: 1; padding-top: 81px; background: var(--color-coal); overflow-y: auto; }
-  .nav-panel__inner { display: flex; flex-direction: column; min-height: calc(100dvh - 81px); padding-top: 16px; padding-bottom: 32px; }
+  .nav-panel { position: fixed; inset: 0; z-index: 1; padding-top: var(--header-h); background: var(--color-coal); overflow-y: auto; }
+  .nav-panel__inner { display: flex; flex-direction: column; min-height: calc(100dvh - var(--header-h)); padding-top: 16px; padding-bottom: 32px; }
   .nav-panel__list { list-style: none; margin: 0; padding: 0; }
   .nav-panel__link { display: block; padding: 16px 0; font-family: var(--font-display); font-size: 2rem; letter-spacing: 0.02em; text-transform: uppercase; line-height: 1; color: var(--color-chalk); text-decoration: none; border-bottom: 1px solid var(--joint); }
   .nav-panel__link[aria-current] { color: var(--color-ember); }
@@ -148,6 +153,7 @@ const servicesActive = segments.some((seg) => servicesBySegment(seg.id).some((s)
   .nav-panel__group a { color: var(--color-mortar); text-decoration: none; font-size: 1.0625rem; }
   .nav-panel__foot { margin-top: auto; padding-top: 32px; display: grid; gap: 16px; justify-items: start; }
   :global(html.nav-open) { overflow: hidden; }
-  @media (min-width: 30rem) { .brand__name { display: flex; } }
-  @media (min-width: 64rem) { .nav { display: block; } :global(.site-header__cta) { display: inline-flex; } .nav-toggle { display: none; } }
+  @media (min-width: 30rem) { .brand__name { display: flex; } .site-header__row { min-height: 120px; } .brand__badge { width: 96px; height: 96px; } }
+  @media (min-width: 64rem) { .nav { display: block; } :global(.site-header__cta) { display: inline-flex; } .nav-toggle { display: none; } .brand__name { display: none; } }
+  @media (min-width: 80rem) { .brand__name { display: flex; } }
 </style>

@@ -37,7 +37,7 @@
   --container-copy: 80rem;
   --container-wide: 80rem;
 
-  --shadow-block: inset 1px 1px 0 rgba(255, 255, 255, 0.05), inset -1px -1px 0 rgba(0, 0, 0, 0.55), 0 18px 40px -24px rgba(0, 0, 0, 0.8);
+  --shadow-block: inset 1px 1px 0 rgba(255, 255, 255, 0.09), inset 0 -2px 0 rgba(0, 0, 0, 0.7), inset -1px 0 0 rgba(0, 0, 0, 0.5), 0 18px 40px -24px rgba(0, 0, 0, 0.85);
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -97,7 +97,9 @@
     accent-color: var(--color-ember);
   }
   @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
-  body { margin: 0; min-height: 100dvh; padding-top: 80px; font-size: 1.0625rem; line-height: 1.65; font-weight: 400; }
+  :root { --header-h: 97px; }
+  @media (min-width: 30rem) { :root { --header-h: 121px; } }
+  body { margin: 0; min-height: 100dvh; padding-top: var(--header-h); font-size: 1.0625rem; line-height: 1.65; font-weight: 400; }
   ::selection { background: var(--color-ember); color: var(--color-coal); }
   :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
   h1, h2, h3, h4 { margin: 0; color: var(--heading); text-wrap: balance; }
@@ -118,6 +120,8 @@
   .section.pad-tight { padding-block: clamp(2.5rem, 5vw, 4rem); }
   .section.pad-none { padding-block: 0; }
   .section + .section { border-top: 1px solid var(--joint); }
+  .section[data-tone="lifted"]::before, .section[data-tone="shadow"]::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: url("/images/textures/fieldstone.webp") center / 420px 320px repeat; opacity: 0.13; }
+  .section[data-tone="shadow"]::before { opacity: 0.1; }
   .glow::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(60% 50% at 50% 0%, rgba(151, 114, 64, 0.16), transparent 70%); }
   .glow-bottom::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(60% 50% at 50% 100%, rgba(151, 114, 64, 0.14), transparent 70%); }
   .section > .wrap { position: relative; z-index: 1; }
@@ -171,7 +175,7 @@
 
   /* Blocks: the cut-stone card */
   .block { position: relative; background: var(--card); color: var(--ink); border: 1px solid var(--joint); box-shadow: var(--shadow-block); overflow: hidden; isolation: isolate; }
-  .block::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0.06; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"); }
+  .block::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0.16; background: url("/images/textures/greystone.webp") center / 528px 250px repeat; }
   .block::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(160deg, rgba(255, 255, 255, 0.04), transparent 45%, rgba(0, 0, 0, 0.25)); }
   .block--link { display: block; text-decoration: none; transition: border-color 160ms ease, transform 200ms var(--ease-expo); }
   .block--link:hover { border-color: var(--joint-strong); transform: translateY(-3px); }
@@ -194,7 +198,8 @@
   .field__hint { font-size: 0.9375rem; color: var(--muted); max-width: 60ch; }
 
   /* Running-bond course stripe: the masonry version of the hazard stripe */
-  .course-stripe { height: 30px; background-color: var(--color-coal); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='112' height='30'%3E%3Crect width='112' height='30' fill='%230b0907'/%3E%3Cg fill='%23f2a81d'%3E%3Crect x='0' y='2' width='52' height='11'/%3E%3Crect x='56' y='2' width='52' height='11'/%3E%3Crect x='-28' y='17' width='52' height='11'/%3E%3Crect x='28' y='17' width='52' height='11'/%3E%3Crect x='84' y='17' width='52' height='11'/%3E%3C/g%3E%3C/svg%3E"); background-repeat: repeat-x; background-position: center; }
+  .course-stripe { position: relative; height: 44px; background: var(--color-coal); border-top: 3px solid var(--color-ember); }
+  .course-stripe::before { content: ""; position: absolute; inset: 0; background: url("/images/textures/fieldstone.webp") center / 420px 320px repeat; filter: brightness(1.35); -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='41'%3E%3Cg fill='%23fff'%3E%3Crect x='0' y='3' width='56' height='16'/%3E%3Crect x='60' y='3' width='56' height='16'/%3E%3Crect x='-30' y='23' width='56' height='16'/%3E%3Crect x='30' y='23' width='56' height='16'/%3E%3Crect x='90' y='23' width='56' height='16'/%3E%3C/g%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='41'%3E%3Cg fill='%23fff'%3E%3Crect x='0' y='3' width='56' height='16'/%3E%3Crect x='60' y='3' width='56' height='16'/%3E%3Crect x='-30' y='23' width='56' height='16'/%3E%3Crect x='30' y='23' width='56' height='16'/%3E%3Crect x='90' y='23' width='56' height='16'/%3E%3C/g%3E%3C/svg%3E"); -webkit-mask-size: 120px 41px; mask-size: 120px 41px; -webkit-mask-repeat: repeat-x; mask-repeat: repeat-x; -webkit-mask-position: center; mask-position: center; }
   .course-stripe--thin { height: 14px; background-size: 56px 14px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='14'%3E%3Crect width='56' height='14' fill='%230b0907'/%3E%3Cg fill='%23f2a81d'%3E%3Crect x='0' y='1' width='26' height='5'/%3E%3Crect x='28' y='1' width='26' height='5'/%3E%3Crect x='-14' y='8' width='26' height='5'/%3E%3Crect x='14' y='8' width='26' height='5'/%3E%3Crect x='42' y='8' width='26' height='5'/%3E%3C/g%3E%3C/svg%3E"); }
 
   /* Marquee strip in ember */
