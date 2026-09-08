@@ -345,7 +345,9 @@ outlined icon box.
 - **Hero:** the section is `width="full"`, so the photograph, the video and the two scrims reach both
   edges of the viewport at any width; only the text keeps the 80rem container. The shade under the type
   is a horizontal gradient on `.hero__inner::before`, feathered top and bottom with a mask, so it darkens
-  the words without dulling the right half of the frame. On phones the text spans the full width, so that
+  the words without dulling the right half of the frame. Nothing else darkens the frame: the photograph and
+  the video run ungraded apart from a touch of saturation, with only a short seat where they meet the stone
+  base, so the work is visible everywhere the words are not. On phones the text spans the full width, so that
   shade turns vertical and lifts toward the buttons, letting the clip read under them. The display size is capped against viewport
   *height* as well as width (`min(1.6rem + 5.9vw, 1.25rem + 6vh)`), which keeps the lead, the stamp and
   the calls to action above the fold on a short laptop window.
@@ -393,7 +395,13 @@ outlined icon box.
   it; the badge already reads as the full lockup, so the set wordmark would only crowd the nav at rest.
   Tracked nav with an ember underline that grows from the left on hover and stays put on the current page,
   phone, chamfered estimate button; full-screen coal panel on mobile with Anton links and a Services
-  disclosure. The document offset is constant, so the shrink never reflows the page.
+  disclosure. The document offset is constant, so the shrink never reflows the page. The bar also compacts
+  while the mobile panel is open, and drops the wordmark on phones, so the whole menu fits one screen down to
+  the call button. **The panel is a sibling of the header, not a child:** the header carries a `backdrop-filter`,
+  which makes it a containing block for fixed descendants in WebKit, and that trapped the panel inside the
+  189px bar so nothing in it could be tapped on iOS. The Services disclosure also states
+  `details:not([open]) .nav-panel__sub { display: none }` explicitly, because an author `display: grid` beats
+  the older WebKit user-agent rule and would leave the list permanently open.
 - **Footer:** pit ground, badge lockup, services in two columns, service area, get in touch, motto
   "Built on a footing."
 
