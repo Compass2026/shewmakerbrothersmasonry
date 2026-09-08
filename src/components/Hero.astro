@@ -49,7 +49,7 @@ const parts = idx >= 0 ? [title.slice(0, idx), accent!, title.slice(idx + accent
       </picture>
     )}
     {bg && !isOriginal(bg) && <div class="photo-bg photo-bg--hero" style={`background-image: url(${imageLarge(bg)}); background-position: ${position}`} data-placeholder data-page={Astro.url.pathname} data-slot="hero-background" data-need={need ?? `Hero background: full-resolution original of ${bg.file}; the interim 414 px frame is shown darkened.`}></div>}
-    {video && <video class="photo-bg photo-bg--hero photo-bg--img hero__video" data-hero-video data-src={video} muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>}
+    {video && <video class="photo-bg photo-bg--hero photo-bg--img hero__video" data-hero-video data-src={video} data-src-sm={site.heroVideoSmall ?? video} muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>}
     <div class="scrim scrim--left"></div>
     <div class="scrim scrim--bottom"></div>
   </div>
@@ -89,12 +89,16 @@ const parts = idx >= 0 ? [title.slice(0, idx), accent!, title.slice(idx + accent
   /* The video sits over the photograph and fades in only once it can actually play. */
   .hero__video { opacity: 0; transition: opacity 900ms var(--ease-expo); }
   /* The credential stamp: a chamfered brass bar, the same cut as the buttons. */
-  .stamp { display: flex; flex-wrap: wrap; gap: 0; margin: 0; padding: 0; list-style: none; width: fit-content; max-width: 100%; border: 1px solid rgba(201, 138, 58, 0.55); background: rgba(25, 20, 16, 0.86); clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px); }
-  .stamp__item { display: inline-flex; align-items: center; gap: 9px; padding: 11px 18px; font-family: var(--font-condensed); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.17em; text-transform: uppercase; color: var(--color-amber-light); white-space: nowrap; }
-  .stamp__item + .stamp__item { border-left: 1px solid rgba(201, 138, 58, 0.34); }
+  .stamp { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; max-width: 100%; }
+  .stamp__item { display: inline-flex; align-items: center; gap: 8px; padding: 8px 13px; font-family: var(--font-condensed); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--color-amber-light); white-space: nowrap; border: 1px solid rgba(201, 138, 58, 0.55); background: rgba(25, 20, 16, 0.86); clip-path: polygon(8px 0, 100% 0, 100% 100%, 0 100%, 0 8px); }
+  /* Wide enough for one line: the chips close up into a single chamfered bar. */
+  @media (min-width: 48rem) {
+    .stamp { gap: 0; flex-wrap: nowrap; width: fit-content; border: 1px solid rgba(201, 138, 58, 0.55); background: rgba(25, 20, 16, 0.86); clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px); }
+    .stamp__item { padding: 11px 18px; font-size: 0.8125rem; letter-spacing: 0.17em; border: 0; background: none; clip-path: none; }
+    .stamp__item + .stamp__item { border-left: 1px solid rgba(201, 138, 58, 0.34); }
+  }
   .stamp__mark { width: 7px; height: 7px; flex: none; background: var(--color-amber); transform: rotate(45deg); transition: transform 420ms var(--ease-expo), background-color 220ms ease; }
   .stamp__item:hover .stamp__mark { transform: rotate(135deg); background: var(--color-amber-light); }
-  @media (max-width: 30rem) { .stamp__item { padding: 9px 13px; font-size: 0.75rem; letter-spacing: 0.13em; } }
   .hero__video.is-playing { opacity: 1; }
   /*
     The shade that makes the type readable is shaped to the text block and feathered out, rather
@@ -106,6 +110,21 @@ const parts = idx >= 0 ? [title.slice(0, idx), accent!, title.slice(idx + accent
     background: linear-gradient(90deg, rgba(25, 20, 16, 0.95) 0%, rgba(25, 20, 16, 0.93) 64%, rgba(25, 20, 16, 0.8) 79%, rgba(25, 20, 16, 0.36) 92%, transparent 100%);
     -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 9%, #000 91%, transparent 100%);
     mask-image: linear-gradient(180deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+  }
+  /*
+    Phones: the text spans the full width, so the shade runs top to bottom instead of left to right,
+    and lifts toward the buttons so the clip is visible under them.
+  */
+  @media (max-width: 48rem) {
+    .hero__inner::before {
+      left: -10vw; right: -10vw;
+      background: linear-gradient(180deg, rgba(25, 20, 16, 0.9) 0%, rgba(25, 20, 16, 0.86) 55%, rgba(25, 20, 16, 0.72) 100%);
+    }
+  }
+  /* The five-line headline needs the buttons kept above the fold on a phone. */
+  @media (max-width: 40rem) {
+    .hero__title { font-size: clamp(2.4rem, 1.2rem + 5.6vw, 6rem); line-height: 0.9; }
+    .hero__inner { gap: 16px; }
   }
   .hero__inner { position: relative; z-index: 1; display: grid; gap: 20px; max-width: 46rem; padding: clamp(3.5rem, 7vh, 7rem) 0 clamp(3rem, 5.5vh, 4.5rem); }
   :global(.hero--compact) .hero__inner { padding: clamp(3.5rem, 7vw, 5.5rem) 0 clamp(3rem, 6vw, 4.5rem); max-width: 52rem; }
@@ -123,12 +142,12 @@ const parts = idx >= 0 ? [title.slice(0, idx), accent!, title.slice(idx + accent
   // connection that is not metered or slow. Phones and reduced-motion visitors keep the photograph.
   const video = document.querySelector<HTMLVideoElement>('[data-hero-video]');
   if (video) {
-    const wide = window.matchMedia('(min-width: 48rem)').matches;
     const motion = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const conn = (navigator as any).connection;
     const cheap = !conn || (!conn.saveData && !/2g/.test(conn.effectiveType ?? ''));
-    if (wide && motion && cheap) {
-      video.src = video.dataset.src!;
+    if (motion && cheap) {
+      const small = window.matchMedia('(max-width: 48rem)').matches;
+      video.src = (small && video.dataset.srcSm) || video.dataset.src!;
       video.load();
       video.addEventListener('canplay', () => { video.play().then(() => video.classList.add('is-playing')).catch(() => {}); }, { once: true });
     }

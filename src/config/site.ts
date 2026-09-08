@@ -55,6 +55,8 @@ export const site = {
    * Footage must be the crew's own; the brand board forbids stock and AI-generated imagery.
    */
   heroVideo: '/videos/hero-lake.mp4' as string | null,
+  /** Phone rendition of the same clip: 576x324, ~1 MB, so the video plays on a phone without a 5.7 MB download. */
+  heroVideoSmall: '/videos/hero-lake-sm.mp4' as string | null,
 
   /** No email or form endpoint has been supplied. Phone-first until Tom decides. */
   email: '',

@@ -345,14 +345,14 @@ outlined icon box.
 - **Hero:** the section is `width="full"`, so the photograph, the video and the two scrims reach both
   edges of the viewport at any width; only the text keeps the 80rem container. The shade under the type
   is a horizontal gradient on `.hero__inner::before`, feathered top and bottom with a mask, so it darkens
-  the words without dulling the right half of the frame. The display size is capped against viewport
+  the words without dulling the right half of the frame. On phones the text spans the full width, so that
+  shade turns vertical and lifts toward the buttons, letting the clip read under them. The display size is capped against viewport
   *height* as well as width (`min(1.6rem + 5.9vw, 1.25rem + 6vh)`), which keeps the lead, the stamp and
   the calls to action above the fold on a short laptop window.
-- **Credential stamp:** `.stamp`, a chamfered brass bar under the hero lead carrying short checkable
-  claims separated by hairlines, each with a small amber diamond that turns on hover. The panel is
+- **Credential stamp:** `.stamp`, short checkable claims under the hero lead, each with a small amber
+  diamond that turns on hover. Below 48rem each claim is its own chamfered chip so a wrapped row still
+  looks deliberate; at 48rem and up the chips close into a single bar divided by hairlines. The panel is
   `rgba(25,20,16,.86)` so amber-light text clears AA even against the brightest frame of the video.
-  It is where a "best in the area" claim would go if the business ever had the evidence for one; see
-  `docs/placeholders.md` section G.
 - **Buttons:** primary ember with a 9px ember-light leading strip and the chamfer; secondary
   outlined chalk on transparent, ember on hover. 52px tall, Barlow Condensed 700 tracked. On hover the
   primary lifts 3px onto a warm shadow while a diagonal highlight sweeps once across its face; the

@@ -1,4 +1,4 @@
-/** Confirm the hero video plays on desktop and is never fetched on a phone. */
+/** Confirm the hero video plays on desktop and on a phone, that the phone gets the light rendition, and that reduced motion fetches nothing. */
 import { spawn } from 'node:child_process';
 import { chromium } from '@playwright/test';
 const server = spawn('npx', ['astro', 'preview', '--port', '4321'], { stdio: 'ignore' });
@@ -20,7 +20,7 @@ try {
       const v = document.querySelector('video');
       return v ? { present: true, src: !!v.currentSrc, paused: v.paused, t: Number(v.currentTime.toFixed(2)), playing: v.classList.contains('is-playing') } : { present: false };
     });
-    console.log(`${name.padEnd(14)} mp4 requests: ${hits.length}  ${JSON.stringify(state)}`);
+    console.log(`${name.padEnd(14)} mp4 requests: ${hits.length} ${JSON.stringify(hits)}  ${JSON.stringify(state)}`);
     if (name === 'desktop') { await page.waitForTimeout(500); await page.screenshot({ path: 'qa/screenshots/hero-video.png' }); }
     await ctx.close();
   }

@@ -18,7 +18,8 @@ for (let i = 0; i < 80; i++) { try { if ((await fetch('http://localhost:4321/'))
 let bad = 0;
 try {
   const browser = await chromium.launch();
-  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+  const VW = Number(process.env.VW ?? 1440), VH = Number(process.env.VH ?? 900);
+  const ctx = await browser.newContext({ viewport: { width: VW, height: VH }, isMobile: VW < 700, hasTouch: VW < 700 });
   const page = await ctx.newPage();
   for (const path of paths) {
     await page.goto('http://localhost:4321' + path, { waitUntil: 'networkidle' });
@@ -43,7 +44,7 @@ try {
       });
     });
     await page.waitForTimeout(200);
-    const shot = await page.screenshot({ clip: { x: 0, y: 0, width: 1440, height: 900 } });
+    const shot = await page.screenshot({ clip: { x: 0, y: 0, width: VW, height: VH } });
     await page.evaluate(() => {
       document.querySelectorAll('.hero__inner').forEach((el) => {
         for (const child of Array.from(el.children)) child.style.visibility = '';
@@ -51,7 +52,7 @@ try {
     });
     for (const t of targets) {
       if (t.y < 0 || t.y + t.h > 900 || t.w < 4) continue;
-      const raw = await sharp(shot).extract({ left: Math.max(0, t.x), top: Math.max(0, t.y), width: Math.min(t.w, 1440 - t.x), height: Math.min(t.h, 900 - t.y) }).raw().toBuffer({ resolveWithObject: true });
+      const raw = await sharp(shot).extract({ left: Math.max(0, t.x), top: Math.max(0, t.y), width: Math.min(t.w, VW - t.x), height: Math.min(t.h, VH - t.y) }).raw().toBuffer({ resolveWithObject: true });
       let worst = 99, lightest = null;
       const { data, info } = raw;
       for (let i = 0; i < data.length; i += info.channels * 7) {
