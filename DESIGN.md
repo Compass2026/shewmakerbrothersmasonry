@@ -342,14 +342,29 @@ outlined icon box.
 
 ## Components
 
+- **Hero:** the section is `width="full"`, so the photograph, the video and the two scrims reach both
+  edges of the viewport at any width; only the text keeps the 80rem container. The shade under the type
+  is a horizontal gradient on `.hero__inner::before`, feathered top and bottom with a mask, so it darkens
+  the words without dulling the right half of the frame. The display size is capped against viewport
+  *height* as well as width (`min(1.6rem + 5.9vw, 1.25rem + 6vh)`), which keeps the lead, the stamp and
+  the calls to action above the fold on a short laptop window.
+- **Credential stamp:** `.stamp`, a chamfered brass bar under the hero lead carrying short checkable
+  claims separated by hairlines, each with a small amber diamond that turns on hover. The panel is
+  `rgba(25,20,16,.86)` so amber-light text clears AA even against the brightest frame of the video.
+  It is where a "best in the area" claim would go if the business ever had the evidence for one; see
+  `docs/placeholders.md` section G.
 - **Buttons:** primary ember with a 9px ember-light leading strip and the chamfer; secondary
-  outlined chalk on transparent, ember on hover. 52px tall, Barlow Condensed 700 tracked.
+  outlined chalk on transparent, ember on hover. 52px tall, Barlow Condensed 700 tracked. On hover the
+  primary lifts 3px onto a warm shadow while a diagonal highlight sweeps once across its face; the
+  secondary fills from the left edge. Both are flattened under `prefers-reduced-motion`.
 - **Blocks:** `.block` with optional `.block__photo` (16:10) on top, `.block__body` at 28px, and a
-  `.numeral` ghost number in ember at 12% bottom-right. `.block--link` for whole-block links.
+  `.numeral` ghost number in ember at 12% bottom-right. `.block--link` for whole-block links. Hovering a
+  card with a photo lifts it 4-5px onto a cast shadow, brightens the joint, eases the photograph to 1.02
+  and lifts the ghost numeral; where the card has an icon box, the box fills with ember.
 - **Service block:** photo, icon box, title, one line, the service links with ember dashes, numeral.
 - **Trust strip:** four icon-box items in a row.
-- **Marquee:** ember strip of the nineteen services in Anton, diamond separators, 60s loop, still
-  under reduced motion.
+- **Marquee:** ember strip of the nineteen services in Anton, diamond separators, 60s loop. It pauses
+  while the pointer is over it so the strip can be read, and is still under reduced motion.
 - **Photo band (parallax):** full-bleed graded photograph pinned to the viewport while the band scrolls
   over it, so the work behind the words appears to move. Built with `clip-path: inset(0)` on the section,
   which makes it the containing block for the `position: fixed` image; this works on iOS Safari, where
@@ -373,11 +388,12 @@ outlined icon box.
 - **Capped block:** `.block--capped`, a 14px stone cap along the top edge with the concrete line under it.
 - **Pending note:** a dashed block in fieldstone naming the photograph or fact still to come; every
   instance is listed in `docs/placeholders.md`.
-- **Header:** fixed, blurred coal, 96px badge (72px on phones) beside the Anton wordmark at rest, shrinking
-  to 48px with the bar at 72px once the page scrolls; tracked nav, phone, chamfered estimate button;
-  the wordmark hides between 64rem and 80rem so the nav stays on one line; full-screen coal panel on
-  mobile with Anton links and a Services disclosure. The document offset is constant, so the shrink
-  never reflows the page.
+- **Header:** fixed, blurred coal. The badge stands alone at rest at 240px tall (168px on phones) and
+  compacts to 60px in an 80px bar once the page scrolls, at which point the Anton wordmark appears beside
+  it; the badge already reads as the full lockup, so the set wordmark would only crowd the nav at rest.
+  Tracked nav with an ember underline that grows from the left on hover and stays put on the current page,
+  phone, chamfered estimate button; full-screen coal panel on mobile with Anton links and a Services
+  disclosure. The document offset is constant, so the shrink never reflows the page.
 - **Footer:** pit ground, badge lockup, services in two columns, service area, get in touch, motto
   "Built on a footing."
 

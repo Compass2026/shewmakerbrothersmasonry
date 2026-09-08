@@ -24,6 +24,8 @@ interface Props {
   compact?: boolean;
   /** CSS background-position for the photograph; anchor it on the stone. */
   position?: string;
+  /** Short, checkable credentials set as a stamp between the lead and the calls to action. */
+  ribbon?: string[];
   /** The stone base under the hero. Turn it off where the page composes its own. */
   base?: boolean;
   /** Video to play behind the headline, over the photograph. Defaults to site.heroVideo. */
@@ -32,13 +34,13 @@ interface Props {
   thumb?: string;
   need?: string;
 }
-const { eyebrow, title, accent, lead, display = false, photo = 'seawall-aerial-01', ctas = true, compact = false, need, position = 'center 55%', video = site.heroVideo, base = true } = Astro.props;
+const { eyebrow, title, accent, lead, ribbon, display = false, photo = 'seawall-aerial-01', ctas = true, compact = false, need, position = 'center 55%', video = site.heroVideo, base = true } = Astro.props;
 const bg = imageByFile(photo);
 const idx = accent ? title.indexOf(accent) : -1;
 const parts = idx >= 0 ? [title.slice(0, idx), accent!, title.slice(idx + accent!.length)] : [title, '', ''];
 ---
 
-<Section tone="ground" width="wide" padding="none" class={compact ? 'hero hero--compact' : 'hero'} labelledby="page-title">
+<Section tone="ground" width="full" padding="none" class={compact ? 'hero hero--compact' : 'hero'} labelledby="page-title">
   <div class="hero__bg" aria-hidden="true">
     {bg && isOriginal(bg) && (
       <picture>
@@ -51,12 +53,20 @@ const parts = idx >= 0 ? [title.slice(0, idx), accent!, title.slice(idx + accent
     <div class="scrim scrim--left"></div>
     <div class="scrim scrim--bottom"></div>
   </div>
+  <div class="wrap wrap--wide hero__wrap">
   <div class="hero__inner">
     {eyebrow && <Eyebrow rule class="reveal">{eyebrow}</Eyebrow>}
     <h1 id="page-title" class:list={[display ? 't-display' : 't-headline', 'hero__title', 'reveal']} style="--i:1">
       {parts[0]}{parts[1] && <span class="accent">{parts[1]}</span>}{parts[2]}
     </h1>
     {lead && <p class="t-lead hero__lead reveal" style="--i:2">{lead}</p>}
+    {ribbon && ribbon.length > 0 && (
+      <ul class="stamp reveal" style="--i:2">
+        {ribbon.map((item) => (
+          <li class="stamp__item"><span class="stamp__mark" aria-hidden="true"></span><span class="stamp__text">{item}</span></li>
+        ))}
+      </ul>
+    )}
     {ctas && (
       <div class="hero__ctas reveal" style="--i:3">
         <Button href={telHref} icon="phone">{site.cta.primary}</Button>
@@ -66,16 +76,25 @@ const parts = idx >= 0 ? [title.slice(0, idx), accent!, title.slice(idx + accent
     <slot />
     <div class="hero__meta"><slot name="above" /></div>
   </div>
+  </div>
 </Section>
 {base && <StoneEdge height="150px" class="hero__base" />}
 
 <style>
   :global(.hero) { position: relative; isolation: isolate; overflow: hidden; }
   .hero__bg { position: absolute; inset: 0; z-index: 0; }
+  .hero__wrap { position: relative; z-index: 1; }
   .photo-bg--hero { filter: saturate(1.08) brightness(0.94) contrast(1); transform: scale(1.02); }
   .photo-bg--img { width: 100%; height: 100%; max-width: none; object-fit: cover; }
   /* The video sits over the photograph and fades in only once it can actually play. */
   .hero__video { opacity: 0; transition: opacity 900ms var(--ease-expo); }
+  /* The credential stamp: a chamfered brass bar, the same cut as the buttons. */
+  .stamp { display: flex; flex-wrap: wrap; gap: 0; margin: 0; padding: 0; list-style: none; width: fit-content; max-width: 100%; border: 1px solid rgba(201, 138, 58, 0.55); background: rgba(25, 20, 16, 0.86); clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px); }
+  .stamp__item { display: inline-flex; align-items: center; gap: 9px; padding: 11px 18px; font-family: var(--font-condensed); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.17em; text-transform: uppercase; color: var(--color-amber-light); white-space: nowrap; }
+  .stamp__item + .stamp__item { border-left: 1px solid rgba(201, 138, 58, 0.34); }
+  .stamp__mark { width: 7px; height: 7px; flex: none; background: var(--color-amber); transform: rotate(45deg); transition: transform 420ms var(--ease-expo), background-color 220ms ease; }
+  .stamp__item:hover .stamp__mark { transform: rotate(135deg); background: var(--color-amber-light); }
+  @media (max-width: 30rem) { .stamp__item { padding: 9px 13px; font-size: 0.75rem; letter-spacing: 0.13em; } }
   .hero__video.is-playing { opacity: 1; }
   /*
     The shade that makes the type readable is shaped to the text block and feathered out, rather
@@ -88,9 +107,9 @@ const parts = idx >= 0 ? [title.slice(0, idx), accent!, title.slice(idx + accent
     -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 9%, #000 91%, transparent 100%);
     mask-image: linear-gradient(180deg, transparent 0, #000 9%, #000 91%, transparent 100%);
   }
-  .hero__inner { position: relative; z-index: 1; display: grid; gap: 22px; max-width: 46rem; padding: clamp(6rem, 12vw, 10rem) 0 clamp(4rem, 8vw, 6rem); }
+  .hero__inner { position: relative; z-index: 1; display: grid; gap: 20px; max-width: 46rem; padding: clamp(3.5rem, 7vh, 7rem) 0 clamp(3rem, 5.5vh, 4.5rem); }
   :global(.hero--compact) .hero__inner { padding: clamp(3.5rem, 7vw, 5.5rem) 0 clamp(3rem, 6vw, 4.5rem); max-width: 52rem; }
-  .hero__title { max-width: 14ch; text-wrap: balance; }
+  .hero__title { max-width: 14ch; text-wrap: balance; font-size: clamp(2.85rem, min(1.6rem + 5.9vw, 1.25rem + 6vh), 6rem); }
   .hero__meta:empty { display: none; }
   .hero__meta { margin-top: 18px; }
   @media (min-width: 64rem) { .hero__title { max-width: 19ch; } .hero__inner { max-width: 52rem; } }

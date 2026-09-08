@@ -16,7 +16,8 @@ const { items } = Astro.props;
 
 <style>
   .trust { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 24px 20px; }
-  .trust__item { display: grid; gap: 14px; align-content: start; padding-top: 4px; }
+  .trust__item { display: grid; gap: 14px; align-content: start; padding-top: 4px; transition: transform 260ms var(--ease-expo); }
+  .trust__item:hover { transform: translateY(-4px); }
   .trust__item h3 { margin-top: 6px; }
   @media (min-width: 40rem) { .trust { gap: 36px; } }
   @media (min-width: 64rem) { .trust { grid-template-columns: repeat(4, 1fr); gap: 40px; } }

@@ -126,7 +126,8 @@ const servicesActive = segments.some((seg) => servicesBySegment(seg.id).some((s)
   .nav__link { position: relative; display: inline-flex; align-items: center; gap: 6px; padding: 10px 10px; white-space: nowrap; font-family: var(--font-condensed); font-weight: 600; font-size: 0.9375rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-mortar-dim); text-decoration: none; background: none; border: 0; cursor: pointer; }
   .nav__link:hover { color: var(--color-chalk); }
   .nav__link.is-active { color: var(--color-chalk); }
-  .nav__link.is-active::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: 4px; height: 2px; background: var(--color-amber); }
+  .nav__link::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: 4px; height: 2px; background: var(--color-amber); transform: scaleX(0); transform-origin: left center; transition: transform 240ms var(--ease-expo); }
+  .nav__link:hover::after, .nav__link[aria-expanded="true"]::after, .nav__link.is-active::after { transform: scaleX(1); }
   :global(.nav__chevron) { transition: transform 160ms ease; }
   .nav__link[aria-expanded="true"] :global(.nav__chevron) { transform: rotate(180deg); }
   .menu { position: absolute; top: calc(100% + 10px); left: 0; width: min(54rem, calc(100vw - 2 * var(--spacing-gutter))); padding: 28px; background: var(--color-ground-2); border: 1px solid var(--joint-strong); box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.8); }
