@@ -46,7 +46,7 @@ const schema = [webPageNode({ path, name: title, description }), breadcrumbNode(
       </div>
       <div class="counties__grid">
         {byCounty.map(({ county, towns }, i) => (
-          <div class="block">
+          <div class="block block--capped">
             <div class="block__body counties__card">
               <h3 class="t-subtitle">{county} County</h3>
               <ul>{towns.map((t) => <li><a class="link" href={cityPath(t.slug)}>{t.name}</a></li>)}</ul>

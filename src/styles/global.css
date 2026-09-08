@@ -23,6 +23,7 @@
   --color-chalk: #f5f3f1;
   --color-fieldstone: #8a7f6d;
   --color-fieldstone-text: #716859;
+  --color-cap: #b9b3a8;
 
   --font-display: "Anton", "Anton Fallback", Impact, "Arial Narrow", sans-serif;
   --font-condensed: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
@@ -120,8 +121,6 @@
   .section.pad-tight { padding-block: clamp(2.5rem, 5vw, 4rem); }
   .section.pad-none { padding-block: 0; }
   .section + .section { border-top: 1px solid var(--joint); }
-  .section[data-tone="lifted"]::before, .section[data-tone="shadow"]::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: url("/images/textures/fieldstone.webp") center / 420px 320px repeat; opacity: 0.13; }
-  .section[data-tone="shadow"]::before { opacity: 0.1; }
   .glow::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(60% 50% at 50% 0%, rgba(151, 114, 64, 0.16), transparent 70%); }
   .glow-bottom::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(60% 50% at 50% 100%, rgba(151, 114, 64, 0.14), transparent 70%); }
   .section > .wrap { position: relative; z-index: 1; }
@@ -175,7 +174,7 @@
 
   /* Blocks: the cut-stone card */
   .block { position: relative; background: var(--card); color: var(--ink); border: 1px solid var(--joint); box-shadow: var(--shadow-block); overflow: hidden; isolation: isolate; }
-  .block::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0.16; background: url("/images/textures/greystone.webp") center / 528px 250px repeat; }
+  .block::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0.1; background: url("/images/textures/greystone.webp") center / 528px 250px repeat; }
   .block::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(160deg, rgba(255, 255, 255, 0.04), transparent 45%, rgba(0, 0, 0, 0.25)); }
   .block--link { display: block; text-decoration: none; transition: border-color 160ms ease, transform 200ms var(--ease-expo); }
   .block--link:hover { border-color: var(--joint-strong); transform: translateY(-3px); }
@@ -196,6 +195,16 @@
   .field__input::placeholder { color: var(--muted); }
   .field__input:focus { outline: none; border-color: var(--color-ember); box-shadow: 0 0 0 1px var(--color-ember); }
   .field__hint { font-size: 0.9375rem; color: var(--muted); max-width: 60ch; }
+
+  /* Stone courses: the crew's sunlit seawall, full brightness, under a poured concrete cap */
+  .stone-course { position: relative; height: 64px; background: url("/images/textures/stonewall.webp") center 30% / 640px 492px repeat; border-top: 7px solid var(--color-cap); box-shadow: inset 0 -14px 18px -8px rgba(0, 0, 0, 0.65), inset 0 2px 0 rgba(0, 0, 0, 0.35); }
+  .stone-course--deep { height: 96px; }
+  .stone-wall { position: relative; isolation: isolate; background: url("/images/textures/stonewall.webp") center / 640px 492px repeat; }
+  .stone-wall::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: linear-gradient(180deg, rgba(11, 9, 7, 0.4), rgba(11, 9, 7, 0.18) 50%, rgba(11, 9, 7, 0.5)), radial-gradient(80% 60% at 50% 50%, transparent 40%, rgba(11, 9, 7, 0.35)); }
+  .stone-wall > * { position: relative; z-index: 1; }
+  .stone-wall__sign { background: rgba(11, 9, 7, 0.93); border: 1px solid var(--joint-strong); box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.9), inset 1px 1px 0 rgba(255, 255, 255, 0.06); }
+  .block--capped { border-top: 14px solid transparent; border-image: url("/images/textures/stonewall.webp") 40 0 0 0 / 14px 0 0 0 / 0 round; outline: 1px solid var(--joint); outline-offset: -1px; }
+  .block--capped > .block__body { box-shadow: inset 0 3px 0 var(--color-cap); }
 
   /* Running-bond course stripe: the masonry version of the hazard stripe */
   .course-stripe { position: relative; height: 44px; background: var(--color-coal); border-top: 3px solid var(--color-ember); }

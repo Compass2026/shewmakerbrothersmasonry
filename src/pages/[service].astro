@@ -88,7 +88,7 @@ const schema = [
   <Section tone="ground" class="svc-sections">
     <div class="svc-sections__grid">
       {copy.sections.map((s, i) => (
-        <div class="block svc-section">
+        <div class="block block--capped svc-section">
           <div class="block__body svc-section__body">
             <h2 class="t-subtitle svc-section__title">{s.heading}</h2>
             <div class="prose">{s.body.map((p) => <p>{p}</p>)}</div>

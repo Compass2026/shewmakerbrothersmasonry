@@ -1,0 +1,7 @@
+---
+/** A course of the crew's own stone with a poured cap: the page is built on it. */
+interface Props { size?: 'regular' | 'deep'; class?: string }
+const { size = 'regular', class: className } = Astro.props;
+---
+
+<div class:list={['stone-course', `stone-course--${size}`, className]} aria-hidden="true"></div>

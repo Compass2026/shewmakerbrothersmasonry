@@ -17,6 +17,7 @@ colors:
   chalk: "#F5F3F1"
   fieldstone: "#8A7F6D"
   fieldstone-text: "#716859"
+  cap: "#B9B3A8"
 typography:
   display:
     fontFamily: "Anton, Anton Fallback, Impact, Arial Narrow, sans-serif"
@@ -289,13 +290,15 @@ at the top or bottom edge, and every section boundary is a 1px joint.
 
 ## Elevation & Depth
 
-Depth is material, and the stone is real: two seamless tiles are cut from the crew's own
-photographs (`public/images/textures/fieldstone.webp` from the lakefront wall detail,
-`greystone.webp` from the dark-mortar wall; `node qa/make-textures.mjs` regenerates them by
-mirror-tiling a cropped patch and darkening it). Grey stone sits behind every block face at 16%;
-fieldstone sits behind lifted sections at 13% and the pit sections at 10%, and, masked into a
-running bond under an ember line, forms the course stripe. Never stock, never generated. The
-block face steps up from the section, a 1px ember joint marks its edge, inset highlights
+Depth is material, and the stone is real and meant to be seen. `public/images/textures/stonewall.webp`
+is nine patches of the crew's own seawall and retaining-wall photographs cross-faded into one seamless
+tile and warmed toward the sunlit tan of the seawall (`node qa/make-textures.mjs` regenerates it;
+`greystone.webp` is the darker face that sits behind block faces at 10%). Stone is an accent, never a
+wash: a stone course under a poured concrete cap (`.stone-course`) runs under the marquee, above the
+closing CTA and, deeper, under the footer; the statement band and the closing CTA sit on a full stone
+wall (`.stone-wall`) with the copy on a dark sign block; numbered and card blocks carry a 14px stone
+cap with a concrete line beneath (`.block--capped`). Never stock, never generated. The block face
+steps up from the section, a 1px ember joint marks its edge, inset highlights
 (top-left) and shadows (bottom-right) chisel it, a diagonal sheen sits over the stone, and a soft 40px drop at 80% black settles it on the ground. Photographs are
 darkened and softened behind text (brightness 0.45 to 0.62, blur 1.5 to 3px) with a scrim from
 the left and from the bottom. Hovered link-blocks lift 3px and brighten their joint.
@@ -331,7 +334,10 @@ outlined icon box.
 - **Before/after:** two blocks with a coal "Before" tag and an ember "After" tag over the photo.
 - **FAQ:** blocks with an ember plus that rotates open.
 - **Chips:** filter buttons, ember when pressed.
-- **Course stripe:** real fieldstone masked into a running bond under a 3px ember line, above the footer.
+- **Stone course:** a 64px course of the real stone under a 7px concrete cap (`--color-cap`, #B9B3A8); the deep
+  96px version carries the footer.
+- **Stone wall:** the tile at full brightness behind a section, with the content on a `.stone-wall__sign` block.
+- **Capped block:** `.block--capped`, a 14px stone cap along the top edge with the concrete line under it.
 - **Pending note:** a dashed block in fieldstone naming the photograph or fact still to come; every
   instance is listed in `docs/placeholders.md`.
 - **Header:** fixed, blurred coal, 96px badge (72px on phones) beside the Anton wordmark at rest, shrinking

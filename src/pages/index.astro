@@ -14,6 +14,7 @@ import Process from '@/components/Process.astro';
 import AreaBlocks from '@/components/AreaBlocks.astro';
 import CtaBlock from '@/components/CtaBlock.astro';
 import Icon from '@/components/Icon.astro';
+import StoneCourse from '@/components/StoneCourse.astro';
 import { site, telHref } from '@/config/site';
 import { segments, services } from '@/data/taxonomy';
 import { copy } from '@/data/copy/global';
@@ -62,6 +63,7 @@ const problems = [
   />
 
   <Marquee items={services.map((s) => s.navLabel ?? s.name)} />
+  <StoneCourse />
 
   <Section tone="ground" width="wide" padding="tight" labelledby="trust-heading">
     <h2 id="trust-heading" class="sr-only">Why homeowners at the lake call Shewmaker Brothers Masonry</h2>
@@ -86,6 +88,7 @@ const problems = [
   </Section>
 
   <PhotoBand
+    wall
     photo="lakefront-retaining-wall-detail-01.jpg"
     eyebrow="The Shewmaker standard"
     statement="Rip rap protects a shoreline. A stone seawall protects it and looks like it belongs to the house."
@@ -187,7 +190,7 @@ const problems = [
       </div>
       <div class="problems__grid">
         {problems.map((p, i) => (
-          <a class="block block--link problem" href={p.href}>
+          <a class="block block--link block--capped problem" href={p.href}>
             <div class="block__body problem__body">
               <span class="icon-box"><Icon name={p.icon} /></span>
               <h3 class="t-subtitle">{p.title}</h3>
@@ -202,6 +205,7 @@ const problems = [
     </div>
   </Section>
 
+  <StoneCourse />
   <CtaBlock />
 </Base>
 

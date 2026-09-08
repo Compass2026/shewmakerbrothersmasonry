@@ -5,7 +5,7 @@ const { steps } = Astro.props;
 
 <ol class="process">
   {steps.map((s, i) => (
-    <li class="block process__step">
+    <li class="block block--capped process__step">
       <div class="block__body process__body">
         <span class="process__num">{String(i + 1).padStart(2, '0')}</span>
         <h3 class="t-subtitle">{s.title}</h3>

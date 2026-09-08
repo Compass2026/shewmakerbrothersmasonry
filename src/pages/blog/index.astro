@@ -36,7 +36,7 @@ const schema = [webPageNode({ path, name: metaTitle, description, type: 'Collect
       <TextPlaceholder slotName="blog-posts" label="No posts yet" need="The first five posts are planned below and not written. None is published until it is real." />
       <ul class="topics__grid">
         {topics.map((t, i) => (
-          <li class="block topic">
+          <li class="block block--capped topic">
             <div class="block__body topic__body">
               <p class="eyebrow">{t.pillar}</p>
               <h3 class="t-subtitle">{t.title}</h3>

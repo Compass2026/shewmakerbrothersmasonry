@@ -1,34 +1,73 @@
 /**
- * Seamless stone tiles cut from the crew's own photographs (never stock): a patch is cropped,
- * mirror-tiled 2x2 so the edges meet, darkened to sit under the palette, and written as WebP.
+ * Stone tiles cut from the crew's own photographs (never stock).
+ * `stonewall.webp`: two different patches of wall, cross-faded into a seamless tile (no mirror symmetry).
+ * `greystone.webp`: a dark grey face for block backgrounds, mirror-tiled and darkened (it sits at 10%).
  *   node qa/make-textures.mjs
  */
 import sharp from 'sharp';
 import { mkdir } from 'node:fs/promises';
 
-const tiles = [
-  { name: 'fieldstone', src: 'public/images/projects/lakefront-retaining-wall-detail-01.jpg', crop: { left: 40, top: 55, width: 210, height: 160 }, brightness: 0.5, saturation: 0.9 },
-  { name: 'greystone', src: 'public/images/projects/stone-wall-dark-mortar-cap-01.jpg', crop: { left: 150, top: 145, width: 264, height: 125 }, brightness: 0.62, saturation: 0.7 },
-];
 await mkdir('public/images/textures', { recursive: true });
-for (const t of tiles) {
-  const base = sharp(t.src).extract(t.crop);
-  const buf = await base.toBuffer();
-  const flop = await sharp(buf).flop().toBuffer();
-  const flip = await sharp(buf).flip().toBuffer();
-  const both = await sharp(buf).flip().flop().toBuffer();
-  const { width, height } = t.crop;
-  const out = `public/images/textures/${t.name}.webp`;
-  await sharp({ create: { width: width * 2, height: height * 2, channels: 3, background: '#000' } })
-    .composite([
-      { input: buf, left: 0, top: 0 },
-      { input: flop, left: width, top: 0 },
-      { input: flip, left: 0, top: height },
-      { input: both, left: width, top: height },
-    ])
-    .modulate({ brightness: t.brightness, saturation: t.saturation })
-    .webp({ quality: 72 })
-    .toFile(out);
-  const meta = await sharp(out).metadata();
-  console.log(out, `${meta.width}x${meta.height}`, `${Math.round((await sharp(out).toBuffer()).length / 1024)} KB`);
+
+/** Alpha ramp so a patch fades in from one side. */
+async function feathered(buf, w, h, side, len) {
+  const mask = Buffer.alloc(w * h);
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+    const t = side === 'left' ? x / len : y / len;
+    mask[y * w + x] = Math.round(Math.min(1, Math.max(0, t)) * 255);
+  }
+  const maskPng = await sharp(mask, { raw: { width: w, height: h, channels: 1 } }).png().toBuffer();
+  return sharp(buf).ensureAlpha().composite([{ input: maskPng, blend: 'dest-in' }]).png().toBuffer();
+}
+
+/** Seamless n-by-n tile from patches of equal size, cross-faded at every seam, wrapping at the edges. */
+async function blendRow(patches, w, h, f) {
+  const n = patches.length, W = n * w - n * f;
+  const tail = await sharp(patches[n - 1]).extract({ left: w - f, top: 0, width: f, height: h }).png().toBuffer();
+  const layers = [{ input: tail, left: 0, top: 0 }];
+  for (let i = 0; i < n; i++) layers.push({ input: await feathered(patches[i], w, h, 'left', f), left: i * (w - f), top: 0 });
+  return sharp({ create: { width: W, height: h, channels: 4, background: '#000' } }).composite(layers).png().toBuffer();
+}
+async function blendTile(rows, w, h, f) {
+  const n = rows.length, W = rows[0].length * w - rows[0].length * f, H = n * h - n * f;
+  const built = [];
+  for (const r of rows) built.push(await blendRow(r, w, h, f));
+  const tail = await sharp(built[n - 1]).extract({ left: 0, top: h - f, width: W, height: f }).png().toBuffer();
+  const layers = [{ input: tail, left: 0, top: 0 }];
+  for (let i = 0; i < n; i++) layers.push({ input: await feathered(built[i], W, h, 'top', f), left: 0, top: i * (h - f) });
+  return sharp({ create: { width: W, height: H, channels: 4, background: '#000' } }).composite(layers).removeAlpha();
+}
+
+const w = 200, h = 165, f = 48;
+const cut = (file, left, top, mod) => sharp(file).extract({ left, top, width: w, height: h }).modulate(mod).png().toBuffer();
+const A = await cut('public/images/projects/stone-seawall-cap-crew-01.jpg', 25, 210, { brightness: 1.18, saturation: 1.06 });
+const B = await cut('public/images/projects/lakefront-retaining-wall-detail-01.jpg', 60, 45, { brightness: 1.0, saturation: 1.04 });
+const C = await cut('public/images/projects/lakefront-retaining-wall-detail-01.jpg', 130, 40, { brightness: 1.0, saturation: 1.04 });
+const flop = (b) => sharp(b).flop().png().toBuffer();
+const flip = (b) => sharp(b).flip().png().toBuffer();
+// nine patches, no patch beside or above its own mirror, wrapping included
+const rows = [
+  [A, B, C],
+  [await flop(A), await flip(C), await flop(B)],
+  [await sharp(B).flip().flop().png().toBuffer(), await flop(C), await flip(A)],
+];
+const wall = await blendTile(rows, w, h, f);
+// warm the shaded frames toward the tan of the seawall in sun
+const wallBuf = await wall.png().toBuffer();
+const wm = await sharp(wallBuf).metadata();
+await sharp(wallBuf)
+  .composite([{ input: { create: { width: wm.width, height: wm.height, channels: 4, background: { r: 214, g: 160, b: 96, alpha: 0.42 } } }, blend: 'soft-light' }])
+  .modulate({ saturation: 1.08 })
+  .webp({ quality: 76 }).toFile('public/images/textures/stonewall.webp');
+{ const mm = await sharp('public/images/textures/stonewall.webp').metadata(); console.log('stonewall.webp', `${mm.width}x${mm.height}`); }
+
+// grey block face (mirror-tiled, darkened; used at 10% so symmetry never shows)
+{
+  const crop = { left: 150, top: 145, width: 264, height: 125 };
+  const buf = await sharp('public/images/projects/stone-wall-dark-mortar-cap-01.jpg').extract(crop).toBuffer();
+  const flop = await sharp(buf).flop().toBuffer(), flip = await sharp(buf).flip().toBuffer(), both = await sharp(buf).flip().flop().toBuffer();
+  await sharp({ create: { width: crop.width * 2, height: crop.height * 2, channels: 3, background: '#000' } })
+    .composite([{ input: buf, left: 0, top: 0 }, { input: flop, left: crop.width, top: 0 }, { input: flip, left: 0, top: crop.height }, { input: both, left: crop.width, top: crop.height }])
+    .modulate({ brightness: 0.62, saturation: 0.7 }).webp({ quality: 72 }).toFile('public/images/textures/greystone.webp');
+  console.log('greystone.webp', `${crop.width * 2}x${crop.height * 2}`);
 }
