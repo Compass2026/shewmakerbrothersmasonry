@@ -2,7 +2,7 @@
 /** A cut-stone service block: photo on top, icon box, title, one line, links, ghost numeral. */
 import type { Segment } from '@/data/types';
 import { servicesBySegment, servicePath } from '@/data/taxonomy';
-import { imageByFile, imageSrc } from '@/data/images';
+import { imageByFile, imageSrc, imageSrcSet } from '@/data/images';
 import Icon from './Icon.astro';
 
 interface Props { segment: Segment; index: number; photo?: string; icon: string }
@@ -13,7 +13,7 @@ const img = photo ? imageByFile(photo) : undefined;
 
 <article class="block service-block">
   {img ? (
-    <img class="block__photo" src={imageSrc(img.file)} width={img.width} height={img.height} alt={img.alt} loading="lazy" decoding="async" />
+    <img class="block__photo" src={imageSrc(img.file)} srcset={imageSrcSet(img)} sizes={img.variants ? '(min-width: 64rem) 33vw, (min-width: 40rem) 50vw, 100vw' : undefined} width={img.width} height={img.height} alt={img.alt} loading="lazy" decoding="async" />
   ) : (
     <div class="block__photo service-block__pending" data-placeholder data-page={Astro.url.pathname} data-slot={`segment-${segment.id}`} data-need={`Segment photo, 16:10 at 1200 px: ${segment.name.toLowerCase()} work by the crew.`}>
       <Icon name={icon} size={40} />

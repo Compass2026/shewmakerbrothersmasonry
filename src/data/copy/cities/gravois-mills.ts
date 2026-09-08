@@ -25,7 +25,7 @@ export const copy: CityCopy = {
     'outdoor-fireplaces',
     'chimney-repair',
   ],
-  projectRefs: ['seawall-footing-trench-crew-01.jpg', 'fireplace-pizza-oven-grill-01.jpg'],
+  projectRefs: ['concrete-pad-lakefront-01', 'stone-walls-stairs-ramp-01'],
   faqs: [
     {
       q: 'Are you actually based in Gravois Mills?',

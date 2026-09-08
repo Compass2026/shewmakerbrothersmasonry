@@ -34,7 +34,7 @@ export const copy: CityCopy = {
     'lakefront-retaining-walls',
     'concrete',
   ],
-  projectRefs: ['indoor-fireplace-stacked-stone-01.jpg', 'lakefront-retaining-wall-detail-01.jpg', 'lakefront-retaining-wall-crew-01.jpg'],
+  projectRefs: ['new-build-stone-porch-01', 'stone-stairs-poured-treads-02', 'indoor-fireplace-stacked-stone-01.jpg'],
   faqs: [
     {
       q: 'When should I have my chimney looked at?',

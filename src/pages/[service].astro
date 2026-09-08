@@ -15,7 +15,7 @@ import Icon from '@/components/Icon.astro';
 import { services, segmentById, serviceBySlug, servicePath } from '@/data/taxonomy';
 import { cityBySlug, cityPath } from '@/data/cities';
 import { serviceCopies, serviceCopy } from '@/data/copy';
-import { imagesFor, pairs } from '@/data/images';
+import { imageByFile, imagesFor, pairs } from '@/data/images';
 import { serviceNode, breadcrumbNode, faqNode, webPageNode } from '@/lib/schema';
 
 export function getStaticPaths() {
@@ -29,8 +29,9 @@ const copy = serviceCopy(def.slug);
 const segment = segmentById(def.segment);
 const path = servicePath(def.slug);
 const photos = imagesFor(def.slug);
-const heroPhoto = photos.find((p) => p.hero) ?? photos.find((p) => p.state === 'after') ?? photos[0];
-const inline = photos.filter((p) => p !== heroPhoto && p.state !== 'before').slice(0, 2);
+const originals = photos.filter((p) => p.variants);
+const heroPhoto = originals.find((p) => p.hero) ?? originals.find((p) => p.state === 'after') ?? originals[0] ?? imageByFile('stone-wall-lake-house-01');
+const inline = [...originals, ...photos.filter((p) => !p.variants)].filter((p) => p !== heroPhoto && p.state !== 'before').slice(0, 2);
 const pair = pairs.find((p) => p.before.services.includes(def.slug));
 const crumbs = [{ name: 'Home', href: '/' }, { name: def.name, href: path }];
 const relatedServices = copy.related.services.map(serviceBySlug).filter((s): s is ServiceDef => !!s);
@@ -47,7 +48,7 @@ const schema = [
 ---
 
 <Base title={copy.metaTitle} description={copy.metaDescription} schema={schema}>
-  <Hero eyebrow={segment.name} title={def.h1} accent={accent} lead={copy.lead} photo={heroPhoto?.file ?? 'stone-seawall-lakefront-02.jpg'} need={`Hero: ${def.heroNeed}`}>
+  <Hero eyebrow={segment.name} title={def.h1} accent={accent} lead={copy.lead} photo={heroPhoto?.id ?? heroPhoto?.file} need={`Hero: ${def.heroNeed}`}>
     <Breadcrumbs items={crumbs} slot="above" />
   </Hero>
 

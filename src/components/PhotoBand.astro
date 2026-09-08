@@ -2,7 +2,7 @@
 /** Full-bleed statement band over one of the crew's photographs. */
 import Eyebrow from './Eyebrow.astro';
 import Button from './Button.astro';
-import { imageByFile, imageSrc } from '@/data/images';
+import { imageByFile, imageLarge, isOriginal } from '@/data/images';
 interface Props { photo: string; eyebrow?: string; statement: string; accent?: string; line?: string; href?: string; cta?: string; id?: string; wall?: boolean }
 const { photo, eyebrow, statement, accent, line, href, cta, id = 'band-heading', wall = false } = Astro.props;
 const img = imageByFile(photo);
@@ -15,7 +15,8 @@ const rest0 = firstBreak >= 0 ? parts[0].slice(firstBreak + 2) : parts[0];
 ---
 
 <section class:list={['band', { 'stone-wall': wall, 'band--wall': wall }]} aria-labelledby={id} data-tone="ground">
-  {!wall && <div class="photo-bg photo-bg--soft" style={`background-image: url(${imageSrc(img.file)})`} aria-hidden="true" data-placeholder data-page={Astro.url.pathname} data-slot="band-background" data-need={`Band background: full-resolution original of ${img.file}; the interim frame is shown softened and darkened.`}></div>}
+  {!wall && isOriginal(img) && <div class="photo-bg photo-bg--band" style={`background-image: url(${imageLarge(img, 2000)})`} aria-hidden="true"></div>}
+  {!wall && !isOriginal(img) && <div class="photo-bg photo-bg--soft" style={`background-image: url(${imageLarge(img)})`} aria-hidden="true" data-placeholder data-page={Astro.url.pathname} data-slot="band-background" data-need={`Band background: full-resolution original of ${img.file}; the interim frame is shown softened and darkened.`}></div>}
   {!wall && <div class="scrim scrim--left"></div>}
   <div class="wrap wrap--wide band__outer">
   <div class:list={['band__inner', { 'stone-wall__sign': wall }]}>
@@ -30,10 +31,11 @@ const rest0 = firstBreak >= 0 ? parts[0].slice(firstBreak + 2) : parts[0];
 <style>
   .band { position: relative; isolation: isolate; overflow: hidden; padding: clamp(5rem, 12vw, 9rem) 0; border-block: 1px solid var(--joint-strong); background: var(--color-coal); }
   .band .photo-bg, .band .scrim { z-index: 0; }
+  .photo-bg--band { filter: saturate(1.05) brightness(0.5) contrast(1.1); transform: scale(1.02); }
   .band__outer { position: relative; z-index: 1; }
   .band__inner { display: grid; gap: 20px; }
   .band__inner > * { max-width: 60rem; }
-  .band--wall { padding: clamp(3rem, 7vw, 5.5rem) 0; background: url("/images/textures/stonewall.webp") center / 640px 492px repeat; }
+  .band--wall { padding: clamp(3rem, 7vw, 5.5rem) 0; background: url("/images/textures/stone-cover.webp") center / cover no-repeat; }
   .band--wall .band__inner { padding: clamp(28px, 5vw, 56px); max-width: 64rem; }
   .band__title { max-width: 24ch; }
   .band__first { display: block; }

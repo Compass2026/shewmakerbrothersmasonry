@@ -34,7 +34,7 @@ export const copy: CityCopy = {
     'stone-veneer',
     'chimney-repair',
   ],
-  projectRefs: ['stone-seawall-lakefront-02.jpg', 'seawall-before-shoreline-from-water-01.jpg', 'seawall-footing-trench-crew-01.jpg'],
+  projectRefs: ['seawall-aerial-01', 'lakefront-wall-rip-rap-01', 'seawall-aerial-02'],
   faqs: [
     {
       q: 'Is a stone seawall better than rip rap for my Lake Ozark shoreline?',

@@ -34,7 +34,7 @@ export const copy: CityCopy = {
     'chimney-repair',
     'concrete',
   ],
-  projectRefs: ['stone-seawall-lakefront-01.jpg', 'retaining-wall-stairs-01.jpg', 'fireplace-pizza-oven-grill-01.jpg'],
+  projectRefs: ['stone-wall-lake-house-01', 'seawall-aerial-02', 'fireplace-pizza-oven-grill-01.jpg'],
   faqs: [
     {
       q: 'Do you work in Osage Beach?',

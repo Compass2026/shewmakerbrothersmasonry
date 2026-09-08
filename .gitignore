@@ -30,3 +30,6 @@ playwright-report/
 # QA output
 qa/screenshots/
 .impeccable/review/
+
+# raw originals from Drive (large; the processed set lives in public/images)
+.tmp-originals/

@@ -1,7 +1,7 @@
 {
   "generated": "2026-09-07",
   "source": "Facebook page facebook.com/shewmakerbrothersmasonry, via Google Drive > Compass Clients > Shewmaker Brothers Masonry > Media",
-  "status": "INTERIM. Every file is a 414 x 414 px Facebook thumbnail. Usable for gallery thumbnails and small cards at 1x only. Full-resolution originals are required from Sam for every image before launch (see docs/placeholders.md).",
+  "status": "Full-resolution originals from Sam (2026-09-08) cover 12 subjects and carry responsive WebP variants under full/. Seventeen 414 px Facebook thumbnails remain for the subjects with no original yet (fireplaces, pizza oven, indoor fireplace, brick arch, the before frames, the crews).",
   "rules": [
     "No location, town, cove or customer is known for any photo. Never caption a photo with a place name.",
     "No stock or AI-generated image may be added to this folder.",
@@ -324,6 +324,468 @@
         "masonry-repair"
       ],
       "usable": "thumbnail-only"
+    },
+    {
+      "file": "full/exterior-stone-veneer-wainscot-01-w1200.webp",
+      "width": 1200,
+      "height": 1600,
+      "id": "exterior-stone-veneer-wainscot-01",
+      "original": "IMG_9274.HEIC",
+      "project": "new-build-veneer-13",
+      "state": "after",
+      "services": [
+        "stone-veneer",
+        "block-masonry",
+        "cities"
+      ],
+      "title": "Stone veneer wainscot on a new house",
+      "caption": "Natural stone veneer laid as a wainscot under board-and-batten siding.",
+      "alt": "Stone veneer wainscot around the base of a white board-and-batten house under construction",
+      "variants": [
+        {
+          "w": 640,
+          "h": 853,
+          "file": "full/exterior-stone-veneer-wainscot-01-w640.webp"
+        },
+        {
+          "w": 1200,
+          "h": 1600,
+          "file": "full/exterior-stone-veneer-wainscot-01-w1200.webp"
+        },
+        {
+          "w": 2000,
+          "h": 2667,
+          "file": "full/exterior-stone-veneer-wainscot-01-w2000.webp"
+        }
+      ],
+      "usable": "full"
+    },
+    {
+      "file": "full/new-build-stone-porch-01-w1200.webp",
+      "width": 1200,
+      "height": 900,
+      "id": "new-build-stone-porch-01",
+      "original": "IMG_9282.HEIC",
+      "project": "new-build-veneer-13",
+      "state": "after",
+      "services": [
+        "stone-veneer",
+        "commercial-masonry",
+        "block-masonry",
+        "chimney-construction",
+        "cities"
+      ],
+      "title": "Stone porch columns on a new build",
+      "caption": "Stone veneer porch columns and wainscot on a new house, built alongside the builder.",
+      "alt": "Front of a new house under construction with stone veneer porch columns and timber posts",
+      "variants": [
+        {
+          "w": 640,
+          "h": 480,
+          "file": "full/new-build-stone-porch-01-w640.webp"
+        },
+        {
+          "w": 1200,
+          "h": 900,
+          "file": "full/new-build-stone-porch-01-w1200.webp"
+        },
+        {
+          "w": 2000,
+          "h": 1500,
+          "file": "full/new-build-stone-porch-01-w2000.webp"
+        }
+      ],
+      "usable": "full"
+    },
+    {
+      "file": "full/garage-stone-veneer-01-w1200.webp",
+      "width": 1200,
+      "height": 900,
+      "id": "garage-stone-veneer-01",
+      "original": "IMG_9284.HEIC",
+      "project": "new-build-veneer-13",
+      "state": "after",
+      "services": [
+        "stone-veneer",
+        "commercial-masonry",
+        "brick-masonry",
+        "cities"
+      ],
+      "title": "Stone veneer on a garage front",
+      "caption": "Stone veneer wainscot under the garage doors of a new build.",
+      "alt": "New garage with black doors and a stone veneer wainscot below white siding",
+      "variants": [
+        {
+          "w": 640,
+          "h": 480,
+          "file": "full/garage-stone-veneer-01-w640.webp"
+        },
+        {
+          "w": 1200,
+          "h": 900,
+          "file": "full/garage-stone-veneer-01-w1200.webp"
+        },
+        {
+          "w": 2000,
+          "h": 1500,
+          "file": "full/garage-stone-veneer-01-w2000.webp"
+        }
+      ],
+      "usable": "full"
+    },
+    {
+      "file": "full/stone-stairs-poured-treads-02-w1200.webp",
+      "width": 1200,
+      "height": 900,
+      "id": "stone-stairs-poured-treads-02",
+      "original": "IMG_9418.HEIC",
+      "project": "stairs-14",
+      "state": "during",
+      "services": [
+        "lakefront-stairs",
+        "retaining-walls",
+        "concrete",
+        "masonry-repair",
+        "chimney-repair"
+      ],
+      "title": "Stone stairs with poured treads, in progress",
+      "caption": "Fieldstone risers with fresh poured concrete treads beside a mortared stone wall.",
+      "alt": "Stone stairs under construction with fresh concrete treads climbing beside a mortared stone wall",
+      "variants": [
+        {
+          "w": 640,
+          "h": 480,
+          "file": "full/stone-stairs-poured-treads-02-w640.webp"
+        },
+        {
+          "w": 1200,
+          "h": 900,
+          "file": "full/stone-stairs-poured-treads-02-w1200.webp"
+        },
+        {
+          "w": 2000,
+          "h": 1500,
+          "file": "full/stone-stairs-poured-treads-02-w2000.webp"
+        }
+      ],
+      "usable": "full"
+    },
+    {
+      "file": "full/lakefront-wall-rip-rap-01-w1200.webp",
+      "width": 1200,
+      "height": 900,
+      "id": "lakefront-wall-rip-rap-01",
+      "original": "IMG_9429.HEIC",
+      "project": "lakefront-wall-15",
+      "state": "after",
+      "services": [
+        "lakefront-retaining-walls",
+        "seawall-repair",
+        "seawall-construction",
+        "retaining-walls",
+        "excavation",
+        "cities"
+      ],
+      "title": "Lakefront stone wall above rip rap",
+      "caption": "Mortared stone retaining wall with rip rap placed along the bank below it.",
+      "alt": "Long mortared stone retaining wall below a lake house with loose rip rap stone along its base",
+      "variants": [
+        {
+          "w": 640,
+          "h": 480,
+          "file": "full/lakefront-wall-rip-rap-01-w640.webp"
+        },
+        {
+          "w": 1200,
+          "h": 900,
+          "file": "full/lakefront-wall-rip-rap-01-w1200.webp"
+        },
+        {
+          "w": 2000,
+          "h": 1500,
+          "file": "full/lakefront-wall-rip-rap-01-w2000.webp"
+        }
+      ],
+      "usable": "full"
+    },
+    {
+      "file": "full/concrete-pad-lakefront-01-w1200.webp",
+      "width": 1200,
+      "height": 1600,
+      "id": "concrete-pad-lakefront-01",
+      "original": "IMG_9647.HEIC",
+      "project": "concrete-16",
+      "state": "after",
+      "services": [
+        "concrete",
+        "excavation",
+        "cities"
+      ],
+      "title": "Concrete pad at the water",
+      "caption": "Fresh poured concrete pad at the shoreline, dock and open water behind.",
+      "alt": "Freshly poured concrete pad at the edge of the lake with a dock and open water behind",
+      "variants": [
+        {
+          "w": 640,
+          "h": 853,
+          "file": "full/concrete-pad-lakefront-01-w640.webp"
+        },
+        {
+          "w": 1200,
+          "h": 1600,
+          "file": "full/concrete-pad-lakefront-01-w1200.webp"
+        },
+        {
+          "w": 2000,
+          "h": 2667,
+          "file": "full/concrete-pad-lakefront-01-w2000.webp"
+        }
+      ],
+      "usable": "full"
+    },
+    {
+      "file": "full/curved-retaining-wall-01-w1200.webp",
+      "width": 1200,
+      "height": 900,
+      "id": "curved-retaining-wall-01",
+      "original": "IMG_9679.HEIC",
+      "project": "curved-wall-17",
+      "state": "after",
+      "services": [
+        "retaining-walls",
+        "lakefront-retaining-walls",
+        "patios",
+        "masonry-repair",
+        "cities"
+      ],
+      "title": "Curved retaining wall and stairs",
+      "caption": "Curved mortared stone retaining wall with a poured cap, stairs beside it, lake house above.",
+      "alt": "Curved mortared stone retaining wall with a concrete cap in a lawn below a lake house deck, stairs to the right",
+      "variants": [
+        {
+          "w": 640,
+          "h": 480,
+          "file": "full/curved-retaining-wall-01-w640.webp"
+        },
+        {
+          "w": 1200,
+          "h": 900,
+          "file": "full/curved-retaining-wall-01-w1200.webp"
+        },
+        {
+          "w": 2000,
+          "h": 1500,
+          "file": "full/curved-retaining-wall-01-w2000.webp"
+        }
+      ],
+      "usable": "full"
+    },
+    {
+      "file": "full/stone-wall-lake-house-01-w1200.webp",
+      "width": 1200,
+      "height": 900,
+      "id": "stone-wall-lake-house-01",
+      "original": "IMG_9757.heic",
+      "project": "lake-house-wall-18",
+      "state": "after",
+      "hero": true,
+      "services": [
+        "retaining-walls",
+        "lakefront-retaining-walls",
+        "stone-veneer",
+        "indoor-fireplaces",
+        "outdoor-fireplaces",
+        "pizza-ovens",
+        "outdoor-kitchens",
+        "cities",
+        "home"
+      ],
+      "title": "Stone retaining wall at a lake house",
+      "caption": "Tall mortared stone retaining wall with a poured cap below a lake house.",
+      "alt": "Tall mortared fieldstone retaining wall with a concrete cap in front of a large lake house",
+      "variants": [
+        {
+          "w": 640,
+          "h": 480,
+          "file": "full/stone-wall-lake-house-01-w640.webp"
+        },
+        {
+          "w": 1200,
+          "h": 900,
+          "file": "full/stone-wall-lake-house-01-w1200.webp"
+        },
+        {
+          "w": 2000,
+          "h": 1500,
+          "file": "full/stone-wall-lake-house-01-w2000.webp"
+        },
+        {
+          "w": 2800,
+          "h": 2100,
+          "file": "full/stone-wall-lake-house-01-w2800.webp"
+        }
+      ],
+      "usable": "full"
+    },
+    {
+      "file": "full/stone-walls-stairs-ramp-01-w1200.webp",
+      "width": 1200,
+      "height": 900,
+      "id": "stone-walls-stairs-ramp-01",
+      "original": "IMG_9759.heic",
+      "project": "lake-house-wall-18",
+      "state": "after",
+      "services": [
+        "lakefront-stairs",
+        "concrete",
+        "retaining-walls",
+        "patios",
+        "cities"
+      ],
+      "title": "Stone walls, stairs and a poured walk",
+      "caption": "Mortared stone walls with poured concrete stairs and a sloped walkway between them.",
+      "alt": "Two mortared stone walls flanking poured concrete stairs and a sloped concrete walkway at a lake house",
+      "variants": [
+        {
+          "w": 640,
+          "h": 480,
+          "file": "full/stone-walls-stairs-ramp-01-w640.webp"
+        },
+        {
+          "w": 1200,
+          "h": 900,
+          "file": "full/stone-walls-stairs-ramp-01-w1200.webp"
+        },
+        {
+          "w": 2000,
+          "h": 1500,
+          "file": "full/stone-walls-stairs-ramp-01-w2000.webp"
+        }
+      ],
+      "usable": "full"
+    },
+    {
+      "file": "full/flagstone-walkway-01-w1200.webp",
+      "width": 1200,
+      "height": 750,
+      "id": "flagstone-walkway-01",
+      "original": "IMG_9846.heic",
+      "project": "walkway-19",
+      "state": "after",
+      "services": [
+        "patios",
+        "cities"
+      ],
+      "title": "Flagstone walkway",
+      "caption": "Flagstone walkway set in mortar across a lawn.",
+      "alt": "Flagstone walkway set in mortar running across a mown lawn",
+      "variants": [
+        {
+          "w": 640,
+          "h": 400,
+          "file": "full/flagstone-walkway-01-w640.webp"
+        },
+        {
+          "w": 1200,
+          "h": 750,
+          "file": "full/flagstone-walkway-01-w1200.webp"
+        },
+        {
+          "w": 2000,
+          "h": 1250,
+          "file": "full/flagstone-walkway-01-w2000.webp"
+        }
+      ],
+      "usable": "full"
+    },
+    {
+      "file": "full/seawall-aerial-01-w1200.webp",
+      "width": 1200,
+      "height": 675,
+      "id": "seawall-aerial-01",
+      "original": "DJI_0394.JPG",
+      "project": "seawall-aerial-20",
+      "state": "after",
+      "hero": true,
+      "services": [
+        "seawall-construction",
+        "lakefront-retaining-walls",
+        "lakefront-stairs",
+        "patios",
+        "home",
+        "cities"
+      ],
+      "title": "Seawall, stairs and patio from the air",
+      "caption": "Stone seawall, stone stairs and a patio at a lake house, from the drone.",
+      "alt": "Aerial view of a lake house with a stone seawall along the water, stone stairs and a patio, docks below",
+      "variants": [
+        {
+          "w": 640,
+          "h": 360,
+          "file": "full/seawall-aerial-01-w640.webp"
+        },
+        {
+          "w": 1200,
+          "h": 675,
+          "file": "full/seawall-aerial-01-w1200.webp"
+        },
+        {
+          "w": 2000,
+          "h": 1125,
+          "file": "full/seawall-aerial-01-w2000.webp"
+        },
+        {
+          "w": 2800,
+          "h": 1575,
+          "file": "full/seawall-aerial-01-w2800.webp"
+        }
+      ],
+      "usable": "full"
+    },
+    {
+      "file": "full/seawall-aerial-02-w1200.webp",
+      "width": 1200,
+      "height": 675,
+      "id": "seawall-aerial-02",
+      "original": "DJI_0395.JPG",
+      "project": "seawall-aerial-20",
+      "state": "after",
+      "hero": true,
+      "services": [
+        "seawall-construction",
+        "seawall-repair",
+        "lakefront-stairs",
+        "concrete",
+        "excavation",
+        "cities",
+        "home"
+      ],
+      "title": "Stone seawall with cap and stairs",
+      "caption": "Mortared stone seawall with a poured cap, stone stairs and a concrete walk, from the drone.",
+      "alt": "Aerial view of a mortared stone seawall with a concrete cap, stairs and walkway at the edge of the water",
+      "variants": [
+        {
+          "w": 640,
+          "h": 360,
+          "file": "full/seawall-aerial-02-w640.webp"
+        },
+        {
+          "w": 1200,
+          "h": 675,
+          "file": "full/seawall-aerial-02-w1200.webp"
+        },
+        {
+          "w": 2000,
+          "h": 1125,
+          "file": "full/seawall-aerial-02-w2000.webp"
+        },
+        {
+          "w": 2800,
+          "h": 1575,
+          "file": "full/seawall-aerial-02-w2800.webp"
+        }
+      ],
+      "usable": "full"
     }
   ]
 }

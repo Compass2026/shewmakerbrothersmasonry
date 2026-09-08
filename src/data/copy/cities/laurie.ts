@@ -25,7 +25,7 @@ export const copy: CityCopy = {
     'chimney-repair',
     'masonry-repair',
   ],
-  projectRefs: ['lakefront-retaining-wall-crew-01.jpg', 'retaining-wall-stairs-01.jpg'],
+  projectRefs: ['curved-retaining-wall-01', 'stone-wall-lake-house-01'],
   faqs: [
     {
       q: 'Why do lakefront retaining walls fail?',

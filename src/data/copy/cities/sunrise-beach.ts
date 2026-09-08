@@ -41,7 +41,7 @@ export const copy: CityCopy = {
     'concrete',
     'excavation',
   ],
-  projectRefs: ['stone-seawall-cap-crew-01.jpg', 'stone-stairs-concrete-treads-01.jpg', 'flagstone-patio-in-progress-01.jpg'],
+  projectRefs: ['seawall-aerial-02', 'curved-retaining-wall-01', 'flagstone-walkway-01'],
   faqs: [
     {
       q: 'I am not at the lake most of the year. Can you handle the job while I am away?',

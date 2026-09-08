@@ -25,7 +25,7 @@ export const copy: CityCopy = {
     'concrete',
     'retaining-walls',
   ],
-  projectRefs: ['brick-arch-doorway-01.jpg', 'retaining-wall-drainage-swale-01.jpg'],
+  projectRefs: ['garage-stone-veneer-01', 'new-build-stone-porch-01'],
   faqs: [
     {
       q: 'Do you tuckpoint old brick?',

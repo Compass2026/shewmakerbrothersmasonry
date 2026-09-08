@@ -1,13 +1,13 @@
 ---
-import { imageByFile, imageSrc } from '@/data/images';
-interface Props { file: string; caption?: string | false; class?: string; eager?: boolean }
-const { file, caption, class: className, eager = false } = Astro.props;
+import { imageByFile, imageSrc, imageSrcSet } from '@/data/images';
+interface Props { file: string; caption?: string | false; class?: string; eager?: boolean; sizes?: string }
+const { file, caption, class: className, eager = false, sizes = '(min-width: 64rem) 440px, 100vw' } = Astro.props;
 const img = imageByFile(file);
 if (!img) throw new Error(`Unknown project image: ${file}`);
 const cap = caption === false ? undefined : (caption ?? img.caption ?? img.alt);
 ---
 
 <figure class:list={['photo', className]}>
-  <img src={imageSrc(img.file)} width={img.width} height={img.height} alt={img.alt} loading={eager ? 'eager' : 'lazy'} decoding="async" />
+  <img src={imageSrc(img.file)} srcset={imageSrcSet(img)} sizes={img.variants ? sizes : undefined} width={img.width} height={img.height} alt={img.alt} loading={eager ? 'eager' : 'lazy'} decoding="async" />
   {cap && <figcaption class="photo__caption">{cap}</figcaption>}
 </figure>

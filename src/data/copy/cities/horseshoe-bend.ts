@@ -24,7 +24,7 @@ export const copy: CityCopy = {
     'lakefront-stairs',
     'patios',
   ],
-  projectRefs: ['stone-seawall-lakefront-02.jpg', 'seawall-before-shoreline-from-water-01.jpg'],
+  projectRefs: ['lakefront-wall-rip-rap-01', 'seawall-aerial-01'],
   faqs: [
     {
       q: 'Is a stone seawall a replacement for rip rap?',

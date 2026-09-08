@@ -216,8 +216,10 @@ soft glow. Labels are Barlow Condensed, tracked wide. Reading copy is Barlow.
 - Anton uppercase display with an ember accent word; Barlow Condensed tracked labels; Barlow body.
 - Blocks with 0 radius, a 1px ember joint at 16% alpha, inset chisel highlights, 6% grain and a ghost numeral.
 - Chamfered buttons: the top-left corner cut like a block face, a lighter ember strip on the leading edge.
-- The crew's own photographs as full-bleed darkened backgrounds behind heroes and statement bands, and at
-  honest size inside blocks; never stock, never generated.
+- The crew's own photographs, full-resolution originals in responsive WebP sets (`public/images/projects/full/`,
+  `node qa/make-photos.mjs`), as full-bleed graded backgrounds behind heroes and statement bands and with
+  `srcset` inside blocks; the remaining 414 px Facebook frames only where no original exists yet; never stock,
+  never generated.
 - The running-bond course stripe (ember bricks, offset courses) where a hazard stripe would go.
 - One entrance motion (fade-and-rise, staggered in the hero) and a slow ember marquee of the services.
 
@@ -290,10 +292,12 @@ at the top or bottom edge, and every section boundary is a 1px joint.
 
 ## Elevation & Depth
 
-Depth is material, and the stone is real and meant to be seen. `public/images/textures/stonewall.webp`
-is nine patches of the crew's own seawall and retaining-wall photographs cross-faded into one seamless
-tile and warmed toward the sunlit tan of the seawall (`node qa/make-textures.mjs` regenerates it;
-`greystone.webp` is the darker face that sits behind block faces at 10%). Stone is an accent, never a
+Depth is material, and the stone is real and meant to be seen. Since Sam's originals arrived
+(2026-09-08) the stone is the actual lake-house wall (IMG_9757): `public/images/textures/stone-cover.webp`
+is the wall uncut, used with `background-size: cover` behind the closing CTA; `stone-course.webp` is a
+wide strip of the same wall for the courses; `stonewall.webp` is a seamless nine-patch blend of it for
+the thin block caps; `greystone.webp` is the darker face behind block faces at 10%. `node qa/make-textures.mjs`
+regenerates all four from `.tmp-originals/`. Stone is an accent, never a
 wash: a stone course under a poured concrete cap (`.stone-course`) runs under the marquee, above the
 closing CTA and, deeper, under the footer; the statement band and the closing CTA sit on a full stone
 wall (`.stone-wall`) with the copy on a dark sign block; numbered and card blocks carry a 14px stone

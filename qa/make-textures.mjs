@@ -1,5 +1,5 @@
 /**
- * Stone tiles cut from the crew's own photographs (never stock).
+ * Stone tiles cut from the crew's own photographs (never stock). Needs .tmp-originals/IMG_9757.jpg (Drive).
  * `stonewall.webp`: two different patches of wall, cross-faded into a seamless tile (no mirror symmetry).
  * `greystone.webp`: a dark grey face for block backgrounds, mirror-tiled and darkened (it sits at 10%).
  *   node qa/make-textures.mjs
@@ -38,28 +38,30 @@ async function blendTile(rows, w, h, f) {
   return sharp({ create: { width: W, height: H, channels: 4, background: '#000' } }).composite(layers).removeAlpha();
 }
 
-const w = 200, h = 165, f = 48;
-const cut = (file, left, top, mod) => sharp(file).extract({ left, top, width: w, height: h }).modulate(mod).png().toBuffer();
-const A = await cut('public/images/projects/stone-seawall-cap-crew-01.jpg', 25, 210, { brightness: 1.18, saturation: 1.06 });
-const B = await cut('public/images/projects/lakefront-retaining-wall-detail-01.jpg', 60, 45, { brightness: 1.0, saturation: 1.04 });
-const C = await cut('public/images/projects/lakefront-retaining-wall-detail-01.jpg', 130, 40, { brightness: 1.0, saturation: 1.04 });
+// The stone tile now comes from the full-resolution wall (IMG_9757) at native scale.
+const w = 900, h = 700, f = 120;
+const cut = (file, left, top, mod) => sharp(file).rotate().extract({ left, top, width: w, height: h }).modulate(mod).png().toBuffer();
+const WALL = '.tmp-originals/IMG_9757.jpg';
+const A = await cut(WALL, 900, 2250, { brightness: 1.06, saturation: 1.06 });
+const B = await cut(WALL, 2350, 2200, { brightness: 1.06, saturation: 1.06 });
+const C = await cut(WALL, 3850, 2250, { brightness: 1.06, saturation: 1.06 });
 const flop = (b) => sharp(b).flop().png().toBuffer();
 const flip = (b) => sharp(b).flip().png().toBuffer();
-// nine patches, no patch beside or above its own mirror, wrapping included
 const rows = [
   [A, B, C],
   [await flop(A), await flip(C), await flop(B)],
   [await sharp(B).flip().flop().png().toBuffer(), await flop(C), await flip(A)],
 ];
 const wall = await blendTile(rows, w, h, f);
-// warm the shaded frames toward the tan of the seawall in sun
 const wallBuf = await wall.png().toBuffer();
 const wm = await sharp(wallBuf).metadata();
-await sharp(wallBuf)
-  .composite([{ input: { create: { width: wm.width, height: wm.height, channels: 4, background: { r: 214, g: 160, b: 96, alpha: 0.42 } } }, blend: 'soft-light' }])
-  .modulate({ saturation: 1.08 })
-  .webp({ quality: 76 }).toFile('public/images/textures/stonewall.webp');
-{ const mm = await sharp('public/images/textures/stonewall.webp').metadata(); console.log('stonewall.webp', `${mm.width}x${mm.height}`); }
+await sharp(wallBuf).resize({ width: 1400 }).webp({ quality: 76 }).toFile('public/images/textures/stonewall.webp');
+{ const mm = await sharp('public/images/textures/stonewall.webp').metadata(); console.log('stonewall.webp', `${mm.width}x${mm.height}`, 'from', `${wm.width}x${wm.height}`); }
+
+// The wall itself, uncut, for the stone walls behind the CTA and the courses (no tiling at all)
+await sharp(WALL).rotate().extract({ left: 1300, top: 1750, width: 3800, height: 1500 }).resize({ width: 2400 }).modulate({ brightness: 1.04, saturation: 1.06 }).webp({ quality: 74 }).toFile('public/images/textures/stone-cover.webp');
+await sharp(WALL).rotate().extract({ left: 700, top: 2500, width: 5000, height: 700 }).resize({ width: 2800 }).modulate({ brightness: 1.06, saturation: 1.06 }).webp({ quality: 74 }).toFile('public/images/textures/stone-course.webp');
+console.log('stone-cover.webp 2400 wide, stone-course.webp 2800 wide');
 
 // grey block face (mirror-tiled, darkened; used at 10% so symmetry never shows)
 {

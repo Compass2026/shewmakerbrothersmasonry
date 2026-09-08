@@ -17,12 +17,12 @@ const metaTitle = 'Masonry Projects at the Lake of the Ozarks';
 const description = 'Stone seawalls, lakefront walls, stairs, flagstone patios, fireplaces and chimneys by our own crews around the Lake of the Ozarks. Call Sam at 573-569-3690.';
 const crumbs = [{ name: 'Home', href: '/' }, { name: 'Projects', href: path }];
 const states = [{ id: 'before', label: 'Before' }, { id: 'during', label: 'During' }, { id: 'after', label: 'After' }, { id: 'detail', label: 'Detail' }];
-const ordered = [...images].sort((a, b) => (a.hero === b.hero ? 0 : a.hero ? -1 : 1));
+const ordered = [...images].sort((a, b) => Number(Boolean(b.variants)) - Number(Boolean(a.variants)) || Number(Boolean(b.hero)) - Number(Boolean(a.hero)));
 const schema = [webPageNode({ path, name: metaTitle, description, type: 'CollectionPage' }), breadcrumbNode(crumbs)];
 ---
 
 <Base title={metaTitle} description={description} schema={schema}>
-  <Hero display eyebrow="Projects · Lake of the Ozarks" title="The work." accent="work." lead="Mortared stone seawalls, lakefront walls, stairs, patios, fireplaces and chimneys around the Lake of the Ozarks. Every photograph here is our work. These are interim frames; the full-size originals are still to come." photo="stone-seawall-lakefront-01.jpg" ctas={false} compact>
+  <Hero display eyebrow="Projects · Lake of the Ozarks" title="The work." accent="work." lead="Mortared stone seawalls, lakefront walls, stairs, patios, fireplaces and chimneys around the Lake of the Ozarks. Every photograph here is our work." photo="seawall-aerial-01" ctas={false} compact>
     <Breadcrumbs items={crumbs} slot="above" />
   </Hero>
 

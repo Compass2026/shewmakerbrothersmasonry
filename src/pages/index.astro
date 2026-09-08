@@ -24,12 +24,12 @@ const title = 'Masonry Contractor at the Lake of the Ozarks';
 const description = site.description;
 const countyLine = `${site.counties.slice(0, -1).join(', ')} and ${site.counties[site.counties.length - 1]} counties`;
 const segmentPhotos: Record<string, string | undefined> = {
-  shoreline: 'stone-seawall-lakefront-01.jpg',
+  shoreline: 'seawall-aerial-02',
   'outdoor-living': 'fireplace-pizza-oven-grill-01.jpg',
-  masonry: 'stone-wall-dark-mortar-cap-01.jpg',
+  masonry: 'stone-wall-lake-house-01',
   'fireplaces-chimneys': 'indoor-fireplace-stacked-stone-01.jpg',
-  'concrete-sitework': 'stone-seawall-cap-crew-01.jpg',
-  commercial: 'brick-arch-doorway-01.jpg',
+  'concrete-sitework': 'concrete-pad-lakefront-01',
+  commercial: 'new-build-stone-porch-01',
 };
 const segmentIcons: Record<string, string> = { shoreline: 'shoreline', 'outdoor-living': 'flame', masonry: 'stone', 'fireplaces-chimneys': 'chimney', 'concrete-sitework': 'trowel', commercial: 'building' };
 const trust = [
@@ -44,7 +44,7 @@ const steps = [
   { title: 'The estimate', body: 'One number for the whole job: the dirt work, the footing, the stone and the concrete.' },
   { title: 'Footing first, then stone', body: 'Our crew digs it, pours it, lays it and caps it. One contract, one schedule.' },
 ];
-const teaser = ['stone-seawall-lakefront-01.jpg', 'fireplace-pizza-oven-grill-01.jpg', 'retaining-wall-stairs-01.jpg', 'indoor-fireplace-stacked-stone-01.jpg', 'lakefront-retaining-wall-detail-01.jpg', 'stone-seawall-lakefront-02.jpg', 'flagstone-patio-in-progress-01.jpg', 'brick-arch-doorway-01.jpg', 'stone-stairs-concrete-treads-01.jpg'];
+const teaser = ['seawall-aerial-01', 'stone-wall-lake-house-01', 'curved-retaining-wall-01', 'stone-walls-stairs-ramp-01', 'stone-stairs-poured-treads-02', 'exterior-stone-veneer-wainscot-01', 'seawall-aerial-02', 'flagstone-walkway-01', 'lakefront-wall-rip-rap-01'];
 const problems = [
   { icon: 'chimney', title: 'A chimney that is starting to go', body: 'Spalling brick, open joints and a cracked crown let water in. Water in a chimney turns a repair into a rebuild.', href: '/chimney-repair/', label: 'Chimney repair' },
   { icon: 'stone', title: 'A wall that is leaning or bulging', body: 'A retaining wall fails from behind, where the water is. Once it moves, the fix is a rebuild on a footing that drains.', href: '/retaining-walls/', label: 'Retaining walls' },
@@ -59,7 +59,7 @@ const problems = [
     title={title}
     accent="Lake of the Ozarks"
     lead="Third-generation stonemasons who build the shoreline, the fireplace and the ground it all sits on. Our own crews, start to finish."
-    photo="stone-seawall-lakefront-02.jpg"
+    photo="seawall-aerial-01"
   />
 
   <Marquee items={services.map((s) => s.navLabel ?? s.name)} />
@@ -88,8 +88,7 @@ const problems = [
   </Section>
 
   <PhotoBand
-    wall
-    photo="lakefront-retaining-wall-detail-01.jpg"
+    photo="lakefront-wall-rip-rap-01"
     eyebrow="The Shewmaker standard"
     statement="Rip rap protects a shoreline. A stone seawall protects it and looks like it belongs to the house."
     accent="the house."

@@ -25,7 +25,7 @@ export const copy: CityCopy = {
     'retaining-walls',
     'masonry-repair',
   ],
-  projectRefs: ['indoor-fireplace-stacked-stone-01.jpg', 'lakefront-retaining-wall-detail-01.jpg'],
+  projectRefs: ['exterior-stone-veneer-wainscot-01', 'garage-stone-veneer-01'],
   faqs: [
     {
       q: 'What does chimney damage look like before it gets bad?',

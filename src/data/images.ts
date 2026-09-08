@@ -2,7 +2,15 @@ import manifest from '../../public/images/projects/manifest.json';
 
 export type ImageState = 'before' | 'during' | 'after' | 'detail';
 
+export interface ImageVariant {
+  w: number;
+  h: number;
+  file: string;
+}
+
 export interface ProjectImage {
+  /** Stable id for originals; thumbnails are addressed by file name. */
+  id?: string;
   file: string;
   width: number;
   height: number;
@@ -19,13 +27,19 @@ export interface ProjectImage {
   hero?: boolean;
   original?: string;
   usable: string;
+  /** Responsive WebP set for full-resolution originals. */
+  variants?: ImageVariant[];
 }
 
 export const images = manifest.images as ProjectImage[];
 export const manifestStatus = manifest.status as string;
 
 export const imageSrc = (file: string) => `/images/projects/${file}`;
-export const imageByFile = (file: string) => images.find((i) => i.file === file);
+export const imageByFile = (key: string) => images.find((i) => i.file === key || i.id === key);
+export const imageSrcSet = (img: ProjectImage) => (img.variants ? img.variants.map((v) => `/images/projects/${v.file} ${v.w}w`).join(', ') : undefined);
+/** Largest variant at or under `max` px wide, for backgrounds. */
+export const imageLarge = (img: ProjectImage, max = 2000) => { const v = img.variants?.filter((x) => x.w <= max).at(-1); return imageSrc(v ? v.file : img.file); };
+export const isOriginal = (img: ProjectImage) => Boolean(img.variants);
 export const imagesFor = (tag: string) => images.filter((i) => i.services.includes(tag));
 
 /** Before/after pairs from the same project only. Never pair images across projects. */

@@ -3,7 +3,7 @@
  * A coursed (running-bond) grid of thumbnails: rows of full squares alternate with rows that
  * start and end on a half stone. The one place the 414 px images are honest at 1x.
  */
-import { imageByFile, imageSrc } from '@/data/images';
+import { imageByFile, imageSrc, imageSrcSet } from '@/data/images';
 
 interface Props {
   files: string[];
@@ -23,9 +23,9 @@ const list = files.map((f) => {
   {list.map((img) => (
     <li class="coursed__item">
       {href ? (
-        <a href={href} class="coursed__link"><img src={imageSrc(img.file)} width={img.width} height={img.height} alt={img.alt} loading="lazy" decoding="async" /></a>
+        <a href={href} class="coursed__link"><img src={imageSrc(img.file)} srcset={imageSrcSet(img)} sizes={img.variants ? '(min-width: 48rem) 25vw, 50vw' : undefined} width={img.width} height={img.height} alt={img.alt} loading="lazy" decoding="async" /></a>
       ) : (
-        <img src={imageSrc(img.file)} width={img.width} height={img.height} alt={img.alt} loading="lazy" decoding="async" />
+        <img src={imageSrc(img.file)} srcset={imageSrcSet(img)} sizes={img.variants ? '(min-width: 48rem) 25vw, 50vw' : undefined} width={img.width} height={img.height} alt={img.alt} loading="lazy" decoding="async" />
       )}
     </li>
   ))}

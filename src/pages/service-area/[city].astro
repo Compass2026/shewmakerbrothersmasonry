@@ -28,7 +28,7 @@ const copy = cityCopy(def.slug);
 const path = cityPath(def.slug);
 const countyLine = def.counties.length > 1 ? `${def.counties.join(' and ')} counties` : `${def.counties[0]} County`;
 const h1 = `Masonry Contractor in ${def.name} at the Lake of the Ozarks`;
-const heroPhoto = imageByFile(copy.projectRefs[0]) ?? images.find((i) => i.services.includes('cities'));
+const heroPhoto = copy.projectRefs.map(imageByFile).find((i) => i?.variants) ?? imageByFile('seawall-aerial-01') ?? images.find((i) => i.services.includes('cities'));
 const crumbs = [{ name: 'Home', href: '/' }, { name: 'Service area', href: '/service-area/' }, { name: def.name, href: path }];
 const featured = copy.services.map(serviceBySlug).filter((s): s is ServiceDef => !!s);
 const neighbours = (copy.communities.list ?? []).map(cityBySlug).filter((c): c is CityDef => !!c);
@@ -40,7 +40,7 @@ const schema = [webPageNode({ path, name: copy.metaTitle, description: copy.meta
 ---
 
 <Base title={copy.metaTitle} description={copy.metaDescription} schema={schema}>
-  <Hero eyebrow={`${def.name} · ${countyLine}`} title={h1} accent={def.name} lead={copy.lead} photo={heroPhoto?.file} need={`Hero: finished lakefront work photographed in or near ${def.name}, water in frame, uncropped original at 2400 px. No location is known for any current photo.`}>
+  <Hero eyebrow={`${def.name} · ${countyLine}`} title={h1} accent={def.name} lead={copy.lead} photo={heroPhoto?.id ?? heroPhoto?.file} need={`Hero: finished lakefront work photographed in or near ${def.name}, water in frame, uncropped original at 2400 px. No location is known for any current photo.`}>
     <Breadcrumbs items={crumbs} slot="above" />
   </Hero>
 

@@ -1,5 +1,5 @@
 ---
-import { imageByFile, imageSrc } from '@/data/images';
+import { imageByFile, imageSrc, imageSrcSet } from '@/data/images';
 import { segments, services } from '@/data/taxonomy';
 interface Props { file: string; eager?: boolean }
 const { file, eager = false } = Astro.props;
@@ -11,7 +11,7 @@ const eyebrow = primary ? segments.find((g) => g.id === primary.segment)!.name :
 ---
 
 <article class="block project-card" data-segments={segIds.join(' ')} data-state={img.state}>
-  <img class="block__photo project-card__photo" src={imageSrc(img.file)} width={img.width} height={img.height} alt={img.alt} loading={eager ? 'eager' : 'lazy'} decoding="async" />
+  <img class="block__photo project-card__photo" src={imageSrc(img.file)} srcset={imageSrcSet(img)} sizes={img.variants ? '(min-width: 80rem) 25vw, (min-width: 40rem) 50vw, 100vw' : undefined} width={img.width} height={img.height} alt={img.alt} loading={eager ? 'eager' : 'lazy'} decoding="async" />
   <div class="block__body project-card__body">
     <p class="eyebrow">{eyebrow} · {img.state}</p>
     <h3 class="t-subtitle project-card__title">{img.title}</h3>
