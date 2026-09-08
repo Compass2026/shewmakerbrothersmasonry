@@ -4,7 +4,8 @@ import Section from '@/components/Section.astro';
 import Hero from '@/components/Hero.astro';
 import Eyebrow from '@/components/Eyebrow.astro';
 import Button from '@/components/Button.astro';
-import BeforeAfter from '@/components/BeforeAfter.astro';
+import BeforeAfterSlider from '@/components/BeforeAfterSlider.astro';
+import Photo from '@/components/Photo.astro';
 import ServiceBlock from '@/components/ServiceBlock.astro';
 import CoursedGrid from '@/components/CoursedGrid.astro';
 import Marquee from '@/components/Marquee.astro';
@@ -111,11 +112,34 @@ const problems = [
         </div>
         <div><Button href="/seawall-repair/" variant="secondary" icon="arrow">Seawall repair and rebuild</Button></div>
       </div>
-      <BeforeAfter before="seawall-before-eroded-bank-01.jpg" after="lakefront-retaining-wall-crew-01.jpg" beforeCaption="The failed bank under the deck, no wall." afterCaption="Mortared fieldstone wall on a poured footing, the same shoreline." />
+      <div class="block argument__photo"><Photo file="seawall-wall-lakehouse-01" sizes="(min-width: 64rem) 640px, 92vw" /></div>
     </div>
   </Section>
 
-  <Section tone="concrete" glow="bottom" labelledby="brothers-heading">
+  <Section tone="concrete" labelledby="slider-heading">
+    <div class="craft">
+      <div class="craft__text">
+        <div class="sec-head">
+          <Eyebrow rule>The craft</Eyebrow>
+          <h2 id="slider-heading" class="t-title">Scaffold to finished. <span class="accent">The same fireplace.</span></h2>
+        </div>
+        <div class="prose">
+          <p>A stone fireplace goes up the way a wall does: in courses, one stone at a time. The firebox is set first, then the stone is laid around it and carried up the chimney breast to the ceiling.</p>
+          <p>Drag the handle. The scaffold comes down, the timber mantel goes in, the hearth is laid, and the stone becomes the room.</p>
+        </div>
+        <div><Button href="/indoor-fireplaces/" icon="arrow">Indoor fireplaces</Button></div>
+      </div>
+      <BeforeAfterSlider
+        before="fireplace-build-during-01"
+        after="fireplace-build-after-01"
+        beforeLabel="During"
+        afterLabel="Finished"
+        caption="One fireplace, photographed from the same spot part way through the build and again when it was done."
+      />
+    </div>
+  </Section>
+
+  <Section tone="lifted" glow="bottom" labelledby="brothers-heading">
     <div class="brothers">
       <div class="brothers__text">
         <div class="sec-head">
@@ -219,7 +243,13 @@ const problems = [
 
   .argument { display: grid; gap: 40px; align-items: start; }
   .argument__text { display: grid; gap: 26px; }
-  @media (min-width: 64rem) { .argument { grid-template-columns: 4fr 8fr; gap: 48px; } }
+  @media (min-width: 64rem) { .argument { grid-template-columns: 6fr 6fr; gap: 56px; } }
+  .argument__photo { padding: 12px; }
+  :global(.argument__photo .photo img) { border: 0; }
+  :global(.argument__photo .photo__caption) { padding: 10px 4px 0; }
+  .craft { display: grid; gap: 40px; align-items: center; }
+  .craft__text { display: grid; gap: 26px; }
+  @media (min-width: 64rem) { .craft { grid-template-columns: 6fr 6fr; gap: 64px; } }
 
   .brothers { display: grid; gap: 40px; align-items: center; }
   .brothers__text { display: grid; gap: 26px; }

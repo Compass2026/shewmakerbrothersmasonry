@@ -359,7 +359,12 @@ outlined icon box.
   (stone behind the closing CTA) does not parallax.
 - **Process:** numbered blocks with a large ember numeral.
 - **Area blocks:** the towns as two-across link blocks with a pin icon; Tier 1 tagged "Full page".
-- **Before/after:** two blocks with a coal "Before" tag and an ember "After" tag over the photo.
+- **Before/after:** two blocks with a dark "Before" tag and an amber "After" tag over the photo, for
+  pairs shot from different positions.
+- **BeforeAfterSlider:** for a pair shot from the same spot. Both frames fill the same box and the
+  during layer is revealed by a `clip-path`, so the two stay pixel-aligned at every handle position.
+  The control is a range input covering the frame: mouse, touch and arrow keys all work, and with no
+  JavaScript it still shows half of each. Dragging anywhere in the frame moves the handle.
 - **FAQ:** blocks with an ember plus that rotates open.
 - **Chips:** filter buttons, ember when pressed.
 - **Stone course:** a 64px course of the real stone under a 7px concrete cap (`--color-cap`, #B9B3A8); the deep

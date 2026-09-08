@@ -12,6 +12,10 @@ Last updated: Stage 2/3, 2026-09-07.
 
 ## A. Photography: full-resolution originals are needed from Sam for every image
 
+**Update 2026-09-08, second batch.** A further 30 originals arrived in Drive (IMG_5062 to IMG_6729 plus one UUID-named file), covering block seawalls under construction, finished stone seawalls at two properties, stone piers at the waterline, a stone-lined drainage swale, interior fireplaces at several stages, a pole barn with stone wainscot, flagstone walks and stone stairs. Three are in use so far: the fireplace before/after pair and a finished seawall. The rest are cut and ready in `.tmp-originals/` and should be worked into the gallery and the service pages.
+
+**Worth Sam confirming:** the finished-fireplace photograph (`D0DD3C95…`) shows two men standing in front of the fireplace. If that is Mike and Sam, it may close the "Mike and Sam, faces, on a job" gap in section B. The site does not name them until Sam confirms.
+
 **Update 2026-09-08.** Sam supplied twelve originals (Drive › Media): two DJI aerials of a seawall with stairs and patio, a stone wall above rip rap, a tall lake-house wall, a curved wall, stairs with poured treads, walls with a poured ramp, a concrete pad at the water, a flagstone walkway, and three frames of exterior stone veneer on a new build. They are processed into responsive WebP sets under `public/images/projects/full/` (`node qa/make-photos.mjs`) and carry `variants` in the manifest. Every hero, band, service block and gallery lead now uses an original. The table below is what is still only a 414 px thumbnail.
 
 Every photo currently in `public/images/projects/` (17 files) and the logo in

@@ -863,6 +863,121 @@
         }
       ],
       "usable": "full"
+    },
+    {
+      "id": "seawall-wall-lakehouse-01",
+      "file": "full/seawall-wall-lakehouse-01-w960.webp",
+      "width": 960,
+      "height": 641,
+      "project": "lakefront-seawall-21",
+      "state": "after",
+      "hero": true,
+      "services": [
+        "seawall-construction",
+        "seawall-repair",
+        "lakefront-retaining-walls",
+        "cities",
+        "home"
+      ],
+      "title": "Mortared stone seawall along the shore",
+      "caption": "A run of mortared stone seawall with a poured cap, holding the bank below a lake house.",
+      "alt": "Long mortared stone seawall with a concrete cap running along a lakefront below a brown lake house, sand and water in front",
+      "original": "IMG_5295.HEIC",
+      "usable": "full",
+      "variants": [
+        {
+          "w": 640,
+          "h": 427,
+          "file": "full/seawall-wall-lakehouse-01-w640.webp"
+        },
+        {
+          "w": 960,
+          "h": 641,
+          "file": "full/seawall-wall-lakehouse-01-w960.webp"
+        },
+        {
+          "w": 1400,
+          "h": 935,
+          "file": "full/seawall-wall-lakehouse-01-w1400.webp"
+        }
+      ]
+    },
+    {
+      "id": "fireplace-build-during-01",
+      "file": "full/fireplace-build-during-01-w960.webp",
+      "width": 960,
+      "height": 1440,
+      "project": "fireplace-build-22",
+      "state": "during",
+      "services": [
+        "indoor-fireplaces",
+        "stone-veneer",
+        "chimney-construction",
+        "projects"
+      ],
+      "title": "Stone fireplace going up",
+      "caption": "The chimney breast part laid, scaffold still standing.",
+      "alt": "Interior stone fireplace part way through construction, scaffolding in front of the chimney breast and a mason working at its base",
+      "original": "IMG_5730.heic",
+      "usable": "full",
+      "pairsWith": "fireplace-build-after-01",
+      "variants": [
+        {
+          "w": 640,
+          "h": 960,
+          "file": "full/fireplace-build-during-01-w640.webp"
+        },
+        {
+          "w": 960,
+          "h": 1440,
+          "file": "full/fireplace-build-during-01-w960.webp"
+        },
+        {
+          "w": 1400,
+          "h": 2100,
+          "file": "full/fireplace-build-during-01-w1400.webp"
+        }
+      ]
+    },
+    {
+      "id": "fireplace-build-after-01",
+      "file": "full/fireplace-build-after-01-w960.webp",
+      "width": 960,
+      "height": 1440,
+      "project": "fireplace-build-22",
+      "state": "after",
+      "hero": true,
+      "services": [
+        "indoor-fireplaces",
+        "stone-veneer",
+        "chimney-construction",
+        "about",
+        "projects",
+        "home"
+      ],
+      "title": "The finished fireplace",
+      "caption": "Ledgestone coursed to the ceiling, timber mantel set, stone hearth laid.",
+      "alt": "Finished floor-to-ceiling stone fireplace with a timber mantel and stone hearth, two men standing in front of it",
+      "original": "D0DD3C95-1145-4CE0-9CE1-551C7BC8814B.heic",
+      "usable": "full",
+      "pairsWith": "fireplace-build-during-01",
+      "variants": [
+        {
+          "w": 640,
+          "h": 960,
+          "file": "full/fireplace-build-after-01-w640.webp"
+        },
+        {
+          "w": 960,
+          "h": 1440,
+          "file": "full/fireplace-build-after-01-w960.webp"
+        },
+        {
+          "w": 1400,
+          "h": 2100,
+          "file": "full/fireplace-build-after-01-w1400.webp"
+        }
+      ]
     }
   ]
 }

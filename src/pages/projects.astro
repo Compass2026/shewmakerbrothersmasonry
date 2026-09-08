@@ -5,6 +5,7 @@ import Hero from '@/components/Hero.astro';
 import Eyebrow from '@/components/Eyebrow.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import BeforeAfter from '@/components/BeforeAfter.astro';
+import BeforeAfterSlider from '@/components/BeforeAfterSlider.astro';
 import Placeholder from '@/components/Placeholder.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import CtaBlock from '@/components/CtaBlock.astro';
@@ -55,6 +56,12 @@ const schema = [webPageNode({ path, name: metaTitle, description, type: 'Collect
         <Eyebrow rule>Before and after</Eyebrow>
         <h2 id="pairs-heading" class="t-title">The same shoreline, <span class="accent">before and after.</span></h2>
       </div>
+      <BeforeAfterSlider
+        before="fireplace-build-during-01"
+        after="fireplace-build-after-01"
+        caption="One fireplace, photographed from the same spot part way through the build and again when it was done. Drag the handle."
+        class="pairs__slider"
+      />
       {pairs.map((p) => <BeforeAfter before={p.before.file} after={p.after.file} />)}
     </div>
   </Section>
@@ -115,4 +122,5 @@ const schema = [webPageNode({ path, name: metaTitle, description, type: 'Collect
     :global(.gallery > .project-card:nth-child(7n + 5 of :not([hidden]))) { grid-column: 2 / span 2; }
   }
   .pairs, .missing { display: grid; gap: 32px; }
+  :global(.pairs__slider) { max-width: 620px; }
 </style>

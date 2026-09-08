@@ -1,0 +1,87 @@
+---
+/**
+ * Before/after slider. Two photographs of the same thing from the same spot, one clipped over the
+ * other, with a handle you drag. The handle is a range input, so it works with a mouse, a finger
+ * and the arrow keys, and it still shows half of each with no JavaScript at all.
+ */
+import { imageByFile, imageSrc, imageSrcSet } from '@/data/images';
+
+interface Props {
+  before: string;
+  after: string;
+  beforeLabel?: string;
+  afterLabel?: string;
+  caption?: string;
+  /** Where the handle starts, as a percentage. */
+  start?: number;
+  class?: string;
+}
+const { before, after, beforeLabel = 'During', afterLabel = 'Finished', caption, start = 50, class: className } = Astro.props;
+const b = imageByFile(before);
+const a = imageByFile(after);
+if (!b || !a) throw new Error(`Before/after slider needs both images in the manifest: ${before}, ${after}`);
+if (b.project !== a.project) throw new Error(`A before/after pair must come from one project: ${before} / ${after}`);
+const sizes = '(min-width: 64rem) 620px, 92vw';
+---
+
+<figure class:list={['ba', className]}>
+  <div class="ba__frame" style={`--pos: ${start}%`} data-ba>
+    <img class="ba__img" src={imageSrc(a.file)} srcset={imageSrcSet(a)} sizes={sizes} width={a.width} height={a.height} alt={a.alt} loading="lazy" decoding="async" />
+    <div class="ba__clip" data-ba-clip>
+      <img class="ba__img" src={imageSrc(b.file)} srcset={imageSrcSet(b)} sizes={sizes} width={b.width} height={b.height} alt={b.alt} loading="lazy" decoding="async" />
+    </div>
+    <span class="ba__tag ba__tag--before">{beforeLabel}</span>
+    <span class="ba__tag ba__tag--after">{afterLabel}</span>
+    <div class="ba__handle" data-ba-handle aria-hidden="true">
+      <span class="ba__grip">
+        <svg width="30" height="18" viewBox="0 0 30 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3 4 9l7 6M19 3l7 6-7 6" /></svg>
+      </span>
+    </div>
+    <input class="ba__range" type="range" min="0" max="100" value={start} step="0.1" data-ba-range aria-label={`Drag to compare: ${beforeLabel} on the left, ${afterLabel} on the right`} />
+  </div>
+  {caption && <figcaption class="ba__caption">{caption}</figcaption>}
+</figure>
+
+<script>
+  for (const frame of document.querySelectorAll<HTMLElement>('[data-ba]')) {
+    const range = frame.querySelector<HTMLInputElement>('[data-ba-range]');
+    if (!range) continue;
+    const set = () => frame.style.setProperty('--pos', `${range.value}%`);
+    range.addEventListener('input', set);
+    // Dragging anywhere in the frame moves the handle, not just the thumb.
+    const track = (e: PointerEvent) => {
+      const r = frame.getBoundingClientRect();
+      range.value = String(Math.min(100, Math.max(0, ((e.clientX - r.left) / r.width) * 100)));
+      set();
+    };
+    frame.addEventListener('pointerdown', (e) => {
+      if ((e.target as HTMLElement).closest('a')) return;
+      frame.setPointerCapture(e.pointerId);
+      track(e);
+    });
+    frame.addEventListener('pointermove', (e) => { if (frame.hasPointerCapture(e.pointerId)) track(e); });
+    frame.addEventListener('pointerup', (e) => frame.releasePointerCapture(e.pointerId));
+    set();
+  }
+</script>
+
+<style>
+  .ba { margin: 0; display: grid; gap: 12px; }
+  .ba__frame { position: relative; overflow: hidden; touch-action: pan-y; cursor: ew-resize; background: var(--color-ground); border: 1px solid var(--joint); box-shadow: var(--block-shadow); }
+  .ba__img { display: block; width: 100%; height: auto; }
+  /* The during shot sits over the finished one and is clipped to the handle position. */
+  /* The during layer is exactly the frame size and is revealed by a clip, so both layers stay
+     pixel-aligned at every handle position. */
+  .ba__clip { position: absolute; inset: 0; clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+  .ba__clip .ba__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .ba__tag { position: absolute; top: 16px; z-index: 3; padding: 7px 13px; font-family: var(--font-condensed); font-weight: 700; font-size: 0.8125rem; letter-spacing: 0.2em; text-transform: uppercase; pointer-events: none; }
+  .ba__tag--before { left: 16px; background: rgba(25, 20, 16, 0.9); color: var(--color-chalk); border: 1px solid rgba(246, 240, 228, 0.28); }
+  .ba__tag--after { right: 16px; background: var(--color-amber); color: var(--color-ground); }
+  .ba__handle { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 3px; margin-left: -1.5px; z-index: 4; background: var(--color-cap-lit); box-shadow: 0 0 0 1px rgba(25, 20, 16, 0.55), 0 0 22px rgba(0, 0, 0, 0.6); pointer-events: none; }
+  .ba__grip { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: grid; place-items: center; width: 58px; height: 58px; background: var(--color-amber); color: var(--color-ground); border: 3px solid var(--color-cap-lit); border-radius: 50%; box-shadow: 0 10px 22px -6px rgba(0, 0, 0, 0.8); }
+  /* The range is the real control: invisible, but it carries the pointer, touch and keyboard. */
+  .ba__range { position: absolute; inset: 0; z-index: 5; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; appearance: none; background: transparent; }
+  .ba__range:focus-visible ~ .ba__handle .ba__grip { outline: 3px solid var(--color-chalk); outline-offset: 3px; }
+  .ba__caption { font-size: 0.9375rem; line-height: 1.5; color: var(--muted); }
+  @media (max-width: 40rem) { .ba__grip { width: 48px; height: 48px; } .ba__tag { top: 12px; font-size: 0.75rem; padding: 6px 10px; } .ba__tag--before { left: 12px; } .ba__tag--after { right: 12px; } }
+</style>
