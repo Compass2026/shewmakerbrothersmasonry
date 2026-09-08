@@ -24,7 +24,7 @@ should be configuration.
 - Stage 1, art direction: approved (Rokkitt display, Merriweather Sans body, one light section per page, the homepage order in `docs/art-direction.md`, interim raster badge in the header).
 - Stage 2, scaffold and globals: done 2026-09-07. Astro 7 + TypeScript + Tailwind 4, `src/config/site.ts` as the single source of truth, global and schema components, the home page, staging on Vercel.
 - Stage 3, all 34 pages to 70 percent: done 2026-09-07. 19 service pages, 9 city pages, service area, gallery, about, contact, blog hub. Copy in `src/data/copy/`, one typed file per page; every unverified fact and missing photo is a visible placeholder logged in `docs/placeholders.md` (section F).
-- Stage 4, verify: done 2026-09-07. Impeccable detect clean on source and on the preview at 1280 and 390 wide (four brief-pinned rules waived in `.impeccable/config.json`, see below); Playwright full-page screenshots of all 34 pages at both widths plus menu, mobile-nav and gallery-filter states; copy-rule lint and structure/schema/link check at zero; Lighthouse 96 to 100 performance, 100 accessibility, 100 best practices, CLS 0 on five page types (SEO 69 only because staging is noindex); Impeccable finish review run on the home surface.
+- Stage 4, verify: done 2026-09-07. Impeccable detect clean on source and on the preview at 1280 and 390 wide (four brief-pinned rules waived in `.impeccable/config.json`, see below); Playwright full-page screenshots of all 34 pages at both widths plus menu, mobile-nav and gallery-filter states; copy-rule lint and structure/schema/link check at zero; Lighthouse 96 to 100 performance, 100 accessibility, 100 best practices, CLS 0 on five page types (SEO 69 only because staging is noindex); Impeccable finish review: five material fixes applied (coursed gallery grid, mobile footer, course-line strength, display word spacing, mobile Services disclosure) and scored resolved, disposition ship; DESIGN.md and  re-documented from the built world; every page measures 390 px wide on mobile ().
 - Next: full-resolution photography from Sam (docs/placeholders.md A and B), the vector logo (C), Sam's answers on the unverified facts (D), the production domain and a form endpoint (E), the Google Business Profile, then blog posts.
 
 ## Build and run
@@ -39,6 +39,7 @@ node qa/lint-copy.mjs           # copy-rule lint over dist/ (pricing, years, lic
 node qa/site-check.mjs          # one H1, title/description lengths, canonical, noindex, JSON-LD NAP, internal links and anchors
 node qa/placeholders.mjs        # rewrites docs/placeholders.md section F from the placeholder blocks in dist/
 node qa/states.mjs              # menu, mobile nav and gallery-filter state captures
+node qa/overflow.mjs            # horizontal-overflow check at 390px on every sitemap page: exit 2 on overflow
 node qa/lighthouse.mjs          # Lighthouse mobile + desktop on a representative page set
 ```
 

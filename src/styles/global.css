@@ -217,7 +217,7 @@
   .photo__caption { margin-top: 8px; font-size: 0.875rem; line-height: 1.5; color: var(--muted); }
 
   /* Placeholder block: impossible to mistake for a finished design */
-  .placeholder { position: relative; display: grid; align-content: center; justify-items: center; gap: 12px; padding: clamp(16px, 3vw, 28px); text-align: center; aspect-ratio: var(--ratio, 16 / 9); border: 2px dashed var(--color-brick); border-radius: var(--radius-sm); background-color: var(--field); color: var(--ink); }
+  .placeholder { position: relative; width: 100%; max-width: 100%; box-sizing: border-box; min-width: 0; contain: inline-size; display: grid; align-content: center; justify-items: center; gap: 12px; padding: clamp(16px, 3vw, 28px); text-align: center; aspect-ratio: var(--ratio, 16 / 9); border: 2px dashed var(--color-brick); border-radius: var(--radius-sm); background-color: var(--field); color: var(--ink); }
   .placeholder::before { content: ""; position: absolute; inset: 0; pointer-events: none; background-image: repeating-linear-gradient(45deg, var(--hatch) 0 1px, transparent 1px 12px); }
   .placeholder > * { position: relative; }
   .placeholder__text { display: grid; gap: 8px; max-width: 40ch; }

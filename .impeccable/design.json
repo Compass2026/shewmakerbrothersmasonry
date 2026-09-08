@@ -1,0 +1,555 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-08T00:50:26+00:00",
+  "title": "Design System: Shewmaker Brothers Masonry",
+  "extensions": {
+    "colorMeta": {
+      "ground": {
+        "role": "primary",
+        "displayName": "Ground",
+        "canonical": "oklch(22% 0.012 65)",
+        "tonalRamp": [
+          "oklch(15% 0.012 65)",
+          "oklch(26% 0.012 65)",
+          "oklch(38% 0.012 65)",
+          "oklch(49% 0.012 65)",
+          "oklch(61% 0.012 65)",
+          "oklch(72% 0.012 65)",
+          "oklch(84% 0.012 65)",
+          "oklch(95% 0.012 65)"
+        ]
+      },
+      "sandstone": {
+        "role": "primary",
+        "displayName": "Sandstone",
+        "canonical": "oklch(82% 0.048 85)",
+        "tonalRamp": [
+          "oklch(15% 0.048 85)",
+          "oklch(26% 0.048 85)",
+          "oklch(38% 0.048 85)",
+          "oklch(49% 0.048 85)",
+          "oklch(61% 0.048 85)",
+          "oklch(72% 0.048 85)",
+          "oklch(84% 0.048 85)",
+          "oklch(95% 0.048 85)"
+        ]
+      },
+      "brick": {
+        "role": "secondary",
+        "displayName": "Brick",
+        "canonical": "oklch(52% 0.135 42)",
+        "tonalRamp": [
+          "oklch(15% 0.135 42)",
+          "oklch(26% 0.135 42)",
+          "oklch(38% 0.135 42)",
+          "oklch(49% 0.135 42)",
+          "oklch(61% 0.135 42)",
+          "oklch(72% 0.135 42)",
+          "oklch(84% 0.135 42)",
+          "oklch(95% 0.135 42)"
+        ]
+      },
+      "brick-hover": {
+        "role": "secondary",
+        "displayName": "Brick Hover",
+        "canonical": "oklch(46% 0.13 42)",
+        "tonalRamp": [
+          "oklch(15% 0.13 42)",
+          "oklch(26% 0.13 42)",
+          "oklch(38% 0.13 42)",
+          "oklch(49% 0.13 42)",
+          "oklch(61% 0.13 42)",
+          "oklch(72% 0.13 42)",
+          "oklch(84% 0.13 42)",
+          "oklch(95% 0.13 42)"
+        ]
+      },
+      "brick-text": {
+        "role": "secondary",
+        "displayName": "Brick Text",
+        "canonical": "oklch(47% 0.13 42)",
+        "tonalRamp": [
+          "oklch(15% 0.13 42)",
+          "oklch(26% 0.13 42)",
+          "oklch(38% 0.13 42)",
+          "oklch(49% 0.13 42)",
+          "oklch(61% 0.13 42)",
+          "oklch(72% 0.13 42)",
+          "oklch(84% 0.13 42)",
+          "oklch(95% 0.13 42)"
+        ]
+      },
+      "shadow": {
+        "role": "neutral",
+        "displayName": "Shadow",
+        "canonical": "oklch(14% 0.008 60)",
+        "tonalRamp": [
+          "oklch(15% 0.008 60)",
+          "oklch(26% 0.008 60)",
+          "oklch(38% 0.008 60)",
+          "oklch(49% 0.008 60)",
+          "oklch(61% 0.008 60)",
+          "oklch(72% 0.008 60)",
+          "oklch(84% 0.008 60)",
+          "oklch(95% 0.008 60)"
+        ]
+      },
+      "ground-2": {
+        "role": "neutral",
+        "displayName": "Ground Lifted",
+        "canonical": "oklch(26% 0.012 60)",
+        "tonalRamp": [
+          "oklch(15% 0.012 60)",
+          "oklch(26% 0.012 60)",
+          "oklch(38% 0.012 60)",
+          "oklch(49% 0.012 60)",
+          "oklch(61% 0.012 60)",
+          "oklch(72% 0.012 60)",
+          "oklch(84% 0.012 60)",
+          "oklch(95% 0.012 60)"
+        ]
+      },
+      "sandstone-dim": {
+        "role": "neutral",
+        "displayName": "Sandstone Dim",
+        "canonical": "oklch(72% 0.038 85)",
+        "tonalRamp": [
+          "oklch(15% 0.038 85)",
+          "oklch(26% 0.038 85)",
+          "oklch(38% 0.038 85)",
+          "oklch(49% 0.038 85)",
+          "oklch(61% 0.038 85)",
+          "oklch(72% 0.038 85)",
+          "oklch(84% 0.038 85)",
+          "oklch(95% 0.038 85)"
+        ]
+      },
+      "mortar": {
+        "role": "neutral",
+        "displayName": "Mortar",
+        "canonical": "oklch(93% 0.017 85)",
+        "tonalRamp": [
+          "oklch(15% 0.017 85)",
+          "oklch(26% 0.017 85)",
+          "oklch(38% 0.017 85)",
+          "oklch(49% 0.017 85)",
+          "oklch(61% 0.017 85)",
+          "oklch(72% 0.017 85)",
+          "oklch(84% 0.017 85)",
+          "oklch(95% 0.017 85)"
+        ]
+      },
+      "mortar-2": {
+        "role": "neutral",
+        "displayName": "Mortar Deep",
+        "canonical": "oklch(89% 0.024 85)",
+        "tonalRamp": [
+          "oklch(15% 0.024 85)",
+          "oklch(26% 0.024 85)",
+          "oklch(38% 0.024 85)",
+          "oklch(49% 0.024 85)",
+          "oklch(61% 0.024 85)",
+          "oklch(72% 0.024 85)",
+          "oklch(84% 0.024 85)",
+          "oklch(95% 0.024 85)"
+        ]
+      },
+      "chalk": {
+        "role": "neutral",
+        "displayName": "Chalk",
+        "canonical": "oklch(98% 0.01 85)",
+        "tonalRamp": [
+          "oklch(15% 0.01 85)",
+          "oklch(26% 0.01 85)",
+          "oklch(38% 0.01 85)",
+          "oklch(49% 0.01 85)",
+          "oklch(61% 0.01 85)",
+          "oklch(72% 0.01 85)",
+          "oklch(84% 0.01 85)",
+          "oklch(95% 0.01 85)"
+        ]
+      },
+      "fieldstone": {
+        "role": "neutral",
+        "displayName": "Fieldstone",
+        "canonical": "oklch(58% 0.03 80)",
+        "tonalRamp": [
+          "oklch(15% 0.03 80)",
+          "oklch(26% 0.03 80)",
+          "oklch(38% 0.03 80)",
+          "oklch(49% 0.03 80)",
+          "oklch(61% 0.03 80)",
+          "oklch(72% 0.03 80)",
+          "oklch(84% 0.03 80)",
+          "oklch(95% 0.03 80)"
+        ]
+      },
+      "fieldstone-text": {
+        "role": "neutral",
+        "displayName": "Fieldstone Text",
+        "canonical": "oklch(50% 0.028 80)",
+        "tonalRamp": [
+          "oklch(15% 0.028 80)",
+          "oklch(26% 0.028 80)",
+          "oklch(38% 0.028 80)",
+          "oklch(49% 0.028 80)",
+          "oklch(61% 0.028 80)",
+          "oklch(72% 0.028 80)",
+          "oklch(84% 0.028 80)",
+          "oklch(95% 0.028 80)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Homepage hero and gallery title only. Uppercase Rokkitt 900, word-spacing -0.1em, text-wrap: pretty."
+      },
+      "headline": {
+        "displayName": "Headline / H1",
+        "purpose": "One per page: primary keyword plus location. Uppercase, word-spacing -0.1em, text-wrap: pretty."
+      },
+      "title": {
+        "displayName": "Title / H2",
+        "purpose": "Section headers. Uppercase, word-spacing -0.08em, balanced."
+      },
+      "subtitle": {
+        "displayName": "Subtitle / H3",
+        "purpose": "Card titles, FAQ questions, sub-sections. Title case, balanced."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "First paragraph under a headline, in the heading colour, max 52ch."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running copy at a 58ch measure; mortar on dark, ground on light."
+      },
+      "small": {
+        "displayName": "Small",
+        "purpose": "Captions, footer links, table cells, placeholder needs."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Eyebrows, menu and footer column headings, filter labels. Uppercase, 0.12em, line-height 1.4."
+      },
+      "button": {
+        "displayName": "Button",
+        "purpose": "Primary and secondary buttons, sentence case."
+      },
+      "chip": {
+        "displayName": "Chip",
+        "purpose": "Gallery filter buttons, sentence case."
+      }
+    },
+    "shadows": [
+      {
+        "name": "stone-edge",
+        "value": "0 1px 0 rgba(34, 30, 26, 0.14), 0 1px 2px rgba(34, 30, 26, 0.08)",
+        "purpose": "Cards on light (mortar) surfaces only, applied through --card-shadow. The maximum shadow in the system."
+      },
+      {
+        "name": "none",
+        "value": "none",
+        "purpose": "Every element on a dark surface; depth is a tonal step and a 1px mortar line."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-expo",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The reveal ease: one fade-and-rise (14px, 700ms) on viewport entry."
+      },
+      {
+        "name": "reveal-stagger",
+        "value": "90ms",
+        "purpose": "Per-item delay in the hero (--i steps: eyebrow 0, headline 1, lead and media 2, buttons 3)."
+      },
+      {
+        "name": "state",
+        "value": "120ms ease",
+        "purpose": "Background, colour and border-colour changes on buttons, chips and linked cards."
+      },
+      {
+        "name": "disclosure",
+        "value": "160ms ease",
+        "purpose": "Chevron and plus-mark rotation on menus and FAQ items; menu close delay on pointer leave."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "transition: none; animation: none",
+        "purpose": "prefers-reduced-motion removes every transition except focus and shows reveals immediately."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "brand-name",
+        "value": "30rem"
+      },
+      {
+        "name": "pairs",
+        "value": "40rem"
+      },
+      {
+        "name": "hero-16x9",
+        "value": "48rem"
+      },
+      {
+        "name": "desktop-nav",
+        "value": "64rem"
+      }
+    ],
+    "textures": [
+      {
+        "name": "grain",
+        "value": "feTurbulence fractalNoise baseFrequency 0.8, 3 octaves, desaturated, 240px tile at opacity 0.05",
+        "purpose": "Dark sections only, never over a photograph, never above 8%."
+      },
+      {
+        "name": "course-lines",
+        "value": "112px SVG tile, 1px sandstone strokes at stroke-opacity 0.05: horizontals at 56px and 112px, verticals offset half a stone",
+        "purpose": "CTA block and footer (shadow tone)."
+      },
+      {
+        "name": "hatch",
+        "value": "repeating-linear-gradient(45deg, var(--hatch) 0 1px, transparent 1px 12px) on ::before",
+        "purpose": "Placeholder blocks; --hatch is sandstone 8% on dark, ground 6% on light."
+      },
+      {
+        "name": "scrim",
+        "value": "linear-gradient(to top, rgb(16 14 12 / 0.85) 0%, rgb(16 14 12 / 0) 55%)",
+        "purpose": "Over photographs that carry type. The only gradient in the system."
+      }
+    ],
+    "toneTokens": {
+      "ground": {
+        "--surface": "var(--color-ground)",
+        "--ink": "var(--color-mortar)",
+        "--heading": "var(--color-sandstone)",
+        "--muted": "var(--color-sandstone-dim)",
+        "--eyebrow": "var(--color-sandstone-dim)",
+        "--link": "var(--color-sandstone)",
+        "--rule": "color-mix(in srgb, var(--color-fieldstone) 35%, transparent)",
+        "--card": "var(--color-ground-2)",
+        "--card-shadow": "none",
+        "--field": "var(--color-ground-2)",
+        "--focus": "var(--color-sandstone)",
+        "--btn2": "var(--color-sandstone)",
+        "--btn2-ink": "var(--color-ground)",
+        "--hatch": "color-mix(in srgb, var(--color-sandstone) 8%, transparent)"
+      },
+      "lifted": {
+        "--surface": "var(--color-ground-2)",
+        "--card": "var(--color-ground)",
+        "--field": "var(--color-ground)"
+      },
+      "shadow": {
+        "--surface": "var(--color-shadow)",
+        "--card": "var(--color-ground-2)",
+        "--field": "var(--color-ground-2)"
+      },
+      "mortar": {
+        "--surface": "var(--color-mortar)",
+        "--ink": "var(--color-ground)",
+        "--heading": "var(--color-ground)",
+        "--muted": "var(--color-fieldstone-text)",
+        "--eyebrow": "var(--color-brick-text)",
+        "--link": "var(--color-brick-text)",
+        "--rule": "color-mix(in srgb, var(--color-fieldstone) 45%, transparent)",
+        "--card": "var(--color-mortar)",
+        "--card-shadow": "var(--shadow-stone)",
+        "--field": "var(--color-mortar-2)",
+        "--focus": "var(--color-brick)",
+        "--btn2": "var(--color-ground)",
+        "--btn2-ink": "var(--color-mortar)",
+        "--hatch": "color-mix(in srgb, var(--color-ground) 6%, transparent)"
+      }
+    },
+    "containers": [
+      {
+        "name": "copy",
+        "value": "72rem"
+      },
+      {
+        "name": "wide",
+        "value": "88rem"
+      }
+    ],
+    "header": {
+      "height": "72px",
+      "compactHeight": "60px",
+      "documentOffset": "73px",
+      "compactAfterScroll": "32px",
+      "position": "fixed"
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Brick fill, chalk label. Only for 'Call Sam at 573-569-3690' and 'Get an estimate'.",
+      "html": "<a class=\"ds-btn ds-btn-primary\" href=\"tel:+15735693690\">Call Sam at 573-569-3690</a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 48px; padding: 14px 24px; font-family: \"Merriweather Sans Variable\", \"Merriweather Sans Fallback\", \"Fira Sans\", \"Segoe UI\", system-ui, sans-serif; font-weight: 700; font-size: 1.0625rem; line-height: 1; border-radius: 2px; border: 1.5px solid transparent; text-decoration: none; cursor: pointer; transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease; } .ds-btn:focus-visible { outline: 2px solid #d9c6a3; outline-offset: 2px; } .ds-btn-primary { background: #b5542a; color: #fbf8f1; border-color: #b5542a; font-variant-numeric: tabular-nums; } .ds-btn-primary:hover { background: #9e4722; border-color: #9e4722; }"
+    },
+    {
+      "name": "Secondary Button (dark)",
+      "kind": "button",
+      "refersTo": "button-secondary-dark",
+      "description": "Transparent with a 1.5px sandstone border on dark; hover inverts to sandstone fill.",
+      "html": "<a class=\"ds-btn ds-btn-secondary\" href=\"/contact/\">Get an estimate</a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 48px; padding: 14px 24px; font-family: \"Merriweather Sans Variable\", \"Merriweather Sans Fallback\", \"Fira Sans\", \"Segoe UI\", system-ui, sans-serif; font-weight: 700; font-size: 1.0625rem; line-height: 1; border-radius: 2px; border: 1.5px solid transparent; text-decoration: none; cursor: pointer; transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease; } .ds-btn:focus-visible { outline: 2px solid #d9c6a3; outline-offset: 2px; } .ds-btn-secondary { background: transparent; color: #d9c6a3; border-color: #d9c6a3; padding: 13px 23px; } .ds-btn-secondary:hover { background: #d9c6a3; color: #221e1a; }"
+    },
+    {
+      "name": "Filter Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Gallery filter button; selected state inverts to sandstone.",
+      "html": "<div style=\"display:flex;gap:8px;align-items:center\"><span class=\"ds-eyebrow\" style=\"min-width:56px\">Work</span><button class=\"ds-chip\" aria-pressed=\"true\">All</button><button class=\"ds-chip\" aria-pressed=\"false\">Seawalls &amp; lakefront</button><button class=\"ds-chip\" aria-pressed=\"false\">Outdoor living</button></div>",
+      "css": ".ds-chip { font-family: \"Merriweather Sans Variable\", \"Merriweather Sans Fallback\", \"Fira Sans\", \"Segoe UI\", system-ui, sans-serif; font-weight: 600; font-size: 0.875rem; line-height: 1; padding: 10px 14px; min-height: 40px; background: transparent; color: #d9c6a3; border: 1px solid color-mix(in srgb, #8a7f6d 35%, transparent); border-radius: 2px; cursor: pointer; transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease; } .ds-chip:hover { border-color: #b9a98a; } .ds-chip:focus-visible { outline: 2px solid #d9c6a3; outline-offset: 2px; } .ds-chip[aria-pressed=\"true\"] { background: #d9c6a3; color: #221e1a; border-color: #d9c6a3; } .ds-eyebrow { font-family: \"Merriweather Sans Variable\", \"Merriweather Sans Fallback\", \"Fira Sans\", \"Segoe UI\", system-ui, sans-serif; font-weight: 700; font-size: 0.8125rem; line-height: 1.4; letter-spacing: 0.12em; text-transform: uppercase; color: #b9a98a; }"
+    },
+    {
+      "name": "Eyebrow",
+      "kind": "custom",
+      "refersTo": "eyebrow-dark",
+      "description": "Label-style kicker naming the segment or town, with the optional 24px by 2px brick rule.",
+      "html": "<p class=\"ds-eyebrow ds-eyebrow--rule\">Third generation · Lake of the Ozarks</p>",
+      "css": ".ds-eyebrow { display: flex; align-items: center; gap: 12px; margin: 0; font-family: \"Merriweather Sans Variable\", \"Merriweather Sans Fallback\", \"Fira Sans\", \"Segoe UI\", system-ui, sans-serif; font-weight: 700; font-size: 0.8125rem; line-height: 1.4; letter-spacing: 0.12em; text-transform: uppercase; color: #b9a98a; } .ds-eyebrow--rule::before { content: \"\"; flex: none; width: 24px; height: 2px; background: #b5542a; }"
+    },
+    {
+      "name": "Project Card (dark)",
+      "kind": "card",
+      "refersTo": "card-dark",
+      "description": "Lifted-ground card with a 1px mortar line: square photo, eyebrow, H3, one line of material and method.",
+      "html": "<article class=\"ds-card\"><div class=\"ds-card__img\"></div><div class=\"ds-card__body\"><p class=\"ds-eyebrow\">Shoreline &amp; lakefront · After</p><h3 class=\"ds-card__title\">Stone seawall along the shore</h3><p class=\"ds-card__cap\">Mortared stone seawall on a poured footing, lake house above.</p></div></article>",
+      "css": ".ds-card { background: #2c2622; color: #efe9de; border: 1px solid color-mix(in srgb, #8a7f6d 35%, transparent); border-radius: 4px; overflow: hidden; max-width: 320px; transition: border-color 120ms ease; } .ds-card:hover { border-color: #b9a98a; } .ds-card__img { aspect-ratio: 1; background: #100e0c; } .ds-card__body { padding: 24px; display: grid; gap: 8px; } .ds-card__title { margin: 0; font-family: \"Rokkitt Variable\", \"Rokkitt Fallback\", Rockwell, \"Roboto Slab\", Georgia, serif; font-weight: 600; font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem); line-height: 1.15; color: #d9c6a3; text-wrap: balance; } .ds-card__cap { margin: 0; font-family: \"Merriweather Sans Variable\", \"Merriweather Sans Fallback\", \"Fira Sans\", \"Segoe UI\", system-ui, sans-serif; font-size: 0.875rem; line-height: 1.5; color: #b9a98a; } .ds-eyebrow { margin: 0; font-family: \"Merriweather Sans Variable\", \"Merriweather Sans Fallback\", \"Fira Sans\", \"Segoe UI\", system-ui, sans-serif; font-weight: 700; font-size: 0.8125rem; line-height: 1.4; letter-spacing: 0.12em; text-transform: uppercase; color: #b9a98a; }"
+    },
+    {
+      "name": "Text Field (dark)",
+      "kind": "input",
+      "refersTo": "input-dark",
+      "description": "Label above, lifted-ground fill, 1px fieldstone stroke; focus is a 2px brick border with no glow.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field__label\">Your name</span><input class=\"ds-field__input\" type=\"text\" placeholder=\"Sam Shewmaker\"><span class=\"ds-field__hint\">We call back the same day.</span></label>",
+      "css": ".ds-field { display: grid; gap: 8px; max-width: 360px; font-family: \"Merriweather Sans Variable\", \"Merriweather Sans Fallback\", \"Fira Sans\", \"Segoe UI\", system-ui, sans-serif; } .ds-field__label { font-weight: 600; font-size: 1rem; color: #d9c6a3; } .ds-field__input { width: 100%; height: 48px; padding: 12px 14px; background: #2c2622; color: #efe9de; border: 1px solid #8a7f6d; border-radius: 2px; font: inherit; caret-color: #b5542a; } .ds-field__input::placeholder { color: #b9a98a; } .ds-field__input:focus { outline: none; border: 2px solid #b5542a; padding: 11px 13px; } .ds-field__hint { font-size: 0.875rem; color: #b9a98a; }"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "header",
+      "description": "Fixed ground header: badge and name, 600-weight sandstone links with a 2px brick active underline, tabular phone, primary button.",
+      "html": "<header class=\"ds-header\"><a class=\"ds-brand\" href=\"/\"><span class=\"ds-brand__badge\"></span><span class=\"ds-brand__name\"><span>Shewmaker Brothers</span><span>Masonry</span></span></a><nav class=\"ds-nav\"><a class=\"ds-nav__link\" href=\"#\">Services</a><a class=\"ds-nav__link is-active\" href=\"#\">Projects</a><a class=\"ds-nav__link\" href=\"#\">Service area</a><a class=\"ds-nav__link\" href=\"#\">Contact</a></nav><a class=\"ds-phone\" href=\"tel:+15735693690\">573-569-3690</a><a class=\"ds-btn ds-btn-primary\" href=\"/contact/\">Get an estimate</a></header>",
+      "css": ".ds-header { display: flex; align-items: center; gap: 24px; min-height: 72px; padding: 0 24px; background: #221e1a; border-bottom: 1px solid color-mix(in srgb, #8a7f6d 35%, transparent); font-family: \"Merriweather Sans Variable\", \"Merriweather Sans Fallback\", \"Fira Sans\", \"Segoe UI\", system-ui, sans-serif; } .ds-brand { display: flex; align-items: center; gap: 12px; margin-right: auto; color: #d9c6a3; text-decoration: none; } .ds-brand__badge { width: 56px; height: 56px; border-radius: 2px; background: #100e0c; } .ds-brand__name { display: flex; flex-direction: column; font-family: \"Rokkitt Variable\", \"Rokkitt Fallback\", Rockwell, \"Roboto Slab\", Georgia, serif; font-weight: 900; text-transform: uppercase; line-height: 0.95; letter-spacing: 0.02em; font-size: 1.125rem; } .ds-brand__name span:last-child { font-weight: 700; font-size: 0.8125rem; letter-spacing: 0.14em; color: #b9a98a; margin-top: 3px; } .ds-nav { display: flex; gap: 2px; } .ds-nav__link { position: relative; padding: 10px 12px; font-weight: 600; font-size: 1rem; color: #d9c6a3; text-decoration: none; } .ds-nav__link:hover { color: #efe9de; } .ds-nav__link.is-active::after { content: \"\"; position: absolute; left: 12px; right: 12px; bottom: 4px; height: 2px; background: #b5542a; } .ds-nav__link:focus-visible { outline: 2px solid #d9c6a3; outline-offset: 2px; border-radius: 2px; } .ds-phone { font-weight: 700; font-size: 1.0625rem; color: #d9c6a3; text-decoration: none; white-space: nowrap; font-variant-numeric: tabular-nums; } .ds-phone:hover { text-decoration: underline; } .ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 48px; padding: 14px 24px; font-family: \"Merriweather Sans Variable\", \"Merriweather Sans Fallback\", \"Fira Sans\", \"Segoe UI\", system-ui, sans-serif; font-weight: 700; font-size: 1.0625rem; line-height: 1; border-radius: 2px; border: 1.5px solid transparent; text-decoration: none; cursor: pointer; transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease; } .ds-btn:focus-visible { outline: 2px solid #d9c6a3; outline-offset: 2px; } .ds-btn-primary {{ background: #b5542a; color: #fbf8f1; border-color: #b5542a; }} .ds-btn-primary:hover {{ background: #9e4722; border-color: #9e4722; }}"
+    },
+    {
+      "name": "Placeholder Block",
+      "kind": "custom",
+      "refersTo": "placeholder-dark",
+      "description": "Labelled photo placeholder: dashed brick border, hatched field on ::before, Rokkitt 'Photo needed' plus the exact shot required.",
+      "html": "<div class=\"ds-placeholder\"><div class=\"ds-placeholder__text\"><p class=\"ds-placeholder__label\">Photo needed</p><p class=\"ds-placeholder__need\">Hero: the finished stone seawall with the lake house above and water in frame. Uncropped original, 2400 px or wider.</p></div></div>",
+      "css": ".ds-placeholder { position: relative; display: grid; align-content: center; justify-items: center; gap: 12px; padding: clamp(16px, 3vw, 28px); text-align: center; aspect-ratio: 16 / 9; max-width: 480px; border: 2px dashed #b5542a; border-radius: 2px; background-color: #2c2622; color: #efe9de; font-family: \"Merriweather Sans Variable\", \"Merriweather Sans Fallback\", \"Fira Sans\", \"Segoe UI\", system-ui, sans-serif; } .ds-placeholder::before { content: \"\"; position: absolute; inset: 0; pointer-events: none; background-image: repeating-linear-gradient(45deg, color-mix(in srgb, #d9c6a3 8%, transparent) 0 1px, transparent 1px 12px); } .ds-placeholder > * { position: relative; } .ds-placeholder__text { display: grid; gap: 8px; max-width: 40ch; } .ds-placeholder__label { margin: 0; font-family: \"Rokkitt Variable\", \"Rokkitt Fallback\", Rockwell, \"Roboto Slab\", Georgia, serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem); line-height: 1; color: #d9c6a3; } .ds-placeholder__need { margin: 0; font-size: 0.875rem; line-height: 1.5; }"
+    },
+    {
+      "name": "Coursed Grid",
+      "kind": "custom",
+      "refersTo": "card-dark",
+      "description": "Running-bond thumbnail grid: courses of four squares alternate with half-stone end cells.",
+      "html": "<ul class=\"ds-coursed\"><li class=\"ds-coursed__item\"></li><li class=\"ds-coursed__item\"></li><li class=\"ds-coursed__item\"></li><li class=\"ds-coursed__item\"></li><li class=\"ds-coursed__item\"></li><li class=\"ds-coursed__item\"></li><li class=\"ds-coursed__item\"></li><li class=\"ds-coursed__item\"></li><li class=\"ds-coursed__item\"></li></ul>",
+      "css": ".ds-coursed { display: grid; grid-template-columns: repeat(8, 1fr); gap: 12px; list-style: none; margin: 0; padding: 0; max-width: 640px; } .ds-coursed__item { grid-column: span 2; aspect-ratio: 1; border-radius: 4px; background: #2c2622; border: 1px solid color-mix(in srgb, #8a7f6d 35%, transparent); } .ds-coursed__item:nth-child(9n + 5), .ds-coursed__item:nth-child(9n + 9) { grid-column: span 1; aspect-ratio: 1 / 2; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Coursed Wall",
+    "overview": "Everything on this site sits the way stone sits on a footing: on a dark ground, in straight courses, heavy at the base, warm in colour. The brand is visible craft, and the audience (a lakefront homeowner who is usually out of town) buys on photographs and a phone call. So the interface is a dark, quiet frame that holds photographs of mortared stone, and the stone carries the colour. Type is sturdy, American and slightly vintage, echoing a heavy condensed slab wordmark with a letterpress finish. Nothing is airy, thin, pastel, rounded or glassy.\n\nDepth comes from material, not decoration: tonal steps between ground and lifted surfaces, a faint paper grain on dark sections, thin \"mortar line\" rules, and the photographs themselves. Motion is minimal, a single fade-and-rise on section entry (staggered in the hero) and nothing on photographs, and it is removed entirely under `prefers-reduced-motion`.\n\nConfirmed rejections (brand board): a white, airy layout; Inter, Poppins, Montserrat or any default geometric sans; stock photography; AI-generated imagery; cool-graded lakefront photos; brick used as a fill or body-text colour.",
+    "keyCharacteristics": [
+      "Dark ground dominates above the fold on every page; light sections are the exception.",
+      "Photography-led: full-bleed project photos on the dark ground with a scrim from shadow.",
+      "Heavy condensed slab display type in uppercase; sturdy humanist sans for reading.",
+      "Rectilinear, near-square geometry (2px radius); no pills, blobs, waves or angled edges.",
+      "Brick is an action colour only: buttons, underlines, active states, one short rule.",
+      "Every image that is not a real Shewmaker photo is a visible, labelled placeholder.",
+      "Surfaces are coursed: cards and thumbnails sit in running bond, half a stone over on alternate rows."
+    ],
+    "rules": [
+      {
+        "name": "The Action-Only Rule",
+        "body": "Brick appears on well under 10% of any screen: a button, an underline, an active state, one short rule. If brick is doing anything but pointing at an action, it is wrong.",
+        "section": "colors"
+      },
+      {
+        "name": "The Dark-Above-The-Fold Rule",
+        "body": "The first viewport of every page is ground with a photograph. Two light sections never touch; the rhythm is ground → lifted → ground → mortar → ground → footer. Where two ground or two lifted sections do meet, a 1px mortar line separates them.",
+        "section": "colors"
+      },
+      {
+        "name": "The No-Brick-Text Rule",
+        "body": "Brick is never a text colour on dark. Links on dark are sandstone with a brick underline; eyebrows on dark are sandstone dim.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tone Rule",
+        "body": "A section declares its tone (`ground`, `lifted`, `shadow`, `mortar`) and nothing inside it names a colour. Cards, fields, eyebrows, links, rules and focus rings take their colour from the tone tokens, so a component dropped into a light section is right by construction.",
+        "section": "colors"
+      },
+      {
+        "name": "The No-Thin-Weights Rule",
+        "body": "Nothing below 400 in the body face, nothing below 600 in the display face. Thin type on a dark ground disappears, and it reads as fashion, not trade.",
+        "section": "typography"
+      },
+      {
+        "name": "The Two-Voices Rule",
+        "body": "Rokkitt for every heading level, Merriweather Sans for everything else. H2 and H3 are lighter weights of the same slab, never a third family.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tabular Numbers Rule",
+        "body": "The phone number, measurements, counts and table figures use tabular numerals so digits align and the number is easy to read off a phone screen.",
+        "section": "typography"
+      },
+      {
+        "name": "The Uppercase Budget Rule",
+        "body": "Uppercase is spent on H1, H2 and labels. H3, buttons, chips and link lists set in the display face are title or sentence case, so a page never shouts twice.",
+        "section": "typography"
+      },
+      {
+        "name": "The Mortar Line Rule",
+        "body": "A card, a panel or a section boundary is separated by a 1px rule in fieldstone at 35% alpha on dark (45% on light), not by a drop shadow.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Grain Rule",
+        "body": "Dark sections may carry an inline-SVG `feTurbulence` noise overlay at 4–6% opacity (shipped at 5%, 240px tile), never above 8%, never over a photograph. It should read as printed paper and disappear on inspection.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Course Lines Rule",
+        "body": "The CTA block and the footer carry a running-bond texture drawn as an inline-SVG tile (112px; 1px horizontal rules every 56px with offset vertical joints) in sandstone at 5% stroke opacity. If it is noticeable at a glance it is too strong.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** open every page on ground with a photograph and a sandstone headline over the darkest third.",
+      "**Do** set every heading in Rokkitt (H1 and H2 uppercase at 900/700, H3 title case at 600) and everything else in Merriweather Sans at 400 or heavier.",
+      "**Do** distinguish cards from sections with a tonal step (#221E1A to #2C2622) and a 1px mortar line, never a drop shadow on dark.",
+      "**Do** keep brick for actions: primary button (#B5542A with #FBF8F1 label), link underlines, active nav, focus accent.",
+      "**Do** use tabular numerals for the phone number and every measurement.",
+      "**Do** keep photographs warm and rectangular, with captions that name the material and the method.",
+      "**Do** render a labelled placeholder block wherever a real Shewmaker photo does not yet exist, and list it in `docs/placeholders.md`.",
+      "**Do** honour `prefers-reduced-motion` by removing every transition except focus.",
+      "**Do** set the tone on the Section wrapper and let components read `--ink`, `--heading`, `--card` and `--field` from it, rather than naming a colour in a component.",
+      "**Do** lay thumbnail and card grids in running bond, alternate courses set half a stone over."
+    ],
+    "donts": [
+      "**Don't** use stock photography anywhere, not one image, and never AI-generated imagery of masonry work or people (brand board hard rule).",
+      "**Don't** cool-grade, desaturate or heavily filter lakefront photographs.",
+      "**Don't** use Inter, Poppins, Montserrat or any default geometric sans, and avoid Oswald, Bebas Neue and Anton, which read as the generic contractor template.",
+      "**Don't** set brick as a section fill, a card background or a text colour on dark; brick text on dark is 3.4:1 and fails.",
+      "**Don't** set fieldstone as running text on mortar (3.3:1); use fieldstone text (#716859) for muted copy and reserve fieldstone for borders.",
+      "**Don't** put two light sections next to each other, or let a light section lead a page.",
+      "**Don't** use pills, rounded-16px cards, circular avatars, angled section edges, blur, glow or glassmorphism.",
+      "**Don't** add parallax to photographs, auto-playing carousels, or hover zoom above 1.02.",
+      "**Don't** add faith language or the John 3:16 element anywhere but the logo, and don't frame the logo badge in white.",
+      "**Don't** set H3, buttons, chips or display-face link lists in uppercase; uppercase is spent on H1, H2 and labels.",
+      "**Don't** animate the header's height on compaction or let the fixed header change the document offset (73px)."
+    ]
+  }
+}
