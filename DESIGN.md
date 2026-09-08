@@ -225,7 +225,8 @@ so every page ends on stonework you could put your hand on.
 - Anton uppercase display with an ember accent word; Barlow Condensed tracked labels; Barlow body.
 - Blocks with 0 radius, a 1px ember joint at 16% alpha, inset chisel highlights, 6% grain and a ghost numeral.
 - Chamfered buttons: the top-left corner cut like a block face, a lighter strip on the leading edge.
-- Stone piers with poured caps: at the closing call to action and as an arcade above the footer.
+- Substantial masonry throughout: a stone base under every hero, capped courses between sections,
+  masonry surrounds on the key content, and a foundation under the footer.
 - The crew's own photographs, full-resolution originals in responsive WebP sets (`public/images/projects/full/`,
   `node qa/make-photos.mjs`), as full-bleed graded backgrounds behind heroes and statement bands and with
   `srcset` inside blocks; the remaining 414 px Facebook frames only where no original exists yet; never stock,
@@ -297,27 +298,40 @@ at the top or bottom edge, and every section boundary is a 1px joint.
 
 ## Elevation & Depth
 
-Depth is material, and the stone is real and meant to be seen. Since Sam's originals arrived
-(2026-09-08) the stone is the actual lake-house wall (IMG_9757): `public/images/textures/stone-cover.webp`
-is the wall uncut, used with `background-size: cover` behind the closing CTA; `stone-course.webp` is a
-wide strip of the same wall for the courses; `stonewall.webp` is a seamless nine-patch blend of it for
-the thin block caps; `greystone.webp` is the darker face behind block faces at 10%. `node qa/make-textures.mjs`
-regenerates all four from `.tmp-originals/`. Stone is an accent, never a
-wash: a stone course under a poured concrete cap (`.stone-course`) runs under the marquee, above the
-closing CTA and, deeper, under the footer; the statement band and the closing CTA sit on a full stone
-wall (`.stone-wall`) with the copy on a dark sign block; numbered and card blocks carry a 14px stone
-cap with a concrete line beneath (`.block--capped`). Never stock, never generated. The block face
-steps up from the section, a 1px ember joint marks its edge, inset highlights
-(top-left) and shadows (bottom-right) chisel it, a diagonal sheen sits over the stone, and a soft 40px drop at 80% black settles it on the ground. Photographs are
-darkened and softened behind text (brightness 0.45 to 0.62, blur 1.5 to 3px) with a scrim from
-the left and from the bottom. Hovered link-blocks lift 3px and brighten their joint.
+Depth is material and it is photographic. Every stone surface on the site is a crop of the crew's
+own walls, cut by `node qa/make-stone.mjs` from Sam's full-resolution originals; CSS supplies the
+light, the thickness and the shadows. Nothing is stock and nothing is generated.
 
-### Named Rules
-**The Joint Rule.** Blocks are separated by 1px ember joints at 16% alpha (40% when hovered or
-current), never by a gap alone.
+**Assets** (`public/images/stone/`, WebP, three widths where it matters):
+- `wall-face` the primary coursed wall, cool grey mortar against warm tan and cream stones, lit
+  from the upper left (IMG_9757).
+- `wall-big` larger, more sculptural stones with deep joints, for lintels, plinths and the
+  foundation (IMG_9679).
+- `pier-face` a tall crop for vertical piers, so a pier never repeats a horizontal tile (IMG_9757).
+- `cap-top` smooth poured concrete, the lit top face of every capstone and ledge (IMG_9759).
+- `block-face` the same wall, dark and out of focus, behind cards at 10%.
+- `edge-bottom.svg` / `edge-top.svg` a seamless irregular silhouette: stones of varied width step
+  to varied depths with a chipped corner each, tiling every 760 px.
 
-**The Chisel Rule.** Every block carries the inset highlight and shadow; nothing else on the page
-has a drop shadow except the block's ground shadow.
+**The lighting rule.** Light falls from the upper left everywhere. Exposed top arrises carry a
+bright line, front faces sit at full value, return faces are darkened to about half, and joints and
+undersides are dark. `.stone-lit` applies the gradient that enforces it.
+
+**The thickness rule.** Any stone element that terminates shows its thickness: a capstone has a lit
+top band, a mid front face and a shadowed bottom arris, and casts a shadow on whatever it sits on.
+A pier shows a lit face and a darker return, so it turns a corner.
+
+**The projection rule.** A course never ends on a straight line. The wall is masked with the
+irregular edge and the shadow is cast by a `drop-shadow` filter on the parent, so it follows the
+stones' own contours and falls onto the section beyond. Stones hang past their container by the
+tooth depth: 46 px on desktop, 30 px on phones.
+
+### Shadow Vocabulary
+- **Cast from stone**: `drop-shadow(0 16px 16px rgba(0,0,0,.58)) drop-shadow(0 4px 3px rgba(0,0,0,.5))`
+  on the masked body, so projecting stones shadow the next section.
+- **Under a cap**: `0 7px 12px -4px rgba(0,0,0,.62)` plus a 2 px dark arris.
+- **Beside a pier**: `drop-shadow(14px 0 20px rgba(0,0,0,.55))` onto the panel it frames.
+- **Block**: the tonal step and 1 px joint, plus the soft ground shadow in `--block-shadow`.
 
 ## Shapes
 

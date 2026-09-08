@@ -1,0 +1,27 @@
+---
+/**
+ * A course of the crew's own wall under a poured capstone, used to change section.
+ * The wall is masked so it ends on the stones' own contours and the projecting stones cast
+ * their shadow onto whatever follows.
+ */
+interface Props {
+  /** 'bottom' hangs the irregular edge into the section below; 'top' into the section above. */
+  edge?: 'bottom' | 'top';
+  /** Course height. */
+  height?: string;
+  cap?: boolean;
+  class?: string;
+}
+const { edge = 'bottom', height, cap = true, class: className } = Astro.props;
+---
+
+<div
+  class:list={['stone-edge', { 'stone-edge--top': edge === 'top' }, className]}
+  style={height ? `--edge-h: ${height}` : undefined}
+  aria-hidden="true"
+>
+  <div class="stone-edge__body">
+    <div class="stone-edge__wall stone-lit"></div>
+    {cap && <div class="stone-edge__cap stone-cap"></div>}
+  </div>
+</div>

@@ -14,7 +14,7 @@ import Process from '@/components/Process.astro';
 import AreaBlocks from '@/components/AreaBlocks.astro';
 import CtaBlock from '@/components/CtaBlock.astro';
 import Icon from '@/components/Icon.astro';
-import StoneCourse from '@/components/StoneCourse.astro';
+import StoneEdge from '@/components/StoneEdge.astro';
 import { site, telHref } from '@/config/site';
 import { segments, services } from '@/data/taxonomy';
 import { copy } from '@/data/copy/global';
@@ -60,10 +60,11 @@ const problems = [
     accent="Lake of the Ozarks"
     lead="Third-generation stonemasons who build the shoreline, the fireplace and the ground it all sits on. Our own crews, start to finish."
     photo="seawall-aerial-01"
+    base={false}
   />
 
   <Marquee items={services.map((s) => s.navLabel ?? s.name)} />
-  <StoneCourse />
+  <StoneEdge height="152px" />
 
   <Section tone="sand" width="wide" padding="tight" labelledby="trust-heading">
     <h2 id="trust-heading" class="sr-only">Why homeowners at the lake call Shewmaker Brothers Masonry</h2>
@@ -204,6 +205,7 @@ const problems = [
     </div>
   </Section>
 
+  <StoneEdge height="148px" />
   <CtaBlock />
 </Base>
 

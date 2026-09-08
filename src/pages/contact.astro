@@ -5,6 +5,7 @@ import Hero from '@/components/Hero.astro';
 import Eyebrow from '@/components/Eyebrow.astro';
 import Button from '@/components/Button.astro';
 import TextPlaceholder from '@/components/TextPlaceholder.astro';
+import StoneFrame from '@/components/StoneFrame.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import AreaBlocks from '@/components/AreaBlocks.astro';
 import CtaBlock from '@/components/CtaBlock.astro';
@@ -32,8 +33,8 @@ const schema = [webPageNode({ path, name: title, description, type: 'ContactPage
   </Hero>
 
   <Section tone="sand" glow="top" labelledby="form-heading">
-    <div class="block form-block">
-      <div class="block__body form-wrap">
+    <StoneFrame class="form-frame">
+      <div class="form-wrap">
         <div class="sec-head">
           <Eyebrow rule>Or write it down</Eyebrow>
           <h2 id="form-heading" class="t-title">Send the details. <span class="accent">Sam calls back.</span></h2>
@@ -57,7 +58,7 @@ const schema = [webPageNode({ path, name: title, description, type: 'ContactPage
           </div>
         </form>
       </div>
-    </div>
+    </StoneFrame>
   </Section>
 
   <Section tone="concrete" width="wide" labelledby="where-heading">
@@ -81,8 +82,8 @@ const schema = [webPageNode({ path, name: title, description, type: 'ContactPage
   :global(.contact-phone) { display: inline-flex; align-items: center; gap: 18px; font-family: var(--font-display); font-size: clamp(2.5rem, 1.5rem + 5vw, 5.5rem); line-height: 1; letter-spacing: 0.01em; color: var(--accent); text-decoration: none; font-variant-numeric: tabular-nums; text-shadow: 0 0 28px rgba(242, 168, 29, 0.35); }
   :global(.contact-phone:hover) { color: var(--accent-solid-hover); }
   :global(.contact-note) { color: var(--color-mortar-dim); }
-  .form-block { max-width: 52rem; }
-  .form-wrap { display: grid; gap: 28px; padding: clamp(24px, 4vw, 40px); }
+  :global(.form-frame) { max-width: 58rem; margin-inline: auto; }
+  .form-wrap { display: grid; gap: 28px; padding: clamp(28px, 5vw, 52px); }
   .form { display: grid; gap: 24px; }
   .form__grid { display: grid; gap: 20px; }
   .form__actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }

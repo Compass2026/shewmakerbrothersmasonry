@@ -1,0 +1,10 @@
+---
+/** The foundation the page ends on: a ledge over a deep course of wall. */
+interface Props { height?: string; class?: string }
+const { height, class: className } = Astro.props;
+---
+
+<div class:list={['stone-foundation-wrap', className]} aria-hidden="true">
+  <div class="stone-cap"></div>
+  <div class="stone-foundation stone-lit" style={height ? `--foundation-h: ${height}` : undefined}></div>
+</div>

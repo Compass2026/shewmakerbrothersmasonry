@@ -3,12 +3,13 @@ import { site, telHref } from '@/config/site';
 import { segments, servicesBySegment, servicePath } from '@/data/taxonomy';
 import { cities, cityPath, foldIns } from '@/data/cities';
 import Button from './Button.astro';
-import Arcade from './Arcade.astro';
+import StoneEdge from './StoneEdge.astro';
+import StoneFoundation from './StoneFoundation.astro';
 const year = new Date().getFullYear();
 const countyLine = `${site.counties.slice(0, -1).join(', ')} and ${site.counties[site.counties.length - 1]} counties`;
 ---
 
-<Arcade count={7} height="150px" />
+<StoneEdge height="138px" />
 <footer class="site-footer" data-tone="shadow">
   <div class="wrap wrap--wide">
     <div class="site-footer__grid">
@@ -54,6 +55,7 @@ const countyLine = `${site.counties.slice(0, -1).join(', ')} and ${site.counties
     </div>
   </div>
 </footer>
+<StoneFoundation height="104px" />
 
 <style>
   .site-footer { background: var(--color-shadow); color: var(--ink); padding: 64px 0 28px; }

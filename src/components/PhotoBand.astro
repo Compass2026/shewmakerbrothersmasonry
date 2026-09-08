@@ -3,8 +3,8 @@
 import Eyebrow from './Eyebrow.astro';
 import Button from './Button.astro';
 import { imageByFile, imageLarge, imageSrcSet, isOriginal } from '@/data/images';
-interface Props { photo: string; eyebrow?: string; statement: string; accent?: string; line?: string; href?: string; cta?: string; id?: string; wall?: boolean; parallax?: boolean }
-const { photo, eyebrow, statement, accent, line, href, cta, id = 'band-heading', wall = false, parallax = true } = Astro.props;
+interface Props { photo: string; eyebrow?: string; statement: string; accent?: string; line?: string; href?: string; cta?: string; id?: string; parallax?: boolean }
+const { photo, eyebrow, statement, accent, line, href, cta, id = 'band-heading', parallax = true } = Astro.props;
 const img = imageByFile(photo);
 if (!img) throw new Error(`Unknown band photo: ${photo}`);
 const idx = accent ? statement.indexOf(accent) : -1;
@@ -14,12 +14,12 @@ const lead0 = firstBreak >= 0 ? parts[0].slice(0, firstBreak + 1) : '';
 const rest0 = firstBreak >= 0 ? parts[0].slice(firstBreak + 2) : parts[0];
 ---
 
-<section class:list={['band', { 'stone-wall': wall, 'band--wall': wall, 'band--parallax': parallax && !wall }]} aria-labelledby={id} data-tone="ground">
-  {!wall && isOriginal(img) && <img class="photo-bg photo-bg--band photo-bg--img" src={imageLarge(img, 1200)} srcset={imageSrcSet(img)} sizes="100vw" alt="" width={img.width} height={img.height} loading="lazy" decoding="async" />}
-  {!wall && !isOriginal(img) && <div class="photo-bg photo-bg--soft" style={`background-image: url(${imageLarge(img)})`} aria-hidden="true" data-placeholder data-page={Astro.url.pathname} data-slot="band-background" data-need={`Band background: full-resolution original of ${img.file}; the interim frame is shown softened and darkened.`}></div>}
-  {!wall && <div class="scrim scrim--left"></div>}
+<section class:list={['band', { 'band--parallax': parallax }]} aria-labelledby={id} data-tone="ground">
+  {isOriginal(img) && <img class="photo-bg photo-bg--band photo-bg--img" src={imageLarge(img, 1200)} srcset={imageSrcSet(img)} sizes="100vw" alt="" width={img.width} height={img.height} loading="lazy" decoding="async" />}
+  {!isOriginal(img) && <div class="photo-bg photo-bg--soft" style={`background-image: url(${imageLarge(img)})`} aria-hidden="true" data-placeholder data-page={Astro.url.pathname} data-slot="band-background" data-need={`Band background: full-resolution original of ${img.file}; the interim frame is shown softened and darkened.`}></div>}
+  <div class="scrim scrim--left"></div>
   <div class="wrap wrap--wide band__outer">
-  <div class:list={['band__inner', { 'stone-wall__sign': wall }]}>
+  <div class="band__inner">
     {eyebrow && <Eyebrow rule>{eyebrow}</Eyebrow>}
     <h2 id={id} class="t-title band__title">{lead0 && <span class="band__first">{lead0}</span>}{rest0}{parts[1] && <span class="accent">{parts[1]}</span>}{parts[2]}</h2>
     {line && <p class="band__line">{line}</p>}
@@ -47,9 +47,6 @@ const rest0 = firstBreak >= 0 ? parts[0].slice(firstBreak + 2) : parts[0];
   .band__outer { position: relative; z-index: 1; }
   .band__inner { display: grid; gap: 20px; }
   .band__inner > * { max-width: 60rem; }
-  .band--wall { padding: clamp(3rem, 7vw, 5.5rem) 0; background: url("/images/textures/stone-cover-sm.webp") center / cover no-repeat; }
-  @media (min-width: 40rem) { .band--wall { background-image: url("/images/textures/stone-cover.webp"); } }
-  .band--wall .band__inner { padding: clamp(28px, 5vw, 56px); max-width: 64rem; }
   .band__title { max-width: 24ch; }
   .band__first { display: block; }
   .band__line { font-family: var(--font-condensed); font-weight: 600; font-size: clamp(1.125rem, 1rem + 0.8vw, 1.5rem); letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-mortar-dim); max-width: 40ch; }

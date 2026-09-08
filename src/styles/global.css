@@ -86,6 +86,19 @@
     --stone-tint: rgba(36, 30, 24, 0.34);
     --pending-bg: var(--field);
   }
+  /* The dark ground, stated explicitly so it also applies when nested inside a light section. */
+  [data-tone="ground"] {
+    color-scheme: dark;
+    --surface: var(--color-ground); --ink: var(--color-mortar); --heading: var(--color-chalk);
+    --muted: var(--color-mortar-dim); --accent: var(--color-amber); --accent-solid: var(--color-amber);
+    --accent-solid-hover: var(--color-amber-light); --accent-label: var(--color-ground);
+    --eyebrow: var(--color-amber); --link: var(--color-chalk);
+    --joint: rgba(201, 138, 58, 0.2); --joint-strong: rgba(201, 138, 58, 0.42);
+    --card: var(--color-ground-2); --card-2: #3a3128; --field: var(--color-shadow);
+    --focus: var(--color-amber); --btn2: var(--color-chalk); --btn2-border: rgba(246, 240, 228, 0.38);
+    --block-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.07), inset 0 -2px 0 rgba(0, 0, 0, 0.55), 0 18px 40px -24px rgba(0, 0, 0, 0.8);
+    --stone-tint: rgba(36, 30, 24, 0.34); --pending-bg: var(--field);
+  }
   [data-tone="lifted"] { --surface: var(--color-ground-2); --card: var(--color-ground); --field: var(--color-ground); }
   [data-tone="shadow"] { --surface: var(--color-shadow); --card: var(--color-ground-2); --field: var(--color-ground); }
 
@@ -203,8 +216,8 @@
 
   /* Blocks: the cut-stone card */
   .block { position: relative; background: var(--card); color: var(--ink); border: 1px solid var(--joint); box-shadow: var(--block-shadow); overflow: hidden; isolation: isolate; }
-  .block::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0.1; background: url("/images/textures/greystone.webp") center / 528px 250px repeat; }
-  [data-tone="sand"] .block::before, [data-tone="concrete"] .block::before { opacity: 0.045; background-size: 190px 90px; }
+  .block::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0.1; background: url("/images/stone/block-face.webp") center / 420px 200px repeat; }
+  [data-tone="sand"] .block::before, [data-tone="concrete"] .block::before { opacity: 0.045; background-size: 210px 100px; }
   .block::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(160deg, rgba(255, 255, 255, 0.05), transparent 45%, var(--stone-tint)); }
   .block--link { display: block; text-decoration: none; transition: border-color 160ms ease, transform 200ms var(--ease-expo), box-shadow 200ms var(--ease-expo); }
   .block--link:hover { border-color: var(--joint-strong); transform: translateY(-3px); }
@@ -226,47 +239,56 @@
   .field__hint { font-size: 0.9375rem; color: var(--muted); max-width: 60ch; }
 
   /*
-    Real stone. `stone-cover` and `stone-course` are the crew's own lake-house wall, uncut.
-    A pier turns that flat photograph into a corner: a lit front face, a darker return face
-    where the corner turns away from the light, a poured cap that overhangs both, and a
-    shadow cast onto the wall behind it.
+    Masonry system. Every stone surface is a photograph of the crew's own walls; CSS supplies the
+    light, the thickness and the shadows. Light falls from the upper left throughout, so exposed
+    top arrises are bright, front faces are mid, and joints and undersides are dark.
   */
-  .stone-course { position: relative; height: 64px; background: url("/images/textures/stone-course-sm.webp") center / cover no-repeat; border-top: 7px solid var(--color-cap); box-shadow: inset 0 -14px 18px -8px rgba(0, 0, 0, 0.55), inset 0 2px 0 rgba(0, 0, 0, 0.3); }
-  .stone-course--deep { height: 96px; }
-  @media (min-width: 40rem) { .stone-course { background-image: url("/images/textures/stone-course.webp"); } }
-  .stone-wall { position: relative; isolation: isolate; background: url("/images/textures/stone-cover-sm.webp") center / cover no-repeat; }
-  @media (min-width: 40rem) { .stone-wall { background-image: url("/images/textures/stone-cover.webp"); } }
-  .stone-wall::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: linear-gradient(180deg, rgba(25, 20, 16, 0.62), rgba(25, 20, 16, 0.46) 50%, rgba(25, 20, 16, 0.72)); }
-  .stone-wall > * { position: relative; z-index: 1; }
-  .stone-wall__sign { background: rgba(25, 20, 16, 0.92); border: 1px solid rgba(201, 138, 58, 0.4); box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.9), inset 1px 1px 0 rgba(255, 255, 255, 0.07); }
-  .block--capped { border-top: 14px solid transparent; border-image: url("/images/textures/stonewall.webp") 40 0 0 0 / 14px 0 0 0 / 0 round; outline: 1px solid var(--joint); outline-offset: -1px; }
-  .block--capped > .block__body { box-shadow: inset 0 3px 0 var(--color-cap); }
+  .stone-edge, .stone-frame, .stone-foundation { --stone-img: url("/images/stone/wall-face-1200.webp"); --stone-big: url("/images/stone/wall-big-1200.webp"); --pier-img: url("/images/stone/pier-face-520.webp"); --cap-img: url("/images/stone/cap-top-1200.webp"); --tooth: 30px; --cap-h: 20px; }
+  @media (min-width: 48rem) {
+    .stone-edge, .stone-frame, .stone-foundation { --stone-img: url("/images/stone/wall-face-2000.webp"); --stone-big: url("/images/stone/wall-big-2200.webp"); --pier-img: url("/images/stone/pier-face-900.webp"); --cap-img: url("/images/stone/cap-top-2400.webp"); --tooth: 46px; --cap-h: 26px; }
+  }
+  @media (min-width: 90rem) { .stone-edge, .stone-frame, .stone-foundation { --stone-img: url("/images/stone/wall-face-3000.webp"); } }
+
+  /* The lit face of any stone surface: a bright arris at the top, deepening shadow at the foot. */
+  .stone-lit::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(177deg, rgba(255, 255, 255, 0.16) 0, rgba(255, 255, 255, 0.04) 14%, transparent 34%, rgba(0, 0, 0, 0.16) 74%, rgba(0, 0, 0, 0.45) 100%); }
+
+  /* A poured capstone with real thickness: lit top face, mid front face, dark underside, cast shadow. */
+  .stone-cap { position: relative; height: var(--cap-h); background: var(--cap-img) center / cover, var(--color-cap); box-shadow: 0 7px 12px -4px rgba(0, 0, 0, 0.62), 0 2px 0 rgba(0, 0, 0, 0.34), inset 0 2px 0 rgba(255, 255, 255, 0.55), inset 0 -3px 0 rgba(0, 0, 0, 0.3); }
+  .stone-cap::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255, 255, 255, 0.42) 0 34%, rgba(0, 0, 0, 0.02) 34% 62%, rgba(0, 0, 0, 0.22) 100%); }
 
   /*
-    Pier: stone that stands proud of the wall. The front face is lit, the return face is the same
-    stone turned away from the light, a bright line marks the corner between them, a poured cap
-    overhangs both, and the shaft casts a shadow onto whatever is behind it.
+    Section transition: a course of wall under a capstone. The wall is masked so it ends on the
+    stones' own contours, and the whole body carries the drop shadow, so the projecting stones
+    cast onto the section below rather than onto a straight line.
   */
-  .pier { position: relative; flex: none; width: var(--pier-w, 118px); height: var(--pier-h, 240px); }
-  .pier--stretch { height: auto; align-self: stretch; }
-  .pier__shaft { position: absolute; left: 0; right: 0; top: 24px; bottom: 0; overflow: hidden; box-shadow: 26px 14px 44px -18px rgba(0, 0, 0, 0.8); }
-  .pier__face { position: absolute; inset: 0 27% 0 0; background: url("/images/textures/pier.webp") var(--pier-x, 30%) center / cover; box-shadow: inset -2px 0 0 rgba(255, 255, 255, 0.34), inset 2px 0 5px rgba(0, 0, 0, 0.28); }
-  .pier__return { position: absolute; top: 0; right: 0; bottom: 0; width: 27%; background: url("/images/textures/pier.webp") 82% center / cover; filter: brightness(0.58) saturate(0.92); box-shadow: inset 3px 0 9px rgba(0, 0, 0, 0.5); }
-  .pier__cap { position: absolute; z-index: 3; left: -13px; right: -17px; top: 0; height: 26px; background: linear-gradient(180deg, var(--color-cap-lit) 0 9px, var(--color-cap) 9px 19px, var(--color-cap-edge) 19px 26px); box-shadow: 0 12px 20px -7px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.75); }
-  .pier__cap::after { content: ""; position: absolute; top: 0; right: 0; bottom: 0; width: 17px; background: rgba(0, 0, 0, 0.3); }
-  .pier--flip .pier__face { inset: 0 0 0 27%; background-position: 70% center; box-shadow: inset 2px 0 0 rgba(255, 255, 255, 0.34), inset -2px 0 5px rgba(0, 0, 0, 0.28); }
-  .pier--flip .pier__return { right: auto; left: 0; background-position: 18% center; box-shadow: inset -3px 0 9px rgba(0, 0, 0, 0.5); }
-  .pier--flip .pier__shaft { box-shadow: -26px 14px 44px -18px rgba(0, 0, 0, 0.8); }
-  .pier--flip .pier__cap { left: -17px; right: -13px; }
-  .pier--flip .pier__cap::after { right: auto; left: 0; }
+  .stone-edge { position: relative; z-index: 3; height: var(--edge-h, 132px); }
+  .stone-edge__body { position: absolute; left: 0; right: 0; top: 0; bottom: calc(var(--tooth) * -1); filter: drop-shadow(0 16px 16px rgba(0, 0, 0, 0.58)) drop-shadow(0 4px 3px rgba(0, 0, 0, 0.5)); }
+  .stone-edge__wall { position: absolute; inset: 0; background: var(--stone-img) center / cover; -webkit-mask-image: url("/images/stone/edge-bottom.svg"), linear-gradient(#000, #000); mask-image: url("/images/stone/edge-bottom.svg"), linear-gradient(#000, #000); -webkit-mask-size: 760px var(--tooth), 100% calc(100% - var(--tooth) + 1px); mask-size: 760px var(--tooth), 100% calc(100% - var(--tooth) + 1px); -webkit-mask-position: bottom left, top left; mask-position: bottom left, top left; -webkit-mask-repeat: repeat-x, no-repeat; mask-repeat: repeat-x, no-repeat; }
+  .stone-edge--top .stone-edge__body { top: calc(var(--tooth) * -1); bottom: 0; filter: drop-shadow(0 -12px 14px rgba(0, 0, 0, 0.45)) drop-shadow(0 -2px 2px rgba(0, 0, 0, 0.4)); }
+  .stone-edge--top .stone-edge__wall { -webkit-mask-image: url("/images/stone/edge-top.svg"), linear-gradient(#000, #000); mask-image: url("/images/stone/edge-top.svg"), linear-gradient(#000, #000); -webkit-mask-position: top left, bottom left; mask-position: top left, bottom left; }
+  .stone-toothed { -webkit-mask-image: url("/images/stone/edge-bottom.svg"), linear-gradient(#000, #000); mask-image: url("/images/stone/edge-bottom.svg"), linear-gradient(#000, #000); -webkit-mask-size: 760px var(--tooth), 100% calc(100% - var(--tooth) + 1px); mask-size: 760px var(--tooth), 100% calc(100% - var(--tooth) + 1px); -webkit-mask-position: bottom left, top left; mask-position: bottom left, top left; -webkit-mask-repeat: repeat-x, no-repeat; mask-repeat: repeat-x, no-repeat; }
+  .stone-frame__plinth { filter: drop-shadow(0 14px 14px rgba(0, 0, 0, 0.5)); }
+  .stone-edge__cap { position: absolute; left: 0; right: 0; top: 0; }
+  .stone-edge--top .stone-edge__cap { top: auto; bottom: 0; }
 
-  /* Arcade: a run of piers under one poured cap, carrying a section edge */
-  .arcade { position: relative; height: var(--arcade-h, 132px); background: linear-gradient(180deg, #120e0b, var(--color-shadow)); overflow: hidden; }
-  .arcade__cap { position: absolute; z-index: 3; inset: 0 0 auto 0; height: 24px; background: linear-gradient(180deg, var(--color-cap-lit) 0 8px, var(--color-cap) 8px 18px, var(--color-cap-edge) 18px 24px); box-shadow: 0 14px 22px -8px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.7); }
-  .arcade__piers { position: absolute; inset: 24px 0 0 0; display: flex; gap: clamp(16px, 2.6vw, 34px); padding-inline: clamp(10px, 2vw, 22px); }
-  .arcade__pier { position: relative; flex: 1 1 0; overflow: hidden; box-shadow: 18px 0 30px -14px rgba(0, 0, 0, 0.9); }
-  .arcade__pier::before { content: ""; position: absolute; inset: 0 20% 0 0; background: url("/images/textures/pier.webp") var(--px, 30%) var(--py, center) / cover; box-shadow: inset -2px 0 0 rgba(255, 255, 255, 0.3); }
-  .arcade__pier::after { content: ""; position: absolute; top: 0; right: 0; bottom: 0; width: 20%; background: url("/images/textures/pier.webp") 85% var(--py, center) / cover; filter: brightness(0.55) saturate(0.92); box-shadow: inset 3px 0 8px rgba(0, 0, 0, 0.5); }
+  /*
+    Content surround: two piers under a lintel on a plinth, with the copy on a calm dark panel.
+    The piers show a lit front face and a shadowed return, so the frame has a corner.
+  */
+  .stone-frame { position: relative; padding: 0; }
+  .stone-frame__lintel, .stone-frame__plinth { position: relative; z-index: 2; }
+  .stone-frame__lintel { filter: drop-shadow(0 12px 14px rgba(0, 0, 0, 0.5)); }
+  .stone-frame__band { position: relative; height: var(--band-h, 74px); background: var(--stone-big) center / auto 190px repeat-x; }
+  .stone-frame__row { position: relative; display: flex; align-items: stretch; }
+  .stone-frame__pier { position: relative; flex: none; width: var(--frame-pier, 148px); background: var(--pier-img) center / cover; filter: drop-shadow(14px 0 20px rgba(0, 0, 0, 0.55)); }
+  .stone-frame__pier::before { content: ""; position: absolute; top: 0; bottom: 0; width: 26%; background: var(--pier-img) 82% center / cover; filter: brightness(0.52) saturate(0.9); box-shadow: inset 3px 0 9px rgba(0, 0, 0, 0.5); }
+  .stone-frame__pier--l::before { right: 0; }
+  .stone-frame__pier--r::before { left: 0; background-position: 18% center; box-shadow: inset -3px 0 9px rgba(0, 0, 0, 0.5); }
+  .stone-frame__inner { flex: 1 1 auto; min-width: 0; position: relative; z-index: 1; background: rgba(25, 20, 16, 0.94); box-shadow: inset 0 0 0 1px rgba(201, 138, 58, 0.24), inset 0 26px 40px -26px rgba(0, 0, 0, 0.95), inset 0 -26px 40px -26px rgba(0, 0, 0, 0.95); }
+  @media (max-width: 63.99rem) { .stone-frame__pier { display: none; } }
+
+  /* The page terminates on a foundation: a deep course of wall under a ledge. */
+  .stone-foundation { position: relative; z-index: 2; height: var(--foundation-h, 112px); background: var(--stone-big) center / auto 210px repeat-x; box-shadow: inset 0 14px 22px -12px rgba(0, 0, 0, 0.85); }
 
   /* Marquee strip */
   .marquee { overflow: hidden; background: var(--color-amber); color: var(--color-ground); border-block: 3px solid var(--color-ground); box-shadow: inset 0 3px 0 var(--color-amber-deep); }

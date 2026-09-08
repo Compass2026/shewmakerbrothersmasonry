@@ -7,6 +7,7 @@ import Section from './Section.astro';
 import Eyebrow from './Eyebrow.astro';
 import Button from './Button.astro';
 import PhoneLink from './PhoneLink.astro';
+import StoneEdge from './StoneEdge.astro';
 import { imageByFile, imageLarge, imageSrcSet, isOriginal } from '@/data/images';
 import { site, telHref } from '@/config/site';
 
@@ -23,13 +24,15 @@ interface Props {
   compact?: boolean;
   /** CSS background-position for the photograph; anchor it on the stone. */
   position?: string;
+  /** The stone base under the hero. Turn it off where the page composes its own. */
+  base?: boolean;
   /** Video to play behind the headline, over the photograph. Defaults to site.heroVideo. */
   video?: string | null;
   /** Legacy props (pending-photo note); the background photo is recorded in the placeholder log via data-need. */
   thumb?: string;
   need?: string;
 }
-const { eyebrow, title, accent, lead, display = false, photo = 'seawall-aerial-01', ctas = true, compact = false, need, position = 'center 55%', video = site.heroVideo } = Astro.props;
+const { eyebrow, title, accent, lead, display = false, photo = 'seawall-aerial-01', ctas = true, compact = false, need, position = 'center 55%', video = site.heroVideo, base = true } = Astro.props;
 const bg = imageByFile(photo);
 const idx = accent ? title.indexOf(accent) : -1;
 const parts = idx >= 0 ? [title.slice(0, idx), accent!, title.slice(idx + accent!.length)] : [title, '', ''];
@@ -64,6 +67,7 @@ const parts = idx >= 0 ? [title.slice(0, idx), accent!, title.slice(idx + accent
     <div class="hero__meta"><slot name="above" /></div>
   </div>
 </Section>
+{base && <StoneEdge height="150px" class="hero__base" />}
 
 <style>
   :global(.hero) { position: relative; isolation: isolate; overflow: hidden; }

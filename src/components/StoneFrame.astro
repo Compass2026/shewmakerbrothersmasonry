@@ -1,0 +1,24 @@
+---
+/**
+ * A masonry surround: two piers under a lintel on a plinth, with the content on a calm dark
+ * panel inside. The piers carry a lit face and a shadowed return so the frame turns a corner.
+ */
+interface Props { class?: string; pier?: string }
+const { class: className, pier } = Astro.props;
+---
+
+<div class:list={['stone-frame', className]} style={pier ? `--frame-pier: ${pier}` : undefined}>
+  <div class="stone-frame__lintel">
+    <div class="stone-cap"></div>
+    <div class="stone-frame__band stone-lit" style="--band-h: 64px"></div>
+  </div>
+  <div class="stone-frame__row">
+    <div class="stone-frame__pier stone-frame__pier--l stone-lit" aria-hidden="true"></div>
+    <div class="stone-frame__inner" data-tone="ground"><slot /></div>
+    <div class="stone-frame__pier stone-frame__pier--r stone-lit" aria-hidden="true"></div>
+  </div>
+  <div class="stone-frame__plinth">
+    <div class="stone-cap"></div>
+    <div class="stone-frame__band stone-lit stone-toothed" style="--band-h: 84px"></div>
+  </div>
+</div>
