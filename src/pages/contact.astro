@@ -6,120 +6,71 @@ import Eyebrow from '@/components/Eyebrow.astro';
 import Button from '@/components/Button.astro';
 import TextPlaceholder from '@/components/TextPlaceholder.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import AreaBlocks from '@/components/AreaBlocks.astro';
 import CtaBlock from '@/components/CtaBlock.astro';
+import Icon from '@/components/Icon.astro';
 import { site, telHref } from '@/config/site';
-import { cities, cityPath, foldIns } from '@/data/cities';
+import { cities, foldIns } from '@/data/cities';
 import { segments } from '@/data/taxonomy';
 import { copy as shared } from '@/data/copy/global';
 import { breadcrumbNode, webPageNode } from '@/lib/schema';
 
 const path = '/contact/';
 const title = 'Contact Shewmaker Brothers Masonry';
-const description =
-  'Call Sam at 573-569-3690 for an estimate on seawalls, retaining walls, fireplaces, chimneys, concrete or excavation anywhere at the Lake of the Ozarks.';
-const crumbs = [
-  { name: 'Home', href: '/' },
-  { name: 'Contact', href: path },
-];
+const description = 'Call Sam at 573-569-3690 for an estimate on seawalls, retaining walls, fireplaces, chimneys, concrete or excavation anywhere at the Lake of the Ozarks.';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Contact', href: path }];
 const countyLine = `${site.counties.slice(0, -1).join(', ')} and ${site.counties[site.counties.length - 1]} counties`;
 const hasEndpoint = Boolean(site.formEndpoint);
 const schema = [webPageNode({ path, name: title, description, type: 'ContactPage' }), breadcrumbNode(crumbs)];
 ---
 
 <Base title={title} description={description} schema={schema}>
-  <Hero
-    eyebrow="Estimates · Lake of the Ozarks"
-    title={title}
-    lead="Tell Sam what the job is and where it is. We come to the property, look at it, and talk it through."
-    thumb="stone-seawall-lakefront-02.jpg"
-    need="Contact hero: Sam on a job site, or the crew at work, uncropped original at 2400 px."
-    ctas={false}
-  >
+  <Hero eyebrow="Estimates · Lake of the Ozarks" title="Got stone work? Talk to Sam." accent="Talk to Sam." lead="Tell Sam what the job is and where it is. We come to the property, look at it, and talk it through." photo="stone-seawall-lakefront-02.jpg" ctas={false} need="Contact hero: Sam on a job site, or the crew at work, uncropped original at 2400 px.">
     <Breadcrumbs items={crumbs} slot="above" />
-    <a class="contact-phone" href={telHref}>{site.phone.display}</a>
-    <p class="t-lead">Call or text. Ask for Sam.</p>
+    <a class="contact-phone" href={telHref}><Icon name="phone" size={40} />{site.phone.display}</a>
+    <p class="contact-note">Call or text. Ask for Sam. Service-area business based in {site.base.locality}, {site.base.regionName}.</p>
   </Hero>
 
-  <Section tone="lifted" labelledby="form-heading">
-    <div class="form-wrap">
-      <div class="heading-group">
-        <Eyebrow rule>Or write it down</Eyebrow>
-        <h2 id="form-heading" class="t-title">{site.cta.secondary}</h2>
-        <p class="t-lead">A few lines about the job and where it is. Sam calls back.</p>
+  <Section tone="lifted" glow="top" labelledby="form-heading">
+    <div class="block form-block">
+      <div class="block__body form-wrap">
+        <div class="sec-head">
+          <Eyebrow rule>Or write it down</Eyebrow>
+          <h2 id="form-heading" class="t-title">Send the details. <span class="accent">Sam calls back.</span></h2>
+        </div>
+        {!hasEndpoint && <TextPlaceholder slotName="form-endpoint" label="Not connected yet" need="No email address or form endpoint has been supplied, so this form does not send. Until it does, call Sam at 573-569-3690." />}
+        <form class="form" action={hasEndpoint ? site.formEndpoint : undefined} method="post" data-form>
+          <div class="form__grid">
+            <div class="field"><label class="field__label" for="name">Name</label><input class="field__input" id="name" name="name" type="text" autocomplete="name" required /></div>
+            <div class="field"><label class="field__label" for="phone">Phone</label><input class="field__input tabular" id="phone" name="phone" type="tel" autocomplete="tel" required /></div>
+            <div class="field"><label class="field__label" for="email">Email</label><input class="field__input" id="email" name="email" type="email" autocomplete="email" /></div>
+            <div class="field"><label class="field__label" for="town">Town</label>
+              <select class="field__input" id="town" name="town"><option value="">Choose a town</option>{cities.map((c) => <option value={c.slug}>{c.name}</option>)}{foldIns.map((f) => <option value={f.name}>{f.name}</option>)}<option value="other">Somewhere else at the lake</option></select>
+            </div>
+            <div class="field form__wide"><label class="field__label" for="work">What do you need built or fixed?</label>
+              <select class="field__input" id="work" name="work"><option value="">Choose one</option>{segments.map((s) => <option value={s.id}>{s.name}</option>)}<option value="not-sure">Not sure yet</option></select>
+            </div>
+            <div class="field form__wide"><label class="field__label" for="message">The job</label><textarea class="field__input" id="message" name="message" rows="6" required></textarea><p class="field__hint">Where it is, what is there now, and what you want it to be. Photos help; send them to Sam by text.</p></div>
+          </div>
+          <div class="form__actions">
+            {hasEndpoint ? <button type="submit" class="btn btn-primary">Send to Sam</button> : <Button href={telHref} icon="phone">{site.cta.primary}</Button>}
+          </div>
+        </form>
       </div>
-      {!hasEndpoint && (
-        <TextPlaceholder
-          slotName="form-endpoint"
-          label="Not connected yet"
-          need="No email address or form endpoint has been supplied, so this form does not send. Until it does, call Sam at 573-569-3690."
-        />
-      )}
-      <form class="form" action={hasEndpoint ? site.formEndpoint : undefined} method="post" data-form>
-        <div class="form__grid">
-          <div class="field">
-            <label class="field__label" for="name">Name</label>
-            <input class="field__input" id="name" name="name" type="text" autocomplete="name" required />
-          </div>
-          <div class="field">
-            <label class="field__label" for="phone">Phone</label>
-            <input class="field__input tabular" id="phone" name="phone" type="tel" autocomplete="tel" required />
-          </div>
-          <div class="field">
-            <label class="field__label" for="email">Email</label>
-            <input class="field__input" id="email" name="email" type="email" autocomplete="email" />
-          </div>
-          <div class="field">
-            <label class="field__label" for="town">Town</label>
-            <select class="field__input" id="town" name="town">
-              <option value="">Choose a town</option>
-              {cities.map((c) => <option value={c.slug}>{c.name}</option>)}
-              {foldIns.map((f) => <option value={f.name}>{f.name}</option>)}
-              <option value="other">Somewhere else at the lake</option>
-            </select>
-          </div>
-          <div class="field form__wide">
-            <label class="field__label" for="work">What do you need built or fixed?</label>
-            <select class="field__input" id="work" name="work">
-              <option value="">Choose one</option>
-              {segments.map((s) => <option value={s.id}>{s.name}</option>)}
-              <option value="not-sure">Not sure yet</option>
-            </select>
-          </div>
-          <div class="field form__wide">
-            <label class="field__label" for="message">The job</label>
-            <textarea class="field__input" id="message" name="message" rows="6" required></textarea>
-            <p class="field__hint">Where it is, what is there now, and what you want it to be. Photos help; send them to Sam by text.</p>
-          </div>
-        </div>
-        <div class="form__actions">
-          {hasEndpoint ? (
-            <button type="submit" class="btn btn-primary">Send to Sam</button>
-          ) : (
-            <Button href={telHref}>{site.cta.primary}</Button>
-          )}
-        </div>
-      </form>
     </div>
   </Section>
 
-  <Section tone="mortar" labelledby="where-heading">
+  <Section tone="ground" width="wide" labelledby="where-heading">
     <div class="where">
-      <div class="heading-group">
-        <Eyebrow rule>Service area</Eyebrow>
-        <h2 id="where-heading" class="t-title">Where we come to</h2>
+      <div class="where__text">
+        <div class="sec-head">
+          <Eyebrow rule>Service area</Eyebrow>
+          <h2 id="where-heading" class="t-title">Where we <span class="accent">come to.</span></h2>
+          <p class="t-lead">{`${shared.serviceArea.line} ${countyLine}. No street address to visit: we come to the job.`}</p>
+        </div>
+        <div class="prose"><p>{shared.ameren}</p></div>
       </div>
-      <div class="prose">
-        <p>{`${shared.serviceArea.line} ${countyLine}. Service-area business based in ${site.base.locality}, ${site.base.regionName}: no street address to visit, we come to the job.`}</p>
-      </div>
-      <ul class="where__towns">
-        {cities.map((c) => (
-          <li><a class="link" href={cityPath(c.slug)}>{c.name}</a></li>
-        ))}
-        {foldIns.map((f) => (
-          <li><a class="link" href={f.anchor}>{f.name}</a></li>
-        ))}
-      </ul>
-      <p class="muted">{shared.ameren}</p>
+      <AreaBlocks />
     </div>
   </Section>
 
@@ -127,15 +78,16 @@ const schema = [webPageNode({ path, name: title, description, type: 'ContactPage
 </Base>
 
 <style>
-  :global(.contact-phone) { display: inline-block; font-family: var(--font-display); font-weight: 900; font-size: clamp(2.75rem, 1.6rem + 4.5vw, 5.5rem); line-height: 1; letter-spacing: 0.01em; color: var(--heading); text-decoration: none; font-variant-numeric: tabular-nums; }
-  :global(.contact-phone:hover) { text-decoration: underline; text-decoration-color: var(--color-brick); text-decoration-thickness: 4px; text-underline-offset: 0.1em; }
-  .form-wrap { display: grid; gap: 28px; max-width: 48rem; }
+  :global(.contact-phone) { display: inline-flex; align-items: center; gap: 18px; font-family: var(--font-display); font-size: clamp(2.5rem, 1.5rem + 5vw, 5.5rem); line-height: 1; letter-spacing: 0.01em; color: var(--color-ember); text-decoration: none; font-variant-numeric: tabular-nums; text-shadow: 0 0 28px rgba(242, 168, 29, 0.35); }
+  :global(.contact-phone:hover) { color: var(--color-ember-light); }
+  :global(.contact-note) { color: var(--color-mortar-dim); }
+  .form-block { max-width: 52rem; }
+  .form-wrap { display: grid; gap: 28px; padding: clamp(24px, 4vw, 40px); }
   .form { display: grid; gap: 24px; }
   .form__grid { display: grid; gap: 20px; }
   .form__actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
   @media (min-width: 40rem) { .form__grid { grid-template-columns: 1fr 1fr; } .form__wide { grid-column: 1 / -1; } }
-  .where { display: grid; gap: 24px; }
-  .where .muted { max-width: 58ch; }
-  .where__towns { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 24px; font-family: var(--font-display); font-weight: 700; font-size: 1.375rem; letter-spacing: 0.01em; }
-  .where__towns .link { color: var(--heading); text-decoration-thickness: 2px; }
+  .where { display: grid; gap: 40px; align-items: start; }
+  .where__text { display: grid; gap: 24px; }
+  @media (min-width: 64rem) { .where { grid-template-columns: 5fr 7fr; gap: 64px; } }
 </style>

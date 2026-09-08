@@ -1,0 +1,23 @@
+---
+import Icon from './Icon.astro';
+interface Props { items: { icon: string; title: string; body: string }[] }
+const { items } = Astro.props;
+---
+
+<ul class="trust">
+  {items.map((it) => (
+    <li class="trust__item">
+      <span class="icon-box"><Icon name={it.icon} /></span>
+      <h3 class="t-subtitle">{it.title}</h3>
+      <p>{it.body}</p>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .trust { list-style: none; margin: 0; padding: 0; display: grid; gap: 28px; }
+  .trust__item { display: grid; gap: 14px; align-content: start; padding-top: 4px; }
+  .trust__item h3 { margin-top: 6px; }
+  @media (min-width: 40rem) { .trust { grid-template-columns: 1fr 1fr; gap: 36px; } }
+  @media (min-width: 64rem) { .trust { grid-template-columns: repeat(4, 1fr); gap: 40px; } }
+</style>

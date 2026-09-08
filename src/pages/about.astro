@@ -8,6 +8,9 @@ import Placeholder from '@/components/Placeholder.astro';
 import TextPlaceholder from '@/components/TextPlaceholder.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import CtaBlock from '@/components/CtaBlock.astro';
+import PhotoBand from '@/components/PhotoBand.astro';
+import Icon from '@/components/Icon.astro';
+import Button from '@/components/Button.astro';
 import { site } from '@/config/site';
 import { copy as shared } from '@/data/copy/global';
 import { segments, servicesBySegment, servicePath } from '@/data/taxonomy';
@@ -15,75 +18,62 @@ import { breadcrumbNode, webPageNode } from '@/lib/schema';
 
 const path = '/about/';
 const title = 'About Shewmaker Brothers Masonry';
-const description =
-  'Mike and Sam Shewmaker, third-generation stonemasons at the Lake of the Ozarks. Our own crews do the stone, concrete and excavation. Call Sam at 573-569-3690.';
-const crumbs = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: path },
-];
+const description = 'Mike and Sam Shewmaker, third-generation stonemasons at the Lake of the Ozarks. Our own crews do the stone, concrete and excavation. Call Sam at 573-569-3690.';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'About', href: path }];
 const countyLine = `${site.counties.slice(0, -1).join(', ')} and ${site.counties[site.counties.length - 1]} counties`;
 const scope = [
-  { title: 'Masonry and stone', body: 'Seawalls, retaining walls, stairs, patios, veneer, brick, block, fireplaces, chimneys and the repairs to all of it. Laid by our own masons.' },
-  { title: 'Concrete flatwork', body: 'Footings, caps, treads, slabs, driveways and patio pours. Poured by the same crew that lays the stone on top of it.' },
-  { title: 'Excavation and site prep', body: 'Footing trenches, grading, drainage and backfill. The dirt work happens on our schedule, not somebody else’s.' },
-  { title: 'One contract', body: 'The footing, the wall and the ground it sits on are one job with one crew answering for all of it. Nothing waits on a sub.' },
+  { icon: 'stone', title: 'Masonry and stone', body: 'Seawalls, retaining walls, stairs, patios, veneer, brick, block, fireplaces, chimneys and the repairs to all of it. Laid by our own masons.' },
+  { icon: 'trowel', title: 'Concrete flatwork', body: 'Footings, caps, treads, slabs, driveways and patio pours. Poured by the same crew that lays the stone on top of it.' },
+  { icon: 'layers', title: 'Excavation and site prep', body: 'Footing trenches, grading, drainage and backfill. The dirt work happens on our schedule, not somebody else’s.' },
+  { icon: 'crew', title: 'One contract', body: 'The footing, the wall and the ground it sits on are one job with one crew answering for all of it. Nothing waits on a sub.' },
 ];
 const schema = [webPageNode({ path, name: title, description, type: 'AboutPage' }), breadcrumbNode(crumbs)];
 ---
 
 <Base title={title} description={description} schema={schema}>
-  <Hero
-    eyebrow={`Third generation · ${site.base.locality}, ${site.base.regionName}`}
-    title="Two Brothers and Their Crews at the Lake of the Ozarks"
-    lead={shared.brothers}
-    thumb="seawall-footing-trench-crew-01.jpg"
-    need="Hero: Mike and Sam with the crew on a job site, faces visible, uncropped original at 2400 px."
-  >
+  <Hero eyebrow={`Third generation · ${site.base.locality}, ${site.base.regionName}`} title="Two brothers and their crews at the Lake of the Ozarks" accent="their crews" lead={shared.brothers} photo="seawall-footing-trench-crew-01.jpg" need="Hero: Mike and Sam with the crew on a job site, faces visible, uncropped original at 2400 px.">
     <Breadcrumbs items={crumbs} slot="above" />
   </Hero>
 
   <Section tone="ground" labelledby="waterline-heading">
     <div class="waterline">
       <div class="waterline__text">
-        <div class="heading-group">
+        <div class="sec-head">
           <Eyebrow rule>The work</Eyebrow>
-          <h2 id="waterline-heading" class="t-title">From the waterline up</h2>
+          <h2 id="waterline-heading" class="t-title">From the <span class="accent">waterline up.</span></h2>
         </div>
         <div class="prose">
           <p>The work runs from the waterline up. Stone seawalls and lakefront retaining walls that hold a shoreline and look like they were always there. Outdoor fireplaces, pizza ovens and flagstone patios. Chimneys, stone veneer, brick and block.</p>
           <p>And because we run our own concrete and excavation crews, the footing, the flatwork and the dirt work happen on the same contract instead of waiting on somebody else’s schedule.</p>
           <ul>
             {segments.map((seg) => (
-              <li>
-                <strong>{seg.name}:</strong>{' '}
-                {servicesBySegment(seg.id).map((s, i, arr) => (
-                  <span><a href={servicePath(s.slug)}>{s.navLabel ?? s.name}</a>{i < arr.length - 1 ? ', ' : ''}</span>
-                ))}
-              </li>
+              <li><strong>{seg.name}:</strong>{' '}{servicesBySegment(seg.id).map((s, i, arr) => <span><a href={servicePath(s.slug)}>{s.navLabel ?? s.name}</a>{i < arr.length - 1 ? ', ' : ''}</span>)}</li>
             ))}
           </ul>
         </div>
       </div>
       <div class="waterline__media">
-        <Photo file="stone-seawall-cap-crew-01.jpg" />
-        <Photo file="lakefront-retaining-wall-crew-01.jpg" />
+        <div class="block waterline__photo"><Photo file="stone-seawall-cap-crew-01.jpg" /></div>
+        <div class="block waterline__photo"><Photo file="lakefront-retaining-wall-crew-01.jpg" /></div>
       </div>
     </div>
   </Section>
 
-  <Section tone="lifted" labelledby="scope-heading">
+  <Section tone="lifted" glow="top" labelledby="scope-heading">
     <div class="scope">
-      <div class="heading-group">
+      <div class="sec-head sec-head--center">
         <Eyebrow rule>Self-performed</Eyebrow>
-        <h2 id="scope-heading" class="t-title">We do our own work</h2>
+        <h2 id="scope-heading" class="t-title">We do our <span class="accent">own work.</span></h2>
         <p class="t-lead">Most masonry outfits sub out the concrete and the dirt work. Most shoreline outfits do not lay stone. We do all of it.</p>
       </div>
       <ul class="scope__grid">
-        {scope.map((item) => (
-          <li class="card">
-            <div class="card__body scope__card">
+        {scope.map((item, i) => (
+          <li class="block">
+            <div class="block__body scope__card">
+              <span class="icon-box"><Icon name={item.icon} /></span>
               <h3 class="t-subtitle">{item.title}</h3>
               <p>{item.body}</p>
+              <span class="numeral">{String(i + 1).padStart(2, '0')}</span>
             </div>
           </li>
         ))}
@@ -91,42 +81,50 @@ const schema = [webPageNode({ path, name: title, description, type: 'AboutPage' 
     </div>
   </Section>
 
-  <Section tone="mortar" labelledby="story-heading">
+  <PhotoBand photo="stone-seawall-lakefront-01.jpg" eyebrow="The Shewmaker standard" statement="Built on a footing. Laid in courses. Capped." accent="Capped." line="Every wall. Every time." />
+
+  <Section tone="ground" labelledby="story-heading">
     <div class="story">
       <div class="story__text">
-        <div class="heading-group">
+        <div class="sec-head">
           <Eyebrow rule>The family</Eyebrow>
-          <h2 id="story-heading" class="t-title">Third generation at the lake</h2>
+          <h2 id="story-heading" class="t-title">Third generation <span class="accent">at the lake.</span></h2>
         </div>
         <div class="prose">
           <p>{site.name} is a family business, third generation, working the Lake of the Ozarks. Mike and Sam Shewmaker run it and work it: the same two names on the estimate are the ones on the job site.</p>
           <p>We work {countyLine} from {site.base.locality}, for homeowners, for builders and general contractors, and for commercial owners and HOAs.</p>
         </div>
-        <div class="story__gaps">
-          <TextPlaceholder slotName="story-origin" need="Who the first generation was and roughly when the trade came into the family. Sam to tell it; nothing is published until he does." />
-          <TextPlaceholder slotName="story-brothers" need="How Mike and Sam came into the trade." />
-          <TextPlaceholder slotName="story-project" need="A signature local project people would recognise, if there is one Sam wants named." />
-          <TextPlaceholder slotName="story-crews" need="The crews: how many, how long they have worked together." />
-        </div>
+        <ul class="ticks">
+          <li>Third generation, family owned</li>
+          <li>Mike and Sam on the job, not a call center</li>
+          <li>Own crews for stone, concrete and excavation</li>
+          <li>Based in Gravois Mills, working the whole lake</li>
+        </ul>
+        <TextPlaceholder slotName="story" label="Still to come" need="The family story in Sam’s words: who started the trade, when, how Mike and Sam came into it, and the crews. Nothing is published until he tells it." />
       </div>
       <div class="story__media">
-        <Placeholder ratio="4 / 5" slotName="portrait" need="Mike and Sam, faces, on a job site. Portrait crop at 1200 px." />
+        <figure class="block story__badge">
+          <img src={site.logo.badge} width={site.logo.width} height={site.logo.height} alt={site.logo.alt} loading="lazy" decoding="async" />
+          <figcaption class="story__caption">The badge on the truck.</figcaption>
+        </figure>
+        <Placeholder ratio="4 / 3" slotName="portrait" need="Mike and Sam, faces, on a job site. Portrait at 1200 px." />
       </div>
     </div>
   </Section>
 
-  <Section tone="ground" grain labelledby="crew-heading">
+  <Section tone="lifted" glow="bottom" labelledby="crew-heading">
     <div class="crew">
-      <div class="heading-group">
+      <div class="sec-head">
         <Eyebrow rule>The crews</Eyebrow>
-        <h2 id="crew-heading" class="t-title">Who shows up</h2>
+        <h2 id="crew-heading" class="t-title">Who <span class="accent">shows up.</span></h2>
         <p class="t-lead">The people who dig the footing, lay the stone and float the cap. Our crews, not a sub’s.</p>
       </div>
       <div class="crew__grid">
-        <Photo file="seawall-footing-trench-crew-01.jpg" />
-        <Photo file="stone-seawall-cap-crew-01.jpg" />
+        <div class="block crew__photo"><Photo file="seawall-footing-trench-crew-01.jpg" /></div>
+        <div class="block crew__photo"><Photo file="stone-seawall-cap-crew-01.jpg" /></div>
         <Placeholder ratio="1 / 1" slotName="crew-more" need="More crew-at-work frames, faces visible where the crew is happy with it." />
       </div>
+      <div><Button href="/projects/" variant="secondary" icon="arrow">See the work</Button></div>
     </div>
   </Section>
 
@@ -136,24 +134,25 @@ const schema = [webPageNode({ path, name: title, description, type: 'AboutPage' 
 <style>
   .waterline { display: grid; gap: 40px; align-items: start; }
   .waterline__text { display: grid; gap: 24px; }
-  .waterline__media { display: grid; gap: 24px; }
-  :global(.waterline__media .photo) { max-width: 414px; }
+  .waterline__media { display: grid; gap: 20px; }
+  .waterline__photo, .crew__photo { padding: 12px; max-width: 440px; }
+  :global(.waterline__photo .photo img), :global(.crew__photo .photo img) { border: 0; }
+  :global(.waterline__photo .photo__caption), :global(.crew__photo .photo__caption) { padding: 10px 4px 0; }
   @media (min-width: 40rem) { .waterline__media { grid-template-columns: 1fr 1fr; } }
   @media (min-width: 64rem) { .waterline { grid-template-columns: 7fr 5fr; gap: 64px; } .waterline__media { grid-template-columns: 1fr; } }
-
-  .scope { display: grid; gap: 32px; }
-  .scope__grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
-  .scope__card { display: grid; gap: 10px; }
-  @media (min-width: 40rem) { .scope__grid { grid-template-columns: 1fr 1fr; gap: 24px; } }
-
+  .scope { display: grid; gap: 40px; }
+  .scope__grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
+  .scope__card { display: grid; gap: 14px; padding-bottom: 40px; }
+  @media (min-width: 40rem) { .scope__grid { grid-template-columns: 1fr 1fr; gap: 22px; } }
+  @media (min-width: 64rem) { .scope__grid { grid-template-columns: repeat(4, 1fr); } }
   .story { display: grid; gap: 40px; align-items: start; }
-  .story__text { display: grid; gap: 24px; }
-  .story__gaps { display: grid; gap: 12px; max-width: 66ch; }
-  :global(.story__media .placeholder) { max-width: 420px; }
+  .story__text { display: grid; gap: 26px; }
+  .story__media { display: grid; gap: 20px; align-content: start; }
+  .story__badge { margin: 0; padding: 18px; }
+  .story__badge img { width: 100%; border: 1px solid var(--joint); }
+  .story__caption { padding: 14px 4px 0; font-family: var(--font-condensed); font-weight: 600; font-size: 0.8125rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); text-align: center; }
   @media (min-width: 64rem) { .story { grid-template-columns: 7fr 5fr; gap: 64px; } }
-
   .crew { display: grid; gap: 32px; }
-  .crew__grid { display: grid; gap: 24px; }
-  :global(.crew__grid .photo), :global(.crew__grid .placeholder) { max-width: 414px; }
+  .crew__grid { display: grid; gap: 20px; }
   @media (min-width: 48rem) { .crew__grid { grid-template-columns: repeat(3, 1fr); } }
 </style>

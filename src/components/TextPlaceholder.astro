@@ -1,23 +1,14 @@
 ---
-/** A visibly interim block of text: a fact or passage that Sam still has to supply. Logged like a photo placeholder. */
-interface Props {
-  need: string;
-  slotName: string;
-  label?: string;
-  class?: string;
-}
-const { need, slotName, label = 'Needed from Sam', class: className } = Astro.props;
+interface Props { need: string; slotName: string; label?: string; class?: string }
+const { need, slotName, label = 'To confirm', class: className } = Astro.props;
 ---
 
-<div class:list={['text-placeholder', className]} data-placeholder data-page={Astro.url.pathname} data-slot={slotName} data-need={need}>
-  <span class="text-placeholder__label">{label}</span>
-  <span class="text-placeholder__need">{need}</span>
+<div class:list={['pending', 'pending--text', className]} style="--ratio: auto" data-placeholder data-page={Astro.url.pathname} data-slot={slotName} data-need={need}>
+  <p class="pending__label">{label}</p>
+  <p class="pending__need">{need}</p>
 </div>
 
 <style>
-  .text-placeholder { position: relative; display: grid; gap: 6px; padding: 14px 16px; border: 2px dashed var(--color-brick); border-radius: var(--radius-sm); background-color: var(--field); }
-  .text-placeholder::before { content: ""; position: absolute; inset: 0; pointer-events: none; background-image: repeating-linear-gradient(45deg, var(--hatch) 0 1px, transparent 1px 12px); }
-  .text-placeholder > * { position: relative; }
-  .text-placeholder__label { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.8125rem; color: var(--heading); }
-  .text-placeholder__need { font-size: 0.875rem; line-height: 1.5; color: var(--ink); max-width: 64ch; }
+  .pending--text { aspect-ratio: auto; justify-items: start; text-align: left; padding: 14px 18px; }
+  .pending--text .pending__need { max-width: 64ch; }
 </style>

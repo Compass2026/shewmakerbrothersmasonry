@@ -1,0 +1,44 @@
+---
+/** A cut-stone service block: photo on top, icon box, title, one line, links, ghost numeral. */
+import type { Segment } from '@/data/types';
+import { servicesBySegment, servicePath } from '@/data/taxonomy';
+import { imageByFile, imageSrc } from '@/data/images';
+import Icon from './Icon.astro';
+
+interface Props { segment: Segment; index: number; photo?: string; icon: string }
+const { segment, index, photo, icon } = Astro.props;
+const list = servicesBySegment(segment.id);
+const img = photo ? imageByFile(photo) : undefined;
+---
+
+<article class="block service-block">
+  {img ? (
+    <img class="block__photo" src={imageSrc(img.file)} width={img.width} height={img.height} alt={img.alt} loading="lazy" decoding="async" />
+  ) : (
+    <div class="block__photo service-block__pending" data-placeholder data-page={Astro.url.pathname} data-slot={`segment-${segment.id}`} data-need={`Segment photo, 16:10 at 1200 px: ${segment.name.toLowerCase()} work by the crew.`}>
+      <Icon name={icon} size={40} />
+      <span class="pending__label">Photo to come</span>
+    </div>
+  )}
+  <div class="block__body service-block__body">
+    <span class="icon-box"><Icon name={icon} /></span>
+    <h3 class="t-subtitle service-block__title">{segment.name}</h3>
+    <p>{segment.blurb}</p>
+    <ul class="service-block__list">
+      {list.map((s) => (
+        <li><a href={servicePath(s.slug)}>{s.name}</a></li>
+      ))}
+    </ul>
+    <span class="numeral">{String(index).padStart(2, '0')}</span>
+  </div>
+</article>
+
+<style>
+  .service-block__body { display: grid; gap: 16px; padding-bottom: 36px; }
+  .service-block__title { font-size: 1.5rem; }
+  .service-block__pending { display: grid; place-content: center; justify-items: center; gap: 10px; color: var(--color-ember); background: var(--color-soot); }
+  .service-block__list { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 8px; }
+  .service-block__list a { color: var(--color-mortar); text-decoration: none; font-weight: 500; display: inline-flex; align-items: center; gap: 10px; }
+  .service-block__list a::before { content: ""; width: 10px; height: 3px; background: var(--color-ember); flex: none; }
+  .service-block__list a:hover { color: var(--color-ember); }
+</style>

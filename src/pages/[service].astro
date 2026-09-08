@@ -1,8 +1,4 @@
 ---
-/**
- * Service page template: one page per canonical service (docs/keyword-map.md).
- * Tone rhythm: ground (hero, intro) → lifted (method) → ground (before/after, sections) → mortar (FAQ) → ground (related) → shadow (CTA).
- */
 import type { CityDef, ServiceDef } from '@/data/types';
 import Base from '@/layouts/Base.astro';
 import Section from '@/components/Section.astro';
@@ -11,9 +7,11 @@ import Eyebrow from '@/components/Eyebrow.astro';
 import Photo from '@/components/Photo.astro';
 import Placeholder from '@/components/Placeholder.astro';
 import BeforeAfter from '@/components/BeforeAfter.astro';
+import Process from '@/components/Process.astro';
 import Faq from '@/components/Faq.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import CtaBlock from '@/components/CtaBlock.astro';
+import Icon from '@/components/Icon.astro';
 import { services, segmentById, serviceBySlug, servicePath } from '@/data/taxonomy';
 import { cityBySlug, cityPath } from '@/data/cities';
 import { serviceCopies, serviceCopy } from '@/data/copy';
@@ -21,7 +19,6 @@ import { imagesFor, pairs } from '@/data/images';
 import { serviceNode, breadcrumbNode, faqNode, webPageNode } from '@/lib/schema';
 
 export function getStaticPaths() {
-  // ALLOW_MISSING_COPY=1 lets the template build while copy files are still being written.
   const list = process.env.ALLOW_MISSING_COPY ? services.filter((s) => serviceCopies[s.slug]) : services;
   return list.map((s) => ({ params: { service: s.slug } }));
 }
@@ -35,13 +32,12 @@ const photos = imagesFor(def.slug);
 const heroPhoto = photos.find((p) => p.hero) ?? photos.find((p) => p.state === 'after') ?? photos[0];
 const inline = photos.filter((p) => p !== heroPhoto && p.state !== 'before').slice(0, 2);
 const pair = pairs.find((p) => p.before.services.includes(def.slug));
-const crumbs = [
-  { name: 'Home', href: '/' },
-  { name: def.name, href: path },
-];
+const crumbs = [{ name: 'Home', href: '/' }, { name: def.name, href: path }];
 const relatedServices = copy.related.services.map(serviceBySlug).filter((s): s is ServiceDef => !!s);
 const relatedCities = copy.related.cities.map(cityBySlug).filter((c): c is CityDef => !!c);
 const shortName = (def.navLabel ?? def.name).toLowerCase();
+const words = def.h1.split(' ');
+const accent = words.slice(-4).join(' ').includes('Ozarks') ? 'Lake of the Ozarks' : words.slice(-2).join(' ');
 const schema = [
   webPageNode({ path, name: copy.metaTitle, description: copy.metaDescription }),
   serviceNode({ path, name: def.name, description: copy.metaDescription }),
@@ -51,7 +47,7 @@ const schema = [
 ---
 
 <Base title={copy.metaTitle} description={copy.metaDescription} schema={schema}>
-  <Hero eyebrow={segment.name} title={def.h1} lead={copy.lead} thumb={heroPhoto?.file} need={`Hero: ${def.heroNeed}`}>
+  <Hero eyebrow={segment.name} title={def.h1} accent={accent} lead={copy.lead} photo={heroPhoto?.file ?? 'stone-seawall-lakefront-02.jpg'} need={`Hero: ${def.heroNeed}`}>
     <Breadcrumbs items={crumbs} slot="above" />
   </Hero>
 
@@ -61,89 +57,72 @@ const schema = [
         {copy.intro.map((p) => <p>{p}</p>)}
       </div>
       <div class="svc-intro__media">
-        {inline.length > 0 ? (
-          inline.map((img) => <Photo file={img.file} />)
-        ) : (
-          <Placeholder ratio="3 / 2" slotName="inline" need={`Inline photo, 3:2 at 1600 px: ${def.heroNeed}`} />
-        )}
+        {inline.length > 0 ? inline.map((img) => <div class="block svc-intro__photo"><Photo file={img.file} /></div>) : <Placeholder ratio="3 / 2" slotName="inline" need={`Inline photo, 3:2 at 1600 px: ${def.heroNeed}`} />}
       </div>
     </div>
   </Section>
 
-  <Section tone="lifted" labelledby="method-heading">
+  <Section tone="lifted" glow="top" labelledby="method-heading">
     <div class="method">
-      <div class="heading-group">
+      <div class="sec-head">
         <Eyebrow rule>Method and materials</Eyebrow>
         <h2 id="method-heading" class="t-title">{copy.method.heading}</h2>
         {copy.method.intro && <p class="t-lead">{copy.method.intro}</p>}
       </div>
-      <ol class="method__list">
-        {copy.method.items.map((item, i) => (
-          <li class="card method__item">
-            <div class="card__body">
-              <Eyebrow>Step {i + 1}</Eyebrow>
-              <h3 class="t-subtitle">{item.title}</h3>
-              <p>{item.body}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
+      <Process steps={copy.method.items} />
     </div>
   </Section>
 
   {pair && (
     <Section tone="ground" labelledby="pair-heading">
       <div class="pair-section">
-        <div class="heading-group">
+        <div class="sec-head">
           <Eyebrow rule>Before and after</Eyebrow>
-          <h2 id="pair-heading" class="t-title">The same shoreline, before and after</h2>
+          <h2 id="pair-heading" class="t-title">The same shoreline, <span class="accent">before and after.</span></h2>
         </div>
         <BeforeAfter before={pair.before.file} after={pair.after.file} />
       </div>
     </Section>
   )}
 
-  <Section tone="ground" grain class="svc-sections">
-    <div class="svc-sections__list">
-      {copy.sections.map((s) => (
-        <div class="svc-section">
-          <h2 class="t-title">{s.heading}</h2>
-          <div class="prose">
-            {s.body.map((p) => <p>{p}</p>)}
+  <Section tone="ground" class="svc-sections">
+    <div class="svc-sections__grid">
+      {copy.sections.map((s, i) => (
+        <div class="block svc-section">
+          <div class="block__body svc-section__body">
+            <h2 class="t-subtitle svc-section__title">{s.heading}</h2>
+            <div class="prose">{s.body.map((p) => <p>{p}</p>)}</div>
+            <span class="numeral">{String(i + 1).padStart(2, '0')}</span>
           </div>
         </div>
       ))}
     </div>
   </Section>
 
-  <Section tone="mortar">
+  <Section tone="lifted" glow="bottom">
     <Faq faqs={copy.faqs} heading={`Questions about ${shortName}`} />
   </Section>
 
   <Section tone="ground" labelledby="related-heading">
     <div class="related">
-      <div class="related__col">
-        <div class="heading-group">
+      <div class="block related__col">
+        <div class="block__body">
           <Eyebrow rule>Related work</Eyebrow>
-          <h2 id="related-heading" class="t-title">Built alongside</h2>
+          <h2 id="related-heading" class="t-subtitle related__title">Built alongside</h2>
+          <ul class="related__list">
+            {relatedServices.map((s) => <li><a href={servicePath(s.slug)}><Icon name="arrow" size={16} />{s.name}</a></li>)}
+          </ul>
         </div>
-        <ul class="related__list">
-          {relatedServices.map((s) => (
-            <li><a class="link" href={servicePath(s.slug)}>{s.name}</a></li>
-          ))}
-        </ul>
       </div>
-      <div class="related__col">
-        <div class="heading-group">
+      <div class="block related__col">
+        <div class="block__body">
           <Eyebrow rule>Service area</Eyebrow>
-          <h2 class="t-title">Where we build it</h2>
+          <h2 class="t-subtitle related__title">Where we build it</h2>
+          <ul class="related__list">
+            {relatedCities.map((c) => <li><a href={cityPath(c.slug)}><Icon name="pin" size={16} />{c.name}</a></li>)}
+            <li><a href="/service-area/"><Icon name="arrow" size={16} />The whole service area</a></li>
+          </ul>
         </div>
-        <ul class="related__list">
-          {relatedCities.map((c) => (
-            <li><a class="link" href={cityPath(c.slug)}>{c.name}</a></li>
-          ))}
-          <li><a class="link" href="/service-area/">The whole service area</a></li>
-        </ul>
       </div>
     </div>
   </Section>
@@ -153,21 +132,24 @@ const schema = [
 
 <style>
   .svc-intro__grid { display: grid; gap: 32px; align-items: start; }
-  .svc-intro__media { display: grid; gap: 24px; align-content: start; }
-  :global(.svc-intro__media .photo) { max-width: 414px; }
+  .svc-intro__text { font-size: 1.125rem; }
+  .svc-intro__media { display: grid; gap: 20px; align-content: start; }
+  .svc-intro__photo { padding: 12px; max-width: 440px; }
+  :global(.svc-intro__photo .photo img) { border: 0; }
+  :global(.svc-intro__photo .photo__caption) { padding: 10px 4px 0; }
   @media (min-width: 64rem) { .svc-intro__grid { grid-template-columns: 7fr 5fr; gap: 64px; } }
-
   .method { display: grid; gap: 40px; }
-  .method__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
-  .method__item .card__body { display: grid; gap: 10px; }
-  @media (min-width: 48rem) { .method__list { grid-template-columns: 1fr 1fr; gap: 24px; } }
-
   .pair-section { display: grid; gap: 32px; }
-  .svc-sections__list { display: grid; gap: 48px; max-width: 66ch; }
-  .svc-section { display: grid; gap: 16px; }
-
-  .related { display: grid; gap: 40px; }
-  .related__col { display: grid; gap: 20px; align-content: start; }
-  .related__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 1.0625rem; }
-  @media (min-width: 48rem) { .related { grid-template-columns: 1fr 1fr; gap: 48px; } }
+  .svc-sections__grid { display: grid; gap: 18px; }
+  .svc-section__body { display: grid; gap: 14px; padding-bottom: 40px; }
+  .svc-section__title { font-size: 1.5rem; }
+  @media (min-width: 64rem) { .svc-sections__grid { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 22px; } }
+  .related { display: grid; gap: 18px; }
+  .related__col .block__body { display: grid; gap: 16px; }
+  .related__title { font-size: 1.5rem; }
+  .related__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .related__list a { display: inline-flex; align-items: center; gap: 10px; color: var(--color-mortar); text-decoration: none; font-weight: 500; }
+  .related__list a svg { color: var(--color-ember); }
+  .related__list a:hover { color: var(--color-ember); }
+  @media (min-width: 48rem) { .related { grid-template-columns: 1fr 1fr; gap: 22px; } }
 </style>

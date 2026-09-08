@@ -4,38 +4,50 @@ import Section from '@/components/Section.astro';
 import Hero from '@/components/Hero.astro';
 import Eyebrow from '@/components/Eyebrow.astro';
 import Button from '@/components/Button.astro';
-import Photo from '@/components/Photo.astro';
-import Placeholder from '@/components/Placeholder.astro';
 import BeforeAfter from '@/components/BeforeAfter.astro';
-import SegmentCard from '@/components/SegmentCard.astro';
+import ServiceBlock from '@/components/ServiceBlock.astro';
 import CoursedGrid from '@/components/CoursedGrid.astro';
-import ServiceAreaStrip from '@/components/ServiceAreaStrip.astro';
+import Marquee from '@/components/Marquee.astro';
+import TrustStrip from '@/components/TrustStrip.astro';
+import PhotoBand from '@/components/PhotoBand.astro';
+import Process from '@/components/Process.astro';
+import AreaBlocks from '@/components/AreaBlocks.astro';
 import CtaBlock from '@/components/CtaBlock.astro';
-import { site } from '@/config/site';
-import { segments } from '@/data/taxonomy';
+import Icon from '@/components/Icon.astro';
+import { site, telHref } from '@/config/site';
+import { segments, services } from '@/data/taxonomy';
 import { copy } from '@/data/copy/global';
 import { webPageNode } from '@/lib/schema';
 
 const title = 'Masonry Contractor at the Lake of the Ozarks';
 const description = site.description;
 const countyLine = `${site.counties.slice(0, -1).join(', ')} and ${site.counties[site.counties.length - 1]} counties`;
-
-const teaser = [
-  'stone-seawall-lakefront-01.jpg',
-  'fireplace-pizza-oven-grill-01.jpg',
-  'retaining-wall-stairs-01.jpg',
-  'indoor-fireplace-stacked-stone-01.jpg',
-  'lakefront-retaining-wall-detail-01.jpg',
-  'stone-seawall-lakefront-02.jpg',
-  'flagstone-patio-in-progress-01.jpg',
-  'brick-arch-doorway-01.jpg',
-  'stone-stairs-concrete-treads-01.jpg',
+const segmentPhotos: Record<string, string | undefined> = {
+  shoreline: 'stone-seawall-lakefront-01.jpg',
+  'outdoor-living': 'fireplace-pizza-oven-grill-01.jpg',
+  masonry: 'stone-wall-dark-mortar-cap-01.jpg',
+  'fireplaces-chimneys': 'indoor-fireplace-stacked-stone-01.jpg',
+  'concrete-sitework': 'stone-seawall-cap-crew-01.jpg',
+  commercial: 'brick-arch-doorway-01.jpg',
+};
+const segmentIcons: Record<string, string> = { shoreline: 'shoreline', 'outdoor-living': 'flame', masonry: 'stone', 'fireplaces-chimneys': 'chimney', 'concrete-sitework': 'trowel', commercial: 'building' };
+const trust = [
+  { icon: 'users', title: 'Third generation', body: 'Family owned at the Lake of the Ozarks. Mike and Sam Shewmaker run the work and work it.' },
+  { icon: 'crew', title: 'Our own crews', body: 'Masonry, stone, concrete flatwork and excavation, all self-performed. Nothing waits on a sub.' },
+  { icon: 'layers', title: 'Stone on a footing', body: 'Mortared stone laid in courses on a poured concrete footing, capped, with drainage behind it.' },
+  { icon: 'pin', title: 'Based at the lake', body: `Gravois Mills, Missouri. ${countyLine}, and the shoreline between them.` },
 ];
-
+const steps = [
+  { title: 'Call Sam', body: 'Tell him what the job is and where it is. Photos by text help.' },
+  { title: 'We walk the property', body: 'The bank, the slope, the water and the access. What is there now, and what it needs.' },
+  { title: 'The estimate', body: 'One number for the whole job: the dirt work, the footing, the stone and the concrete.' },
+  { title: 'Footing first, then stone', body: 'Our crew digs it, pours it, lays it and caps it. One contract, one schedule.' },
+];
+const teaser = ['stone-seawall-lakefront-01.jpg', 'fireplace-pizza-oven-grill-01.jpg', 'retaining-wall-stairs-01.jpg', 'indoor-fireplace-stacked-stone-01.jpg', 'lakefront-retaining-wall-detail-01.jpg', 'stone-seawall-lakefront-02.jpg', 'flagstone-patio-in-progress-01.jpg', 'brick-arch-doorway-01.jpg', 'stone-stairs-concrete-treads-01.jpg'];
 const problems = [
-  { eyebrow: 'Chimneys', title: 'A chimney that is starting to go', body: 'Spalling brick, open joints and a cracked crown let water in. Water in a chimney turns a repair into a rebuild.', href: '/chimney-repair/', label: 'Chimney repair' },
-  { eyebrow: 'Walls', title: 'A wall that is leaning or bulging', body: 'A retaining wall fails from behind, where the water is. Once it moves, the fix is a rebuild on a footing that drains.', href: '/retaining-walls/', label: 'Retaining walls' },
-  { eyebrow: 'Concrete', title: 'Flatwork that is cracking or heaving', body: 'A slab that heaves or settles takes the steps and the wall above it along. Catch it before the rest of the site moves.', href: '/concrete/', label: 'Concrete flatwork' },
+  { icon: 'chimney', title: 'A chimney that is starting to go', body: 'Spalling brick, open joints and a cracked crown let water in. Water in a chimney turns a repair into a rebuild.', href: '/chimney-repair/', label: 'Chimney repair' },
+  { icon: 'stone', title: 'A wall that is leaning or bulging', body: 'A retaining wall fails from behind, where the water is. Once it moves, the fix is a rebuild on a footing that drains.', href: '/retaining-walls/', label: 'Retaining walls' },
+  { icon: 'trowel', title: 'Flatwork that is cracking or heaving', body: 'A slab that heaves or settles takes the steps and the wall above it along. Catch it before the rest of the site moves.', href: '/concrete/', label: 'Concrete flatwork' },
 ];
 ---
 
@@ -44,146 +56,144 @@ const problems = [
     display
     eyebrow="Third generation · Lake of the Ozarks"
     title={title}
+    accent="Lake of the Ozarks"
     lead="Third-generation stonemasons who build the shoreline, the fireplace and the ground it all sits on. Our own crews, start to finish."
-    thumb="stone-seawall-lakefront-01.jpg"
-    need="Hero: the finished stone seawall with the lake house above and water in frame. Uncropped original, 2400 px or wider."
+    photo="stone-seawall-lakefront-02.jpg"
   />
 
-  <!-- 2. Two doors -->
-  <Section tone="ground" width="wide" labelledby="doors-heading" class="doors">
-    <h2 id="doors-heading" class="sr-only">The two things we are known for</h2>
-    <div class="doors__grid">
-      <a class="card card--link door" href="/seawall-construction/">
-        <Photo file="stone-seawall-lakefront-02.jpg" caption={false} class="door__photo" />
-        <div class="card__body door__body">
-          <Eyebrow>Shoreline &amp; lakefront</Eyebrow>
-          <h3 class="t-title door__title">Stone seawalls and shoreline</h3>
-          <p>Mortared stone on a poured concrete footing, built to hold the bank and look like part of the house.</p>
-          <span class="link door__link">Seawall construction</span>
-        </div>
-      </a>
-      <a class="card card--link door" href="/outdoor-fireplaces/">
-        <Photo file="fireplace-pizza-oven-grill-01.jpg" caption={false} class="door__photo" />
-        <div class="card__body door__body">
-          <Eyebrow>Outdoor living</Eyebrow>
-          <h3 class="t-title door__title">Fireplaces, pizza ovens and outdoor living</h3>
-          <p>Stone fireplaces, wood-fired ovens and built-in grills on flagstone, laid by hand.</p>
-          <span class="link door__link">Outdoor fireplaces</span>
-        </div>
-      </a>
-    </div>
+  <Marquee items={services.map((s) => s.navLabel ?? s.name)} />
+
+  <Section tone="ground" width="wide" padding="tight" labelledby="trust-heading">
+    <h2 id="trust-heading" class="sr-only">Why homeowners at the lake call Shewmaker Brothers Masonry</h2>
+    <TrustStrip items={trust} />
   </Section>
 
-  <!-- 3. All nineteen services -->
-  <Section tone="lifted" width="wide" labelledby="services-heading">
+  <Section tone="lifted" width="wide" glow="top" labelledby="services-heading">
     <div class="services">
-      <div class="heading-group">
-        <Eyebrow rule>Nineteen services, six trades</Eyebrow>
-        <h2 id="services-heading" class="t-title">What we build</h2>
+      <div class="sec-head">
+        <Eyebrow rule>What we do</Eyebrow>
+        <h2 id="services-heading" class="t-title">Stone work, <span class="accent">done right.</span></h2>
+        <p class="t-lead">Nineteen services in six trades, from the waterline up. Every one of them is one click away.</p>
       </div>
       <div class="services__grid">
-        {segments.map((seg) => <SegmentCard segment={seg} />)}
+        {segments.map((seg, i) => <ServiceBlock segment={seg} index={i + 1} photo={segmentPhotos[seg.id]} icon={segmentIcons[seg.id]} />)}
+      </div>
+      <div class="strip">
+        <p class="strip__text">Don't see your job? If it is stone, concrete or dirt, call anyway.</p>
+        <Button href={telHref} icon="phone">Talk it over with Sam</Button>
       </div>
     </div>
   </Section>
 
-  <!-- 4. The argument -->
-  <Section tone="ground" grain labelledby="argument-heading">
+  <PhotoBand
+    photo="lakefront-retaining-wall-detail-01.jpg"
+    eyebrow="The Shewmaker standard"
+    statement="Rip rap protects a shoreline. A stone seawall protects it and looks like it belongs to the house."
+    accent="looks like it belongs to the house."
+    line="Footing. Courses. Cap. Drainage behind the stone."
+    href="/seawall-construction/"
+    cta="Seawall construction"
+  />
+
+  <Section tone="ground" labelledby="pair-heading">
     <div class="argument">
       <div class="argument__text">
-        <div class="heading-group">
+        <div class="sec-head">
           <Eyebrow rule>Stone seawall or rip rap</Eyebrow>
-          <h2 id="argument-heading" class="t-title">{copy.ripRap.heading}</h2>
+          <h2 id="pair-heading" class="t-title">The same shoreline, <span class="accent">before and after.</span></h2>
         </div>
         <div class="prose">
           {copy.ripRap.body.map((p) => <p>{p}</p>)}
-          <p><a href="/seawall-construction/">Seawall construction at the lake</a></p>
+          <p>We do not talk anyone out of rip rap that suits their bank. We build the wall for the shoreline that deserves one.</p>
         </div>
+        <div><Button href="/seawall-repair/" variant="secondary" icon="arrow">Seawall repair and rebuild</Button></div>
       </div>
-      <BeforeAfter
-        before="seawall-before-shoreline-from-water-01.jpg"
-        after="lakefront-retaining-wall-crew-01.jpg"
-        beforeCaption="Undercut bank at the waterline, before the rebuild."
-        afterCaption="Mortared fieldstone wall on a poured footing, the same shoreline."
-      />
+      <BeforeAfter before="seawall-before-eroded-bank-01.jpg" after="lakefront-retaining-wall-crew-01.jpg" beforeCaption="The failed bank under the deck, no wall." afterCaption="Mortared fieldstone wall on a poured footing, the same shoreline." />
     </div>
   </Section>
 
-  <!-- 5. Outdoor living feature -->
-  <Section tone="ground" width="wide" labelledby="outdoor-heading">
-    <div class="feature">
-      <Placeholder
-        ratio="3 / 2"
-        slotName="feature"
-        thumb="fireplace-pizza-oven-grill-01.jpg"
-        need="The fireplace, pizza oven and grill: uncropped original at 1600 px or wider, 3:2. An evening or in-use shot if there is one."
-      />
-      <div class="feature__text">
-        <div class="heading-group">
-          <Eyebrow rule>Outdoor living</Eyebrow>
-          <h2 id="outdoor-heading" class="t-title">The fireplace, the oven and the grill</h2>
-        </div>
-        <p>Stone fireplace, wood-fired pizza oven above it, crank grill beside it, all in multicolour stone veneer on a flagstone patio. One build, one crew, one patio to spend the summer on.</p>
-        <ul class="feature__links">
-          <li><a class="link" href="/outdoor-fireplaces/">Outdoor fireplaces</a></li>
-          <li><a class="link" href="/pizza-ovens/">Pizza ovens</a></li>
-          <li><a class="link" href="/outdoor-kitchens/">Outdoor kitchens and built-in grills</a></li>
-        </ul>
-      </div>
-    </div>
-  </Section>
-
-  <!-- 6. Two brothers and their crews: the one light section -->
-  <Section tone="mortar" labelledby="brothers-heading">
+  <Section tone="lifted" glow="bottom" labelledby="brothers-heading">
     <div class="brothers">
       <div class="brothers__text">
-        <div class="heading-group">
+        <div class="sec-head">
           <Eyebrow rule>The family and the crew</Eyebrow>
-          <h2 id="brothers-heading" class="t-title">Two brothers and their crews</h2>
+          <h2 id="brothers-heading" class="t-title">Two brothers. <span class="accent">Their own crews.</span></h2>
         </div>
         <div class="prose">
           <p>{copy.brothers}</p>
           <p>{copy.selfPerformed}</p>
-          <p>Based in {site.base.locality}. Working {countyLine}.</p>
-          <p><a href="/about/">About Shewmaker Brothers Masonry</a></p>
         </div>
+        <ul class="ticks">
+          <li>Third generation, family owned</li>
+          <li>Mike and Sam run the work themselves</li>
+          <li>Own crews for stone, concrete and excavation</li>
+          <li>Residential and commercial, homeowners and builders</li>
+        </ul>
+        <div><Button href="/about/" icon="arrow">About Shewmaker Brothers Masonry</Button></div>
       </div>
-      <div class="brothers__media">
-        <Placeholder ratio="1 / 1" slotName="portrait" need="Mike and Sam, faces, on a job site. Square crop at 1200 px." />
-        <Photo file="seawall-footing-trench-crew-01.jpg" caption="Hand-digging the seawall footing trench along the shore." />
-      </div>
+      <figure class="block brothers__badge">
+        <img src={site.logo.badge} width={site.logo.width} height={site.logo.height} alt={site.logo.alt} loading="lazy" decoding="async" />
+        <figcaption class="brothers__caption">The badge on the truck.</figcaption>
+      </figure>
     </div>
   </Section>
 
-  <!-- 7. The work -->
   <Section tone="ground" width="wide" labelledby="work-heading">
     <div class="work">
       <div class="work__head">
-        <div class="heading-group">
+        <div class="sec-head">
           <Eyebrow rule>Projects</Eyebrow>
-          <h2 id="work-heading" class="t-title">The work</h2>
+          <h2 id="work-heading" class="t-title">The <span class="accent">work.</span></h2>
+          <p class="t-lead">Every photograph is ours. Seawalls, walls, stairs, patios, fireplaces and chimneys around the Lake of the Ozarks.</p>
         </div>
-        <Button href="/projects/" variant="secondary">See the work</Button>
+        <Button href="/projects/" variant="secondary" icon="arrow">See the work</Button>
       </div>
       <CoursedGrid files={teaser} href="/projects/" />
     </div>
   </Section>
 
-  <!-- 8. Problems worth catching early -->
+  <Section tone="lifted" glow="top" labelledby="process-heading">
+    <div class="process-sec">
+      <div class="sec-head sec-head--center">
+        <Eyebrow rule>How it works</Eyebrow>
+        <h2 id="process-heading" class="t-title">From phone call <span class="accent">to finished.</span></h2>
+      </div>
+      <Process steps={steps} />
+    </div>
+  </Section>
+
+  <Section tone="ground" width="wide" labelledby="area-heading">
+    <div class="area">
+      <div class="area__text">
+        <div class="sec-head">
+          <Eyebrow rule>Service area</Eyebrow>
+          <h2 id="area-heading" class="t-title">Where we <span class="accent">work.</span></h2>
+          <p class="t-lead">{copy.serviceArea.line} {countyLine}.</p>
+        </div>
+        <div class="prose">
+          <p>{copy.ameren}</p>
+          <p><a href="/service-area/">The whole service area</a></p>
+        </div>
+      </div>
+      <AreaBlocks />
+    </div>
+  </Section>
+
   <Section tone="lifted" labelledby="problems-heading">
     <div class="problems">
-      <div class="heading-group">
+      <div class="sec-head">
         <Eyebrow rule>Repairs</Eyebrow>
-        <h2 id="problems-heading" class="t-title">Problems worth catching early</h2>
+        <h2 id="problems-heading" class="t-title">Problems worth <span class="accent">catching early.</span></h2>
       </div>
       <div class="problems__grid">
-        {problems.map((p) => (
-          <a class="card card--link problem" href={p.href}>
-            <div class="card__body problem__body">
-              <Eyebrow>{p.eyebrow}</Eyebrow>
+        {problems.map((p, i) => (
+          <a class="block block--link problem" href={p.href}>
+            <div class="block__body problem__body">
+              <span class="icon-box"><Icon name={p.icon} /></span>
               <h3 class="t-subtitle">{p.title}</h3>
               <p>{p.body}</p>
-              <span class="link">{p.label}</span>
+              <span class="problem__link">{p.label} <Icon name="arrow" size={16} /></span>
+              <span class="numeral">{String(i + 1).padStart(2, '0')}</span>
             </div>
           </a>
         ))}
@@ -192,52 +202,40 @@ const problems = [
     </div>
   </Section>
 
-  <!-- 9. Service area strip -->
-  <ServiceAreaStrip />
-
-  <!-- 10. CTA -->
   <CtaBlock />
 </Base>
 
 <style>
-  .doors__grid { display: grid; gap: 24px; }
-  .door { display: grid; }
-  .door__body { display: grid; gap: 12px; }
-  :global(.door__photo img) { border-radius: 0; aspect-ratio: 1; max-height: 414px; object-position: center; }
-  @media (min-width: 48rem) {
-    .doors__grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-  }
-  @media (min-width: 64rem) {
-    .door { grid-template-columns: minmax(0, 360px) 1fr; align-items: center; }
-    .door__body { padding: 32px; }
-  }
-
-  .services { display: grid; gap: 40px; }
-  .services__grid { display: grid; gap: 16px; }
+  .services { display: grid; gap: 44px; }
+  .services__grid { display: grid; gap: 18px; }
   @media (min-width: 40rem) { .services__grid { grid-template-columns: 1fr 1fr; } }
-  @media (min-width: 64rem) { .services__grid { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
+  @media (min-width: 64rem) { .services__grid { grid-template-columns: repeat(3, 1fr); gap: 22px; } }
+  .strip { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; padding: 26px 30px; border: 1px dashed var(--joint-strong); }
+  .strip__text { font-family: var(--font-condensed); font-weight: 600; font-size: 1.25rem; letter-spacing: 0.04em; color: var(--heading); }
 
   .argument { display: grid; gap: 40px; align-items: start; }
-  .argument__text { display: grid; gap: 24px; }
+  .argument__text { display: grid; gap: 26px; }
   @media (min-width: 64rem) { .argument { grid-template-columns: 6fr 6fr; gap: 64px; } }
 
-  .feature { display: grid; gap: 32px; align-items: center; }
-  .feature__text { display: grid; gap: 20px; max-width: 56ch; }
-  .feature__links { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
-  @media (min-width: 64rem) { .feature { grid-template-columns: 7fr 5fr; gap: 56px; } }
+  .brothers { display: grid; gap: 40px; align-items: center; }
+  .brothers__text { display: grid; gap: 26px; }
+  .brothers__badge { margin: 0; padding: 18px; max-width: 480px; }
+  .brothers__badge img { width: 100%; border: 1px solid var(--joint); }
+  .brothers__caption { padding: 14px 4px 0; font-family: var(--font-condensed); font-weight: 600; font-size: 0.8125rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); text-align: center; }
+  @media (min-width: 64rem) { .brothers { grid-template-columns: 7fr 5fr; gap: 64px; } .brothers__badge { justify-self: end; } }
 
-  .brothers { display: grid; gap: 40px; align-items: start; }
-  .brothers__text { display: grid; gap: 24px; }
-  .brothers__media { display: grid; gap: 24px; align-content: start; }
-  :global(.brothers__media .photo) { max-width: 414px; }
-  @media (min-width: 40rem) { .brothers__media { grid-template-columns: 1fr 1fr; } }
-  @media (min-width: 64rem) { .brothers { grid-template-columns: 6fr 6fr; gap: 64px; } }
-
-  .work { display: grid; gap: 32px; }
+  .work { display: grid; gap: 36px; }
   .work__head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px 24px; }
 
+  .process-sec { display: grid; gap: 40px; }
+
+  .area { display: grid; gap: 40px; align-items: start; }
+  .area__text { display: grid; gap: 24px; }
+  @media (min-width: 64rem) { .area { grid-template-columns: 5fr 7fr; gap: 64px; } }
+
   .problems { display: grid; gap: 32px; }
-  .problems__grid { display: grid; gap: 16px; }
-  .problem__body { display: grid; gap: 12px; align-content: start; }
-  @media (min-width: 48rem) { .problems__grid { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
+  .problems__grid { display: grid; gap: 18px; }
+  .problem__body { display: grid; gap: 14px; align-content: start; padding-bottom: 40px; }
+  .problem__link { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-condensed); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-ember); }
+  @media (min-width: 48rem) { .problems__grid { grid-template-columns: repeat(3, 1fr); gap: 22px; } }
 </style>

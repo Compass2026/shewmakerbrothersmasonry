@@ -1,8 +1,4 @@
 ---
-/**
- * City page template. Tier 1 pages carry a light "lakefront and Ameren permitting" section;
- * Tier 2 pages are shorter and have no light section (docs/art-direction.md, §2).
- */
 import type { CityDef, ServiceDef } from '@/data/types';
 import Base from '@/layouts/Base.astro';
 import Section from '@/components/Section.astro';
@@ -12,6 +8,8 @@ import Photo from '@/components/Photo.astro';
 import Faq from '@/components/Faq.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import CtaBlock from '@/components/CtaBlock.astro';
+import AreaBlocks from '@/components/AreaBlocks.astro';
+import Icon from '@/components/Icon.astro';
 import { cities, cityBySlug, cityPath } from '@/data/cities';
 import { segmentById, serviceBySlug, servicePath } from '@/data/taxonomy';
 import { cityCopies, cityCopy } from '@/data/copy';
@@ -24,7 +22,6 @@ export function getStaticPaths() {
   const list = process.env.ALLOW_MISSING_COPY ? cities.filter((c) => cityCopies[c.slug]) : cities;
   return list.map((c) => ({ params: { city: c.slug } }));
 }
-
 const def = cityBySlug(Astro.params.city!);
 if (!def) throw new Error(`Unknown city: ${Astro.params.city}`);
 const copy = cityCopy(def.slug);
@@ -32,57 +29,38 @@ const path = cityPath(def.slug);
 const countyLine = def.counties.length > 1 ? `${def.counties.join(' and ')} counties` : `${def.counties[0]} County`;
 const h1 = `Masonry Contractor in ${def.name} at the Lake of the Ozarks`;
 const heroPhoto = imageByFile(copy.projectRefs[0]) ?? images.find((i) => i.services.includes('cities'));
-const crumbs = [
-  { name: 'Home', href: '/' },
-  { name: 'Service area', href: '/service-area/' },
-  { name: def.name, href: path },
-];
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Service area', href: '/service-area/' }, { name: def.name, href: path }];
 const featured = copy.services.map(serviceBySlug).filter((s): s is ServiceDef => !!s);
 const neighbours = (copy.communities.list ?? []).map(cityBySlug).filter((c): c is CityDef => !!c);
 const refs = copy.projectRefs.map(imageByFile).filter((i): i is NonNullable<typeof i> => !!i);
 const parent = def.parent ? cityBySlug(def.parent) : undefined;
 const foldId = copy.foldIn ? copy.foldIn.heading.toLowerCase().replace(/[^a-z0-9]+/g, '-') : undefined;
-const schema = [
-  webPageNode({ path, name: copy.metaTitle, description: copy.metaDescription }),
-  breadcrumbNode(crumbs),
-  ...(copy.faqs?.length ? [faqNode(copy.faqs)] : []),
-];
+const segIcon: Record<string, string> = { shoreline: 'shoreline', 'outdoor-living': 'flame', masonry: 'stone', 'fireplaces-chimneys': 'chimney', 'concrete-sitework': 'trowel', commercial: 'building' };
+const schema = [webPageNode({ path, name: copy.metaTitle, description: copy.metaDescription }), breadcrumbNode(crumbs), ...(copy.faqs?.length ? [faqNode(copy.faqs)] : [])];
 ---
 
 <Base title={copy.metaTitle} description={copy.metaDescription} schema={schema}>
-  <Hero
-    eyebrow={`${def.name} · ${countyLine}`}
-    title={h1}
-    lead={copy.lead}
-    thumb={heroPhoto?.file}
-    need={`Hero: finished lakefront work photographed in or near ${def.name}, water in frame, uncropped original at 2400 px. No location is known for any current photo, so this slot stays a placeholder until Sam supplies one.`}
-  >
+  <Hero eyebrow={`${def.name} · ${countyLine}`} title={h1} accent={def.name} lead={copy.lead} photo={heroPhoto?.file} need={`Hero: finished lakefront work photographed in or near ${def.name}, water in frame, uncropped original at 2400 px. No location is known for any current photo.`}>
     <Breadcrumbs items={crumbs} slot="above" />
   </Hero>
 
   <Section tone="ground" labelledby="services-heading">
     <div class="city-intro">
-      <div class="prose">
+      <div class="prose city-intro__text">
         {copy.intro.map((p) => <p>{p}</p>)}
-        {parent && (
-          <p>
-            {def.name} sits inside {parent.name}. The <a href={cityPath(parent.slug)}>{parent.name} page</a> covers the wider area.
-          </p>
-        )}
+        {parent && <p>{def.name} sits inside {parent.name}. The <a href={cityPath(parent.slug)}>{parent.name} page</a> covers the wider area.</p>}
       </div>
       <div class="city-services">
-        <div class="heading-group">
+        <div class="sec-head">
           <Eyebrow rule>What we build in {def.name}</Eyebrow>
           <h2 id="services-heading" class="t-title">Services</h2>
         </div>
         <ul class="city-services__grid">
           {featured.map((s) => (
             <li>
-              <a class="card card--link city-service" href={servicePath(s.slug)}>
-                <div class="card__body city-service__body">
-                  <Eyebrow>{segmentById(s.segment).name}</Eyebrow>
-                  <h3 class="t-subtitle">{s.name}</h3>
-                </div>
+              <a class="block block--link city-service" href={servicePath(s.slug)}>
+                <span class="icon-box"><Icon name={segIcon[s.segment]} /></span>
+                <span class="city-service__text"><span class="eyebrow">{segmentById(s.segment).name}</span><span class="city-service__name">{s.name}</span></span>
               </a>
             </li>
           ))}
@@ -92,13 +70,13 @@ const schema = [
   </Section>
 
   {copy.lakefront && (
-    <Section tone="mortar" labelledby="lakefront-heading">
+    <Section tone="lifted" glow="top" labelledby="lakefront-heading">
       <div class="city-lakefront">
-        <div class="heading-group">
+        <div class="sec-head">
           <Eyebrow rule>Lakefront and permitting</Eyebrow>
           <h2 id="lakefront-heading" class="t-title">{copy.lakefront.heading}</h2>
         </div>
-        <div class="prose">
+        <div class="prose city-lakefront__text">
           {copy.lakefront.body.map((p) => <p>{p}</p>)}
           <p>{shared.ameren}</p>
         </div>
@@ -106,76 +84,76 @@ const schema = [
     </Section>
   )}
 
-  <Section tone="lifted" labelledby="communities-heading">
+  <Section tone="ground" labelledby="communities-heading">
     <div class="city-communities">
-      <div class="heading-group">
-        <Eyebrow rule>Counties and communities</Eyebrow>
-        <h2 id="communities-heading" class="t-title">{copy.communities.heading}</h2>
+      <div class="city-communities__text">
+        <div class="sec-head">
+          <Eyebrow rule>Counties and communities</Eyebrow>
+          <h2 id="communities-heading" class="t-title">{copy.communities.heading}</h2>
+        </div>
+        <div class="prose">
+          {copy.communities.body.map((p) => <p>{p}</p>)}
+          {def.base && <p>This is home. {site.name} is based in {def.name}.</p>}
+          {neighbours.length > 0 && <p>Nearby: {neighbours.map((c, i) => <span><a href={cityPath(c.slug)}>{c.name}</a>{i < neighbours.length - 1 ? ', ' : ''}</span>)}.</p>}
+        </div>
       </div>
-      <div class="prose">
-        {copy.communities.body.map((p) => <p>{p}</p>)}
-        {def.base && <p>This is home. {site.name} is based in {def.name}.</p>}
-      </div>
-      {neighbours.length > 0 && (
-        <ul class="city-communities__list">
-          {neighbours.map((c) => (
-            <li><a class="link" href={cityPath(c.slug)}>{c.name}</a></li>
-          ))}
-          <li><a class="link" href="/service-area/">The whole service area</a></li>
-        </ul>
-      )}
+      <AreaBlocks current={def.slug} />
     </div>
   </Section>
 
   {copy.foldIn && (
-    <Section tone="ground" id={foldId} labelledby="foldin-heading">
+    <Section tone="lifted" id={foldId} labelledby="foldin-heading">
       <div class="city-foldin">
-        <div class="heading-group">
+        <div class="sec-head">
           <Eyebrow rule>Unincorporated</Eyebrow>
           <h2 id="foldin-heading" class="t-title">{copy.foldIn.heading}</h2>
         </div>
-        <div class="prose">
-          {copy.foldIn.body.map((p) => <p>{p}</p>)}
-        </div>
+        <div class="prose">{copy.foldIn.body.map((p) => <p>{p}</p>)}</div>
       </div>
     </Section>
   )}
 
-  <Section tone="ground" grain labelledby="projects-heading">
+  <Section tone="ground" labelledby="projects-heading">
     <div class="city-projects">
-      <div class="heading-group">
+      <div class="sec-head">
         <Eyebrow rule>Projects</Eyebrow>
-        <h2 id="projects-heading" class="t-title">The work</h2>
+        <h2 id="projects-heading" class="t-title">The <span class="accent">work.</span></h2>
         <p class="t-lead">Shewmaker Brothers Masonry work around the Lake of the Ozarks. Project locations are not published.</p>
       </div>
       <div class="city-projects__grid">
-        {refs.map((img) => <Photo file={img.file} />)}
+        {refs.map((img) => <div class="block city-projects__photo"><Photo file={img.file} /></div>)}
       </div>
       <p><a class="link" href="/projects/">See the whole gallery</a></p>
     </div>
   </Section>
 
   {copy.faqs && copy.faqs.length > 0 && (
-    <Section tone="ground">
+    <Section tone="lifted" glow="bottom">
       <Faq faqs={copy.faqs} heading={`Questions about working in ${def.name}`} />
     </Section>
   )}
 
-  <CtaBlock heading={`Talk to Sam about a job in ${def.name}`} />
+  <CtaBlock line1={`A job in ${def.name}?`} line2="Talk to Sam." />
 </Base>
 
 <style>
   .city-intro { display: grid; gap: 48px; }
+  .city-intro__text { font-size: 1.125rem; }
   .city-services { display: grid; gap: 28px; }
-  .city-services__grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
-  .city-service__body { display: grid; gap: 8px; padding: 20px 24px; }
+  .city-services__grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+  .city-service { display: flex; align-items: center; gap: 16px; padding: 18px 20px; }
+  .city-service__text { display: grid; gap: 4px; }
+  .city-service__name { font-family: var(--font-condensed); font-weight: 700; font-size: 1.25rem; letter-spacing: 0.03em; text-transform: uppercase; color: var(--heading); }
   @media (min-width: 40rem) { .city-services__grid { grid-template-columns: 1fr 1fr; } }
-  @media (min-width: 64rem) { .city-services__grid { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
-
-  .city-lakefront, .city-communities, .city-foldin, .city-projects { display: grid; gap: 28px; }
-  .city-communities__list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 24px; font-family: var(--font-display); font-weight: 700; font-size: 1.375rem; letter-spacing: 0.01em; }
-  .city-communities__list .link { color: var(--heading); text-decoration-thickness: 2px; }
-  .city-projects__grid { display: grid; gap: 24px; }
-  :global(.city-projects__grid .photo) { max-width: 414px; }
+  @media (min-width: 64rem) { .city-services__grid { grid-template-columns: repeat(3, 1fr); gap: 18px; } }
+  .city-lakefront, .city-foldin, .city-projects { display: grid; gap: 28px; }
+  .city-lakefront__text { font-size: 1.125rem; }
+  .city-communities { display: grid; gap: 40px; align-items: start; }
+  .city-communities__text { display: grid; gap: 24px; }
+  @media (min-width: 64rem) { .city-communities { grid-template-columns: 5fr 7fr; gap: 64px; } }
+  .city-projects__grid { display: grid; gap: 20px; }
+  .city-projects__photo { padding: 12px; max-width: 440px; }
+  :global(.city-projects__photo .photo img) { border: 0; }
+  :global(.city-projects__photo .photo__caption) { padding: 10px 4px 0; }
   @media (min-width: 40rem) { .city-projects__grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); } }
 </style>

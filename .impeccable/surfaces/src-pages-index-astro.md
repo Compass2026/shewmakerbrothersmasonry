@@ -11,15 +11,15 @@ Scope and mode: Persuade. A 34-page static marketing site. The visitor is a lake
 
 Audience, job, action: homeowners, year-round residents, builders and HOAs at the Lake of the Ozarks. Job: judge whether this mason can be trusted with a visible, permanent addition. Action: call, or ask for an estimate. Proof: real project photography (interim 414 px thumbnails, full-resolution originals pending), the self-performed scope, third generation. Constraints: docs/placeholders.md and PRODUCT.md hard rules; no stock or AI imagery; no pricing, years, licensing or warranty claims.
 
-Chosen direction: docs/art-direction.md, approved by Tom on 2026-09-07. Memorable moment: the hero's staggered rise into a dark, photograph-led page and the coursed running-bond gallery grid.
+Chosen direction: redesign on 2026-09-08 after Tom rejected the Stage 4 look; references h2dirtwork.com and magnoliahomeinspection.vercel.app, brief "use the blocks they use, like the stones the guys use on site". Memorable moment: the ember accent word glowing out of the Anton headline over the darkened seawall, and the cut-stone blocks with ghost numerals.
 
 Unresolved: production domain, form endpoint, business hours, vector logo, all full-resolution photography.
 
 ## Direction contract
 
-THESIS: The coursed wall. A dark, quiet frame that holds photographs of mortared stone; refuses the white, airy contractor template with a centred hero and icon cards.
-OWN-WORLD: Ground #221E1A with lifted ground and one mortar section per page; sandstone headings, brick for actions only; Rokkitt 900 uppercase display over Merriweather Sans; 2 px radii, mortar-line rules, paper grain, running-bond course lines. Recognisable with the content removed.
+THESIS: The block world. A wall the crew built: cut-stone modules in courses on a near-black ground with one ember accent; refuses the warm-brown brochure it replaces and the white contractor template.
+OWN-WORLD: Coal, soot and block tones; ember for the accent word, button, icon, joint and running-bond stripe; Anton uppercase display over Barlow Condensed labels and Barlow body; chamfered buttons, 0 radius, chiselled block edges with grain and ghost numerals. Recognisable with the content removed.
 STORY: This is a real crew that lays stone on footings at the lake. It looks like it belongs to the house. Call Sam.
-FIRST VIEWPORT: Sticky ground header with badge, nav, phone and estimate button. Below it a 7/5 split: eyebrow, display H1, one-line lead, primary phone button beside secondary estimate button on the left; labelled 16:9 (4:5 mobile) photo placeholder with the seawall thumbnail on the right.
-FORM: Photography-led editorial brochure, first on the ordered list; pinned by the approved art direction (form script not run; world fixed by brief).
+FIRST VIEWPORT: Fixed blurred-coal header with badge, Anton wordmark, tracked nav, phone and chamfered estimate button. Full-bleed darkened seawall photograph; on the left, eyebrow, display H1 "Masonry Contractor at the Lake of the Ozarks" with "Lake of the Ozarks" in glowing ember, one-line lead, ember phone button beside outlined estimate button. Ember services marquee directly beneath.
+FORM: Dark block-built contractor landing, pinned by Tom's references (h2dirtwork.com, magnoliahomeinspection.vercel.app) on 2026-09-08; form script not run, world fixed by brief.
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance

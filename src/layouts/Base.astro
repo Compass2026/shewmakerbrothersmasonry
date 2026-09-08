@@ -1,9 +1,15 @@
 ---
-import '@fontsource-variable/rokkitt';
-import '@fontsource-variable/merriweather-sans';
+import '@fontsource/anton/400.css';
+import '@fontsource/barlow-condensed/500.css';
+import '@fontsource/barlow-condensed/600.css';
+import '@fontsource/barlow-condensed/700.css';
+import '@fontsource/barlow/400.css';
+import '@fontsource/barlow/500.css';
+import '@fontsource/barlow/600.css';
 import '@/styles/global.css';
-import rokkittWoff2 from '@fontsource-variable/rokkitt/files/rokkitt-latin-wght-normal.woff2?url';
-import merriweatherWoff2 from '@fontsource-variable/merriweather-sans/files/merriweather-sans-latin-wght-normal.woff2?url';
+import antonWoff2 from '@fontsource/anton/files/anton-latin-400-normal.woff2?url';
+import barlowWoff2 from '@fontsource/barlow/files/barlow-latin-400-normal.woff2?url';
+import condensedWoff2 from '@fontsource/barlow-condensed/files/barlow-condensed-latin-600-normal.woff2?url';
 import { site, absoluteUrl } from '@/config/site';
 import { businessNode, websiteNode } from '@/lib/schema';
 import Header from '@/components/Header.astro';
@@ -35,9 +41,10 @@ const graph = [businessNode(), websiteNode(), ...schema];
     {site.env !== 'production' && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <link rel="preload" as="font" type="font/woff2" href={rokkittWoff2} crossorigin />
-    <link rel="preload" as="font" type="font/woff2" href={merriweatherWoff2} crossorigin />
-    <meta name="theme-color" content="#221e1a" />
+    <link rel="preload" as="font" type="font/woff2" href={antonWoff2} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={barlowWoff2} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={condensedWoff2} crossorigin />
+    <meta name="theme-color" content="#0b0907" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={fullTitle} />

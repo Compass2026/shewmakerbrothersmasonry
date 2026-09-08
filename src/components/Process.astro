@@ -1,0 +1,24 @@
+---
+interface Props { steps: { title: string; body: string }[] }
+const { steps } = Astro.props;
+---
+
+<ol class="process">
+  {steps.map((s, i) => (
+    <li class="block process__step">
+      <div class="block__body process__body">
+        <span class="process__num">{String(i + 1).padStart(2, '0')}</span>
+        <h3 class="t-subtitle">{s.title}</h3>
+        <p>{s.body}</p>
+      </div>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .process { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; counter-reset: step; }
+  .process__body { display: grid; gap: 12px; align-content: start; }
+  .process__num { font-family: var(--font-display); font-size: 2.5rem; line-height: 1; color: var(--color-ember); }
+  @media (min-width: 40rem) { .process { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 64rem) { .process { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
+</style>

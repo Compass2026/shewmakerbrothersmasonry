@@ -1,0 +1,12 @@
+---
+/** Ember strip running the services, like a course of stone across the page. */
+interface Props { items: string[] }
+const { items } = Astro.props;
+const track = [...items, ...items];
+---
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    {track.map((t) => <span class="marquee__item">{t}</span>)}
+  </div>
+</div>

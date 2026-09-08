@@ -5,81 +5,52 @@ import Hero from '@/components/Hero.astro';
 import Eyebrow from '@/components/Eyebrow.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import CtaBlock from '@/components/CtaBlock.astro';
+import AreaBlocks from '@/components/AreaBlocks.astro';
 import { site } from '@/config/site';
-import { cities, cityPath, foldIns, tier1, tier2 } from '@/data/cities';
+import { cities, cityPath } from '@/data/cities';
 import { copy as shared } from '@/data/copy/global';
 import { breadcrumbNode, webPageNode } from '@/lib/schema';
 
 const path = '/service-area/';
 const title = 'Masonry Service Area at the Lake of the Ozarks';
-const description =
-  'Osage Beach, Lake Ozark, Camdenton, Sunrise Beach, Horseshoe Bend, Gravois Mills, Laurie, Eldon and Versailles. Camden, Miller and Morgan counties. Call Sam.';
-const crumbs = [
-  { name: 'Home', href: '/' },
-  { name: 'Service area', href: path },
-];
+const description = 'Osage Beach, Lake Ozark, Camdenton, Sunrise Beach, Horseshoe Bend, Gravois Mills, Laurie, Eldon and Versailles. Camden, Miller and Morgan counties. Call Sam.';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Service area', href: path }];
 const byCounty = site.counties.map((county) => ({ county, towns: cities.filter((c) => c.counties.includes(county)) }));
 const schema = [webPageNode({ path, name: title, description }), breadcrumbNode(crumbs)];
 ---
 
 <Base title={title} description={description} schema={schema}>
-  <Hero
-    eyebrow="Service area · Camden, Miller and Morgan counties"
-    title={title}
-    lead="Nine towns around the lake, the unincorporated shoreline between them, and the county roads north of the water. We come to you."
-    thumb="stone-seawall-lakefront-02.jpg"
-    need="Hero: finished seawall with water in frame in summer, uncropped original at 2400 px."
-  >
+  <Hero eyebrow="Service area · Camden, Miller and Morgan counties" title={title} accent="Lake of the Ozarks" lead="Nine towns around the lake, the unincorporated shoreline between them, and the county roads north of the water. We come to you." photo="stone-seawall-lakefront-02.jpg" need="Hero: finished seawall with water in frame in summer, uncropped original at 2400 px.">
     <Breadcrumbs items={crumbs} slot="above" />
   </Hero>
 
-  <Section tone="ground" labelledby="towns-heading">
+  <Section tone="ground" width="wide" labelledby="towns-heading">
     <div class="towns">
-      <div class="heading-group">
-        <Eyebrow rule>Where we work</Eyebrow>
-        <h2 id="towns-heading" class="t-title">The towns</h2>
-        <p class="t-lead">Full pages for the four lakefront towns we work most. Shorter pages for the five around them.</p>
+      <div class="towns__text">
+        <div class="sec-head">
+          <Eyebrow rule>Where we work</Eyebrow>
+          <h2 id="towns-heading" class="t-title">The <span class="accent">towns.</span></h2>
+          <p class="t-lead">Full pages for the four lakefront towns we work most. Shorter pages for the five around them, and Hurricane Deck folded into Sunrise Beach.</p>
+        </div>
+        <div class="prose"><p>{shared.ameren}</p></div>
       </div>
-      <ul class="towns__tier1">
-        {tier1.map((c) => (
-          <li>
-            <a class="card card--link town" href={cityPath(c.slug)}>
-              <div class="card__body town__body">
-                <Eyebrow>{`${c.counties.join(' and ')} ${c.counties.length > 1 ? 'counties' : 'County'}`}</Eyebrow>
-                <h3 class="t-subtitle">{c.name}</h3>
-                {c.foldIns && <p class="t-small muted">Includes {c.foldIns.join(', ')}</p>}
-              </div>
-            </a>
-          </li>
-        ))}
-      </ul>
-      <ul class="towns__tier2">
-        {tier2.map((c) => (
-          <li><a class="link" href={cityPath(c.slug)}>{c.name}</a></li>
-        ))}
-        {foldIns.map((f) => (
-          <li><a class="link" href={f.anchor}>{f.name}</a></li>
-        ))}
-      </ul>
+      <AreaBlocks />
     </div>
   </Section>
 
-  <Section tone="lifted" labelledby="counties-heading">
+  <Section tone="lifted" glow="top" labelledby="counties-heading">
     <div class="counties">
-      <div class="heading-group">
+      <div class="sec-head sec-head--center">
         <Eyebrow rule>Three counties</Eyebrow>
-        <h2 id="counties-heading" class="t-title">Camden, Miller and Morgan</h2>
+        <h2 id="counties-heading" class="t-title">Camden, Miller <span class="accent">and Morgan.</span></h2>
       </div>
       <div class="counties__grid">
-        {byCounty.map(({ county, towns }) => (
-          <div class="card">
-            <div class="card__body counties__card">
+        {byCounty.map(({ county, towns }, i) => (
+          <div class="block">
+            <div class="block__body counties__card">
               <h3 class="t-subtitle">{county} County</h3>
-              <ul>
-                {towns.map((t) => (
-                  <li><a class="link" href={cityPath(t.slug)}>{t.name}</a></li>
-                ))}
-              </ul>
+              <ul>{towns.map((t) => <li><a class="link" href={cityPath(t.slug)}>{t.name}</a></li>)}</ul>
+              <span class="numeral">{String(i + 1).padStart(2, '0')}</span>
             </div>
           </div>
         ))}
@@ -87,25 +58,24 @@ const schema = [webPageNode({ path, name: title, description }), breadcrumbNode(
     </div>
   </Section>
 
-  <Section tone="mortar" labelledby="ameren-heading">
+  <Section tone="ground" labelledby="ameren-heading">
     <div class="ameren">
-      <div class="heading-group">
+      <div class="sec-head">
         <Eyebrow rule>Lakefront permitting</Eyebrow>
-        <h2 id="ameren-heading" class="t-title">Ameren Missouri and the shoreline</h2>
+        <h2 id="ameren-heading" class="t-title">Ameren Missouri <span class="accent">and the shoreline.</span></h2>
       </div>
-      <div class="prose">
+      <div class="prose ameren__text">
         <p>Ameren Missouri manages the shoreline of the Lake of the Ozarks, and shoreline work needs a lakefront permit from them before anything goes in the water. That covers seawalls, seawall repairs, lakefront retaining walls at the shoreline and the stairs that run down to a dock.</p>
         <p>We treat the permit as part of planning the job. Call Sam before you plan the season and we will talk through what the shoreline needs and what the permit has to cover, so the footing goes in when it is supposed to.</p>
-        <p>{shared.ameren}</p>
       </div>
     </div>
   </Section>
 
-  <Section tone="ground" grain labelledby="base-heading">
+  <Section tone="lifted" glow="bottom" labelledby="base-heading">
     <div class="base">
-      <div class="heading-group">
+      <div class="sec-head">
         <Eyebrow rule>Based in {site.base.locality}</Eyebrow>
-        <h2 id="base-heading" class="t-title">A service-area business</h2>
+        <h2 id="base-heading" class="t-title">A service-area <span class="accent">business.</span></h2>
       </div>
       <div class="prose">
         <p>{site.name} is based in {site.base.locality}, {site.base.regionName}, on the Morgan County side of the lake. There is no street address to visit: we come to the job. {shared.brothers}</p>
@@ -118,15 +88,14 @@ const schema = [webPageNode({ path, name: title, description }), breadcrumbNode(
 </Base>
 
 <style>
-  .towns, .counties, .ameren, .base { display: grid; gap: 32px; }
-  .towns__tier1 { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
-  .town__body { display: grid; gap: 8px; }
-  .towns__tier2 { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 24px; font-family: var(--font-display); font-weight: 700; font-size: 1.375rem; letter-spacing: 0.01em; }
-  .towns__tier2 .link { color: var(--heading); text-decoration-thickness: 2px; }
-  @media (min-width: 40rem) { .towns__tier1 { grid-template-columns: 1fr 1fr; } }
-  @media (min-width: 64rem) { .towns__tier1 { grid-template-columns: repeat(4, 1fr); } }
-  .counties__grid { display: grid; gap: 16px; }
-  .counties__card { display: grid; gap: 12px; }
+  .towns { display: grid; gap: 40px; align-items: start; }
+  .towns__text { display: grid; gap: 24px; }
+  @media (min-width: 64rem) { .towns { grid-template-columns: 5fr 7fr; gap: 64px; } }
+  .counties { display: grid; gap: 36px; }
+  .counties__grid { display: grid; gap: 18px; }
+  .counties__card { display: grid; gap: 14px; padding-bottom: 40px; }
   .counties__card ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
-  @media (min-width: 48rem) { .counties__grid { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
+  @media (min-width: 48rem) { .counties__grid { grid-template-columns: repeat(3, 1fr); gap: 22px; } }
+  .ameren, .base { display: grid; gap: 28px; }
+  .ameren__text { font-size: 1.125rem; }
 </style>

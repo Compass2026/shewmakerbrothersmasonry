@@ -9,14 +9,9 @@ import CtaBlock from '@/components/CtaBlock.astro';
 import { breadcrumbNode, webPageNode } from '@/lib/schema';
 
 const path = '/blog/';
-const title = 'Problems Worth Catching Early';
 const metaTitle = 'Masonry Notes from the Lake of the Ozarks';
-const description =
-  'What chimney damage looks like before it gets expensive, why lakefront walls fail, what Ameren permitting requires. Notes from the Lake of the Ozarks.';
-const crumbs = [
-  { name: 'Home', href: '/' },
-  { name: 'Blog', href: path },
-];
+const description = 'What chimney damage looks like before it gets expensive, why lakefront walls fail, what Ameren permitting requires. Notes from the Lake of the Ozarks.';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Blog', href: path }];
 const topics = [
   { pillar: 'Problems worth catching early', title: 'What chimney damage looks like before it gets expensive', line: 'Spalling brick, open joints, a cracked crown, rust on the flashing. What each one means and what it turns into by spring.' },
   { pillar: 'Shoreline and the lake', title: 'Rip rap versus a stone seawall: lifespan, appearance and fit', line: 'What each one does for a bank, where each one belongs, and how to decide for your shoreline.' },
@@ -28,36 +23,26 @@ const schema = [webPageNode({ path, name: metaTitle, description, type: 'Collect
 ---
 
 <Base title={metaTitle} description={description} schema={schema}>
-  <Hero
-    eyebrow="Notes from the job site"
-    title={title}
-    lead="What to look for, what it means, and what it costs to wait. Written by people who fix it."
-    thumb="lakefront-retaining-wall-detail-01.jpg"
-    need="Blog hero: a close-up of stone and joint work, the hand of the mason, uncropped original at 2400 px."
-    ctas={false}
-  >
+  <Hero eyebrow="Notes from the job site" title="Problems worth catching early." accent="catching early." lead="What to look for, what it means, and what it costs to wait. Written by people who fix it." photo="lakefront-retaining-wall-detail-01.jpg" ctas={false} compact need="Blog hero: a close-up of stone and joint work, uncropped original at 2400 px.">
     <Breadcrumbs items={crumbs} slot="above" />
   </Hero>
 
   <Section tone="ground" labelledby="topics-heading">
     <div class="topics">
-      <div class="heading-group">
+      <div class="sec-head">
         <Eyebrow rule>Coming first</Eyebrow>
-        <h2 id="topics-heading" class="t-title">Five things worth writing down</h2>
+        <h2 id="topics-heading" class="t-title">Five things worth <span class="accent">writing down.</span></h2>
       </div>
-      <TextPlaceholder
-        slotName="blog-posts"
-        label="No posts yet"
-        need="The first five posts are planned below and not written. Each is seeded from the content signal in docs/keyword-map.md; none is published until it is real."
-      />
+      <TextPlaceholder slotName="blog-posts" label="No posts yet" need="The first five posts are planned below and not written. None is published until it is real." />
       <ul class="topics__grid">
-        {topics.map((t) => (
-          <li class="card topic">
-            <div class="card__body topic__body">
-              <Eyebrow>{t.pillar}</Eyebrow>
+        {topics.map((t, i) => (
+          <li class="block topic">
+            <div class="block__body topic__body">
+              <p class="eyebrow">{t.pillar}</p>
               <h3 class="t-subtitle">{t.title}</h3>
               <p>{t.line}</p>
-              <p class="t-small muted">In the works</p>
+              <p class="topic__soon">In the works</p>
+              <span class="numeral">{String(i + 1).padStart(2, '0')}</span>
             </div>
           </li>
         ))}
@@ -65,24 +50,24 @@ const schema = [webPageNode({ path, name: metaTitle, description, type: 'Collect
     </div>
   </Section>
 
-  <Section tone="lifted" labelledby="why-heading">
+  <Section tone="lifted" glow="top" labelledby="why-heading">
     <div class="why">
-      <div class="heading-group">
+      <div class="sec-head">
         <Eyebrow rule>Why this exists</Eyebrow>
-        <h2 id="why-heading" class="t-title">The post that did the best</h2>
+        <h2 id="why-heading" class="t-title">The post that <span class="accent">did the best.</span></h2>
       </div>
-      <div class="prose">
+      <div class="prose why__text">
         <p>The post that did better than anything else on our Facebook page was a warning: do not ignore your chimney, small problems become expensive repairs. Nobody shared the pretty pictures the way they shared that.</p>
         <p>So that is what this is for. Not what we build, which the <a href="/projects/">gallery</a> shows better than words. What to look for on your own place, what it means, and what it turns into if it waits a season.</p>
       </div>
     </div>
   </Section>
 
-  <Section tone="mortar" labelledby="winter-heading">
+  <Section tone="ground" labelledby="winter-heading">
     <div class="winter">
-      <div class="heading-group">
+      <div class="sec-head">
         <Eyebrow rule>October to January</Eyebrow>
-        <h2 id="winter-heading" class="t-title">The chimney season</h2>
+        <h2 id="winter-heading" class="t-title">The chimney <span class="accent">season.</span></h2>
       </div>
       <div class="prose">
         <p>Chimney work at the lake gets busy from October through January, when the first fires go in and the first problems show. If the crown is cracked or the joints are open now, water is already in the brick, and a freeze does the rest.</p>
@@ -91,13 +76,15 @@ const schema = [webPageNode({ path, name: metaTitle, description, type: 'Collect
     </div>
   </Section>
 
-  <CtaBlock heading="Seen something on your own place?" line="Send Sam a photo by text, or call. He will tell you what it is." />
+  <CtaBlock line1="Seen something on your place?" line2="Send Sam a photo." line="Text a photo, or call. He will tell you what it is." />
 </Base>
 
 <style>
   .topics, .why, .winter { display: grid; gap: 28px; }
-  .topics__grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
-  .topic__body { display: grid; gap: 10px; align-content: start; }
+  .why__text { font-size: 1.125rem; }
+  .topics__grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
+  .topic__body { display: grid; gap: 12px; align-content: start; padding-bottom: 40px; }
+  .topic__soon { font-family: var(--font-condensed); font-weight: 700; font-size: 0.8125rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-ember); }
   @media (min-width: 40rem) { .topics__grid { grid-template-columns: 1fr 1fr; } }
-  @media (min-width: 64rem) { .topics__grid { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
+  @media (min-width: 64rem) { .topics__grid { grid-template-columns: repeat(3, 1fr); gap: 22px; } }
 </style>

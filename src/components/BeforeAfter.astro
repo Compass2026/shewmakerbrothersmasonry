@@ -1,37 +1,24 @@
 ---
-/** Before/after pair from the same project, side by side, no slider. */
 import Photo from './Photo.astro';
-import Eyebrow from './Eyebrow.astro';
 import { imageByFile } from '@/data/images';
-
-interface Props {
-  before: string;
-  after: string;
-  beforeCaption?: string;
-  afterCaption?: string;
-}
+interface Props { before: string; after: string; beforeCaption?: string; afterCaption?: string }
 const { before, after, beforeCaption, afterCaption } = Astro.props;
-const b = imageByFile(before);
-const a = imageByFile(after);
+const b = imageByFile(before); const a = imageByFile(after);
 if (!b || !a) throw new Error(`Before/after pair missing from manifest: ${before}, ${after}`);
 if (b.project !== a.project) throw new Error(`Before/after pair must come from one project: ${before} / ${after}`);
 ---
 
 <div class="pair">
-  <div class="pair__item">
-    <Eyebrow rule>Before</Eyebrow>
-    <Photo file={before} caption={beforeCaption} />
-  </div>
-  <div class="pair__item">
-    <Eyebrow rule>After</Eyebrow>
-    <Photo file={after} caption={afterCaption} />
-  </div>
+  <div class="block pair__item"><span class="pair__tag">Before</span><Photo file={before} caption={beforeCaption} /></div>
+  <div class="block pair__item pair__item--after"><span class="pair__tag pair__tag--after">After</span><Photo file={after} caption={afterCaption} /></div>
 </div>
 
 <style>
-  .pair { display: grid; gap: 24px; }
-  .pair__item { display: grid; gap: 12px; align-content: start; max-width: 414px; }
-  @media (min-width: 40rem) {
-    .pair { grid-template-columns: 1fr 1fr; }
-  }
+  .pair { display: grid; gap: 16px; }
+  .pair__item { position: relative; padding: 12px; }
+  :global(.pair__item .photo img) { aspect-ratio: 1; border: 0; }
+  :global(.pair__item .photo__caption) { padding: 12px 6px 4px; }
+  .pair__tag { position: absolute; top: 20px; left: 20px; z-index: 1; padding: 6px 12px; background: var(--color-coal); color: var(--color-chalk); font-family: var(--font-condensed); font-weight: 700; font-size: 0.8125rem; letter-spacing: 0.2em; text-transform: uppercase; border: 1px solid var(--joint-strong); }
+  .pair__tag--after { background: var(--color-ember); color: var(--color-coal); border-color: var(--color-ember); }
+  @media (min-width: 40rem) { .pair { grid-template-columns: 1fr 1fr; gap: 20px; } }
 </style>

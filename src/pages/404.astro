@@ -6,20 +6,20 @@ import { site, telHref } from '@/config/site';
 ---
 
 <Base title="Page not found" description="That page is not here. Call Sam at 573-569-3690 or start from the home page.">
-  <Section tone="ground" grain labelledby="page-title" class="nf">
+  <Section tone="ground" glow="top" labelledby="page-title" class="nf">
     <div class="nf__inner">
-      <h1 id="page-title" class="t-headline">That page is not here</h1>
+      <h1 id="page-title" class="t-headline">That page <span class="accent">is not here.</span></h1>
       <p class="t-lead">The link may be old, or the page has moved. Start from the home page, or call Sam.</p>
       <div class="nf__actions">
         <Button href="/" variant="secondary">Back to the home page</Button>
-        <Button href={telHref}>{site.cta.primary}</Button>
+        <Button href={telHref} icon="phone">{site.cta.primary}</Button>
       </div>
     </div>
   </Section>
 </Base>
 
 <style>
-  .nf { min-height: 60dvh; display: grid; align-items: center; }
+  :global(.nf) { min-height: 60dvh; display: grid; align-items: center; }
   .nf__inner { display: grid; gap: 20px; max-width: 60ch; }
   .nf__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
 </style>

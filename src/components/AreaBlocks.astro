@@ -1,0 +1,29 @@
+---
+/** Service area as stone blocks: the nine towns plus Hurricane Deck, two across. */
+import { cities, cityPath, foldIns } from '@/data/cities';
+import Icon from './Icon.astro';
+interface Props { current?: string }
+const { current } = Astro.props;
+const items = [...cities.map((c) => ({ name: c.name, href: cityPath(c.slug), tier: c.tier, slug: c.slug })), ...foldIns.map((f) => ({ name: f.name, href: f.anchor, tier: 2, slug: 'hurricane-deck' }))];
+---
+
+<ul class="areas">
+  {items.map((it) => (
+    <li>
+      <a class:list={['block', 'block--link', 'areas__item', { 'is-current': it.slug === current }]} href={it.href}>
+        <Icon name="pin" size={18} />
+        <span>{it.name}</span>
+        {it.tier === 1 && <span class="areas__tier">Full page</span>}
+      </a>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .areas { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .areas__item { display: flex; align-items: center; gap: 12px; padding: 16px 18px; font-family: var(--font-condensed); font-weight: 700; font-size: 1.125rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--heading); }
+  .areas__item svg { color: var(--color-ember); flex: none; }
+  .areas__tier { margin-left: auto; font-size: 0.75rem; letter-spacing: 0.18em; color: var(--muted); font-weight: 600; }
+  .areas__item.is-current { border-color: var(--color-ember); }
+  @media (min-width: 40rem) { .areas { grid-template-columns: 1fr 1fr; } }
+</style>

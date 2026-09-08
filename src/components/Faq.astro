@@ -1,19 +1,19 @@
 ---
 import type { Faq } from '@/data/types';
-interface Props {
-  faqs: Faq[];
-  heading?: string;
-  id?: string;
-}
+import Icon from './Icon.astro';
+interface Props { faqs: Faq[]; heading?: string; id?: string }
 const { faqs, heading = 'Questions we get asked', id = 'faq' } = Astro.props;
 ---
 
 <div class="faq" id={id}>
-  <h2 class="t-title">{heading}</h2>
+  <div class="sec-head">
+    <p class="eyebrow has-rule">Straight answers</p>
+    <h2 class="t-title">{heading}</h2>
+  </div>
   <div class="faq__list">
     {faqs.map((f) => (
-      <details class="faq__item">
-        <summary class="faq__q"><h3 class="t-subtitle">{f.q}</h3><svg class="faq__mark" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v12M2 8h12" fill="none" stroke="currentColor" stroke-width="2" /></svg></summary>
+      <details class="block faq__item">
+        <summary class="faq__q"><h3 class="faq__h">{f.q}</h3><span class="faq__mark"><Icon name="plus" size={18} /></span></summary>
         <div class="faq__a prose"><p>{f.a}</p></div>
       </details>
     ))}
@@ -21,14 +21,12 @@ const { faqs, heading = 'Questions we get asked', id = 'faq' } = Astro.props;
 </div>
 
 <style>
-  .faq { display: grid; gap: 24px; }
-  .faq__list { display: grid; }
-  .faq__item { border-top: 1px solid var(--rule); }
-  .faq__item:last-child { border-bottom: 1px solid var(--rule); }
-  .faq__q { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 0; cursor: pointer; list-style: none; }
+  .faq { display: grid; gap: 32px; }
+  .faq__list { display: grid; gap: 12px; }
+  .faq__q { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 24px; cursor: pointer; list-style: none; }
   .faq__q::-webkit-details-marker { display: none; }
-  .faq__q h3 { font-size: clamp(1.125rem, 1rem + 0.6vw, 1.375rem); }
-  .faq__mark { flex: none; color: var(--color-brick); transition: transform 160ms ease; }
+  .faq__h { font-family: var(--font-condensed); font-weight: 700; font-size: 1.25rem; letter-spacing: 0.03em; text-transform: uppercase; }
+  .faq__mark { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--joint-strong); color: var(--color-ember); transition: transform 160ms ease; }
   .faq__item[open] .faq__mark { transform: rotate(45deg); }
-  .faq__a { padding: 0 0 20px; }
+  .faq__a { padding: 0 24px 22px; }
 </style>
