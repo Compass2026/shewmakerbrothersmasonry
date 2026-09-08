@@ -5,6 +5,7 @@
  *   node qa/make-textures.mjs
  */
 import sharp from 'sharp';
+import fs from 'node:fs';
 import { mkdir } from 'node:fs/promises';
 
 await mkdir('public/images/textures', { recursive: true });
@@ -55,13 +56,20 @@ const rows = [
 const wall = await blendTile(rows, w, h, f);
 const wallBuf = await wall.png().toBuffer();
 const wm = await sharp(wallBuf).metadata();
-await sharp(wallBuf).resize({ width: 1400 }).webp({ quality: 76 }).toFile('public/images/textures/stonewall.webp');
+await sharp(wallBuf).resize({ width: 760 }).webp({ quality: 70 }).toFile('public/images/textures/stonewall.webp');
 { const mm = await sharp('public/images/textures/stonewall.webp').metadata(); console.log('stonewall.webp', `${mm.width}x${mm.height}`, 'from', `${wm.width}x${wm.height}`); }
 
-// The wall itself, uncut, for the stone walls behind the CTA and the courses (no tiling at all)
-await sharp(WALL).rotate().extract({ left: 1300, top: 1750, width: 3800, height: 1500 }).resize({ width: 2400 }).modulate({ brightness: 1.04, saturation: 1.06 }).webp({ quality: 74 }).toFile('public/images/textures/stone-cover.webp');
-await sharp(WALL).rotate().extract({ left: 700, top: 2500, width: 5000, height: 700 }).resize({ width: 2800 }).modulate({ brightness: 1.06, saturation: 1.06 }).webp({ quality: 74 }).toFile('public/images/textures/stone-course.webp');
-console.log('stone-cover.webp 2400 wide, stone-course.webp 2800 wide');
+// The wall itself, uncut, for the stone walls and courses. Two sizes: phones never fetch the wide one.
+const cover = sharp(WALL).rotate().extract({ left: 1300, top: 1750, width: 3800, height: 1500 }).modulate({ brightness: 1.04, saturation: 1.06 });
+await sharp(await cover.toBuffer()).resize({ width: 2000 }).webp({ quality: 66 }).toFile('public/images/textures/stone-cover.webp');
+await sharp(await cover.toBuffer()).resize({ width: 900 }).webp({ quality: 64 }).toFile('public/images/textures/stone-cover-sm.webp');
+const course = sharp(WALL).rotate().extract({ left: 700, top: 2500, width: 5000, height: 700 }).modulate({ brightness: 1.06, saturation: 1.06 });
+await sharp(await course.toBuffer()).resize({ width: 1800 }).webp({ quality: 66 }).toFile('public/images/textures/stone-course.webp');
+await sharp(await course.toBuffer()).resize({ width: 800 }).webp({ quality: 64 }).toFile('public/images/textures/stone-course-sm.webp');
+for (const f of ['stone-cover', 'stone-cover-sm', 'stone-course', 'stone-course-sm']) {
+  const st = fs.statSync(`public/images/textures/${f}.webp`);
+  console.log(f + '.webp', Math.round(st.size / 1024) + ' KB');
+}
 
 // grey block face (mirror-tiled, darkened; used at 10% so symmetry never shows)
 {

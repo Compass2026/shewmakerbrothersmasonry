@@ -3,8 +3,8 @@
 import Eyebrow from './Eyebrow.astro';
 import Button from './Button.astro';
 import { imageByFile, imageLarge, imageSrcSet, isOriginal } from '@/data/images';
-interface Props { photo: string; eyebrow?: string; statement: string; accent?: string; line?: string; href?: string; cta?: string; id?: string; wall?: boolean }
-const { photo, eyebrow, statement, accent, line, href, cta, id = 'band-heading', wall = false } = Astro.props;
+interface Props { photo: string; eyebrow?: string; statement: string; accent?: string; line?: string; href?: string; cta?: string; id?: string; wall?: boolean; parallax?: boolean }
+const { photo, eyebrow, statement, accent, line, href, cta, id = 'band-heading', wall = false, parallax = true } = Astro.props;
 const img = imageByFile(photo);
 if (!img) throw new Error(`Unknown band photo: ${photo}`);
 const idx = accent ? statement.indexOf(accent) : -1;
@@ -14,7 +14,7 @@ const lead0 = firstBreak >= 0 ? parts[0].slice(0, firstBreak + 1) : '';
 const rest0 = firstBreak >= 0 ? parts[0].slice(firstBreak + 2) : parts[0];
 ---
 
-<section class:list={['band', { 'stone-wall': wall, 'band--wall': wall }]} aria-labelledby={id} data-tone="ground">
+<section class:list={['band', { 'stone-wall': wall, 'band--wall': wall, 'band--parallax': parallax && !wall }]} aria-labelledby={id} data-tone="ground">
   {!wall && isOriginal(img) && <img class="photo-bg photo-bg--band photo-bg--img" src={imageLarge(img, 1200)} srcset={imageSrcSet(img)} sizes="100vw" alt="" width={img.width} height={img.height} loading="lazy" decoding="async" />}
   {!wall && !isOriginal(img) && <div class="photo-bg photo-bg--soft" style={`background-image: url(${imageLarge(img)})`} aria-hidden="true" data-placeholder data-page={Astro.url.pathname} data-slot="band-background" data-need={`Band background: full-resolution original of ${img.file}; the interim frame is shown softened and darkened.`}></div>}
   {!wall && <div class="scrim scrim--left"></div>}
@@ -30,13 +30,25 @@ const rest0 = firstBreak >= 0 ? parts[0].slice(firstBreak + 2) : parts[0];
 
 <style>
   .band { position: relative; isolation: isolate; overflow: hidden; padding: clamp(5rem, 12vw, 9rem) 0; border-block: 1px solid var(--joint-strong); background: var(--color-coal); }
+  /*
+    Parallax: clip-path makes this section the containing block for the fixed photograph, so the
+    image is pinned to the viewport and the band scrolls over it. Unlike background-attachment:
+    fixed this also works on iOS Safari.
+  */
+  .band--parallax { clip-path: inset(0); overflow: visible; padding-block: clamp(7rem, 18vw, 13rem); }
+  .band--parallax .photo-bg--img { position: fixed; top: 0; left: 0; width: 100vw; height: 100lvh; }
+  @media (prefers-reduced-motion: reduce) {
+    .band--parallax { clip-path: none; overflow: hidden; padding-block: clamp(5rem, 12vw, 9rem); }
+    .band--parallax .photo-bg--img { position: absolute; width: 100%; height: 100%; }
+  }
   .band .photo-bg, .band .scrim { z-index: 0; }
   .photo-bg--band { filter: saturate(1.05) brightness(0.5) contrast(1.1); transform: scale(1.02); }
   .photo-bg--img { width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: center 40%; }
   .band__outer { position: relative; z-index: 1; }
   .band__inner { display: grid; gap: 20px; }
   .band__inner > * { max-width: 60rem; }
-  .band--wall { padding: clamp(3rem, 7vw, 5.5rem) 0; background: url("/images/textures/stone-cover.webp") center / cover no-repeat; }
+  .band--wall { padding: clamp(3rem, 7vw, 5.5rem) 0; background: url("/images/textures/stone-cover-sm.webp") center / cover no-repeat; }
+  @media (min-width: 40rem) { .band--wall { background-image: url("/images/textures/stone-cover.webp"); } }
   .band--wall .band__inner { padding: clamp(28px, 5vw, 56px); max-width: 64rem; }
   .band__title { max-width: 24ch; }
   .band__first { display: block; }

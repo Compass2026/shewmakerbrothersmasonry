@@ -331,8 +331,13 @@ outlined icon box.
 - **Trust strip:** four icon-box items in a row.
 - **Marquee:** ember strip of the nineteen services in Anton, diamond separators, 60s loop, still
   under reduced motion.
-- **Photo band:** full-bleed darkened photograph, eyebrow, headline with accent, a tracked sub-line,
-  optional button.
+- **Photo band (parallax):** full-bleed graded photograph pinned to the viewport while the band scrolls
+  over it, so the work behind the words appears to move. Built with `clip-path: inset(0)` on the section,
+  which makes it the containing block for the `position: fixed` image; this works on iOS Safari, where
+  `background-attachment: fixed` does not. Eyebrow, headline with one ember accent phrase, a tracked
+  sub-line, optional button, and roughly a viewport of travel so the movement reads. Under
+  `prefers-reduced-motion` the image reverts to absolute and the band shortens. The `wall` variant
+  (stone behind the closing CTA) does not parallax.
 - **Process:** numbered blocks with a large ember numeral.
 - **Area blocks:** the towns as two-across link blocks with a pin icon; Tier 1 tagged "Full page".
 - **Before/after:** two blocks with a coal "Before" tag and an ember "After" tag over the photo.
@@ -360,7 +365,7 @@ outlined icon box.
 - **Do** keep ember for pointing: the accent word, the button, the icon, the joint, the stripe.
 - **Do** run grids in bond where the content allows (the gallery, the home teaser).
 - **Do** keep the crew's photographs at honest size inside blocks and only as darkened texture when larger.
-- **Do** honour `prefers-reduced-motion`: no reveal, no marquee.
+- **Do** honour `prefers-reduced-motion`: no reveal, no marquee, no parallax.
 
 ### Don't:
 - **Don't** use stock photography or AI-generated imagery, ever (brand board hard rule).

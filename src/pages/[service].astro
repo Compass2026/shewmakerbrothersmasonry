@@ -8,6 +8,7 @@ import Photo from '@/components/Photo.astro';
 import Placeholder from '@/components/Placeholder.astro';
 import BeforeAfter from '@/components/BeforeAfter.astro';
 import Process from '@/components/Process.astro';
+import PhotoBand from '@/components/PhotoBand.astro';
 import Faq from '@/components/Faq.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import CtaBlock from '@/components/CtaBlock.astro';
@@ -37,6 +38,7 @@ const crumbs = [{ name: 'Home', href: '/' }, { name: def.name, href: path }];
 const relatedServices = copy.related.services.map(serviceBySlug).filter((s): s is ServiceDef => !!s);
 const relatedCities = copy.related.cities.map(cityBySlug).filter((c): c is CityDef => !!c);
 const shortName = (def.navLabel ?? def.name).toLowerCase();
+const bandPhoto = originals.filter((p) => p !== heroPhoto && !inline.includes(p))[0] ?? originals.filter((p) => p !== heroPhoto)[0];
 const words = def.h1.split(' ');
 const accent = words.slice(-4).join(' ').includes('Ozarks') ? 'Lake of the Ozarks' : words.slice(-2).join(' ');
 const schema = [
@@ -73,6 +75,17 @@ const schema = [
       <Process steps={copy.method.items} />
     </div>
   </Section>
+
+  {bandPhoto && (
+    <PhotoBand
+      photo={bandPhoto.id ?? bandPhoto.file}
+      eyebrow="Self-performed"
+      statement="Our crew digs it, pours it, lays it and caps it. One contract, one schedule."
+      accent="One contract, one schedule."
+      line="Masonry. Stone. Concrete. Excavation."
+      id="svc-band-heading"
+    />
+  )}
 
   {pair && (
     <Section tone="ground" labelledby="pair-heading">
