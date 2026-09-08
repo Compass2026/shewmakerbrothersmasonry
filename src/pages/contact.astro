@@ -135,6 +135,7 @@ const schema = [webPageNode({ path, name: title, description, type: 'ContactPage
   .form__actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
   @media (min-width: 40rem) { .form__grid { grid-template-columns: 1fr 1fr; } .form__wide { grid-column: 1 / -1; } }
   .where { display: grid; gap: 24px; }
-  .where__towns { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 24px; font-family: var(--font-display); font-weight: 700; font-size: 1.375rem; text-transform: uppercase; letter-spacing: 0.02em; }
+  .where .muted { max-width: 58ch; }
+  .where__towns { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 24px; font-family: var(--font-display); font-weight: 700; font-size: 1.375rem; letter-spacing: 0.01em; }
   .where__towns .link { color: var(--heading); text-decoration-thickness: 2px; }
 </style>

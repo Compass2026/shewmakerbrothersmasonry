@@ -1,0 +1,12 @@
+{
+  "detector": {
+    "ignoreRules": [
+      "all-caps-body",
+      "kicker-above-heading",
+      "hero-eyebrow-chip",
+      "oversized-h1"
+    ],
+    "ignoreFiles": [],
+    "ignoreValues": []
+  }
+}

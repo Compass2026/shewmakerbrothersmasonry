@@ -24,7 +24,8 @@ should be configuration.
 - Stage 1, art direction: approved (Rokkitt display, Merriweather Sans body, one light section per page, the homepage order in `docs/art-direction.md`, interim raster badge in the header).
 - Stage 2, scaffold and globals: done 2026-09-07. Astro 7 + TypeScript + Tailwind 4, `src/config/site.ts` as the single source of truth, global and schema components, the home page, staging on Vercel.
 - Stage 3, all 34 pages to 70 percent: done 2026-09-07. 19 service pages, 9 city pages, service area, gallery, about, contact, blog hub. Copy in `src/data/copy/`, one typed file per page; every unverified fact and missing photo is a visible placeholder logged in `docs/placeholders.md` (section F).
-- Stage 4, verify with Impeccable detect, Playwright screenshots, schema validation, Core Web Vitals: next.
+- Stage 4, verify: done 2026-09-07. Impeccable detect clean on source and on the preview at 1280 and 390 wide (four brief-pinned rules waived in `.impeccable/config.json`, see below); Playwright full-page screenshots of all 34 pages at both widths plus menu, mobile-nav and gallery-filter states; copy-rule lint and structure/schema/link check at zero; Lighthouse 96 to 100 performance, 100 accessibility, 100 best practices, CLS 0 on five page types (SEO 69 only because staging is noindex); Impeccable finish review run on the home surface.
+- Next: full-resolution photography from Sam (docs/placeholders.md A and B), the vector logo (C), Sam's answers on the unverified facts (D), the production domain and a form endpoint (E), the Google Business Profile, then blog posts.
 
 ## Build and run
 
@@ -55,6 +56,14 @@ Never state years in business. Never claim licensed, insured, bonded or warranty
 imply pricing. Never invent a project, customer, testimonial or location. Never use a stock or
 AI-generated image. "Shewmaker Brothers Masonry" in full, always. No street address anywhere.
 The only phone number is 573-569-3690.
+
+## Impeccable detector waivers
+
+`.impeccable/config.json` ignores four detector rules because the approved DESIGN.md and art direction pin the pattern:
+`all-caps-body` (H1 and H2 are uppercase Rokkitt; eyebrows are uppercase labels), `kicker-above-heading` and
+`hero-eyebrow-chip` (the Eyebrow component on every heading group), `oversized-h1` (display size on the home hero and
+gallery title). `repeating-stripes-gradient` stays as an advisory: it is the placeholder block's hatch. Two inline
+waivers in `src/styles/global.css` cover the size-adjusted local fallback faces named in the art direction.
 
 ## Note on Impeccable in a proxied environment
 

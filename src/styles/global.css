@@ -147,13 +147,13 @@
   .t-headline { font-family: var(--font-display); font-weight: 900; font-size: clamp(2.25rem, 1.5rem + 3vw, 4rem); line-height: 1; letter-spacing: 0.01em; text-transform: uppercase; color: var(--heading); }
   .t-title { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.75rem, 1.3rem + 1.8vw, 2.75rem); line-height: 1.05; letter-spacing: 0.02em; text-transform: uppercase; color: var(--heading); }
   .t-subtitle { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem); line-height: 1.15; color: var(--heading); }
-  .t-lead { font-family: var(--font-body); font-weight: 400; font-size: clamp(1.125rem, 1.05rem + 0.4vw, 1.3125rem); line-height: 1.55; color: var(--heading); }
+  .t-lead { font-family: var(--font-body); font-weight: 400; font-size: clamp(1.125rem, 1.05rem + 0.4vw, 1.3125rem); line-height: 1.55; color: var(--heading); max-width: 52ch; }
   .t-body { font-size: clamp(1rem, 0.97rem + 0.2vw, 1.0625rem); line-height: 1.6; }
   .t-small { font-size: 0.875rem; line-height: 1.5; }
-  .t-label { font-family: var(--font-body); font-weight: 700; font-size: 0.8125rem; line-height: 1.2; letter-spacing: 0.12em; text-transform: uppercase; }
+  .t-label { font-family: var(--font-body); font-weight: 700; font-size: 0.8125rem; line-height: 1.4; letter-spacing: 0.12em; text-transform: uppercase; }
   .muted { color: var(--muted); }
 
-  .eyebrow { font-family: var(--font-body); font-weight: 700; font-size: 0.8125rem; line-height: 1.2; letter-spacing: 0.12em; text-transform: uppercase; color: var(--eyebrow); display: flex; align-items: center; gap: 12px; }
+  .eyebrow { font-family: var(--font-body); font-weight: 700; font-size: 0.8125rem; line-height: 1.4; letter-spacing: 0.12em; text-transform: uppercase; color: var(--eyebrow); display: flex; align-items: center; gap: 12px; }
   .eyebrow.has-rule::before { content: ""; flex: none; width: 24px; height: 2px; background: var(--color-brick); }
 
   .heading-group { display: grid; gap: 14px; }
@@ -161,7 +161,7 @@
   .heading-group .t-lead { margin-top: 4px; }
 
   /* Running copy */
-  .prose { max-width: 66ch; }
+  .prose { max-width: 58ch; }
   .prose > * + * { margin-top: 1em; }
   .prose h2 { margin-top: 2em; }
   .prose h3 { margin-top: 1.5em; }
@@ -198,7 +198,7 @@
   textarea.field__input { height: auto; min-height: 144px; resize: vertical; }
   .field__input::placeholder { color: var(--muted); }
   .field__input:focus { outline: none; border: 2px solid var(--color-brick); padding: 11px 13px; }
-  .field__hint { font-size: 0.875rem; color: var(--muted); }
+  .field__hint { font-size: 0.875rem; color: var(--muted); max-width: 60ch; }
 
   /* Textures: paper grain on dark sections, running-bond course lines on CTA and footer */
   .grain, .course-lines { position: relative; isolation: isolate; }
@@ -217,7 +217,9 @@
   .photo__caption { margin-top: 8px; font-size: 0.875rem; line-height: 1.5; color: var(--muted); }
 
   /* Placeholder block: impossible to mistake for a finished design */
-  .placeholder { position: relative; display: grid; align-content: center; justify-items: center; gap: 12px; padding: clamp(16px, 3vw, 28px); text-align: center; aspect-ratio: var(--ratio, 16 / 9); border: 2px dashed var(--color-brick); border-radius: var(--radius-sm); background-color: var(--field); background-image: repeating-linear-gradient(45deg, var(--hatch) 0 1px, transparent 1px 12px); color: var(--ink); }
+  .placeholder { position: relative; display: grid; align-content: center; justify-items: center; gap: 12px; padding: clamp(16px, 3vw, 28px); text-align: center; aspect-ratio: var(--ratio, 16 / 9); border: 2px dashed var(--color-brick); border-radius: var(--radius-sm); background-color: var(--field); color: var(--ink); }
+  .placeholder::before { content: ""; position: absolute; inset: 0; pointer-events: none; background-image: repeating-linear-gradient(45deg, var(--hatch) 0 1px, transparent 1px 12px); }
+  .placeholder > * { position: relative; }
   .placeholder__text { display: grid; gap: 8px; max-width: 40ch; }
   .placeholder__label { font-family: var(--font-display); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem); line-height: 1; color: var(--heading); white-space: nowrap; }
   .placeholder__need { font-size: 0.875rem; line-height: 1.5; }

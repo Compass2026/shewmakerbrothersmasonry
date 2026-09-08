@@ -15,7 +15,9 @@ const { need, slotName, label = 'Needed from Sam', class: className } = Astro.pr
 </div>
 
 <style>
-  .text-placeholder { display: grid; gap: 6px; padding: 14px 16px; border: 2px dashed var(--color-brick); border-radius: var(--radius-sm); background-color: var(--field); background-image: repeating-linear-gradient(45deg, var(--hatch) 0 1px, transparent 1px 12px); }
+  .text-placeholder { position: relative; display: grid; gap: 6px; padding: 14px 16px; border: 2px dashed var(--color-brick); border-radius: var(--radius-sm); background-color: var(--field); }
+  .text-placeholder::before { content: ""; position: absolute; inset: 0; pointer-events: none; background-image: repeating-linear-gradient(45deg, var(--hatch) 0 1px, transparent 1px 12px); }
+  .text-placeholder > * { position: relative; }
   .text-placeholder__label { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.8125rem; color: var(--heading); }
-  .text-placeholder__need { font-size: 0.875rem; line-height: 1.5; color: var(--ink); }
+  .text-placeholder__need { font-size: 0.875rem; line-height: 1.5; color: var(--ink); max-width: 64ch; }
 </style>
