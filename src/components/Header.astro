@@ -67,7 +67,7 @@ const servicesActive = segments.some((seg) => servicesBySegment(seg.id).some((s)
         <ul class="nav-panel__list">
           <li>
             <details class="nav-panel__details">
-              <summary class="nav-panel__link">Services</summary>
+              <summary class="nav-panel__link nav-panel__summary">Services<svg class="nav-panel__chevron" width="18" height="18" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.75" /></svg></summary>
               <div class="nav-panel__sub">
                 {segments.map((seg) => (
                   <div class="nav-panel__group">
@@ -88,7 +88,7 @@ const servicesActive = segments.some((seg) => servicesBySegment(seg.id).some((s)
         </ul>
       </nav>
       <div class="nav-panel__foot">
-        <PhoneLink class="nav-panel__phone" />
+        <p class="t-small muted">Service-area business based in {site.base.locality}, {site.base.regionName}.</p>
         <Button href={telHref} class="nav-panel__cta">{site.cta.primary}</Button>
       </div>
     </div>
@@ -197,13 +197,14 @@ const servicesActive = segments.some((seg) => servicesBySegment(seg.id).some((s)
   .nav-panel__list { list-style: none; margin: 0; padding: 0; }
   .nav-panel__link { display: block; padding: 14px 0; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; font-size: clamp(1.75rem, 1.3rem + 1.8vw, 2.25rem); line-height: 1.1; color: var(--color-sandstone); text-decoration: none; border-bottom: 1px solid var(--rule); }
   .nav-panel__link[aria-current] { text-decoration: underline; text-decoration-color: var(--color-brick); text-decoration-thickness: 3px; text-underline-offset: 0.12em; }
-  summary.nav-panel__link { cursor: pointer; list-style: none; }
+  summary.nav-panel__link { cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; }
+  .nav-panel__chevron { color: var(--color-brick); transition: transform 160ms ease; }
+  .nav-panel__details[open] .nav-panel__chevron { transform: rotate(180deg); }
   summary.nav-panel__link::-webkit-details-marker { display: none; }
   .nav-panel__sub { display: grid; gap: 20px; padding: 12px 0 20px; border-bottom: 1px solid var(--rule); }
   .nav-panel__group ul { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 10px; }
   .nav-panel__group a { color: var(--color-mortar); text-decoration: none; font-size: 1.0625rem; }
   .nav-panel__foot { margin-top: auto; padding-top: 32px; display: grid; gap: 16px; justify-items: start; }
-  .nav-panel__phone { font-family: var(--font-display); font-weight: 700; font-size: 2.25rem; }
 
   :global(html.nav-open) { overflow: hidden; }
 

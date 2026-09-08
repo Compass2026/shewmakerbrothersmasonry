@@ -43,7 +43,7 @@ try {
   console.log('nav open:', await page.getAttribute('[data-nav-toggle]', 'aria-expanded'));
   await page.click('summary.nav-panel__link');
   await page.waitForTimeout(100);
-  await page.screenshot({ path: `${OUT}/state-nav-services-mobile.png`, fullPage: true });
+  await page.screenshot({ path: `${OUT}/state-nav-services-mobile.png` });
   await mobile.close();
   await browser.close();
 } finally {

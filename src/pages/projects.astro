@@ -146,11 +146,19 @@ const schema = [webPageNode({ path, name: metaTitle, description, type: 'Collect
   .chip { font-family: var(--font-body); font-weight: 600; font-size: 0.875rem; line-height: 1; padding: 10px 14px; min-height: 40px; background: transparent; color: var(--heading); border: 1px solid var(--rule); border-radius: var(--radius-sm); cursor: pointer; transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease; }
   .chip:hover { border-color: var(--color-sandstone-dim); }
   .chip[aria-pressed="true"] { background: var(--color-sandstone); color: var(--color-ground); border-color: var(--color-sandstone); }
-  .gallery { display: grid; gap: 16px; }
+  /* Coursed grid: courses of four cards alternate with courses of three set half a stone over, like running bond. */
+  .gallery { display: grid; gap: 16px; align-items: start; }
   .gallery__empty { margin-top: 24px; }
-  @media (min-width: 40rem) { .gallery { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 64rem) { .gallery { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
-  @media (min-width: 80rem) { .gallery { grid-template-columns: repeat(4, 1fr); } }
+  @media (min-width: 40rem) {
+    .gallery { grid-template-columns: repeat(4, 1fr); }
+    :global(.gallery > .project-card) { grid-column: span 2; }
+    :global(.gallery > .project-card:nth-child(3n + 3 of :not([hidden]))) { grid-column: 2 / span 2; }
+  }
+  @media (min-width: 64rem) {
+    .gallery { grid-template-columns: repeat(8, 1fr); gap: 24px; }
+    :global(.gallery > .project-card:nth-child(3n + 3 of :not([hidden]))) { grid-column: span 2; }
+    :global(.gallery > .project-card:nth-child(7n + 5 of :not([hidden]))) { grid-column: 2 / span 2; }
+  }
   .pairs { display: grid; gap: 32px; }
   .missing { display: grid; gap: 32px; }
 </style>

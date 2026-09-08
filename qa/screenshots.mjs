@@ -27,6 +27,23 @@ if (args.includes('--all')) {
 }
 if (paths.length === 0) paths = ['/'];
 
+/** Force lazy images eager, walk the page so every observer fires, wait for images and fonts, return to top. */
+async function settle(page) {
+  await page.evaluate(async () => {
+    document.querySelectorAll('img[loading="lazy"]').forEach((img) => { img.loading = 'eager'; });
+    const step = window.innerHeight;
+    for (let y = 0; y <= document.documentElement.scrollHeight; y += step) {
+      window.scrollTo(0, y);
+      await new Promise((r) => setTimeout(r, 40));
+    }
+    window.scrollTo(0, 0);
+    await Promise.all([...document.images].map((img) => (img.complete ? null : new Promise((r) => { img.onload = img.onerror = r; }))));
+    await document.fonts.ready;
+  });
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(100);
+}
+
 const slug = (p) => (p === '/' ? 'home' : p.replace(/^\/|\/$/g, '').replace(/\//g, '--'));
 
 const server = spawn('npx', ['astro', 'preview', '--port', String(PORT)], { stdio: 'ignore' });
@@ -50,7 +67,7 @@ try {
     const page = await ctx.newPage();
     for (const p of paths) {
       const res = await page.goto(`${BASE}${p}`, { waitUntil: 'networkidle' });
-      await page.evaluate(() => document.fonts.ready);
+      await settle(page);
       const file = `${OUT}/${slug(p)}-${name}${FOLD ? '-fold' : ''}.png`;
       await page.screenshot({ path: file, fullPage: !FOLD });
       console.log(`${res?.status() ?? '?'}  ${p}  ->  ${file}`);
