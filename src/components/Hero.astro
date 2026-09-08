@@ -7,7 +7,7 @@ import Section from './Section.astro';
 import Eyebrow from './Eyebrow.astro';
 import Button from './Button.astro';
 import PhoneLink from './PhoneLink.astro';
-import { imageByFile, imageLarge, isOriginal } from '@/data/images';
+import { imageByFile, imageLarge, imageSrcSet, isOriginal } from '@/data/images';
 import { site, telHref } from '@/config/site';
 
 interface Props {
@@ -35,7 +35,12 @@ const parts = idx >= 0 ? [title.slice(0, idx), accent!, title.slice(idx + accent
 
 <Section tone="ground" width="wide" padding="none" class={compact ? 'hero hero--compact' : 'hero'} labelledby="page-title">
   <div class="hero__bg" aria-hidden="true">
-    {bg && isOriginal(bg) && <div class="photo-bg photo-bg--hero" style={`background-image: url(${imageLarge(bg, 2000)}); background-position: ${position}`}></div>}
+    {bg && isOriginal(bg) && (
+      <picture>
+        <source media="(max-width: 40rem)" srcset={bg.variants!.filter((v) => v.w <= 960).map((v) => `/images/projects/${v.file} ${v.w}w`).join(', ')} sizes="100vw" />
+        <img class="photo-bg photo-bg--hero photo-bg--img" src={imageLarge(bg, 1200)} srcset={imageSrcSet(bg)} sizes="100vw" alt="" width={bg.width} height={bg.height} loading="eager" fetchpriority="high" decoding="async" style={`object-position: ${position}`} />
+      </picture>
+    )}
     {bg && !isOriginal(bg) && <div class="photo-bg photo-bg--hero" style={`background-image: url(${imageLarge(bg)}); background-position: ${position}`} data-placeholder data-page={Astro.url.pathname} data-slot="hero-background" data-need={need ?? `Hero background: full-resolution original of ${bg.file}; the interim 414 px frame is shown darkened.`}></div>}
     <div class="scrim scrim--left"></div>
     <div class="scrim scrim--bottom"></div>
@@ -61,6 +66,7 @@ const parts = idx >= 0 ? [title.slice(0, idx), accent!, title.slice(idx + accent
   :global(.hero) { position: relative; isolation: isolate; overflow: hidden; }
   .hero__bg { position: absolute; inset: 0; z-index: 0; }
   .photo-bg--hero { filter: saturate(1.05) brightness(0.55) contrast(1.12); transform: scale(1.02); }
+  .photo-bg--img { width: 100%; height: 100%; max-width: none; object-fit: cover; }
   .hero__inner { position: relative; z-index: 1; display: grid; gap: 22px; max-width: 46rem; padding: clamp(6rem, 12vw, 10rem) 0 clamp(4rem, 8vw, 6rem); }
   :global(.hero--compact) .hero__inner { padding: clamp(3.5rem, 7vw, 5.5rem) 0 clamp(3rem, 6vw, 4.5rem); max-width: 52rem; }
   .hero__title { max-width: 14ch; text-wrap: balance; }

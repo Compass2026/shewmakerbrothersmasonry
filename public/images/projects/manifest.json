@@ -348,6 +348,11 @@
           "file": "full/exterior-stone-veneer-wainscot-01-w640.webp"
         },
         {
+          "w": 960,
+          "h": 1280,
+          "file": "full/exterior-stone-veneer-wainscot-01-w960.webp"
+        },
+        {
           "w": 1200,
           "h": 1600,
           "file": "full/exterior-stone-veneer-wainscot-01-w1200.webp"
@@ -383,6 +388,11 @@
           "w": 640,
           "h": 480,
           "file": "full/new-build-stone-porch-01-w640.webp"
+        },
+        {
+          "w": 960,
+          "h": 720,
+          "file": "full/new-build-stone-porch-01-w960.webp"
         },
         {
           "w": 1200,
@@ -421,6 +431,11 @@
           "file": "full/garage-stone-veneer-01-w640.webp"
         },
         {
+          "w": 960,
+          "h": 720,
+          "file": "full/garage-stone-veneer-01-w960.webp"
+        },
+        {
           "w": 1200,
           "h": 900,
           "file": "full/garage-stone-veneer-01-w1200.webp"
@@ -456,6 +471,11 @@
           "w": 640,
           "h": 480,
           "file": "full/stone-stairs-poured-treads-02-w640.webp"
+        },
+        {
+          "w": 960,
+          "h": 720,
+          "file": "full/stone-stairs-poured-treads-02-w960.webp"
         },
         {
           "w": 1200,
@@ -496,6 +516,11 @@
           "file": "full/lakefront-wall-rip-rap-01-w640.webp"
         },
         {
+          "w": 960,
+          "h": 720,
+          "file": "full/lakefront-wall-rip-rap-01-w960.webp"
+        },
+        {
           "w": 1200,
           "h": 900,
           "file": "full/lakefront-wall-rip-rap-01-w1200.webp"
@@ -529,6 +554,11 @@
           "w": 640,
           "h": 853,
           "file": "full/concrete-pad-lakefront-01-w640.webp"
+        },
+        {
+          "w": 960,
+          "h": 1280,
+          "file": "full/concrete-pad-lakefront-01-w960.webp"
         },
         {
           "w": 1200,
@@ -566,6 +596,11 @@
           "w": 640,
           "h": 480,
           "file": "full/curved-retaining-wall-01-w640.webp"
+        },
+        {
+          "w": 960,
+          "h": 720,
+          "file": "full/curved-retaining-wall-01-w960.webp"
         },
         {
           "w": 1200,
@@ -610,6 +645,11 @@
           "file": "full/stone-wall-lake-house-01-w640.webp"
         },
         {
+          "w": 960,
+          "h": 720,
+          "file": "full/stone-wall-lake-house-01-w960.webp"
+        },
+        {
           "w": 1200,
           "h": 900,
           "file": "full/stone-wall-lake-house-01-w1200.webp"
@@ -652,6 +692,11 @@
           "file": "full/stone-walls-stairs-ramp-01-w640.webp"
         },
         {
+          "w": 960,
+          "h": 720,
+          "file": "full/stone-walls-stairs-ramp-01-w960.webp"
+        },
+        {
           "w": 1200,
           "h": 900,
           "file": "full/stone-walls-stairs-ramp-01-w1200.webp"
@@ -684,6 +729,11 @@
           "w": 640,
           "h": 400,
           "file": "full/flagstone-walkway-01-w640.webp"
+        },
+        {
+          "w": 960,
+          "h": 600,
+          "file": "full/flagstone-walkway-01-w960.webp"
         },
         {
           "w": 1200,
@@ -723,6 +773,11 @@
           "w": 640,
           "h": 360,
           "file": "full/seawall-aerial-01-w640.webp"
+        },
+        {
+          "w": 960,
+          "h": 540,
+          "file": "full/seawall-aerial-01-w960.webp"
         },
         {
           "w": 1200,
@@ -768,6 +823,11 @@
           "w": 640,
           "h": 360,
           "file": "full/seawall-aerial-02-w640.webp"
+        },
+        {
+          "w": 960,
+          "h": 540,
+          "file": "full/seawall-aerial-02-w960.webp"
         },
         {
           "w": 1200,

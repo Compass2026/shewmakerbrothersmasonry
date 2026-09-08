@@ -8,7 +8,7 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 
 const SRC = '.tmp-originals';
 const OUT = 'public/images/projects/full';
-const WIDTHS = [640, 1200, 2000, 2800];
+const WIDTHS = [640, 960, 1200, 2000, 2800];
 mkdirSync(OUT, { recursive: true });
 
 const photos = [
@@ -37,7 +37,7 @@ for (const p of photos) {
     if (w > meta.width) continue;
     if (w > 2000 && !p.hero) continue;
     const file = `${p.id}-w${w}.webp`;
-    const info = await sharp(await base.toBuffer()).resize({ width: w, withoutEnlargement: true }).webp({ quality: w >= 2000 ? 68 : 76 }).toFile(`${OUT}/${file}`);
+    const info = await sharp(await base.toBuffer()).resize({ width: w, withoutEnlargement: true }).webp({ quality: w >= 2000 ? 68 : w <= 960 ? 70 : 76 }).toFile(`${OUT}/${file}`);
     variants.push({ w: info.width, h: info.height, file: `full/${file}` });
   }
   const def = variants.find((v) => v.w === 1200) ?? variants[variants.length - 1];
