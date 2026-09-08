@@ -21,8 +21,8 @@ export const businessNode = () => ({
   name: site.name,
   url: `${site.url}/`,
   telephone: site.phone.e164,
-  image: absoluteUrl(site.logo.badge),
-  logo: absoluteUrl(site.logo.badge),
+  image: absoluteUrl(site.logo.raster),
+  logo: absoluteUrl(site.logo.raster),
   description: site.description,
   address: {
     '@type': 'PostalAddress',

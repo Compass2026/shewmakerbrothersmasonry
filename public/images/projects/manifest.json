@@ -9,10 +9,27 @@
   ],
   "brand": [
     {
-      "file": "../brand/logo-badge-414.jpg",
-      "width": 414,
-      "height": 414,
-      "description": "The logo badge: bearded mason with folded arms, American flag, stone fireplace with mounted buck, trowel, John 3:16 tattoo; wordmark SHEWMAKER BROTHERS in a heavy condensed slab. Square Facebook crop; the MASONRY line is cut off at the bottom.",
+      "file": "../brand/logo-badge.webp",
+      "width": 900,
+      "height": 1350,
+      "description": "The full badge supplied by Sam on 2026-09-08: SHEWMAKER BROTHERS arced over a bearded mason with folded arms, American flag, stone fireplace with a mounted buck, trowel, JOHN 3:16 forearm tattoo, MASONRY across the base. Trimmed from a phone screenshot; the wordmark is complete, unlike the earlier Facebook crop.",
+      "variants": [
+        {
+          "w": 900,
+          "h": 1350,
+          "file": "../brand/logo-badge.webp"
+        },
+        {
+          "w": 300,
+          "h": 450,
+          "file": "../brand/logo-badge-sm.webp"
+        },
+        {
+          "w": 900,
+          "h": 1350,
+          "file": "../brand/logo-badge.jpg"
+        }
+      ],
       "needs": "Vector source, a simplified small-size mark and a one-colour version."
     }
   ],

@@ -49,6 +49,13 @@ export const site = {
 
   owners: [{ name: 'Mike Shewmaker' }, { name: 'Sam Shewmaker' }],
 
+  /**
+   * Hero video. null keeps the photograph. Set to a path under /videos/ to play it behind the
+   * headline: it loads only on wide screens with motion allowed, over the photo as its poster.
+   * Footage must be the crew's own; the brand board forbids stock and AI-generated imagery.
+   */
+  heroVideo: null as string | null,
+
   /** No email or form endpoint has been supplied. Phone-first until Tom decides. */
   email: '',
   formEndpoint: '',
@@ -62,9 +69,13 @@ export const site = {
   },
 
   logo: {
-    badge: '/images/brand/logo-badge-414.jpg',
-    width: 414,
-    height: 414,
+    /** The full badge Sam supplied on 2026-09-08: wordmark, mason, flag, buck, fireplace, trowel. */
+    badge: '/images/brand/logo-badge.webp',
+    small: '/images/brand/logo-badge-sm.webp',
+    /** JPEG for schema and social cards. */
+    raster: '/images/brand/logo-badge.jpg',
+    width: 900,
+    height: 1350,
     alt: 'Shewmaker Brothers Masonry badge',
   },
 

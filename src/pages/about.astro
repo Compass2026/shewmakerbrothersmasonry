@@ -148,7 +148,7 @@ const schema = [webPageNode({ path, name: title, description, type: 'AboutPage' 
   .story { display: grid; gap: 40px; align-items: start; }
   .story__text { display: grid; gap: 26px; }
   .story__media { display: grid; gap: 20px; align-content: start; }
-  .story__badge { margin: 0; padding: 18px; }
+  .story__badge { margin: 0; padding: 16px; max-width: 360px; justify-self: start; }
   .story__badge img { width: 100%; border: 1px solid var(--joint); }
   .story__caption { padding: 14px 4px 0; font-family: var(--font-condensed); font-weight: 600; font-size: 0.8125rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); text-align: center; }
   @media (min-width: 64rem) { .story { grid-template-columns: 7fr 5fr; gap: 64px; } }

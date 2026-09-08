@@ -14,7 +14,7 @@ const countyLine = `${site.counties.slice(0, -1).join(', ')} and ${site.counties
     <div class="site-footer__grid">
       <div class="site-footer__brand">
         <a href="/" class="site-footer__lockup" aria-label={`${site.name}, home`}>
-          <img src={site.logo.badge} width="64" height="64" alt="" loading="lazy" decoding="async" />
+          <img class="site-footer__badge" src={site.logo.small} width="300" height="450" alt="" loading="lazy" decoding="async" />
           <span><span class="site-footer__name">Shewmaker Brothers</span><span class="site-footer__sub">Masonry</span></span>
         </a>
         <p class="site-footer__tag">Third generation. Own crews.<br />Stone on a footing.</p>
@@ -59,7 +59,8 @@ const countyLine = `${site.counties.slice(0, -1).join(', ')} and ${site.counties
   .site-footer { background: var(--color-shadow); color: var(--ink); padding: 64px 0 28px; }
   .site-footer__grid { display: grid; gap: 40px; }
   .site-footer__brand { display: grid; gap: 14px; align-content: start; }
-  .site-footer__lockup { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+  .site-footer__lockup { display: flex; align-items: center; gap: 16px; text-decoration: none; }
+  .site-footer__badge { width: auto; height: 104px; }
   .site-footer__lockup > span { display: flex; flex-direction: column; line-height: 1; }
   .site-footer__name { font-family: var(--font-display); font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.02em; color: var(--color-chalk); }
   .site-footer__sub { margin-top: 5px; font-family: var(--font-condensed); font-weight: 600; font-size: 0.75rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--color-amber); }

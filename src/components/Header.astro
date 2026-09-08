@@ -12,7 +12,7 @@ const servicesActive = segments.some((seg) => servicesBySegment(seg.id).some((s)
 <header class="site-header" data-header>
   <div class="wrap wrap--wide site-header__row">
     <a class="brand" href="/" aria-label={`${site.name}, home`}>
-      <img class="brand__badge" src={site.logo.badge} width="96" height="96" alt="" decoding="async" fetchpriority="high" />
+      <img class="brand__badge" src={site.logo.small} width="300" height="450" alt="" decoding="async" fetchpriority="high" />
       <span class="brand__name" aria-hidden="true"><span class="brand__line1">Shewmaker Brothers</span><span class="brand__line2">Masonry · Lake of the Ozarks</span></span>
     </a>
     <nav class="nav" aria-label="Primary">
@@ -107,12 +107,12 @@ const servicesActive = segments.some((seg) => servicesBySegment(seg.id).some((s)
   .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: rgba(25, 20, 16, 0.88); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--joint); }
   .site-header.is-compact { background: rgba(25, 20, 16, 0.95); }
   /* impeccable-disable-next-line layout-transition: fixed header, the document offset is constant so nothing reflows */
-  .site-header__row { position: relative; z-index: 2; display: flex; align-items: center; gap: 24px; min-height: 96px; transition: min-height 260ms var(--ease-expo); }
-  .site-header.is-compact .site-header__row { min-height: 72px; }
+  .site-header__row { position: relative; z-index: 2; display: flex; align-items: center; gap: 22px; min-height: 104px; transition: min-height 280ms var(--ease-expo); }
+  .site-header.is-compact .site-header__row { min-height: 70px; }
   .brand { display: flex; align-items: center; gap: 12px; margin-right: auto; text-decoration: none; color: var(--color-chalk); }
   /* impeccable-disable-next-line layout-transition: the badge shrinks with the fixed header; no document reflow */
-  .brand__badge { width: 72px; height: 72px; transition: width 260ms var(--ease-expo), height 260ms var(--ease-expo); }
-  .site-header.is-compact .brand__badge { width: 48px; height: 48px; }
+  .brand__badge { width: auto; height: 84px; transition: height 280ms var(--ease-expo); }
+  .site-header.is-compact .brand__badge { height: 52px; }
   .brand__name { display: none; flex-direction: column; line-height: 1; }
   .brand__line1 { font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 0.02em; text-transform: uppercase; color: var(--color-chalk); white-space: nowrap; transition: font-size 260ms var(--ease-expo); }
   .site-header.is-compact .brand__line1 { font-size: 1.375rem; }
@@ -153,7 +153,7 @@ const servicesActive = segments.some((seg) => servicesBySegment(seg.id).some((s)
   .nav-panel__group a { color: var(--color-mortar); text-decoration: none; font-size: 1.0625rem; }
   .nav-panel__foot { margin-top: auto; padding-top: 32px; display: grid; gap: 16px; justify-items: start; }
   :global(html.nav-open) { overflow: hidden; }
-  @media (min-width: 30rem) { .brand__name { display: flex; } .site-header__row { min-height: 120px; } .brand__badge { width: 96px; height: 96px; } }
+  @media (min-width: 30rem) { .brand__name { display: flex; } .site-header__row { min-height: 140px; } .brand__badge { height: 120px; } .site-header.is-compact .site-header__row { min-height: 78px; } .site-header.is-compact .brand__badge { height: 58px; } }
   @media (min-width: 64rem) { .nav { display: block; } :global(.site-header__cta) { display: inline-flex; } .nav-toggle { display: none; } .brand__name { display: none; } }
   @media (min-width: 80rem) { .brand__name { display: flex; } }
 </style>

@@ -24,7 +24,7 @@ interface Props {
   ogImage?: string;
 }
 
-const { title, description, schema = [], ogImage = site.logo.badge } = Astro.props;
+const { title, description, schema = [], ogImage = site.logo.raster } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 const fullTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
 const graph = [businessNode(), websiteNode(), ...schema];

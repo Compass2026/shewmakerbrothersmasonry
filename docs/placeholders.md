@@ -80,14 +80,15 @@ exists. From the brand board's wish list and the 19-page service taxonomy:
 
 ## C. Logo and brand assets
 
-- **Vector logo** (AI, EPS or SVG). Only a 414 px raster exists, and the Facebook square crop cuts
-  the MASONRY line off the bottom. Ask Sam whether the designer's source file exists; if not the
-  badge needs redrawing as vector before launch.
+- **Vector logo** (AI, EPS or SVG). Sam supplied a complete badge on 2026-09-08 (1179 x 1769 after
+  trimming, wordmark and MASONRY line intact), now the site logo at `public/images/brand/`. It is
+  still a raster from a phone screenshot, so a vector source is wanted before launch. Ask Sam
+  whether the designer's file exists; if not the badge needs redrawing as vector.
 - **Simplified small mark** for the favicon, footer and social avatar. The full badge will not read
   at 32 px.
 - **One-colour version** for single-colour uses.
-- **Interim treatment on staging:** the raster badge at 56 px in the header beside the business
-  name set in the display face. Visibly interim; replaced when the vector arrives.
+- **Header treatment:** the full badge at 120 px tall (84 px on phones) beside the name set in the
+  display face, shrinking to 58 px as the page scrolls.
 
 ## D. Facts that stay out of the site until Sam confirms them
 
