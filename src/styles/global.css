@@ -131,11 +131,12 @@
   .t-small { font-size: 0.9375rem; line-height: 1.5; }
   .t-label { font-family: var(--font-condensed); font-weight: 600; font-size: 0.875rem; line-height: 1.3; letter-spacing: 0.22em; text-transform: uppercase; }
   .muted { color: var(--muted); }
-  .accent { color: var(--color-ember); text-shadow: 0 0 0.22em rgba(242, 168, 29, 0.28); }
+  .accent { color: var(--color-ember); text-shadow: 0 0 14px rgba(242, 168, 29, 0.3); }
   [data-tone="mortar"] .accent { color: var(--color-ember-deep); text-shadow: none; }
 
   .eyebrow { display: flex; align-items: center; gap: 12px; font-family: var(--font-condensed); font-weight: 600; font-size: 0.875rem; line-height: 1.3; letter-spacing: 0.22em; text-transform: uppercase; color: var(--eyebrow); }
   .eyebrow.has-rule::before { content: ""; flex: none; width: 28px; height: 2px; background: var(--color-ember); box-shadow: -8px 0 0 -0.5px var(--color-ember-deep); }
+  @media (max-width: 39.99rem) { .eyebrow { font-size: 0.8125rem; letter-spacing: 0.14em; } .eyebrow.has-rule::before { width: 20px; } }
   [data-tone="mortar"] .eyebrow.has-rule::before { background: var(--color-ember-deep); box-shadow: none; }
 
   .sec-head { display: grid; gap: 16px; max-width: 62ch; }

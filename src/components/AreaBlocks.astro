@@ -20,10 +20,11 @@ const items = [...cities.map((c) => ({ name: c.name, href: cityPath(c.slug), tie
 </ul>
 
 <style>
-  .areas { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .areas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .areas__item { display: flex; align-items: center; gap: 12px; padding: 16px 18px; font-family: var(--font-condensed); font-weight: 700; font-size: 1.125rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--heading); }
   .areas__item svg { color: var(--color-ember); flex: none; }
   .areas__tier { margin-left: auto; font-size: 0.75rem; letter-spacing: 0.18em; color: var(--muted); font-weight: 600; }
   .areas__item.is-current { border-color: var(--color-ember); }
-  @media (min-width: 40rem) { .areas { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 39.99rem) { .areas__item { padding: 14px 12px; font-size: 0.9375rem; letter-spacing: 0.05em; gap: 8px; } .areas__tier { display: none; } }
+  @media (min-width: 40rem) { .areas { gap: 12px; } }
 </style>

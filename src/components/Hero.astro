@@ -62,7 +62,7 @@ const parts = idx >= 0 ? [title.slice(0, idx), accent!, title.slice(idx + accent
   .photo-bg--hero { filter: saturate(1.1) brightness(0.5) contrast(1.2); transform: scale(1.03); }
   .hero__inner { position: relative; z-index: 1; display: grid; gap: 22px; max-width: 46rem; padding: clamp(6rem, 12vw, 10rem) 0 clamp(4rem, 8vw, 6rem); }
   :global(.hero--compact) .hero__inner { padding: clamp(3.5rem, 7vw, 5.5rem) 0 clamp(3rem, 6vw, 4.5rem); max-width: 52rem; }
-  .hero__title { max-width: 14ch; }
+  .hero__title { max-width: 14ch; text-wrap: balance; }
   .hero__meta:empty { display: none; }
   .hero__meta { margin-top: 18px; }
   @media (min-width: 64rem) { .hero__title { max-width: 19ch; } .hero__inner { max-width: 52rem; } }
