@@ -54,7 +54,7 @@ export const site = {
    * headline: it loads only on wide screens with motion allowed, over the photo as its poster.
    * Footage must be the crew's own; the brand board forbids stock and AI-generated imagery.
    */
-  heroVideo: null as string | null,
+  heroVideo: '/videos/hero-lake.mp4' as string | null,
 
   /** No email or form endpoint has been supplied. Phone-first until Tom decides. */
   email: '',
