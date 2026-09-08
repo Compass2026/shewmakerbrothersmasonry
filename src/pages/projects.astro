@@ -26,7 +26,7 @@ const schema = [webPageNode({ path, name: metaTitle, description, type: 'Collect
     <Breadcrumbs items={crumbs} slot="above" />
   </Hero>
 
-  <Section tone="lifted" padding="tight" width="wide" labelledby="filter-heading" class="filters">
+  <Section tone="concrete" padding="tight" width="wide" labelledby="filter-heading" class="filters">
     <h2 id="filter-heading" class="sr-only">Filter the gallery</h2>
     <div class="filters__row" data-filter-group="segment">
       <span class="eyebrow filters__label">Work</span>
@@ -49,7 +49,7 @@ const schema = [webPageNode({ path, name: metaTitle, description, type: 'Collect
     <p class="gallery__empty muted" data-empty hidden>Nothing in this set yet. That is a photo we still need from Sam.</p>
   </Section>
 
-  <Section tone="lifted" glow="top" labelledby="pairs-heading">
+  <Section tone="sand" glow="top" labelledby="pairs-heading">
     <div class="pairs">
       <div class="sec-head">
         <Eyebrow rule>Before and after</Eyebrow>
@@ -59,7 +59,7 @@ const schema = [webPageNode({ path, name: metaTitle, description, type: 'Collect
     </div>
   </Section>
 
-  <Section tone="ground" labelledby="missing-heading">
+  <Section tone="concrete" labelledby="missing-heading">
     <div class="missing">
       <div class="sec-head">
         <Eyebrow rule>Still to photograph</Eyebrow>
@@ -101,7 +101,7 @@ const schema = [webPageNode({ path, name: metaTitle, description, type: 'Collect
   .filters__count { margin-top: 12px; }
   .chip { font-family: var(--font-condensed); font-weight: 600; font-size: 0.9375rem; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1; padding: 11px 16px; min-height: 40px; background: var(--card); color: var(--heading); border: 1px solid var(--joint); cursor: pointer; transition: border-color 120ms ease, background-color 120ms ease, color 120ms ease; }
   .chip:hover { border-color: var(--joint-strong); }
-  .chip[aria-pressed="true"] { background: var(--color-ember); color: var(--color-coal); border-color: var(--color-ember); }
+  .chip[aria-pressed="true"] { background: var(--accent-solid); color: var(--accent-label); border-color: var(--accent-solid); }
   .gallery { display: grid; gap: 16px; align-items: start; }
   .gallery__empty { margin-top: 24px; }
   @media (min-width: 40rem) {

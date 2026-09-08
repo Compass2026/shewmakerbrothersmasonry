@@ -31,7 +31,7 @@ const schema = [webPageNode({ path, name: title, description, type: 'ContactPage
     <p class="contact-note">Call or text. Ask for Sam. Service-area business based in {site.base.locality}, {site.base.regionName}.</p>
   </Hero>
 
-  <Section tone="lifted" glow="top" labelledby="form-heading">
+  <Section tone="sand" glow="top" labelledby="form-heading">
     <div class="block form-block">
       <div class="block__body form-wrap">
         <div class="sec-head">
@@ -60,7 +60,7 @@ const schema = [webPageNode({ path, name: title, description, type: 'ContactPage
     </div>
   </Section>
 
-  <Section tone="ground" width="wide" labelledby="where-heading">
+  <Section tone="concrete" width="wide" labelledby="where-heading">
     <div class="where">
       <div class="where__text">
         <div class="sec-head">
@@ -78,8 +78,8 @@ const schema = [webPageNode({ path, name: title, description, type: 'ContactPage
 </Base>
 
 <style>
-  :global(.contact-phone) { display: inline-flex; align-items: center; gap: 18px; font-family: var(--font-display); font-size: clamp(2.5rem, 1.5rem + 5vw, 5.5rem); line-height: 1; letter-spacing: 0.01em; color: var(--color-ember); text-decoration: none; font-variant-numeric: tabular-nums; text-shadow: 0 0 28px rgba(242, 168, 29, 0.35); }
-  :global(.contact-phone:hover) { color: var(--color-ember-light); }
+  :global(.contact-phone) { display: inline-flex; align-items: center; gap: 18px; font-family: var(--font-display); font-size: clamp(2.5rem, 1.5rem + 5vw, 5.5rem); line-height: 1; letter-spacing: 0.01em; color: var(--accent); text-decoration: none; font-variant-numeric: tabular-nums; text-shadow: 0 0 28px rgba(242, 168, 29, 0.35); }
+  :global(.contact-phone:hover) { color: var(--accent-solid-hover); }
   :global(.contact-note) { color: var(--color-mortar-dim); }
   .form-block { max-width: 52rem; }
   .form-wrap { display: grid; gap: 28px; padding: clamp(24px, 4vw, 40px); }

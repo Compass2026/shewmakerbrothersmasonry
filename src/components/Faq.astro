@@ -26,7 +26,7 @@ const { faqs, heading = 'Questions we get asked', id = 'faq' } = Astro.props;
   .faq__q { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 24px; cursor: pointer; list-style: none; }
   .faq__q::-webkit-details-marker { display: none; }
   .faq__h { font-family: var(--font-condensed); font-weight: 700; font-size: 1.25rem; letter-spacing: 0.03em; text-transform: uppercase; }
-  .faq__mark { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--joint-strong); color: var(--color-ember); transition: transform 160ms ease; }
+  .faq__mark { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--joint-strong); color: var(--accent); transition: transform 160ms ease; }
   .faq__item[open] .faq__mark { transform: rotate(45deg); }
   .faq__a { padding: 0 24px 22px; }
 </style>

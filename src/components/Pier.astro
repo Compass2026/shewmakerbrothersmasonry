@@ -1,0 +1,23 @@
+---
+/**
+ * A stone pier: lit front face, darker return face where the corner turns away from the light,
+ * a poured concrete cap overhanging both, and a shadow cast onto the wall behind it.
+ */
+interface Props {
+  /** Which way the corner turns. 'right' puts the return face on the right. */
+  side?: 'right' | 'left';
+  width?: string;
+  height?: string;
+  class?: string;
+}
+const { side = 'right', width, height, class: className } = Astro.props;
+const style = [width && `--pier-w: ${width}`, height && `--pier-h: ${height}`].filter(Boolean).join('; ');
+---
+
+<div class:list={['pier', { 'pier--flip': side === 'left' }, className]} style={style || undefined} aria-hidden="true">
+  <div class="pier__shaft">
+    <div class="pier__face"></div>
+    <div class="pier__return"></div>
+  </div>
+  <div class="pier__cap"></div>
+</div>

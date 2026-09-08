@@ -3,11 +3,12 @@ import { site, telHref } from '@/config/site';
 import { segments, servicesBySegment, servicePath } from '@/data/taxonomy';
 import { cities, cityPath, foldIns } from '@/data/cities';
 import Button from './Button.astro';
+import Arcade from './Arcade.astro';
 const year = new Date().getFullYear();
 const countyLine = `${site.counties.slice(0, -1).join(', ')} and ${site.counties[site.counties.length - 1]} counties`;
 ---
 
-<div class="stone-course stone-course--deep" aria-hidden="true"></div>
+<Arcade count={7} height="150px" />
 <footer class="site-footer" data-tone="shadow">
   <div class="wrap wrap--wide">
     <div class="site-footer__grid">
@@ -55,23 +56,23 @@ const countyLine = `${site.counties.slice(0, -1).join(', ')} and ${site.counties
 </footer>
 
 <style>
-  .site-footer { background: var(--color-pit); color: var(--ink); padding: 64px 0 28px; }
+  .site-footer { background: var(--color-shadow); color: var(--ink); padding: 64px 0 28px; }
   .site-footer__grid { display: grid; gap: 40px; }
   .site-footer__brand { display: grid; gap: 14px; align-content: start; }
   .site-footer__lockup { display: flex; align-items: center; gap: 14px; text-decoration: none; }
   .site-footer__lockup > span { display: flex; flex-direction: column; line-height: 1; }
   .site-footer__name { font-family: var(--font-display); font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.02em; color: var(--color-chalk); }
-  .site-footer__sub { margin-top: 5px; font-family: var(--font-condensed); font-weight: 600; font-size: 0.75rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--color-ember); }
+  .site-footer__sub { margin-top: 5px; font-family: var(--font-condensed); font-weight: 600; font-size: 0.75rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--color-amber); }
   .site-footer__tag { font-family: var(--font-condensed); font-weight: 600; font-size: 1rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-mortar-dim); line-height: 1.6; }
-  .site-footer__heading { font-family: var(--font-condensed); font-weight: 600; font-size: 0.8125rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--color-ember); margin-bottom: 14px; }
+  .site-footer__heading { font-family: var(--font-condensed); font-weight: 600; font-size: 0.8125rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--color-amber); margin-bottom: 14px; }
   .site-footer__col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
   .site-footer__col a { color: var(--color-mortar); text-decoration: none; }
-  .site-footer__col a:hover { color: var(--color-ember); }
+  .site-footer__col a:hover { color: var(--color-amber); }
   .site-footer__services ul { grid-template-columns: 1fr 1fr; column-gap: 20px; }
   .site-footer__touch { display: grid; gap: 20px; align-content: start; }
   :global(.site-footer__cta) { justify-self: start; }
   .site-footer__bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; margin-top: 48px; padding-top: 22px; border-top: 1px solid var(--joint); }
-  .site-footer__motto { font-family: var(--font-condensed); font-weight: 600; font-size: 0.8125rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--color-ember); }
+  .site-footer__motto { font-family: var(--font-condensed); font-weight: 600; font-size: 0.8125rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--color-amber); }
   @media (min-width: 40rem) { .site-footer__grid { grid-template-columns: 1fr 1fr; } }
   @media (min-width: 64rem) { .site-footer__grid { grid-template-columns: 1.2fr 1.4fr 0.8fr 1fr; gap: 48px; } }
 </style>

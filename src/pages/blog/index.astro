@@ -27,7 +27,7 @@ const schema = [webPageNode({ path, name: metaTitle, description, type: 'Collect
     <Breadcrumbs items={crumbs} slot="above" />
   </Hero>
 
-  <Section tone="ground" labelledby="topics-heading">
+  <Section tone="sand" labelledby="topics-heading">
     <div class="topics">
       <div class="sec-head">
         <Eyebrow rule>Coming first</Eyebrow>
@@ -50,7 +50,7 @@ const schema = [webPageNode({ path, name: metaTitle, description, type: 'Collect
     </div>
   </Section>
 
-  <Section tone="lifted" glow="top" labelledby="why-heading">
+  <Section tone="concrete" glow="top" labelledby="why-heading">
     <div class="why">
       <div class="sec-head">
         <Eyebrow rule>Why this exists</Eyebrow>
@@ -63,7 +63,7 @@ const schema = [webPageNode({ path, name: metaTitle, description, type: 'Collect
     </div>
   </Section>
 
-  <Section tone="ground" labelledby="winter-heading">
+  <Section tone="sand" labelledby="winter-heading">
     <div class="winter">
       <div class="sec-head">
         <Eyebrow rule>October to January</Eyebrow>
@@ -84,7 +84,7 @@ const schema = [webPageNode({ path, name: metaTitle, description, type: 'Collect
   .why__text { font-size: 1.125rem; }
   .topics__grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
   .topic__body { display: grid; gap: 12px; align-content: start; padding-bottom: 40px; }
-  .topic__soon { font-family: var(--font-condensed); font-weight: 700; font-size: 0.8125rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-ember); }
+  .topic__soon { font-family: var(--font-condensed); font-weight: 700; font-size: 0.8125rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
   @media (min-width: 40rem) { .topics__grid { grid-template-columns: 1fr 1fr; } }
   @media (min-width: 64rem) { .topics__grid { grid-template-columns: repeat(3, 1fr); gap: 22px; } }
 </style>

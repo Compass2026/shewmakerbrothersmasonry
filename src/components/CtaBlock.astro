@@ -5,6 +5,7 @@ import Button from './Button.astro';
 import PhoneLink from './PhoneLink.astro';
 import { site, telHref } from '@/config/site';
 import { copy } from '@/data/copy/global';
+import Pier from './Pier.astro';
 interface Props { line1?: string; line2?: string; heading?: string; line?: string }
 const { line1, line2, heading, line = copy.cta.line } = Astro.props;
 const l1 = line1 ?? heading ?? 'Talk to Sam.';
@@ -12,7 +13,9 @@ const l2 = line2 ?? (heading ? '' : 'Build it once.');
 ---
 
 <Section tone="shadow" labelledby="cta-heading" class="cta stone-wall">
-  <div class="cta__inner stone-wall__sign">
+  <div class="cta__row">
+    <Pier side="right" class="cta__pier pier--stretch" />
+    <div class="cta__inner stone-wall__sign">
     <p class="eyebrow cta__eyebrow">Third generation · Own crews · Lake of the Ozarks</p>
     <h2 id="cta-heading" class="t-display cta__title">{l1}{l2 && <span class="accent cta__line2">{l2}</span>}</h2>
     <p class="t-lead cta__lead">{line}</p>
@@ -21,11 +24,16 @@ const l2 = line2 ?? (heading ? '' : 'Build it once.');
       <Button href={site.cta.secondaryHref} variant="secondary" icon="mail">{site.cta.secondary}</Button>
     </div>
     <p class="cta__owner">Sam Shewmaker · <PhoneLink /></p>
+    </div>
+    <Pier side="left" class="cta__pier pier--stretch" />
   </div>
 </Section>
 
 <style>
+  .cta__row { display: flex; align-items: stretch; justify-content: center; gap: clamp(18px, 3vw, 44px); }
   .cta__inner { display: grid; gap: 22px; justify-items: center; text-align: center; max-width: 60rem; margin-inline: auto; padding: clamp(32px, 6vw, 72px) clamp(24px, 5vw, 56px); }
+  :global(.cta__pier) { display: none; }
+  @media (min-width: 64rem) { :global(.cta__pier) { display: block; --pier-w: 132px; } }
   .cta__eyebrow { justify-content: center; }
   .cta__title { max-width: 14ch; }
   .cta__line2 { display: block; }

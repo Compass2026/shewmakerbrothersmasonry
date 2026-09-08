@@ -1,23 +1,28 @@
 ---
 name: Shewmaker Brothers Masonry
-description: Third-generation stonemasons at the Lake of the Ozarks. The block world, near-black ground, one ember accent, cut-stone modules.
+description: Third-generation stonemasons at the Lake of the Ozarks. Sandstone and concrete surfaces, warm brown grounds, real stone standing proud as piers.
 colors:
-  coal: "#0B0907"
-  soot: "#14100B"
-  block: "#1C1610"
-  block-2: "#251D15"
-  pit: "#070503"
-  ember: "#F2A81D"
-  ember-deep: "#C9860C"
-  ember-light: "#FFC457"
-  brick: "#B5542A"
-  sandstone: "#D9C6A3"
-  mortar: "#EFE9DE"
-  mortar-dim: "#C9C2B8"
-  chalk: "#F5F3F1"
-  fieldstone: "#8A7F6D"
-  fieldstone-text: "#716859"
-  cap: "#B9B3A8"
+  ground: "#241E18"
+  ground-2: "#30281F"
+  shadow: "#191410"
+  sand: "#E7DCC6"
+  sand-2: "#DCCFB4"
+  concrete: "#D6D2C8"
+  concrete-2: "#C6C1B5"
+  paper: "#F4EFE4"
+  chalk: "#F6F0E4"
+  mortar: "#E2D9C9"
+  mortar-dim: "#C9BFAC"
+  ink: "#2A231C"
+  ink-soft: "#55493D"
+  ink-muted: "#5E5347"
+  amber: "#C98A3A"
+  amber-light: "#E0A44F"
+  amber-deep: "#A66C25"
+  brick: "#8A4222"
+  cap: "#CFC9BC"
+  cap-lit: "#E4DFD4"
+  cap-edge: "#A29B8E"
 typography:
   display:
     fontFamily: "Anton, Anton Fallback, Impact, Arial Narrow, sans-serif"
@@ -200,22 +205,27 @@ bind; the logo badge, the phone number and the hard copy rules are untouched.
 
 ## Overview
 
-**Creative North Star: "The Block World"**
+**Creative North Star: "The Block World, Warmed"**
 
-Every module on the page is a cut-stone block: a tonal step up from the ground, a thin gold
-joint, a chiselled edge that catches light on one side and falls into shadow on the other, and
-a faint grain. Blocks sit in courses. Grids run in bond. The page reads as a wall the crew built,
-on a near-black ground with one ember accent doing every job an accent has: the word that
-matters in a headline, the button, the icon, the joint between blocks, the running-bond stripe.
-The display voice is Anton: tall, loud, uppercase, with the accent word set in ember and given a
-soft glow. Labels are Barlow Condensed, tracked wide. Reading copy is Barlow.
+Sandstone and concrete carry the page the way they carry a wall: warm, quiet, matte surfaces
+between the moments where a photograph or a run of stone takes over. Warm brown grounds hold the
+photographs; the light surfaces hold the reading. One accent runs through both, amber on the dark
+grounds and brick on the light ones, and it only ever points: an accent word, a button, an icon,
+the joint between blocks.
+
+The stone is real, cut from the crew's own walls, and it stands proud of the page rather than
+sitting behind it. Piers carry a lit front face, a darker return face where the corner turns away
+from the light, a poured concrete cap that overhangs both, and a shadow cast onto what is behind
+them. They frame the closing call to action and run as an arcade under one cap above the footer,
+so every page ends on stonework you could put your hand on.
 
 **Key Characteristics:**
-- Near-black warm ground (coal) with a lifted step (soot) and a block step above that; no light sections.
-- One accent, ember, and one job for it: point. The accent word, the button, the icon, the joint, the stripe.
+- Sandstone and concrete surfaces carry most of the page; warm brown grounds carry the photographs, the gallery and the closing call to action.
+- One accent with one job, pointing: amber on the dark grounds, brick on the light surfaces, set per tone so contrast never falls below AA.
 - Anton uppercase display with an ember accent word; Barlow Condensed tracked labels; Barlow body.
 - Blocks with 0 radius, a 1px ember joint at 16% alpha, inset chisel highlights, 6% grain and a ghost numeral.
-- Chamfered buttons: the top-left corner cut like a block face, a lighter ember strip on the leading edge.
+- Chamfered buttons: the top-left corner cut like a block face, a lighter strip on the leading edge.
+- Stone piers with poured caps: at the closing call to action and as an arcade above the footer.
 - The crew's own photographs, full-resolution originals in responsive WebP sets (`public/images/projects/full/`,
   `node qa/make-photos.mjs`), as full-bleed graded backgrounds behind heroes and statement bands and with
   `srcset` inside blocks; the remaining 414 px Facebook frames only where no original exists yet; never stock,
@@ -225,36 +235,31 @@ soft glow. Labels are Barlow Condensed, tracked wide. Reading copy is Barlow.
 
 ## Colors
 
-- **Coal** (#0B0907): the page. **Soot** (#14100B): the lifted section. **Block** (#1C1610) and
-  **Block 2** (#251D15): card faces. **Pit** (#070503): footer and closing CTA.
-- **Ember** (#F2A81D): the accent. Buttons, accent words, icons, joints, chips, marquee, stripe.
-  **Ember light** (#FFC457) is the button hover and the leading strip; **Ember deep** (#C9860C)
-  is the accent on the light tone.
-- **Chalk** (#F5F3F1): headings. **Mortar** (#EFE9DE): link text in lists. **Mortar dim**
-  (#C9C2B8): body copy. **Fieldstone** (#8A7F6D): muted text, pending notes.
-- **Sandstone** (#D9C6A3): band sub-lines only. **Brick** (#B5542A): reserved, unused on the surface.
-- The tone tokens (`--surface`, `--ink`, `--heading`, `--muted`, `--eyebrow`, `--link`, `--joint`,
-  `--joint-strong`, `--card`, `--card-2`, `--field`, `--focus`, `--btn2`, `--btn2-border`) are set
-  by `data-tone` on the Section wrapper; a `mortar` light tone exists in the tokens and is not used.
+- **Grounds:** Ground (#241E18), Lifted (#30281F), Shadow (#191410). Warm brown, never blue-black.
+  They carry the hero, the parallax bands, the gallery, the closing CTA and the footer.
+- **Surfaces:** Sand (#E7DCC6) and Concrete (#D6D2C8) alternate down the page and are where the
+  reading happens; Paper (#F4EFE4) is the card on them.
+- **Type on dark:** Chalk (#F6F0E4) headings, Mortar (#E2D9C9) body, Mortar Dim (#C9BFAC) muted.
+- **Type on light:** Ink (#2A231C) headings, Ink Soft (#55493D) body, Ink Muted (#5E5347) muted.
+- **Accent:** Amber (#C98A3A) on the grounds, Brick (#8A4222) on the light surfaces, exposed to
+  components as `--accent`. `--accent-solid` (amber) fills buttons and chips on both, with
+  `--accent-label` (ground) as the label.
+- **Poured concrete:** Cap (#CFC9BC) with Cap Lit (#E4DFD4) and Cap Edge (#A29B8E) for the top
+  surface and the shadowed edge of every cap.
 
-| Pair | Ratio | Verdict |
-| --- | --- | --- |
-| Chalk on coal | 18.9:1 | Headings |
-| Mortar dim on coal | 12.6:1 | Body |
-| Ember on coal | 9.9:1 | Accent words, labels, icons |
-| Coal on ember | 9.9:1 | Button labels, marquee |
-| Fieldstone on coal | 4.9:1 | Muted text |
-| Mortar dim on block | 10.4:1 | Body on a block |
+Every pair the site actually uses is measured by `node qa/contrast.mjs`, which fails the build
+of the palette if any drops below AA (24 pairs, all passing).
 
 ### Named Rules
-**The One-Accent Rule.** Ember is the only saturated colour. If it is not pointing at an action,
-a word that matters, or the edge of a block, it is wrong.
+**The One-Accent Rule.** One accent, amber on dark and brick on light, and it only points: at an
+action, a word that matters, or the edge of a block. Nothing else on the page is saturated.
 
 **The Tone Rule.** A section owns its tone through `data-tone`; components read the tone tokens
 and never pick colours.
 
-**The Dark-Everywhere Rule.** No light section. Contrast comes from the ember accent, the chalk
-headings and the photographs, not from a white block.
+**The Alternating Surface Rule.** Sand and concrete alternate down the page; a ground section
+appears where a photograph, the gallery or the closing call to action needs to take over. Two
+grounds never sit next to each other without a stone course or a band between them.
 
 ## Typography
 

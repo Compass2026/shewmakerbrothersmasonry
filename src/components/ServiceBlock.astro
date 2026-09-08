@@ -37,9 +37,9 @@ const img = photo ? imageByFile(photo) : undefined;
   .service-block__body { display: grid; gap: 16px; padding-bottom: 36px; }
   @media (max-width: 39.99rem) { :global(.service-block .block__photo) { aspect-ratio: 21 / 9; } .service-block__list { gap: 6px; } .service-block__body { gap: 12px; padding: 22px 22px 34px; } }
   .service-block__title { font-size: 1.5rem; }
-  .service-block__pending { display: grid; place-content: center; justify-items: center; gap: 10px; color: var(--color-ember); background: var(--color-soot); }
+  .service-block__pending { display: grid; place-content: center; justify-items: center; gap: 10px; color: var(--accent); background: var(--field); }
   .service-block__list { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 8px; }
-  .service-block__list a { color: var(--color-mortar); text-decoration: none; font-weight: 500; display: inline-flex; align-items: center; gap: 10px; }
-  .service-block__list a::before { content: ""; width: 10px; height: 3px; background: var(--color-ember); flex: none; }
-  .service-block__list a:hover { color: var(--color-ember); }
+  .service-block__list a { color: var(--heading); text-decoration: none; font-weight: 500; display: inline-flex; align-items: center; gap: 10px; }
+  .service-block__list a::before { content: ""; width: 10px; height: 3px; background: var(--accent); flex: none; }
+  .service-block__list a:hover { color: var(--accent); }
 </style>

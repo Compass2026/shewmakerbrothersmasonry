@@ -54,7 +54,7 @@ const schema = [
     <Breadcrumbs items={crumbs} slot="above" />
   </Hero>
 
-  <Section tone="ground" class="svc-intro">
+  <Section tone="sand" class="svc-intro">
     <div class="svc-intro__grid">
       <div class="prose svc-intro__text">
         {copy.intro.map((p) => <p>{p}</p>)}
@@ -65,7 +65,7 @@ const schema = [
     </div>
   </Section>
 
-  <Section tone="lifted" glow="top" labelledby="method-heading">
+  <Section tone="concrete" glow="top" labelledby="method-heading">
     <div class="method">
       <div class="sec-head">
         <Eyebrow rule>Method and materials</Eyebrow>
@@ -88,7 +88,7 @@ const schema = [
   )}
 
   {pair && (
-    <Section tone="ground" labelledby="pair-heading">
+    <Section tone="sand" labelledby="pair-heading">
       <div class="pair-section">
         <div class="sec-head">
           <Eyebrow rule>Before and after</Eyebrow>
@@ -99,7 +99,7 @@ const schema = [
     </Section>
   )}
 
-  <Section tone="ground" class="svc-sections">
+  <Section tone="concrete" class="svc-sections">
     <div class="svc-sections__grid">
       {copy.sections.map((s, i) => (
         <div class="block block--capped svc-section">
@@ -113,11 +113,11 @@ const schema = [
     </div>
   </Section>
 
-  <Section tone="lifted" glow="bottom">
+  <Section tone="sand" glow="bottom">
     <Faq faqs={copy.faqs} heading={`Questions about ${shortName}`} />
   </Section>
 
-  <Section tone="ground" labelledby="related-heading">
+  <Section tone="concrete" labelledby="related-heading">
     <div class="related">
       <div class="block related__col">
         <div class="block__body">
@@ -162,8 +162,8 @@ const schema = [
   .related__col .block__body { display: grid; gap: 16px; }
   .related__title { font-size: 1.5rem; }
   .related__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-  .related__list a { display: inline-flex; align-items: center; gap: 10px; color: var(--color-mortar); text-decoration: none; font-weight: 500; }
-  .related__list a svg { color: var(--color-ember); }
-  .related__list a:hover { color: var(--color-ember); }
+  .related__list a { display: inline-flex; align-items: center; gap: 10px; color: var(--heading); text-decoration: none; font-weight: 500; }
+  .related__list a svg { color: var(--accent); }
+  .related__list a:hover { color: var(--accent); }
   @media (min-width: 48rem) { .related { grid-template-columns: 1fr 1fr; gap: 22px; } }
 </style>

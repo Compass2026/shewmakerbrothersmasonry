@@ -44,7 +44,7 @@ const schema = [webPageNode({ path, name: copy.metaTitle, description: copy.meta
     <Breadcrumbs items={crumbs} slot="above" />
   </Hero>
 
-  <Section tone="ground" labelledby="services-heading">
+  <Section tone="sand" labelledby="services-heading">
     <div class="city-intro">
       <div class="prose city-intro__text">
         {copy.intro.map((p) => <p>{p}</p>)}
@@ -70,7 +70,7 @@ const schema = [webPageNode({ path, name: copy.metaTitle, description: copy.meta
   </Section>
 
   {copy.lakefront && (
-    <Section tone="lifted" glow="top" labelledby="lakefront-heading">
+    <Section tone="concrete" glow="top" labelledby="lakefront-heading">
       <div class="city-lakefront">
         <div class="sec-head">
           <Eyebrow rule>Lakefront and permitting</Eyebrow>
@@ -84,7 +84,7 @@ const schema = [webPageNode({ path, name: copy.metaTitle, description: copy.meta
     </Section>
   )}
 
-  <Section tone="ground" labelledby="communities-heading">
+  <Section tone="sand" labelledby="communities-heading">
     <div class="city-communities">
       <div class="city-communities__text">
         <div class="sec-head">
@@ -102,7 +102,7 @@ const schema = [webPageNode({ path, name: copy.metaTitle, description: copy.meta
   </Section>
 
   {copy.foldIn && (
-    <Section tone="lifted" id={foldId} labelledby="foldin-heading">
+    <Section tone="concrete" id={foldId} labelledby="foldin-heading">
       <div class="city-foldin">
         <div class="sec-head">
           <Eyebrow rule>Unincorporated</Eyebrow>
@@ -128,7 +128,7 @@ const schema = [webPageNode({ path, name: copy.metaTitle, description: copy.meta
   </Section>
 
   {copy.faqs && copy.faqs.length > 0 && (
-    <Section tone="lifted" glow="bottom">
+    <Section tone="sand" glow="bottom">
       <Faq faqs={copy.faqs} heading={`Questions about working in ${def.name}`} />
     </Section>
   )}

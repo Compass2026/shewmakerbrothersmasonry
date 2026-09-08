@@ -65,12 +65,12 @@ const problems = [
   <Marquee items={services.map((s) => s.navLabel ?? s.name)} />
   <StoneCourse />
 
-  <Section tone="ground" width="wide" padding="tight" labelledby="trust-heading">
+  <Section tone="sand" width="wide" padding="tight" labelledby="trust-heading">
     <h2 id="trust-heading" class="sr-only">Why homeowners at the lake call Shewmaker Brothers Masonry</h2>
     <TrustStrip items={trust} />
   </Section>
 
-  <Section tone="lifted" width="wide" glow="top" labelledby="services-heading">
+  <Section tone="concrete" width="wide" glow="top" labelledby="services-heading">
     <div class="services">
       <div class="sec-head">
         <Eyebrow rule>What we do</Eyebrow>
@@ -97,7 +97,7 @@ const problems = [
     cta="Seawall construction"
   />
 
-  <Section tone="ground" labelledby="pair-heading">
+  <Section tone="sand" labelledby="pair-heading">
     <div class="argument">
       <div class="argument__text">
         <div class="sec-head">
@@ -114,7 +114,7 @@ const problems = [
     </div>
   </Section>
 
-  <Section tone="lifted" glow="bottom" labelledby="brothers-heading">
+  <Section tone="concrete" glow="bottom" labelledby="brothers-heading">
     <div class="brothers">
       <div class="brothers__text">
         <div class="sec-head">
@@ -154,7 +154,7 @@ const problems = [
     </div>
   </Section>
 
-  <Section tone="lifted" glow="top" labelledby="process-heading">
+  <Section tone="sand" glow="top" labelledby="process-heading">
     <div class="process-sec">
       <div class="sec-head sec-head--center">
         <Eyebrow rule>How it works</Eyebrow>
@@ -164,7 +164,7 @@ const problems = [
     </div>
   </Section>
 
-  <Section tone="ground" width="wide" labelledby="area-heading">
+  <Section tone="concrete" width="wide" labelledby="area-heading">
     <div class="area">
       <div class="area__text">
         <div class="sec-head">
@@ -181,7 +181,7 @@ const problems = [
     </div>
   </Section>
 
-  <Section tone="lifted" labelledby="problems-heading">
+  <Section tone="sand" labelledby="problems-heading">
     <div class="problems">
       <div class="sec-head">
         <Eyebrow rule>Repairs</Eyebrow>
@@ -204,7 +204,6 @@ const problems = [
     </div>
   </Section>
 
-  <StoneCourse />
   <CtaBlock />
 </Base>
 
@@ -239,6 +238,6 @@ const problems = [
   .problems { display: grid; gap: 32px; }
   .problems__grid { display: grid; gap: 18px; }
   .problem__body { display: grid; gap: 14px; align-content: start; padding-bottom: 40px; }
-  .problem__link { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-condensed); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-ember); }
+  .problem__link { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-condensed); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
   @media (min-width: 48rem) { .problems__grid { grid-template-columns: repeat(3, 1fr); gap: 22px; } }
 </style>

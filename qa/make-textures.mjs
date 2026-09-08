@@ -71,6 +71,11 @@ for (const f of ['stone-cover', 'stone-cover-sm', 'stone-course', 'stone-course-
   console.log(f + '.webp', Math.round(st.size / 1024) + ' KB');
 }
 
+// Pier face: a tall crop of pure wall stone, no ground and no grass, so a pier reads as an
+// object standing in front of the wall rather than a window cut into it.
+await sharp(WALL).rotate().extract({ left: 1900, top: 1880, width: 980, height: 880 }).resize({ width: 560 }).modulate({ brightness: 1.12, saturation: 1.08 }).webp({ quality: 74 }).toFile('public/images/textures/pier.webp');
+{ const st = fs.statSync('public/images/textures/pier.webp'); console.log('pier.webp 560 wide,', Math.round(st.size / 1024) + ' KB'); }
+
 // grey block face (mirror-tiled, darkened; used at 10% so symmetry never shows)
 {
   const crop = { left: 150, top: 145, width: 264, height: 125 };
