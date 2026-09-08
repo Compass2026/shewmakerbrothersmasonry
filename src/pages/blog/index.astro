@@ -1,0 +1,103 @@
+---
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/Section.astro';
+import Hero from '@/components/Hero.astro';
+import Eyebrow from '@/components/Eyebrow.astro';
+import TextPlaceholder from '@/components/TextPlaceholder.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import CtaBlock from '@/components/CtaBlock.astro';
+import { breadcrumbNode, webPageNode } from '@/lib/schema';
+
+const path = '/blog/';
+const title = 'Problems Worth Catching Early';
+const metaTitle = 'Masonry Notes from the Lake of the Ozarks';
+const description =
+  'What chimney damage looks like before it gets expensive, why lakefront walls fail, what Ameren permitting requires. Notes from the Lake of the Ozarks.';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Blog', href: path },
+];
+const topics = [
+  { pillar: 'Problems worth catching early', title: 'What chimney damage looks like before it gets expensive', line: 'Spalling brick, open joints, a cracked crown, rust on the flashing. What each one means and what it turns into by spring.' },
+  { pillar: 'Shoreline and the lake', title: 'Rip rap versus a stone seawall: lifespan, appearance and fit', line: 'What each one does for a bank, where each one belongs, and how to decide for your shoreline.' },
+  { pillar: 'Shoreline and the lake', title: 'What Ameren permitting actually requires for lakefront work', line: 'Who issues the permit, what it covers, and where it sits in the plan for the job.' },
+  { pillar: 'The craft', title: 'Why lakefront retaining walls fail, and what holds', line: 'Water behind the wall, no footing under it, and the two things a wall needs to stay put.' },
+  { pillar: 'The craft', title: 'Choosing stone that matches an existing lake house', line: 'Fieldstone, limestone, ledgestone: how to pick stone so the new work reads as part of the old.' },
+];
+const schema = [webPageNode({ path, name: metaTitle, description, type: 'CollectionPage' }), breadcrumbNode(crumbs)];
+---
+
+<Base title={metaTitle} description={description} schema={schema}>
+  <Hero
+    eyebrow="Notes from the job site"
+    title={title}
+    lead="What to look for, what it means, and what it costs to wait. Written by people who fix it."
+    thumb="lakefront-retaining-wall-detail-01.jpg"
+    need="Blog hero: a close-up of stone and joint work, the hand of the mason, uncropped original at 2400 px."
+    ctas={false}
+  >
+    <Breadcrumbs items={crumbs} slot="above" />
+  </Hero>
+
+  <Section tone="ground" labelledby="topics-heading">
+    <div class="topics">
+      <div class="heading-group">
+        <Eyebrow rule>Coming first</Eyebrow>
+        <h2 id="topics-heading" class="t-title">Five things worth writing down</h2>
+      </div>
+      <TextPlaceholder
+        slotName="blog-posts"
+        label="No posts yet"
+        need="The first five posts are planned below and not written. Each is seeded from the content signal in docs/keyword-map.md; none is published until it is real."
+      />
+      <ul class="topics__grid">
+        {topics.map((t) => (
+          <li class="card topic">
+            <div class="card__body topic__body">
+              <Eyebrow>{t.pillar}</Eyebrow>
+              <h3 class="t-subtitle">{t.title}</h3>
+              <p>{t.line}</p>
+              <p class="t-small muted">In the works</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Section>
+
+  <Section tone="lifted" labelledby="why-heading">
+    <div class="why">
+      <div class="heading-group">
+        <Eyebrow rule>Why this exists</Eyebrow>
+        <h2 id="why-heading" class="t-title">The post that did the best</h2>
+      </div>
+      <div class="prose">
+        <p>The post that did better than anything else on our Facebook page was a warning: do not ignore your chimney, small problems become expensive repairs. Nobody shared the pretty pictures the way they shared that.</p>
+        <p>So that is what this is for. Not what we build, which the <a href="/projects/">gallery</a> shows better than words. What to look for on your own place, what it means, and what it turns into if it waits a season.</p>
+      </div>
+    </div>
+  </Section>
+
+  <Section tone="mortar" labelledby="winter-heading">
+    <div class="winter">
+      <div class="heading-group">
+        <Eyebrow rule>October to January</Eyebrow>
+        <h2 id="winter-heading" class="t-title">The chimney season</h2>
+      </div>
+      <div class="prose">
+        <p>Chimney work at the lake gets busy from October through January, when the first fires go in and the first problems show. If the crown is cracked or the joints are open now, water is already in the brick, and a freeze does the rest.</p>
+        <p>Have a look before the season, or <a href="/chimney-repair/">read what to look for</a>. Then call Sam.</p>
+      </div>
+    </div>
+  </Section>
+
+  <CtaBlock heading="Seen something on your own place?" line="Send Sam a photo by text, or call. He will tell you what it is." />
+</Base>
+
+<style>
+  .topics, .why, .winter { display: grid; gap: 28px; }
+  .topics__grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+  .topic__body { display: grid; gap: 10px; align-content: start; }
+  @media (min-width: 40rem) { .topics__grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 64rem) { .topics__grid { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
+</style>

@@ -15,7 +15,7 @@ interface Props {
 const { file, caption, class: className, eager = false } = Astro.props;
 const img = imageByFile(file);
 if (!img) throw new Error(`Unknown project image: ${file}`);
-const cap = caption === false ? undefined : (caption ?? img.alt);
+const cap = caption === false ? undefined : (caption ?? img.caption ?? img.alt);
 ---
 
 <figure class:list={['photo', className]}>

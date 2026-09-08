@@ -9,7 +9,7 @@ export const copy = {
   ripRap: {
     heading: 'Rip rap protects a shoreline. A stone seawall protects it and looks like it belongs to the house.',
     body: [
-      'Most of the shoreline at the lake is rip rap: rock placed along the bank to slow erosion. It does that job, and some banks call for it.',
+      'Most of the shoreline at the lake is rip rap: broken stone placed loose along the bank to slow erosion. It does that job, and some banks call for it.',
       'A mortared stone seawall does the same job a different way. It sits on a poured concrete footing, the stone is laid in courses and mortared solid, and it finishes with a cap you can walk on. It takes a crew that lays stone, and it reads as part of the property rather than a repair.',
     ],
   },

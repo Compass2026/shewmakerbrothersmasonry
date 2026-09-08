@@ -9,6 +9,10 @@ export interface ProjectImage {
   project: string;
   state: ImageState;
   alt: string;
+  /** What was built, for the card H3. */
+  title: string;
+  /** One line naming material and method, for the card caption. Never a place name. */
+  caption: string;
   description: string;
   services: string[];
   pairsWith?: string;

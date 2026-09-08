@@ -1,0 +1,181 @@
+---
+/**
+ * City page template. Tier 1 pages carry a light "lakefront and Ameren permitting" section;
+ * Tier 2 pages are shorter and have no light section (docs/art-direction.md, §2).
+ */
+import type { CityDef, ServiceDef } from '@/data/types';
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/Section.astro';
+import Hero from '@/components/Hero.astro';
+import Eyebrow from '@/components/Eyebrow.astro';
+import Photo from '@/components/Photo.astro';
+import Faq from '@/components/Faq.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import CtaBlock from '@/components/CtaBlock.astro';
+import { cities, cityBySlug, cityPath } from '@/data/cities';
+import { segmentById, serviceBySlug, servicePath } from '@/data/taxonomy';
+import { cityCopies, cityCopy } from '@/data/copy';
+import { copy as shared } from '@/data/copy/global';
+import { imageByFile, images } from '@/data/images';
+import { site } from '@/config/site';
+import { breadcrumbNode, faqNode, webPageNode } from '@/lib/schema';
+
+export function getStaticPaths() {
+  const list = process.env.ALLOW_MISSING_COPY ? cities.filter((c) => cityCopies[c.slug]) : cities;
+  return list.map((c) => ({ params: { city: c.slug } }));
+}
+
+const def = cityBySlug(Astro.params.city!);
+if (!def) throw new Error(`Unknown city: ${Astro.params.city}`);
+const copy = cityCopy(def.slug);
+const path = cityPath(def.slug);
+const countyLine = def.counties.length > 1 ? `${def.counties.join(' and ')} counties` : `${def.counties[0]} County`;
+const h1 = `Masonry Contractor in ${def.name} at the Lake of the Ozarks`;
+const heroPhoto = imageByFile(copy.projectRefs[0]) ?? images.find((i) => i.services.includes('cities'));
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Service area', href: '/service-area/' },
+  { name: def.name, href: path },
+];
+const featured = copy.services.map(serviceBySlug).filter((s): s is ServiceDef => !!s);
+const neighbours = (copy.communities.list ?? []).map(cityBySlug).filter((c): c is CityDef => !!c);
+const refs = copy.projectRefs.map(imageByFile).filter((i): i is NonNullable<typeof i> => !!i);
+const parent = def.parent ? cityBySlug(def.parent) : undefined;
+const foldId = copy.foldIn ? copy.foldIn.heading.toLowerCase().replace(/[^a-z0-9]+/g, '-') : undefined;
+const schema = [
+  webPageNode({ path, name: copy.metaTitle, description: copy.metaDescription }),
+  breadcrumbNode(crumbs),
+  ...(copy.faqs?.length ? [faqNode(copy.faqs)] : []),
+];
+---
+
+<Base title={copy.metaTitle} description={copy.metaDescription} schema={schema}>
+  <Hero
+    eyebrow={`${def.name} · ${countyLine}`}
+    title={h1}
+    lead={copy.lead}
+    thumb={heroPhoto?.file}
+    need={`Hero: finished lakefront work photographed in or near ${def.name}, water in frame, uncropped original at 2400 px. No location is known for any current photo, so this slot stays a placeholder until Sam supplies one.`}
+  >
+    <Breadcrumbs items={crumbs} slot="above" />
+  </Hero>
+
+  <Section tone="ground" labelledby="services-heading">
+    <div class="city-intro">
+      <div class="prose">
+        {copy.intro.map((p) => <p>{p}</p>)}
+        {parent && (
+          <p>
+            {def.name} sits inside {parent.name}. The <a href={cityPath(parent.slug)}>{parent.name} page</a> covers the wider area.
+          </p>
+        )}
+      </div>
+      <div class="city-services">
+        <div class="heading-group">
+          <Eyebrow rule>What we build in {def.name}</Eyebrow>
+          <h2 id="services-heading" class="t-title">Services</h2>
+        </div>
+        <ul class="city-services__grid">
+          {featured.map((s) => (
+            <li>
+              <a class="card card--link city-service" href={servicePath(s.slug)}>
+                <div class="card__body city-service__body">
+                  <Eyebrow>{segmentById(s.segment).name}</Eyebrow>
+                  <h3 class="t-subtitle">{s.name}</h3>
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </Section>
+
+  {copy.lakefront && (
+    <Section tone="mortar" labelledby="lakefront-heading">
+      <div class="city-lakefront">
+        <div class="heading-group">
+          <Eyebrow rule>Lakefront and permitting</Eyebrow>
+          <h2 id="lakefront-heading" class="t-title">{copy.lakefront.heading}</h2>
+        </div>
+        <div class="prose">
+          {copy.lakefront.body.map((p) => <p>{p}</p>)}
+          <p>{shared.ameren}</p>
+        </div>
+      </div>
+    </Section>
+  )}
+
+  <Section tone="lifted" labelledby="communities-heading">
+    <div class="city-communities">
+      <div class="heading-group">
+        <Eyebrow rule>Counties and communities</Eyebrow>
+        <h2 id="communities-heading" class="t-title">{copy.communities.heading}</h2>
+      </div>
+      <div class="prose">
+        {copy.communities.body.map((p) => <p>{p}</p>)}
+        {def.base && <p>This is home. {site.name} is based in {def.name}.</p>}
+      </div>
+      {neighbours.length > 0 && (
+        <ul class="city-communities__list">
+          {neighbours.map((c) => (
+            <li><a class="link" href={cityPath(c.slug)}>{c.name}</a></li>
+          ))}
+          <li><a class="link" href="/service-area/">The whole service area</a></li>
+        </ul>
+      )}
+    </div>
+  </Section>
+
+  {copy.foldIn && (
+    <Section tone="ground" id={foldId} labelledby="foldin-heading">
+      <div class="city-foldin">
+        <div class="heading-group">
+          <Eyebrow rule>Unincorporated</Eyebrow>
+          <h2 id="foldin-heading" class="t-title">{copy.foldIn.heading}</h2>
+        </div>
+        <div class="prose">
+          {copy.foldIn.body.map((p) => <p>{p}</p>)}
+        </div>
+      </div>
+    </Section>
+  )}
+
+  <Section tone="ground" grain labelledby="projects-heading">
+    <div class="city-projects">
+      <div class="heading-group">
+        <Eyebrow rule>Projects</Eyebrow>
+        <h2 id="projects-heading" class="t-title">The work</h2>
+        <p class="t-lead">Shewmaker Brothers Masonry work around the Lake of the Ozarks. Project locations are not published.</p>
+      </div>
+      <div class="city-projects__grid">
+        {refs.map((img) => <Photo file={img.file} />)}
+      </div>
+      <p><a class="link" href="/projects/">See the whole gallery</a></p>
+    </div>
+  </Section>
+
+  {copy.faqs && copy.faqs.length > 0 && (
+    <Section tone="ground">
+      <Faq faqs={copy.faqs} heading={`Questions about working in ${def.name}`} />
+    </Section>
+  )}
+
+  <CtaBlock heading={`Talk to Sam about a job in ${def.name}`} />
+</Base>
+
+<style>
+  .city-intro { display: grid; gap: 48px; }
+  .city-services { display: grid; gap: 28px; }
+  .city-services__grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .city-service__body { display: grid; gap: 8px; padding: 20px 24px; }
+  @media (min-width: 40rem) { .city-services__grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 64rem) { .city-services__grid { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
+
+  .city-lakefront, .city-communities, .city-foldin, .city-projects { display: grid; gap: 28px; }
+  .city-communities__list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 24px; font-family: var(--font-display); font-weight: 700; font-size: 1.375rem; text-transform: uppercase; letter-spacing: 0.02em; }
+  .city-communities__list .link { color: var(--heading); text-decoration-thickness: 2px; }
+  .city-projects__grid { display: grid; gap: 24px; }
+  :global(.city-projects__grid .photo) { max-width: 414px; }
+  @media (min-width: 40rem) { .city-projects__grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); } }
+</style>

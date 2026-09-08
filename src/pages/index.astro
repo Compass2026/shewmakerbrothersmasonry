@@ -46,7 +46,7 @@ const problems = [
     title={title}
     lead="Third-generation stonemasons who build the shoreline, the fireplace and the ground it all sits on. Our own crews, start to finish."
     thumb="stone-seawall-lakefront-01.jpg"
-    need="Hero: the finished stone seawall with the lake house above and water in frame. Uncropped original at 2400 px, 16:9 desktop crop and 4:5 mobile crop."
+    need="Hero: the finished stone seawall with the lake house above and water in frame. Uncropped original, 2400 px or wider."
   />
 
   <!-- 2. Two doors -->
@@ -203,7 +203,6 @@ const problems = [
   .doors__grid { display: grid; gap: 24px; }
   .door { display: grid; }
   .door__body { display: grid; gap: 12px; }
-  .door__title { font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.25rem); }
   :global(.door__photo img) { border-radius: 0; aspect-ratio: 1; max-height: 414px; object-position: center; }
   @media (min-width: 48rem) {
     .doors__grid { grid-template-columns: 1fr 1fr; gap: 32px; }

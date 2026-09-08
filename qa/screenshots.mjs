@@ -3,6 +3,7 @@
  *   node qa/screenshots.mjs            # home only
  *   node qa/screenshots.mjs /about/ /contact/
  *   node qa/screenshots.mjs --all      # every URL in dist/sitemap-0.xml
+ *   add --fold for first-viewport captures instead of full-page
  * Serves dist/ with `astro preview`, so run `npm run build` first. Output: qa/screenshots/.
  */
 import { spawn } from 'node:child_process';
@@ -18,6 +19,7 @@ const VIEWPORTS = {
 };
 
 const args = process.argv.slice(2);
+const FOLD = args.includes('--fold');
 let paths = args.filter((a) => a.startsWith('/'));
 if (args.includes('--all')) {
   const xml = await readFile('dist/sitemap-0.xml', 'utf8');
@@ -49,8 +51,8 @@ try {
     for (const p of paths) {
       const res = await page.goto(`${BASE}${p}`, { waitUntil: 'networkidle' });
       await page.evaluate(() => document.fonts.ready);
-      const file = `${OUT}/${slug(p)}-${name}.png`;
-      await page.screenshot({ path: file, fullPage: true });
+      const file = `${OUT}/${slug(p)}-${name}${FOLD ? '-fold' : ''}.png`;
+      await page.screenshot({ path: file, fullPage: !FOLD });
       console.log(`${res?.status() ?? '?'}  ${p}  ->  ${file}`);
     }
     await ctx.close();

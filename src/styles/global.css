@@ -40,11 +40,13 @@
 
 /* Size-adjusted local fallbacks so the swap to the self-hosted faces does not shift layout. */
 @font-face {
+  /* impeccable-disable-next-line design-system-font: size-adjusted local fallback named in docs/art-direction.md §1 */
   font-family: "Rokkitt Fallback";
   src: local("Rockwell"), local("Rockwell-Regular"), local("Georgia");
   size-adjust: 86%;
 }
 @font-face {
+  /* impeccable-disable-next-line design-system-font: size-adjusted local fallback named in docs/art-direction.md §1 */
   font-family: "Merriweather Sans Fallback";
   src: local("Fira Sans"), local("FiraSans-Regular"), local("Helvetica Neue"), local("Arial");
   size-adjust: 103%;
@@ -112,6 +114,7 @@
   body {
     margin: 0;
     min-height: 100dvh;
+    padding-top: 73px; /* fixed header: 72px row plus its 1px mortar line */
     font-size: clamp(1rem, 0.97rem + 0.2vw, 1.0625rem);
     line-height: 1.6;
     font-weight: 400;
@@ -190,7 +193,7 @@
 
   /* Fields */
   .field { display: grid; gap: 8px; }
-  .field__label { font-weight: 600; font-size: 0.9375rem; color: var(--heading); }
+  .field__label { font-weight: 600; font-size: 1rem; color: var(--heading); }
   .field__input { width: 100%; height: 48px; padding: 12px 14px; background: var(--field); color: var(--ink); border: 1px solid var(--color-fieldstone); border-radius: var(--radius-sm); font: inherit; }
   textarea.field__input { height: auto; min-height: 144px; resize: vertical; }
   .field__input::placeholder { color: var(--muted); }
@@ -214,16 +217,16 @@
   .photo__caption { margin-top: 8px; font-size: 0.875rem; line-height: 1.5; color: var(--muted); }
 
   /* Placeholder block: impossible to mistake for a finished design */
-  .placeholder { position: relative; display: grid; align-content: center; justify-items: center; gap: 12px; padding: clamp(16px, 3vw, 28px); text-align: center; aspect-ratio: var(--ratio, 16 / 9); border: 2px dashed var(--color-brick); border-radius: var(--radius-sm); background-color: var(--field); background-image: repeating-linear-gradient(45deg, var(--hatch) 0 1px, transparent 1px 12px); color: var(--ink); overflow: hidden; }
+  .placeholder { position: relative; display: grid; align-content: center; justify-items: center; gap: 12px; padding: clamp(16px, 3vw, 28px); text-align: center; aspect-ratio: var(--ratio, 16 / 9); border: 2px dashed var(--color-brick); border-radius: var(--radius-sm); background-color: var(--field); background-image: repeating-linear-gradient(45deg, var(--hatch) 0 1px, transparent 1px 12px); color: var(--ink); }
   .placeholder__text { display: grid; gap: 8px; max-width: 40ch; }
-  .placeholder__label { font-family: var(--font-display); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: clamp(1.125rem, 1rem + 0.8vw, 1.5rem); line-height: 1; color: var(--heading); }
-  .placeholder__need { font-size: 0.9375rem; line-height: 1.5; }
+  .placeholder__label { font-family: var(--font-display); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem); line-height: 1; color: var(--heading); white-space: nowrap; }
+  .placeholder__need { font-size: 0.875rem; line-height: 1.5; }
   .placeholder__thumb { margin: 0; display: grid; gap: 6px; justify-items: center; }
-  .placeholder__thumb img { width: clamp(72px, 18%, 120px); border-radius: var(--radius-sm); }
-  .placeholder__thumb figcaption { font-size: 0.75rem; color: var(--muted); }
+  .placeholder__thumb img { width: 96px; border-radius: var(--radius-sm); }
+  .placeholder__thumb figcaption { font-size: 0.8125rem; line-height: 1.4; color: var(--muted); text-align: center; max-width: 132px; }
   .placeholder--thumb { grid-template-columns: 1fr; }
   @media (min-width: 40rem) {
-    .placeholder--thumb { grid-template-columns: 1fr auto; text-align: left; justify-items: start; align-items: center; gap: 24px; }
+    .placeholder--thumb { grid-template-columns: minmax(0, 1fr) minmax(96px, 132px); text-align: left; justify-items: start; align-items: center; gap: 24px; }
     .placeholder--thumb .placeholder__thumb { justify-items: center; }
   }
 

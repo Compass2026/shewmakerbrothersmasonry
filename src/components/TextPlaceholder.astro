@@ -1,0 +1,21 @@
+---
+/** A visibly interim block of text: a fact or passage that Sam still has to supply. Logged like a photo placeholder. */
+interface Props {
+  need: string;
+  slotName: string;
+  label?: string;
+  class?: string;
+}
+const { need, slotName, label = 'Needed from Sam', class: className } = Astro.props;
+---
+
+<div class:list={['text-placeholder', className]} data-placeholder data-page={Astro.url.pathname} data-slot={slotName} data-need={need}>
+  <span class="text-placeholder__label">{label}</span>
+  <span class="text-placeholder__need">{need}</span>
+</div>
+
+<style>
+  .text-placeholder { display: grid; gap: 6px; padding: 14px 16px; border: 2px dashed var(--color-brick); border-radius: var(--radius-sm); background-color: var(--field); background-image: repeating-linear-gradient(45deg, var(--hatch) 0 1px, transparent 1px 12px); }
+  .text-placeholder__label { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.8125rem; color: var(--heading); }
+  .text-placeholder__need { font-size: 0.875rem; line-height: 1.5; color: var(--ink); }
+</style>

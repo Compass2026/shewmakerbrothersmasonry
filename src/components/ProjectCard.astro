@@ -1,0 +1,32 @@
+---
+/** Project card: photo on top, eyebrow (segment), H3 (what was built), one line naming material and method. */
+import { imageByFile, imageSrc } from '@/data/images';
+import { segments, services } from '@/data/taxonomy';
+import Eyebrow from './Eyebrow.astro';
+
+interface Props {
+  file: string;
+  eager?: boolean;
+}
+const { file, eager = false } = Astro.props;
+const img = imageByFile(file);
+if (!img) throw new Error(`Unknown project image: ${file}`);
+const segIds = [...new Set(img.services.map((tag) => services.find((s) => s.slug === tag)?.segment).filter((x): x is NonNullable<typeof x> => !!x))];
+const primary = services.find((s) => s.slug === img.services[0]);
+const eyebrow = primary ? segments.find((g) => g.id === primary.segment)!.name : 'Projects';
+---
+
+<article class="card project-card" data-segments={segIds.join(' ')} data-state={img.state}>
+  <img src={imageSrc(img.file)} width={img.width} height={img.height} alt={img.alt} loading={eager ? 'eager' : 'lazy'} decoding="async" />
+  <div class="card__body project-card__body">
+    <Eyebrow>{eyebrow} · {img.state}</Eyebrow>
+    <h3 class="t-subtitle project-card__title">{img.title}</h3>
+    <p class="t-small muted">{img.caption}</p>
+  </div>
+</article>
+
+<style>
+  .project-card img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+  .project-card__body { display: grid; gap: 8px; }
+  .project-card__title { font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem); }
+</style>

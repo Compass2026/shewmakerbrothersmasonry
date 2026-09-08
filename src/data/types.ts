@@ -77,6 +77,8 @@ export interface CityCopy {
   /** Manifest files shown as project references (no place names in captions). */
   projectRefs: string[];
   faqs?: Faq[];
+  /** Unincorporated place covered as a section on this page (Sunrise Beach carries Hurricane Deck). */
+  foldIn?: { heading: string; body: string[] };
 }
 
 export type Tone = 'ground' | 'lifted' | 'mortar' | 'shadow';

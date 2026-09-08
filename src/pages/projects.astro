@@ -1,0 +1,156 @@
+---
+/**
+ * The project gallery: the single most important page on the site (PRODUCT.md).
+ * Every image is Shewmaker work. Filterable by segment and by before / during / after / detail.
+ */
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/Section.astro';
+import Hero from '@/components/Hero.astro';
+import Eyebrow from '@/components/Eyebrow.astro';
+import ProjectCard from '@/components/ProjectCard.astro';
+import BeforeAfter from '@/components/BeforeAfter.astro';
+import Placeholder from '@/components/Placeholder.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import CtaBlock from '@/components/CtaBlock.astro';
+import { segments } from '@/data/taxonomy';
+import { images, pairs } from '@/data/images';
+import { breadcrumbNode, webPageNode } from '@/lib/schema';
+
+const path = '/projects/';
+const title = 'The Work';
+const metaTitle = 'Masonry Projects at the Lake of the Ozarks';
+const description =
+  'Stone seawalls, lakefront walls, stairs, flagstone patios, fireplaces and chimneys by our own crews around the Lake of the Ozarks. Call Sam at 573-569-3690.';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Projects', href: path },
+];
+const states = [
+  { id: 'before', label: 'Before' },
+  { id: 'during', label: 'During' },
+  { id: 'after', label: 'After' },
+  { id: 'detail', label: 'Detail' },
+];
+const ordered = [...images].sort((a, b) => (a.hero === b.hero ? 0 : a.hero ? -1 : 1));
+const schema = [webPageNode({ path, name: metaTitle, description, type: 'CollectionPage' }), breadcrumbNode(crumbs)];
+---
+
+<Base title={metaTitle} description={description} schema={schema}>
+  <Hero
+    display
+    eyebrow="Projects · Lake of the Ozarks"
+    title={title}
+    lead="Mortared stone seawalls, lakefront walls, stairs, patios, fireplaces and chimneys around the Lake of the Ozarks. Every photograph here is our work. These are interim frames; the full-size originals are still to come."
+    thumb="stone-seawall-lakefront-02.jpg"
+    need="Gallery hero: finished seawall with water in frame in summer, uncropped original at 2400 px."
+    ctas={false}
+  >
+    <Breadcrumbs items={crumbs} slot="above" />
+  </Hero>
+
+  <Section tone="lifted" padding="tight" width="wide" labelledby="filter-heading" class="filters">
+    <h2 id="filter-heading" class="sr-only">Filter the gallery</h2>
+    <div class="filters__row" data-filter-group="segment">
+      <span class="eyebrow filters__label">Work</span>
+      <button type="button" class="chip" data-filter="segment" data-value="all" aria-pressed="true">All</button>
+      {segments.map((s) => (
+        <button type="button" class="chip" data-filter="segment" data-value={s.id} aria-pressed="false">{s.name}</button>
+      ))}
+    </div>
+    <div class="filters__row" data-filter-group="state">
+      <span class="eyebrow filters__label">Stage</span>
+      <button type="button" class="chip" data-filter="state" data-value="all" aria-pressed="true">All</button>
+      {states.map((s) => (
+        <button type="button" class="chip" data-filter="state" data-value={s.id} aria-pressed="false">{s.label}</button>
+      ))}
+    </div>
+    <p class="t-small muted filters__count" data-count aria-live="polite">{images.length} photographs</p>
+  </Section>
+
+  <Section tone="ground" width="wide" labelledby="gallery-heading">
+    <h2 id="gallery-heading" class="sr-only">Photographs</h2>
+    <div class="gallery" data-gallery>
+      {ordered.map((img, i) => <ProjectCard file={img.file} eager={i < 3} />)}
+    </div>
+    <p class="gallery__empty muted" data-empty hidden>Nothing in this set yet. That is a photo we still need from Sam.</p>
+  </Section>
+
+  <Section tone="ground" grain labelledby="pairs-heading">
+    <div class="pairs">
+      <div class="heading-group">
+        <Eyebrow rule>Before and after</Eyebrow>
+        <h2 id="pairs-heading" class="t-title">The same shoreline, before and after</h2>
+      </div>
+      {pairs.map((p) => <BeforeAfter before={p.before.file} after={p.after.file} />)}
+    </div>
+  </Section>
+
+  <Section tone="lifted" labelledby="missing-heading">
+    <div class="missing">
+      <div class="heading-group">
+        <Eyebrow rule>Still to photograph</Eyebrow>
+        <h2 id="missing-heading" class="t-title">What is not here yet</h2>
+        <p class="t-lead">Work we do that has no photograph in the interim set. Each becomes a gallery card the day an original arrives.</p>
+      </div>
+      <Placeholder
+        ratio="3 / 1"
+        slotName="gallery-missing"
+        need="Chimney repair before and after; a new chimney; tuckpointing before and after; block masonry; concrete flatwork; excavation with equipment on site; exterior stone veneer; an outdoor kitchen with counters; a commercial exterior; lakefront stairs down to a dock; a finished seawall in summer; stone and joint close-ups."
+      />
+    </div>
+  </Section>
+
+  <CtaBlock heading="Want yours in here?" />
+</Base>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+  const cards = document.querySelectorAll<HTMLElement>('[data-gallery] [data-segments]');
+  const count = document.querySelector<HTMLElement>('[data-count]');
+  const empty = document.querySelector<HTMLElement>('[data-empty]');
+  const active: Record<string, string> = { segment: 'all', state: 'all' };
+
+  const apply = () => {
+    let shown = 0;
+    cards.forEach((card) => {
+      const segs = (card.dataset.segments ?? '').split(' ');
+      const okSeg = active.segment === 'all' || segs.includes(active.segment);
+      const okState = active.state === 'all' || card.dataset.state === active.state;
+      const show = okSeg && okState;
+      card.hidden = !show;
+      if (show) shown += 1;
+    });
+    if (count) count.textContent = `${shown} photograph${shown === 1 ? '' : 's'}`;
+    if (empty) empty.hidden = shown > 0;
+  };
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const group = btn.dataset.filter!;
+      active[group] = btn.dataset.value!;
+      buttons.forEach((b) => {
+        if (b.dataset.filter === group) b.setAttribute('aria-pressed', String(b === btn));
+      });
+      apply();
+    });
+  });
+</script>
+
+<style>
+  .filters { border-bottom: 1px solid var(--rule); }
+  @media (min-width: 64rem) { .filters { position: sticky; top: 60px; z-index: 30; } }
+  .filters__row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .filters__row + .filters__row { margin-top: 10px; }
+  .filters__label { min-width: 56px; }
+  .filters__count { margin-top: 12px; }
+  .chip { font-family: var(--font-body); font-weight: 600; font-size: 0.875rem; line-height: 1; padding: 10px 14px; min-height: 40px; background: transparent; color: var(--heading); border: 1px solid var(--rule); border-radius: var(--radius-sm); cursor: pointer; transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease; }
+  .chip:hover { border-color: var(--color-sandstone-dim); }
+  .chip[aria-pressed="true"] { background: var(--color-sandstone); color: var(--color-ground); border-color: var(--color-sandstone); }
+  .gallery { display: grid; gap: 16px; }
+  .gallery__empty { margin-top: 24px; }
+  @media (min-width: 40rem) { .gallery { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 64rem) { .gallery { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
+  @media (min-width: 80rem) { .gallery { grid-template-columns: repeat(4, 1fr); } }
+  .pairs { display: grid; gap: 32px; }
+  .missing { display: grid; gap: 32px; }
+</style>

@@ -33,7 +33,7 @@ export const site = {
   positioning:
     'Third-generation stonemasons at the Lake of the Ozarks who build the shoreline, the fireplace and the ground it all sits on, with their own crews, start to finish.',
   description:
-    'Stone seawalls, retaining walls, outdoor fireplaces, chimneys, concrete flatwork and excavation at the Lake of the Ozarks. Family owned, third generation. Call Sam at 573-569-3690.',
+    'Stone seawalls, retaining walls, fireplaces, chimneys, concrete and excavation at the Lake of the Ozarks. Family owned. Call Sam at 573-569-3690.',
 
   market: 'Lake of the Ozarks',
   base: { locality: 'Gravois Mills', region: 'MO', regionName: 'Missouri', country: 'US' },

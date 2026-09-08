@@ -129,9 +129,16 @@ const servicesActive = segments.some((seg) => servicesBySegment(seg.id).some((s)
     menuToggle.setAttribute('aria-expanded', String(open));
     menu.hidden = !open;
   };
-  menuToggle?.addEventListener('click', () => setMenu(menuToggle.getAttribute('aria-expanded') !== 'true'));
+  const hoverCapable = window.matchMedia('(hover: hover)').matches;
+  // Hover opens the menu on pointer devices, so a click on an already-open menu keeps it open
+  // unless it came from the keyboard (detail === 0), where click must toggle.
+  menuToggle?.addEventListener('click', (e) => {
+    const open = menuToggle.getAttribute('aria-expanded') === 'true';
+    if (!open) setMenu(true);
+    else if (e.detail === 0 || !hoverCapable) setMenu(false);
+  });
 
-  if (menuItem && window.matchMedia('(hover: hover)').matches) {
+  if (menuItem && hoverCapable) {
     let timer: number | undefined;
     menuItem.addEventListener('pointerenter', () => { window.clearTimeout(timer); setMenu(true); });
     menuItem.addEventListener('pointerleave', () => { timer = window.setTimeout(() => setMenu(false), 160); });
@@ -151,20 +158,20 @@ const servicesActive = segments.some((seg) => servicesBySegment(seg.id).some((s)
 </script>
 
 <style>
-  .site-header { position: sticky; top: 0; z-index: 50; background: var(--color-ground); border-bottom: 1px solid var(--rule); }
-  .site-header__row { display: flex; align-items: center; gap: 24px; min-height: 72px; transition: min-height 200ms ease; }
+  .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: var(--color-ground); border-bottom: 1px solid var(--rule); }
+  .site-header__row { position: relative; z-index: 2; display: flex; align-items: center; gap: 24px; min-height: 72px; }
   .site-header.is-compact .site-header__row { min-height: 60px; }
 
   .brand { display: flex; align-items: center; gap: 12px; margin-right: auto; color: var(--color-sandstone); text-decoration: none; }
-  .brand__badge { width: 56px; height: 56px; border-radius: var(--radius-sm); transition: width 200ms ease, height 200ms ease; }
+  .brand__badge { width: 56px; height: 56px; border-radius: var(--radius-sm); }
   .is-compact .brand__badge { width: 44px; height: 44px; }
-  .brand__name { display: flex; flex-direction: column; font-family: var(--font-display); font-weight: 900; text-transform: uppercase; line-height: 0.95; letter-spacing: 0.02em; font-size: 1.125rem; }
+  .brand__name { display: none; flex-direction: column; font-family: var(--font-display); font-weight: 900; text-transform: uppercase; line-height: 0.95; letter-spacing: 0.02em; font-size: 1.125rem; }
   .brand__name span:last-child { font-weight: 700; font-size: 0.8125rem; letter-spacing: 0.14em; color: var(--color-sandstone-dim); margin-top: 3px; }
 
   .nav { display: none; }
   .nav__list { display: flex; gap: 2px; list-style: none; margin: 0; padding: 0; }
   .nav__item { position: relative; }
-  .nav__link { position: relative; display: inline-flex; align-items: center; gap: 6px; padding: 10px 12px; font-family: inherit; font-weight: 600; font-size: 0.9375rem; color: var(--color-sandstone); text-decoration: none; background: none; border: 0; cursor: pointer; }
+  .nav__link { position: relative; display: inline-flex; align-items: center; gap: 6px; padding: 10px 12px; font-family: inherit; font-weight: 600; font-size: 1rem; color: var(--color-sandstone); text-decoration: none; background: none; border: 0; cursor: pointer; }
   .nav__link:hover { color: var(--color-mortar); }
   .nav__link.is-active::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: 4px; height: 2px; background: var(--color-brick); }
   .nav__chevron { transition: transform 160ms ease; }
@@ -174,7 +181,7 @@ const servicesActive = segments.some((seg) => servicesBySegment(seg.id).some((s)
   .menu__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px 32px; }
   .menu__heading { margin: 0 0 10px; font-weight: 700; font-size: 0.8125rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-sandstone-dim); }
   .menu__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
-  .menu__link { color: var(--color-mortar); text-decoration: none; font-size: 0.9375rem; }
+  .menu__link { color: var(--color-mortar); text-decoration: none; font-size: 1rem; }
   .menu__link:hover, .menu__link.is-active { text-decoration: underline; text-decoration-color: var(--color-brick); text-underline-offset: 0.18em; }
 
   .site-header__actions { display: flex; align-items: center; gap: 16px; }
@@ -185,7 +192,7 @@ const servicesActive = segments.some((seg) => servicesBySegment(seg.id).some((s)
   .nav-toggle[aria-expanded="true"] .nav-toggle__icon--open { display: none; }
   .nav-toggle[aria-expanded="true"] .nav-toggle__icon--close { display: block; }
 
-  .nav-panel { position: fixed; inset: 0; z-index: 40; padding-top: 73px; background: var(--color-ground); overflow-y: auto; }
+  .nav-panel { position: fixed; inset: 0; z-index: 1; padding-top: 73px; background: var(--color-ground); overflow-y: auto; }
   .nav-panel__inner { display: flex; flex-direction: column; min-height: calc(100dvh - 73px); padding-top: 16px; padding-bottom: 32px; }
   .nav-panel__list { list-style: none; margin: 0; padding: 0; }
   .nav-panel__link { display: block; padding: 14px 0; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; font-size: clamp(1.75rem, 1.3rem + 1.8vw, 2.25rem); line-height: 1.1; color: var(--color-sandstone); text-decoration: none; border-bottom: 1px solid var(--rule); }
@@ -200,6 +207,9 @@ const servicesActive = segments.some((seg) => servicesBySegment(seg.id).some((s)
 
   :global(html.nav-open) { overflow: hidden; }
 
+  @media (min-width: 30rem) {
+    .brand__name { display: flex; }
+  }
   @media (min-width: 64rem) {
     .nav { display: block; }
     :global(.site-header__cta) { display: inline-flex; }
