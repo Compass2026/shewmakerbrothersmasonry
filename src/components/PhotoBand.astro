@@ -16,7 +16,7 @@ const parts = idx >= 0 ? [statement.slice(0, idx), accent!, statement.slice(idx 
   <div class="scrim scrim--left"></div>
   <div class="wrap wrap--wide band__inner">
     {eyebrow && <Eyebrow rule>{eyebrow}</Eyebrow>}
-    <h2 id={id} class="t-headline band__title">{parts[0]}{parts[1] && <span class="accent">{parts[1]}</span>}{parts[2]}</h2>
+    <h2 id={id} class="t-title band__title">{parts[0]}{parts[1] && <span class="accent">{parts[1]}</span>}{parts[2]}</h2>
     {line && <p class="band__line">{line}</p>}
     {href && cta && <div><Button href={href}>{cta}</Button></div>}
   </div>
@@ -25,7 +25,8 @@ const parts = idx >= 0 ? [statement.slice(0, idx), accent!, statement.slice(idx 
 <style>
   .band { position: relative; isolation: isolate; overflow: hidden; padding: clamp(5rem, 12vw, 9rem) 0; border-block: 1px solid var(--joint-strong); background: var(--color-coal); }
   .band .photo-bg, .band .scrim { z-index: 0; }
-  .band__inner { position: relative; z-index: 1; display: grid; gap: 20px; max-width: 60rem; margin-left: 0; }
-  .band__title { max-width: 16ch; }
+  .band__inner { position: relative; z-index: 1; display: grid; gap: 20px; }
+  .band__inner > * { max-width: 60rem; }
+  .band__title { max-width: 22ch; }
   .band__line { font-family: var(--font-condensed); font-weight: 600; font-size: clamp(1.125rem, 1rem + 0.8vw, 1.5rem); letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-sandstone); max-width: 40ch; }
 </style>

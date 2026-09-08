@@ -35,6 +35,7 @@ const img = photo ? imageByFile(photo) : undefined;
 
 <style>
   .service-block__body { display: grid; gap: 16px; padding-bottom: 36px; }
+  @media (max-width: 39.99rem) { :global(.service-block .block__photo) { aspect-ratio: 21 / 9; } .service-block__list { grid-template-columns: 1fr 1fr; column-gap: 12px; } }
   .service-block__title { font-size: 1.5rem; }
   .service-block__pending { display: grid; place-content: center; justify-items: center; gap: 10px; color: var(--color-ember); background: var(--color-soot); }
   .service-block__list { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 8px; }

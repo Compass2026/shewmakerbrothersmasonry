@@ -15,7 +15,7 @@ if (b.project !== a.project) throw new Error(`Before/after pair must come from o
 
 <style>
   .pair { display: grid; gap: 16px; }
-  .pair__item { position: relative; padding: 12px; }
+  .pair__item { position: relative; padding: 12px; max-width: 440px; width: 100%; }
   :global(.pair__item .photo img) { aspect-ratio: 1; border: 0; }
   :global(.pair__item .photo__caption) { padding: 12px 6px 4px; }
   .pair__tag { position: absolute; top: 20px; left: 20px; z-index: 1; padding: 6px 12px; background: var(--color-coal); color: var(--color-chalk); font-family: var(--font-condensed); font-weight: 700; font-size: 0.8125rem; letter-spacing: 0.2em; text-transform: uppercase; border: 1px solid var(--joint-strong); }
