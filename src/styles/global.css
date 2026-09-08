@@ -298,10 +298,10 @@
   @keyframes marquee { to { transform: translateX(-50%); } }
 
   /* Photo layers */
-  .photo-bg { position: absolute; inset: 0; background-position: center; background-size: cover; filter: saturate(1.06) brightness(0.76); }
+  .photo-bg { position: absolute; inset: 0; background-position: center; background-size: cover; filter: saturate(1.08) brightness(0.94); }
   .scrim { position: absolute; inset: 0; pointer-events: none; }
-  .scrim--bottom { background: linear-gradient(to top, rgba(25, 20, 16, 0.9) 0%, rgba(25, 20, 16, 0.34) 46%, rgba(25, 20, 16, 0.08) 100%); }
-  .scrim--left { background: radial-gradient(128% 86% at 0% 42%, rgba(25, 20, 16, 0.95) 0%, rgba(25, 20, 16, 0.9) 32%, rgba(25, 20, 16, 0.62) 54%, rgba(25, 20, 16, 0.18) 76%, transparent 92%), linear-gradient(90deg, rgba(25, 20, 16, 0.72) 0%, rgba(25, 20, 16, 0.55) 34%, rgba(25, 20, 16, 0.2) 62%, transparent 88%); }
+  .scrim--bottom { background: linear-gradient(to top, rgba(25, 20, 16, 0.78) 0%, rgba(25, 20, 16, 0.16) 42%, transparent 100%); }
+  .scrim--left { background: linear-gradient(90deg, rgba(25, 20, 16, 0.5) 0%, rgba(25, 20, 16, 0.3) 38%, rgba(25, 20, 16, 0.08) 66%, transparent 88%); }
   .photo { margin: 0; }
   .photo img { width: 100%; object-fit: cover; border: 1px solid var(--joint); }
   .photo__caption { margin-top: 10px; font-size: 0.9375rem; line-height: 1.5; color: var(--muted); }

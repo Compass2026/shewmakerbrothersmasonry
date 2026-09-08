@@ -35,10 +35,20 @@ try {
       }
       return out;
     });
-    await page.evaluate(() => { document.querySelectorAll('.hero__inner').forEach((e) => (e.style.visibility = 'hidden')); });
+    // Hide only the text, never its container: the container's ::before carries the shade that
+    // makes the text readable, and hiding it would measure a background that never ships.
+    await page.evaluate(() => {
+      document.querySelectorAll('.hero__inner').forEach((el) => {
+        for (const child of Array.from(el.children)) child.style.visibility = 'hidden';
+      });
+    });
     await page.waitForTimeout(200);
     const shot = await page.screenshot({ clip: { x: 0, y: 0, width: 1440, height: 900 } });
-    await page.evaluate(() => { document.querySelectorAll('.hero__inner').forEach((e) => (e.style.visibility = '')); });
+    await page.evaluate(() => {
+      document.querySelectorAll('.hero__inner').forEach((el) => {
+        for (const child of Array.from(el.children)) child.style.visibility = '';
+      });
+    });
     for (const t of targets) {
       if (t.y < 0 || t.y + t.h > 900 || t.w < 4) continue;
       const raw = await sharp(shot).extract({ left: Math.max(0, t.x), top: Math.max(0, t.y), width: Math.min(t.w, 1440 - t.x), height: Math.min(t.h, 900 - t.y) }).raw().toBuffer({ resolveWithObject: true });
