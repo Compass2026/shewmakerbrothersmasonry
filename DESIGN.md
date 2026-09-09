@@ -347,8 +347,10 @@ outlined icon box.
   is a horizontal gradient on `.hero__inner::before`, feathered top and bottom with a mask, so it darkens
   the words without dulling the right half of the frame. Nothing else darkens the frame: the photograph and
   the video run ungraded apart from a touch of saturation, with only a short seat where they meet the stone
-  base, so the work is visible everywhere the words are not. On phones the text spans the full width, so that
-  shade turns vertical and lifts toward the buttons, letting the clip read under them. The display size is capped against viewport
+  base, so the work is visible everywhere the words are not. **Phones carry nothing at all over the footage**
+  (Tom's instruction, `docs/placeholders.md` section G): no shade, no seat, no filter. Legibility there comes
+  from the glyphs, a one-pixel dark contour on four sides plus a soft glow, which holds on the near-white
+  frames without touching them. The display size is capped against viewport
   *height* as well as width (`min(1.6rem + 5.9vw, 1.25rem + 6vh)`), which keeps the lead, the stamp and
   the calls to action above the fold on a short laptop window.
 - **Credential stamp:** `.stamp`, short checkable claims under the hero lead, each with a small amber

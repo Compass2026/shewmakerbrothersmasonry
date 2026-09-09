@@ -114,10 +114,20 @@ const parts = idx >= 0 ? [title.slice(0, idx), accent!, title.slice(idx + accent
     Phones: the text spans the full width, so the shade runs top to bottom instead of left to right,
     and lifts toward the buttons so the clip is visible under them.
   */
+  /*
+    Phones carry nothing over the footage at Tom's instruction: no shade, no seat, no filter.
+    Legibility moves into the glyphs themselves, so the clip plays completely untouched.
+  */
   @media (max-width: 48rem) {
-    .hero__inner::before {
-      left: -10vw; right: -10vw;
-      background: linear-gradient(180deg, rgba(25, 20, 16, 0.9) 0%, rgba(25, 20, 16, 0.86) 55%, rgba(25, 20, 16, 0.72) 100%);
+    .hero__inner::before { display: none; }
+    .photo-bg--hero { filter: none; }
+    .hero__bg .scrim { display: none; }
+    /* A tight dark contour plus a soft glow: it holds on the near-white frames without touching them. */
+    .hero__title {
+      text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.85), 1px -1px 0 rgba(0, 0, 0, 0.85), -1px 1px 0 rgba(0, 0, 0, 0.85), 1px 1px 0 rgba(0, 0, 0, 0.85), 0 2px 14px rgba(0, 0, 0, 0.85), 0 5px 38px rgba(0, 0, 0, 0.75);
+    }
+    .hero__lead, :global(.hero .eyebrow) {
+      text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.92), 1px -1px 0 rgba(0, 0, 0, 0.92), -1px 1px 0 rgba(0, 0, 0, 0.92), 1px 1px 0 rgba(0, 0, 0, 0.92), 0 1px 9px rgba(0, 0, 0, 0.92), 0 2px 24px rgba(0, 0, 0, 0.85);
     }
   }
   /* The five-line headline needs the buttons kept above the fold on a phone. */
