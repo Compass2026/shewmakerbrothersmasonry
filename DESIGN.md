@@ -345,12 +345,12 @@ outlined icon box.
 - **Hero:** the section is `width="full"`, so the photograph, the video and the two scrims reach both
   edges of the viewport at any width; only the text keeps the 80rem container. The shade under the type
   is a horizontal gradient on `.hero__inner::before`, feathered top and bottom with a mask, so it darkens
-  the words without dulling the right half of the frame. Nothing else darkens the frame: the photograph and
-  the video run ungraded apart from a touch of saturation, with only a short seat where they meet the stone
-  base, so the work is visible everywhere the words are not. **Phones carry nothing at all over the footage**
-  (Tom's instruction, `docs/placeholders.md` section G): no shade, no seat, no filter. Legibility there comes
-  from the glyphs, a one-pixel dark contour on four sides plus a soft glow, which holds on the near-white
-  frames without touching them. The display size is capped against viewport
+  the words. **Nothing is laid over the footage at any width** (Tom's instruction, `docs/placeholders.md`
+  section G): no shade, no seat, no filter, no upscale. Legibility lives in the glyphs instead, a dark contour
+  on four sides plus a soft glow, one pixel on phones and two on the far larger desktop display type, and it
+  covers the eyebrow, lead and breadcrumbs as well as the headline. The ghost button carries a translucent
+  seat behind its hover sweep for the same reason. This holds on the near-white frames without touching
+  them, and it is the reason `qa/hero-contrast.mjs` reports the hero as `note` rather than `ok`. The display size is capped against viewport
   *height* as well as width (`min(1.6rem + 5.9vw, 1.25rem + 6vh)`), which keeps the lead, the stamp and
   the calls to action above the fold on a short laptop window.
 - **Credential stamp:** `.stamp`, short checkable claims under the hero lead, each with a small amber

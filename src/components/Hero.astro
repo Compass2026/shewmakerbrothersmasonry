@@ -50,7 +50,6 @@ const parts = idx >= 0 ? [title.slice(0, idx), accent!, title.slice(idx + accent
     )}
     {bg && !isOriginal(bg) && <div class="photo-bg photo-bg--hero" style={`background-image: url(${imageLarge(bg)}); background-position: ${position}`} data-placeholder data-page={Astro.url.pathname} data-slot="hero-background" data-need={need ?? `Hero background: full-resolution original of ${bg.file}; the interim 414 px frame is shown darkened.`}></div>}
     {video && <video class="photo-bg photo-bg--hero photo-bg--img hero__video" data-hero-video data-src={video} data-src-sm={site.heroVideoSmall ?? video} muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>}
-    <div class="scrim scrim--foot"></div>
   </div>
   <div class="wrap wrap--wide hero__wrap">
   <div class="hero__inner">
@@ -83,7 +82,7 @@ const parts = idx >= 0 ? [title.slice(0, idx), accent!, title.slice(idx + accent
   :global(.hero) { position: relative; isolation: isolate; overflow: hidden; }
   .hero__bg { position: absolute; inset: 0; z-index: 0; }
   .hero__wrap { position: relative; z-index: 1; }
-  .photo-bg--hero { filter: saturate(1.06); transform: scale(1.02); }
+  .photo-bg--hero { filter: none; }
   .photo-bg--img { width: 100%; height: 100%; max-width: none; object-fit: cover; }
   /* The video sits over the photograph and fades in only once it can actually play. */
   .hero__video { opacity: 0; transition: opacity 900ms var(--ease-expo); }
@@ -100,34 +99,25 @@ const parts = idx >= 0 ? [title.slice(0, idx), accent!, title.slice(idx + accent
   .stamp__item:hover .stamp__mark { transform: rotate(135deg); background: var(--color-amber-light); }
   .hero__video.is-playing { opacity: 1; }
   /*
-    The shade that makes the type readable is shaped to the text block and feathered out, rather
-    than laid across the whole frame, so the photograph and the video stay bright beside it.
+    Nothing is laid over the footage at any width, at Tom's instruction: no shade, no seat, no
+    filter. Legibility lives in the glyphs instead, as a tight dark contour plus a soft glow, so
+    the photograph and the video are never touched. See docs/placeholders.md section G.
   */
-  .hero__inner::before {
-    content: ""; position: absolute; z-index: -1; pointer-events: none;
-    left: -26vw; right: -13%; top: -12%; bottom: -14%;
-    background: linear-gradient(90deg, rgba(25, 20, 16, 0.95) 0%, rgba(25, 20, 16, 0.93) 64%, rgba(25, 20, 16, 0.8) 79%, rgba(25, 20, 16, 0.36) 92%, transparent 100%);
-    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 9%, #000 91%, transparent 100%);
-    mask-image: linear-gradient(180deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+  .hero__title {
+    text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.85), 1px -1px 0 rgba(0, 0, 0, 0.85), -1px 1px 0 rgba(0, 0, 0, 0.85), 1px 1px 0 rgba(0, 0, 0, 0.85), 0 2px 14px rgba(0, 0, 0, 0.85), 0 5px 38px rgba(0, 0, 0, 0.75);
   }
-  /*
-    Phones: the text spans the full width, so the shade runs top to bottom instead of left to right,
-    and lifts toward the buttons so the clip is visible under them.
-  */
-  /*
-    Phones carry nothing over the footage at Tom's instruction: no shade, no seat, no filter.
-    Legibility moves into the glyphs themselves, so the clip plays completely untouched.
-  */
-  @media (max-width: 48rem) {
-    .hero__inner::before { display: none; }
-    .photo-bg--hero { filter: none; }
-    .hero__bg .scrim { display: none; }
-    /* A tight dark contour plus a soft glow: it holds on the near-white frames without touching them. */
+  .hero__lead, :global(.hero .eyebrow), :global(.hero .breadcrumbs), :global(.hero .breadcrumbs a) {
+    text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.95), 1px -1px 0 rgba(0, 0, 0, 0.95), -1px 1px 0 rgba(0, 0, 0, 0.95), 1px 1px 0 rgba(0, 0, 0, 0.95), 0 0 6px rgba(0, 0, 0, 0.95), 0 1px 12px rgba(0, 0, 0, 0.95), 0 3px 30px rgba(0, 0, 0, 0.9);
+  }
+  /* The ghost button has no fill of its own, so on a bright frame it needs a seat behind it.
+     It sits behind the hover sweep, which paints at z-index -1. */
+  :global(.hero .btn-secondary::before) {
+    content: ""; position: absolute; z-index: -2; inset: 0; background: rgba(25, 20, 16, 0.55);
+  }
+  /* The display type is far bigger here, so the contour scales with it or it disappears. */
+  @media (min-width: 48rem) {
     .hero__title {
-      text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.85), 1px -1px 0 rgba(0, 0, 0, 0.85), -1px 1px 0 rgba(0, 0, 0, 0.85), 1px 1px 0 rgba(0, 0, 0, 0.85), 0 2px 14px rgba(0, 0, 0, 0.85), 0 5px 38px rgba(0, 0, 0, 0.75);
-    }
-    .hero__lead, :global(.hero .eyebrow) {
-      text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.92), 1px -1px 0 rgba(0, 0, 0, 0.92), -1px 1px 0 rgba(0, 0, 0, 0.92), 1px 1px 0 rgba(0, 0, 0, 0.92), 0 1px 9px rgba(0, 0, 0, 0.92), 0 2px 24px rgba(0, 0, 0, 0.85);
+      text-shadow: -2px -2px 0 rgba(0, 0, 0, 0.8), 2px -2px 0 rgba(0, 0, 0, 0.8), -2px 2px 0 rgba(0, 0, 0, 0.8), 2px 2px 0 rgba(0, 0, 0, 0.8), 0 3px 20px rgba(0, 0, 0, 0.85), 0 8px 60px rgba(0, 0, 0, 0.8);
     }
   }
   /* The five-line headline needs the buttons kept above the fold on a phone. */

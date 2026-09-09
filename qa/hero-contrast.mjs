@@ -62,10 +62,10 @@ try {
         if (r < worst) { worst = r; lightest = px; }
       }
       const ok = worst >= t.min;
-      // Below 700px the hero deliberately carries nothing over the footage (Tom's instruction,
+      // The hero deliberately carries nothing over the footage at any width (Tom's instruction,
       // docs/placeholders.md section G), so legibility comes from a dark contour on the glyphs,
       // which this background sampling cannot see. Report the number, do not fail the run.
-      const unshaded = VW < 700;
+      const unshaded = true;
       if (!ok && !unshaded) bad++;
       const tag = ok ? 'ok  ' : unshaded ? 'note' : 'FAIL';
       const why = ok || !unshaded ? '' : '  <- bare footage by decision; text contour carries it';
