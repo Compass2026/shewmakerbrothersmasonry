@@ -1,9 +1,13 @@
 # Hero video: generation brief
 
-> **Used once, 2026-09-08.** The second generation replaced the first the same evening: better scene
-> (an aerial over two finished retaining walls, stone steps and the poured walkways rather than a
-> house with a wall behind it) and, notably, **no visible watermark**. It came back at 1280x720
-> again, so the resolution note in section 1 is the one to press on next time.
+> **Used twice, 2026-09-08.** Two generations replaced the original that evening, and both came back
+> with **no visible watermark**. The one in place is the third clip overall: a low tracking shot moving
+> along the wall face, picked over an aerial of the same job because the stone fills the frame instead
+> of sitting small in a landscape. On a mason's home page, craft beats scope; the gallery already
+> carries scope.
+>
+> **All three came back at 1280x720.** Resolution is the one thing prompting has not moved, which is
+> the point of section 1: set it before generating, or nothing changes.
 
 For regenerating `public/videos/hero-lake.mp4`. The clip in place now is 1280x720, which is why it
 looks soft on a wide screen: the browser stretches it about 1.35x at 1728px and more beyond that.
